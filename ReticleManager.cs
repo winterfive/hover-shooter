@@ -4,7 +4,7 @@ using UnityEngine;
 public class ReticleManager : MonoBehaviour {
 
     public GameObject reticle;
-    public RaycastManager _raycastManager;
+    public RaycastManager raycastManager;
 
     private GameObject _objectFound;
     private Vector3 _reticleNormalPosition;
@@ -18,10 +18,10 @@ public class ReticleManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (_raycastManager.HasHitObject)
+        if (raycastManager.HasHitObject)
         {
-            _objectFound = _raycastManager.GetObjectFound;
-            //PlaceReticle(_objectFound);
+            _objectFound = raycastManager.GetObjectFound;
+            PlaceReticle(_objectFound);
         }
         else
         {
@@ -31,9 +31,9 @@ public class ReticleManager : MonoBehaviour {
 
     // Places Reticle object on object found by raycast
     // GameObject -> void
-    void PlaceReticle()
+    void PlaceReticle(GameObject objectFound)
     {
-        //Debug.Log("Reticle thinks this is objectFound: " + _objectFound);
+        Debug.Log("Reticle thinks this is objectFound: " + objectFound);
     }
 
     void ChangeReticleColor()
