@@ -6,23 +6,22 @@ public class ShapeManager : MonoBehaviour
     public Transform[] SpawnPoints;
     public float spawnTime;
     public float colorAdd;
+    public RaycastManager raycastManager;
 
-    private RaycastManager _raycastManager;
-    private GameObject objectFound;
-    
+    private GameObject _objectFound;
+
     //  Use this for initialization
     void Start ()
     {
         InvokeRepeating("SpawnShapes", spawnTime, spawnTime);
-        _raycastManager = null;
 	}
 
     private void Update()
     {
-        if(_raycastManager.HasHitObject && _raycastManager.IfShootable)
+        if(raycastManager.HasHitObject && raycastManager.IfShootable)
         {
-            objectFound = _raycastManager.GetObjectFound;
-            ChangeShapeColor(objectFound);
+            _objectFound = raycastManager.GetObjectFound;
+            ChangeShapeColor(_objectFound);
         }
     }
 
