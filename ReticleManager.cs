@@ -4,17 +4,14 @@ using UnityEngine;
 public class ReticleManager : MonoBehaviour {
 
     public GameObject reticle;
+    public RaycastManager _raycastManager;
 
-    private RaycastManager _raycastManager;
     private GameObject _objectFound;
-    private MeshRenderer _meshRenderer;
     private Vector3 _reticleNormalPosition;
 
 
 	void Awake ()
     {
-        _raycastManager = null;
-        _objectFound = null;
         // TODO _reticleNormalPosition = GetComponent camera position and rotation and add to it
 	}
 	
@@ -36,7 +33,7 @@ public class ReticleManager : MonoBehaviour {
     // GameObject -> void
     void PlaceReticle()
     {
-        Debug.Log("Reticle thinks this is objectFound: " + _objectFound);
+        //Debug.Log("Reticle thinks this is objectFound: " + _objectFound);
     }
 
     void ChangeReticleColor()
