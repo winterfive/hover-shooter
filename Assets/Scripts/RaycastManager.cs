@@ -51,7 +51,7 @@ public class RaycastManager : MonoBehaviour {
         if(HasHitObject)
         {
             _objectFound = hit.collider.GetComponent<GameObject>();
-            //Debug.Log("Object assigned to objectFound: " + hit.collider.tag);
+            Debug.Log("Object assigned to objectFound: " + hit.collider.tag);
         }
         else
         {
