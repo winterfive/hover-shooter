@@ -3,19 +3,18 @@
 public class GameManager : MonoBehaviour{
     
     public float timeBetweenShots = 0.15f;
+    public RaycastManager raycastManager;
+    public ShapeManager shapeManager;
 
     private float _timer;
-    private bool _isObjectShootable;
-    private RaycastManager _raycastManager;
-    private GameObject _currentFoundObject;
-    private ShapeManager _shapeManager;
+    private bool _isObjectShootable;    
+    private GameObject _currentFoundObject;    
 
 
     // Use this for initialization
     void Awake()
     {
         _timer = 0f;
-        _raycastManager = null;
         _currentFoundObject = null;
     }
 
@@ -33,15 +32,16 @@ public class GameManager : MonoBehaviour{
     //  void -> void
     public void Shoot()
     {
-        _shapeManager.DestroyShape(_currentFoundObject);
-        Debug.Log("Shot an object");
+        _currentFoundObject = raycastManager.GetObjectFound;
+        shapeManager.DestroyShape(_currentFoundObject);
+        Debug.Log("Shot an object: " + _currentFoundObject.name);
     }
 
     // Updates bool isObjectSHootable
     // void -> void
     void Shootable()
     {
-        if (_raycastManager.IfShootable)
+        if (raycastManager.IfShootable)
         {
             _isObjectShootable = true;
         }
