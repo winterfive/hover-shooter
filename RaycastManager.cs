@@ -32,14 +32,12 @@ public class RaycastManager : MonoBehaviour {
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {
             //Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.magenta);
-            //Debug.Log("Did Hit: " + hit.collider.tag);
             _hasHitObject = true;
             StoreObject();
         }
         else
         {
             //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * range, Color.blue);
-            //Debug.Log("Did not Hit");
             _hasHitObject = false;           
         }        
     }
