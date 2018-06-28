@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Reticle : MonoBehaviour {
 
+    public GameObject reticle;
+
     private RaycastManager _raycastManager;
     private GameObject _objectFound;
     private MeshRenderer _meshRenderer;
