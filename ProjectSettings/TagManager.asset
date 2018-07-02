@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Shootable
   - Environment
+  - Reticle
   layers:
   - Default
   - TransparentFX

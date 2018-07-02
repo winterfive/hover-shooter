@@ -951,6 +951,47 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a314154826fbb6d46a3df1bf2708f183, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1029078574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1029078576}
+  - component: {fileID: 1029078575}
+  m_Layer: 0
+  m_Name: ReticleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1029078575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1029078574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c603186dbc3174589241abf1fad65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reticle: {fileID: 1223452815434258, guid: 9cc33d047d903244fa66a258381ed343, type: 2}
+--- !u!4 &1029078576
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1029078574}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1073434662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,6 +1130,15 @@ Prefab:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4169841553498140, guid: 9cc33d047d903244fa66a258381ed343, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 136053310619877486, guid: 9cc33d047d903244fa66a258381ed343,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4805407296225096, guid: 9cc33d047d903244fa66a258381ed343, type: 2}
       propertyPath: m_LocalScale.z
       value: 0.2
       objectReference: {fileID: 0}
@@ -1279,8 +1329,7 @@ MonoBehaviour:
   - {fileID: 741158106}
   - {fileID: 1327769901}
   spawnTime: 0.8
-  normalMaterial: {fileID: 0}
-  onGazeMaterial: {fileID: 0}
+  colorAdd: 0.2
 --- !u!4 &1372577770
 Transform:
   m_ObjectHideFlags: 0

@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4812836930803946}
   - component: {fileID: 65002204757859018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TriggerBox
-  m_TagString: Untagged
+  m_TagString: Shootable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,9 +38,10 @@ GameObject:
   - component: {fileID: 23866942451754790}
   - component: {fileID: 54787771567775410}
   - component: {fileID: 65431119375093320}
-  m_Layer: 2
+  - component: {fileID: 33541110104872596}
+  m_Layer: 8
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Shootable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +88,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 7a849d0fa6b15d44eb7143a840c58e7c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,6 +108,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33541110104872596
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448448087918088}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54787771567775410
 Rigidbody:
   m_ObjectHideFlags: 1

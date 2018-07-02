@@ -31,15 +31,14 @@ public class RaycastManager : MonoBehaviour {
     {
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {
-            //Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.magenta);
-            //Debug.Log("Did Hit: " + hit.collider.tag);
+            //Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.magenta); works
             _hasHitObject = true;
             StoreObject();
+            CheckForShootable();
         }
         else
         {
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * range, Color.blue);
-            //Debug.Log("Did not Hit");
+            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * range, Color.blue); works
             _hasHitObject = false;           
         }        
     }
@@ -51,7 +50,8 @@ public class RaycastManager : MonoBehaviour {
         if(HasHitObject)
         {
             _objectFound = hit.collider.GetComponent<GameObject>();
-            Debug.Log("Object assigned to objectFound: " + hit.collider.tag);
+            //Debug.Log("Object assigned to objectFound: " + hit.collider.tag); works
+            //Debug.Log("hasHitObject: " + _hasHitObject.ToString()); works
         }
         else
         {
@@ -59,11 +59,13 @@ public class RaycastManager : MonoBehaviour {
         }
     }
 
-    public void CheckObject()
+    // Checks object found for "Shootable" tag, updates bool ifShootable
+    // void -> void
+    public void CheckForShootable()
     {
         if(_objectFound.tag == "Shootable")
         {
-           _ifShootable = true;
+            _ifShootable = true;
         }
         else
         {
