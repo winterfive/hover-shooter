@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 public class ReticleManager : MonoBehaviour {
@@ -20,7 +20,7 @@ public class ReticleManager : MonoBehaviour {
     {
         if (raycastManager.HasHitObject)
         {
-            _objectFound = raycastManager.GetObjectFound;
+            _objectFound = raycastManager.GetObjectFound.gameObject;
             PlaceReticle(_objectFound);
         }
         else
@@ -45,5 +45,4 @@ public class ReticleManager : MonoBehaviour {
 
         // TODO if(objectFound is Shootable), change color of reticle
     }
-
 }
