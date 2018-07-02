@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class ShapeManager : MonoBehaviour
 {
@@ -7,6 +7,10 @@ public class ShapeManager : MonoBehaviour
     public float spawnTime;
     public float colorAdd;
     public RaycastManager raycastManager;
+    public Material cubeNormal;
+    public Material cubeOver;
+    public Material sphereNormal;
+    public Material sphereOver;
 
     private GameObject managers;
     private GameObject _objectFound;
@@ -21,8 +25,7 @@ public class ShapeManager : MonoBehaviour
     {
         if(raycastManager.HasHitObject && raycastManager.IfShootable)
         {
-            _objectFound = raycastManager.GetObjectFound;
-            Debug.Log("_objectFound for ShapeManager: " + _objectFound.GetComponent<Collider>().tag);
+            _objectFound = raycastManager.GetObjectFound.gameObject;
             ChangeShapeColor(_objectFound);
         }
     }
@@ -61,10 +64,17 @@ public class ShapeManager : MonoBehaviour
     // GameObject -> void
     public void ChangeShapeColor(GameObject foundObject)
     {
-        Color c = foundObject.GetComponent<Renderer>().material.color;
+        Color c = foundObject.gameObject.GetComponentInParent<Renderer>().material.color;
         c.g += colorAdd;
         c.r += colorAdd;
         c.b += colorAdd;
-        foundObject.GetComponent<Renderer>().material.color = c;       
+        foundObject.gameObject.GetComponentInParent<Renderer>().material.color = c;
+
+        // TODO Check for which shape (cube or sphere) and change amterial to overMaterial
+        //if(foundObject.name == "Cube")
+        //{
+
+        //}
+        // TODO change the material back to normal when not being gazed at
     }
 }
