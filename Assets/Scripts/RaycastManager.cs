@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class RaycastManager : MonoBehaviour {
 
@@ -49,7 +49,7 @@ public class RaycastManager : MonoBehaviour {
     {
         if(HasHitObject)
         {
-            _objectFound = hit.collider.GetComponent<GameObject>();
+            _objectFound = hit.collider.gameObject;
             //Debug.Log("Object assigned to objectFound: " + hit.collider.tag); works
             //Debug.Log("hasHitObject: " + _hasHitObject.ToString()); works
         }
