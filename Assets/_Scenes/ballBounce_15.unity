@@ -1365,10 +1365,8 @@ MonoBehaviour:
   spawnTime: 0.8
   colorAdd: 0.2
   raycastManager: {fileID: 1213041246}
-  cubeNormal: {fileID: 0}
-  cubeOver: {fileID: 0}
-  sphereNormal: {fileID: 0}
-  sphereOver: {fileID: 0}
+  sphereNormal: {fileID: 2100000, guid: a6bbcfbc7f79e49458ea8b418fe28ee6, type: 2}
+  sphereOver: {fileID: 2100000, guid: 908bdbd1b1820324c946709585fc808a, type: 2}
 --- !u!4 &1372577770
 Transform:
   m_ObjectHideFlags: 0

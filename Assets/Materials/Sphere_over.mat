@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Sphere_normal
+  m_Name: Sphere_over
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
@@ -133,5 +133,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.08235294, g: 0.5647059, b: 0.6132076, a: 1}
+    - _Color: {r: 0.61877, g: 0.9403268, b: 0.9716981, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
