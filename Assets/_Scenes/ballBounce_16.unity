@@ -1034,8 +1034,8 @@ MonoBehaviour:
     m_Bits: 4
   m_Reticle: {fileID: 0}
   m_VrInput: {fileID: 0}
-  m_ShowDebugRay: 0
-  m_DebugRayLength: 5
+  m_ShowDebugRay: 1
+  m_DebugRayLength: 50
   m_DebugRayDuration: 1
   m_RayLength: 500
 --- !u!224 &1213041248

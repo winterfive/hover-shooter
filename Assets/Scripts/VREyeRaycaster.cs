@@ -36,9 +36,6 @@ namespace VRStandardAssets.Utils
         private void OnEnable()
         {
             m_VrInput.OnClick += HandleClick;
-            m_VrInput.OnDoubleClick += HandleDoubleClick;
-            m_VrInput.OnUp += HandleUp;
-            m_VrInput.OnDown += HandleDown;
         }
 
 
