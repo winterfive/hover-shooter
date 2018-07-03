@@ -16,7 +16,7 @@ public class ShapeManager : MonoBehaviour
     //  void -> void
     public void SpawnShapes()
     {
-        int spawnPointIndex = UnityEngine.Random.Range(0, SpawnPoints.Length);
+        int spawnPointIndex = Random.Range(0, SpawnPoints.Length);
 
         int shapeIndex = Random.Range(0, Shapes.Length);
 

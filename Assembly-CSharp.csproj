@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Reticle.cs" />
+    <Compile Include="Assets\Scripts\ShapeManager.cs" />
     <Compile Include="Assets\Scripts\VREyeRaycaster.cs" />
     <Compile Include="Assets\Scripts\VRInput.cs" />
     <Compile Include="Assets\Scripts\VRInteractiveItem.cs" />
