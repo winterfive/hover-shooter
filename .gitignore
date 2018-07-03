@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/ballPhysics/v15/Server/sqlite3
+/Temp
+/obj
+/Library
+/.vs
