@@ -7,8 +7,8 @@ public class ShapeManager : MonoBehaviour
     public float spawnTime;
     public float colorAdd;
     public RaycastManager raycastManager;
-    public Material cubeNormal;
-    public Material cubeOver;
+    //public Material cubeNormal;
+    //public Material cubeOver;
     public Material sphereNormal;
     public Material sphereOver;
 
@@ -66,34 +66,18 @@ public class ShapeManager : MonoBehaviour
     {
         GameObject objectAlreadyFound = foundObject;
 
-        if (foundObject.Equals("Sphere"))
-        {
-            foundObject.gameObject.GetComponentInParent<Renderer>().material = sphereOver;
-        }
-
-        if (foundObject.Equals("Cube"))
-        {
-            foundObject.gameObject.GetComponentInParent<Renderer>().material = cubeOver;
-        }
-
-        if (!foundObject.Equals(objectAlreadyFound))
-        {
-            if (objectAlreadyFound.Equals("Sphere"))
-            {
-                foundObject.gameObject.GetComponentInParent<Renderer>().material = sphereNormal;
-            }
-
-            if (objectAlreadyFound.Equals("Cube"))
-            {
-                foundObject.gameObject.GetComponentInParent<Renderer>().material = cubeNormal;
-            }
-        }
-
         //Color c = foundObject.gameObject.GetComponentInParent<Renderer>().material.color;
         //c.g += colorAdd;
         //c.r += colorAdd;
         //c.b += colorAdd;
         //foundObject.gameObject.GetComponentInParent<Renderer>().material.color = c;
-        
+
+        foundObject.gameObject.GetComponentInParent<Renderer>().material = sphereOver;
+
+        if(!foundObject.Equals(objectAlreadyFound))
+        {
+            objectAlreadyFound.gameObject.GetComponentInParent<Renderer>().material = sphereNormal;
+        }
+
     }
 }
