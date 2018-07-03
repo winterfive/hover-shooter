@@ -60,21 +60,40 @@ public class ShapeManager : MonoBehaviour
         //Debug.Log("Destroyed object: " + foundObject.name);
     }
 
-    // Changes color of object's material via rgb values
+    // Changes object's material
     // GameObject -> void
     public void ChangeShapeColor(GameObject foundObject)
     {
-        Color c = foundObject.gameObject.GetComponentInParent<Renderer>().material.color;
-        c.g += colorAdd;
-        c.r += colorAdd;
-        c.b += colorAdd;
-        foundObject.gameObject.GetComponentInParent<Renderer>().material.color = c;
+        GameObject objectAlreadyFound = foundObject;
 
-        // TODO Check for which shape (cube or sphere) and change amterial to overMaterial
-        //if(foundObject.name == "Cube")
-        //{
+        if (foundObject.Equals("Sphere"))
+        {
+            foundObject.gameObject.GetComponentInParent<Renderer>().material = sphereOver;
+        }
 
-        //}
-        // TODO change the material back to normal when not being gazed at
+        if (foundObject.Equals("Cube"))
+        {
+            foundObject.gameObject.GetComponentInParent<Renderer>().material = cubeOver;
+        }
+
+        if (!foundObject.Equals(objectAlreadyFound))
+        {
+            if (objectAlreadyFound.Equals("Sphere"))
+            {
+                foundObject.gameObject.GetComponentInParent<Renderer>().material = sphereNormal;
+            }
+
+            if (objectAlreadyFound.Equals("Cube"))
+            {
+                foundObject.gameObject.GetComponentInParent<Renderer>().material = cubeNormal;
+            }
+        }
+
+        //Color c = foundObject.gameObject.GetComponentInParent<Renderer>().material.color;
+        //c.g += colorAdd;
+        //c.r += colorAdd;
+        //c.b += colorAdd;
+        //foundObject.gameObject.GetComponentInParent<Renderer>().material.color = c;
+        
     }
 }
