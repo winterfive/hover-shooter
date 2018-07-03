@@ -42,9 +42,6 @@ namespace VRStandardAssets.Utils
         private void OnDisable ()
         {
             m_VrInput.OnClick -= HandleClick;
-            m_VrInput.OnDoubleClick -= HandleDoubleClick;
-            m_VrInput.OnUp -= HandleUp;
-            m_VrInput.OnDown -= HandleDown;
         }
 
 
@@ -59,7 +56,7 @@ namespace VRStandardAssets.Utils
             // Show the debug ray if required
             if (m_ShowDebugRay)
             {
-                Debug.DrawRay(m_Camera.position, m_Camera.forward * m_DebugRayLength, Color.blue, m_DebugRayDuration);
+                Debug.DrawRay(m_Camera.position, m_Camera.forward * m_DebugRayLength, Color.magenta, m_DebugRayDuration);
             }
 
             // Create a ray that points forwards from the camera.
@@ -111,33 +108,10 @@ namespace VRStandardAssets.Utils
             m_LastInteractible = null;
         }
 
-
-        private void HandleUp()
-        {
-            if (m_CurrentInteractible != null)
-                m_CurrentInteractible.Up();
-        }
-
-
-        private void HandleDown()
-        {
-            if (m_CurrentInteractible != null)
-                m_CurrentInteractible.Down();
-        }
-
-
         private void HandleClick()
         {
             if (m_CurrentInteractible != null)
                 m_CurrentInteractible.Click();
-        }
-
-
-        private void HandleDoubleClick()
-        {
-            if (m_CurrentInteractible != null)
-                m_CurrentInteractible.DoubleClick();
-
         }
     }
 }
