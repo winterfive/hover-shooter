@@ -9,23 +9,20 @@ namespace VRStandardAssets.Utils
     // This script should be generally be placed on the camera.
     public class VREyeRaycaster : MonoBehaviour
     {
-        public event Action<RaycastHit> OnRaycasthit;                   // This event is called every frame that the user's gaze is over a collider.
+        public event Action<RaycastHit> OnRaycasthit;                   
 
         [SerializeField] private Transform _camTransform;
-        [SerializeField] private LayerMask _findWithRaycast;           // Layer to use raycast on
-        [SerializeField] private Reticle _reticle;                     // The reticle, if applicable.
-        [SerializeField] private VRInput _vrInput;                     // Used to call input based events on the current VRInteractiveItem.
-        [SerializeField] private bool _showDebugRay;                   // Optionally show the debug ray.
-        [SerializeField] private float _debugRayLength = 5f;           // Debug ray length.
-        [SerializeField] private float _debugRayDuration = 1f;         // How long the Debug ray will remain visible.
-        [SerializeField] private float _rayLength = 500f;              // How far into the scene the ray is cast.
-
+        [SerializeField] private LayerMask _findWithRaycast;           
+        [SerializeField] private Reticle _reticle;                     
+        [SerializeField] private VRInput _vrInput;                     
+        [SerializeField] private bool _showDebugRay;                   
+        [SerializeField] private float _debugRayLength = 5f;           
+        [SerializeField] private float _debugRayDuration = 1f;         
+        [SerializeField] private float _rayLength = 500f;  
         
-        private VRInteractiveItem _currentInteractible;                //The current interactive item
-        private VRInteractiveItem _previousInteractible;               //The previous interactive item
+        private VRInteractiveItem _currentInteractible;
+        private VRInteractiveItem _previousInteractible;
 
-
-        // Utility for other classes to get the current interactive item
         public VRInteractiveItem CurrentInteractible
         {
             get { return _currentInteractible; }
@@ -49,7 +46,10 @@ namespace VRStandardAssets.Utils
             EyeRaycast();
         }
 
-      
+
+        // Shoots raycast into scene, if found, stores interactiveItem, and 
+        // manages reticle location
+        // void -> void
         private void EyeRaycast()
         {
             // Show the debug ray if required
@@ -58,14 +58,13 @@ namespace VRStandardAssets.Utils
                 Debug.DrawRay(_camTransform.position, _camTransform.forward * _debugRayLength, Color.magenta, _debugRayDuration);
             }
 
-            // Create a ray that points forwards from the camera.
             Ray ray = new Ray(_camTransform.position, _camTransform.forward);
             RaycastHit hit;
             
-            // Do the raycast forweards to see if we hit an interactive item
+            // Send raycast forwards to see if we hit an interactive item
             if (Physics.Raycast(ray, out hit, _rayLength, _findWithRaycast))
             {
-                VRInteractiveItem interactible = hit.collider.GetComponent<VRInteractiveItem>(); //attempt to get the VRInteractiveItem on the hit object
+                VRInteractiveItem interactible = hit.collider.GetComponent<VRInteractiveItem>();
                 _currentInteractible = interactible;
 
                 // If we hit an interactive item and it's not the same as the last interactive item, then call Over
