@@ -1,40 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShapeManager : MonoBehaviour
 {
     public GameObject[] Shapes;
     public Transform[] SpawnPoints;
     public float spawnTime;
-    public float colorAdd;
-    public RaycastManager raycastManager;
-    //public Material cubeNormal;
-    //public Material cubeOver;
-    public Material sphereNormal;
-    public Material sphereOver;
-
-    private GameObject managers;
-    private GameObject _objectFound;
 
     //  Use this for initialization
-    void Start ()
+    void Start()
     {
         InvokeRepeating("SpawnShapes", spawnTime, spawnTime);
-	}
-
-    private void Update()
-    {
-        if(raycastManager.HasHitObject && raycastManager.IfShootable)
-        {
-            _objectFound = raycastManager.GetObjectFound.gameObject;
-            ChangeShapeColor(_objectFound);
-        }
     }
 
     //  Spawns random shape at random spawnpoint
     //  void -> void
     public void SpawnShapes()
     {
-        int spawnPointIndex = UnityEngine.Random.Range(0, SpawnPoints.Length);
+        int spawnPointIndex = Random.Range(0, SpawnPoints.Length);
 
         int shapeIndex = Random.Range(0, Shapes.Length);
 
@@ -58,26 +40,5 @@ public class ShapeManager : MonoBehaviour
         // TODO Instantiate(explosion, foundObject.transform.position, foundObject.transform.rotation);
         Destroy(foundObject);
         //Debug.Log("Destroyed object: " + foundObject.name);
-    }
-
-    // Changes object's material
-    // GameObject -> void
-    public void ChangeShapeColor(GameObject foundObject)
-    {
-        GameObject objectAlreadyFound = foundObject;
-
-        //Color c = foundObject.gameObject.GetComponentInParent<Renderer>().material.color;
-        //c.g += colorAdd;
-        //c.r += colorAdd;
-        //c.b += colorAdd;
-        //foundObject.gameObject.GetComponentInParent<Renderer>().material.color = c;
-
-        foundObject.gameObject.GetComponentInParent<Renderer>().material = sphereOver;
-
-        if(!foundObject.Equals(objectAlreadyFound))
-        {
-            objectAlreadyFound.gameObject.GetComponentInParent<Renderer>().material = sphereNormal;
-        }
-
     }
 }
