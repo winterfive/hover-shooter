@@ -11,9 +11,8 @@ namespace VRStandardAssets.Utils
     {
         public event Action<RaycastHit> OnRaycasthit;                   // This event is called every frame that the user's gaze is over a collider.
 
-
         [SerializeField] private Transform _camTransform;
-        [SerializeField] private LayerMask _exclusionLayers;           // Layers to exclude from the raycast.
+        [SerializeField] private LayerMask _findWithRaycast;           // Layer to use raycast on
         [SerializeField] private Reticle _reticle;                     // The reticle, if applicable.
         [SerializeField] private VRInput _vrInput;                     // Used to call input based events on the current VRInteractiveItem.
         [SerializeField] private bool _showDebugRay;                   // Optionally show the debug ray.
@@ -23,7 +22,7 @@ namespace VRStandardAssets.Utils
 
         
         private VRInteractiveItem _currentInteractible;                //The current interactive item
-        private VRInteractiveItem _previousInteractible;               //The last interactive item
+        private VRInteractiveItem _previousInteractible;               //The previous interactive item
 
 
         // Utility for other classes to get the current interactive item
@@ -64,7 +63,7 @@ namespace VRStandardAssets.Utils
             RaycastHit hit;
             
             // Do the raycast forweards to see if we hit an interactive item
-            if (Physics.Raycast(ray, out hit, _rayLength, ~_exclusionLayers))
+            if (Physics.Raycast(ray, out hit, _rayLength, _findWithRaycast))
             {
                 VRInteractiveItem interactible = hit.collider.GetComponent<VRInteractiveItem>(); //attempt to get the VRInteractiveItem on the hit object
                 _currentInteractible = interactible;
