@@ -14,12 +14,12 @@ namespace VRStandardAssets.Utils
         public event Action OnClick;            // Called when click input is detected whilst the gaze is over this object.
 
 
-        protected bool m_IsOver;
+        protected bool _isOver;
 
 
         public bool IsOver
         {
-            get { return m_IsOver; }              // Is the gaze currently over this object?
+            get { return _isOver; }              // Is the gaze currently over this object?
         }
 
 
@@ -27,7 +27,7 @@ namespace VRStandardAssets.Utils
         // They in turn call the appropriate events should they have subscribers.
         public void Over()
         {
-            m_IsOver = true;
+            _isOver = true;
 
             if (OnOver != null)
                 OnOver();
@@ -36,7 +36,7 @@ namespace VRStandardAssets.Utils
 
         public void Out()
         {
-            m_IsOver = false;
+            _isOver = false;
 
             if (OnOut != null)
                 OnOut();
