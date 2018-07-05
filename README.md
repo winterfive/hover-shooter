@@ -1,3 +1,3 @@
 # shape-shooter-vr
 
-Version using C# Events and VR assets from Unity.
+Version using C# Events.
