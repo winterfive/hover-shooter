@@ -6,10 +6,12 @@ public class ShapeManager : MonoBehaviour
     public Transform[] SpawnPoints;
     public float spawnTime;
 
+    private float startTime = 2.0f;
+
     //  Use this for initialization
     void Start()
     {
-        InvokeRepeating("SpawnShapes", spawnTime, spawnTime);
+        InvokeRepeating("SpawnShapes", startTime, spawnTime);
     }
 
     //  Spawns random shape at random spawnpoint
