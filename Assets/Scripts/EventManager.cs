@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour {
 
+    public delegate void NewObjectFound();
+    public static event NewObjectFound OnNewObjectFound;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -11,8 +14,13 @@ public class EventManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
 
-    // Need events for: onOver, onOut, hasNewObject... more
+        if(RaycastManager._hasNewObject)
+        {
+            if(OnNewObjectFound != null)
+            {
+                OnNewObjectFound();
+            }
+        }
+	} 
 }
