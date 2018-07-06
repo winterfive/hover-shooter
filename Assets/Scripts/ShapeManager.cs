@@ -69,6 +69,7 @@ public class ShapeManager : MonoBehaviour
     public void CheckForShootable()
     {
         _currentGameObject = raycastManager.GetCurrentFoundObject();
+        // Should I assign the parent gameObject instead?
 
         if (_currentGameObject.tag == "Shootable")
         {
