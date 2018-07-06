@@ -3,18 +3,24 @@ using UnityEngine;
 public class RaycastManager : MonoBehaviour {
 
     public float range = 100f;
-    
+    public static bool _hasNewObject;
+
     private RaycastHit hit;
-    private GameObject _currentObjectFound;
+    private GameObject _currentFoundObject;
     private GameObject _previousFoundObject;
 
-    public GameObject GetCurrentFoundObject
+    public GameObject GetCurrentFoundObject()
     {
-        get { return _currentObjectFound; }
+        return _currentFoundObject;
+    }
+    
+
+    private void Start()
+    {
+        _hasNewObject = false;
     }
 
-    // Sends out ray
-    // void -> void
+
     void Update()
     {
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
@@ -29,16 +35,19 @@ public class RaycastManager : MonoBehaviour {
     //  void -> void
     public void CheckForNewObject()
     {
-        _currentObjectFound = hit.collider.gameObject;
+        _currentFoundObject = hit.collider.gameObject;
 
-        if(_previousFoundObject != null)
+        Debug.Log("Current Found Object: " + GetCurrentFoundObject().name);
+
+        if(!_currentFoundObject.Equals(_previousFoundObject))
         {
-            if(!_currentObjectFound.Equals(_previousFoundObject))
-            {
-                // send event to ShapeManager
-            }
+            _hasNewObject = true;
+        }
+        else
+        {
+            _hasNewObject = false;   
         }
 
-        _previousFoundObject = _currentObjectFound;
+        _previousFoundObject = _currentFoundObject;
     }    
 }
