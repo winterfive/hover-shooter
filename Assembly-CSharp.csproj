@@ -62,10 +62,8 @@
     <Compile Include="Assets\Scripts\EventManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\RaycastManager.cs" />
-    <Compile Include="Assets\Scripts\Reticle.cs" />
     <Compile Include="Assets\Scripts\ReticleManager.cs" />
     <Compile Include="Assets\Scripts\ShapeManager.cs" />
-    <None Include="Assets\Shaders\UIOverlay.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Moo/Documents/Unity Projects/shape-shooter-vr/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
