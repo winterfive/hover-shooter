@@ -4,25 +4,21 @@ public class ShapeManager : MonoBehaviour
 {
     public GameObject[] Shapes;
     public Transform[] SpawnPoints;
+    public float startTime = 2.0f;
     public float spawnTime;
-
     public RaycastManager raycastManager;
     //public Material cubeNormal;
     //public Material cubeOver;
     //public Material sphereNormal;
     //public Material sphereOver;
 
-    private GameObject managers;
-    private GameObject _objectFound;
-    private bool _ifShootable;
-    private float startTime = 2.0f;
-
-
+    private GameObject _currentGameObject;
+    
+    
     //  Use this for initialization
     void Start()
     {
         InvokeRepeating("SpawnShapes", spawnTime, spawnTime);
-        _ifShootable = false;
 	}
 
     private void Update()
@@ -72,25 +68,24 @@ public class ShapeManager : MonoBehaviour
     // void -> void
     public void CheckForShootable()
     {
-        if (_objectFound.tag == "Shootable")
+        _currentGameObject = raycastManager.GetCurrentFoundObject();
+
+        if (_currentGameObject.tag == "Shootable")
         {
-            _ifShootable = true;
-        }
-        else
-        {
-            _ifShootable = false;
+            // change color of current object
+            // change color of previous object back to normal (if it's shootable)
         }
     }
 
 
-    // Changes object's material to onGaze material
-    // GameObject -> void
-    public void ChangeShapeColor(GameObject foundObject)
+    private void OnEnable()
     {
-        GameObject objectAlreadyFound = foundObject;
+        EventManager.OnNewObjectFound += CheckForShootable;
+    }
 
-        // TODO Break this into 2 methods: enable, disable
-
+    private void OnDisable()
+    {
+        EventManager.OnNewObjectFound -= CheckForShootable;
     }
 }
 
