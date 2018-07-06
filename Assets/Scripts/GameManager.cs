@@ -6,8 +6,7 @@ public class GameManager : MonoBehaviour{
     public RaycastManager raycastManager;
     public ShapeManager shapeManager;
 
-    private float _timer;
-    private bool _isObjectShootable;    
+    private float _timer;    
     private GameObject _currentFoundObject;    
 
 
@@ -22,7 +21,7 @@ public class GameManager : MonoBehaviour{
     {
         _timer += Time.deltaTime;
 
-        if (_isObjectShootable && _timer >= timeBetweenShots && Input.GetButton("Fire1"))
+        if (_timer >= timeBetweenShots && Input.GetButton("Fire1"))
         {
             Shoot();
         }
@@ -32,22 +31,8 @@ public class GameManager : MonoBehaviour{
     //  void -> void
     public void Shoot()
     {
-        _currentFoundObject = raycastManager.GetObjectFound;
+        _currentFoundObject = raycastManager.GetCurrentFoundObject;
         shapeManager.DestroyShape(_currentFoundObject);
         Debug.Log("Shot an object: " + _currentFoundObject.name);
-    }
-
-    // Updates bool isObjectSHootable
-    // void -> void
-    void Shootable()
-    {
-        if (raycastManager.IfShootable)
-        {
-            _isObjectShootable = true;
-        }
-        else
-        {
-            _isObjectShootable = false;
-        }
-    }
+    }}
 }
