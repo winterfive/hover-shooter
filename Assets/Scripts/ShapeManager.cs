@@ -64,7 +64,7 @@ public class ShapeManager : MonoBehaviour
     }
 
 
-    // Checks object found for "Shootable" tag, updates bool ifShootable
+    // Checks parent object of object found for "Shootable" tag
     // void -> void
     public void CheckForShootable()
     {
@@ -72,7 +72,7 @@ public class ShapeManager : MonoBehaviour
 
         if (_currentGameObject.tag == "Shootable")
         {
-            // change color of current object
+            ApplyNormalColor(_currentGameObject);
             // change color of previous object back to normal (if it's shootable)
         }
     }
@@ -86,6 +86,16 @@ public class ShapeManager : MonoBehaviour
     private void OnDisable()
     {
         EventManager.OnNewObjectFound -= CheckForShootable;
+    }
+
+    public void ApplyOverColor(GameObject go)
+    {
+
+    }
+
+    public void ApplyNormalColor(GameObject go)
+    {
+
     }
 }
 
