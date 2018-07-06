@@ -15,8 +15,6 @@ public class ShapeManager : MonoBehaviour
     private GameObject managers;
     private GameObject _objectFound;
     private bool _ifShootable;
-
-
     private float startTime = 2.0f;
 
 
@@ -29,7 +27,7 @@ public class ShapeManager : MonoBehaviour
 
     private void Update()
     {
-        InvokeRepeating("SpawnShapes", startTime, spawnTime);
+        
     }
 
     //  Spawns random shape at random spawnpoint
