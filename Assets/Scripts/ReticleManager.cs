@@ -18,15 +18,7 @@ public class ReticleManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (raycastManager.HasHitObject)
-        {
-            _objectFound = raycastManager.GetCurrentFoundObject.gameObject;
-            PlaceReticle(_objectFound);
-        }
-        else
-        {
-            // place reticle infront camera at default distance
-        }
+        
 	}
 
     // Places Reticle object on object found by raycast
