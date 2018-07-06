@@ -7,16 +7,10 @@ public class RaycastManager : MonoBehaviour {
     private RaycastHit hit;
     private GameObject _currentObjectFound;
     private GameObject _previousFoundObject;
-    private bool _ifShootable;
 
-    public GameObject GetObjectFound
+    public GameObject GetCurrentFoundObject
     {
         get { return _currentObjectFound; }
-    }
-
-    public bool IfShootable
-    {
-        get { return _ifShootable; }
     }
 
     // Sends out ray
@@ -27,10 +21,6 @@ public class RaycastManager : MonoBehaviour {
         {
             //Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.magenta); works
             CheckForNewObject();
-        }
-        else
-        {
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * range, Color.blue); works           
         }        
     }
 
@@ -50,19 +40,5 @@ public class RaycastManager : MonoBehaviour {
         }
 
         _previousFoundObject = _currentObjectFound;
-    }
-
-    // Checks object found for "Shootable" tag, updates bool ifShootable
-    // void -> void
-    public void CheckForShootable()
-    {
-        if(_currentObjectFound.tag == "Shootable")
-        {
-            _ifShootable = true;
-        }
-        else
-        {
-            _ifShootable = false;
-        }
-    }
+    }    
 }
