@@ -47,16 +47,9 @@ public class RaycastManager : MonoBehaviour {
     //  void -> void
     public void StoreObject()
     {
-        if(HasHitObject)
-        {
             _objectFound = hit.collider.gameObject;
-            //Debug.Log("Object assigned to objectFound: " + hit.collider.tag); works
-            //Debug.Log("hasHitObject: " + _hasHitObject.ToString()); works
-        }
-        else
-        {
-            _objectFound = null;
-        }
+            // TODO checks currentObjectFound against previosuObjectFound
+            // TODO if different, send an event to shapeManager
     }
 
     // Checks object found for "Shootable" tag, updates bool ifShootable
@@ -65,7 +58,7 @@ public class RaycastManager : MonoBehaviour {
     {
         if(_objectFound.tag == "Shootable")
         {
-            _ifShootable = true;
+            _ifShootable = true;  
         }
         else
         {
