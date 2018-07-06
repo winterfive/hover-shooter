@@ -20,20 +20,23 @@ public class RaycastManager : MonoBehaviour {
     {
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {
-            StoreObject();
+            CheckForNewObject();
         }        
     }
 
-    //  Stores found object
+    //  Stores found object adn compares it to previosu object
     //  void -> void
-    public void StoreObject()
+    public void CheckForNewObject()
     {
         _objectFound = hit.collider.gameObject;
 
-        if(_objectFound.Equals(_previousObjectFound))
+        if(_previousObjectFound != null)
         {
-            //send an event to shapeManager
-        }
+            if (!_objectFound.Equals(_previousObjectFound))
+            {
+                //send an event to shapeManager, newObjectFound
+            }
+        }        
 
         _previousObjectFound = _objectFound;
     }    
