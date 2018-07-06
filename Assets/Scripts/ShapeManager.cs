@@ -5,29 +5,26 @@ public class ShapeManager : MonoBehaviour
     public GameObject[] Shapes;
     public Transform[] SpawnPoints;
     public float spawnTime;
-    public float colorAdd;
     public RaycastManager raycastManager;
     //public Material cubeNormal;
     //public Material cubeOver;
-    public Material sphereNormal;
-    public Material sphereOver;
+    //public Material sphereNormal;
+    //public Material sphereOver;
 
     private GameObject managers;
     private GameObject _objectFound;
+    private bool _ifShootable;
 
     //  Use this for initialization
     void Start ()
     {
         InvokeRepeating("SpawnShapes", spawnTime, spawnTime);
+        _ifShootable = false;
 	}
 
     private void Update()
     {
-        if(raycastManager.HasHitObject && raycastManager.IfShootable)
-        {
-            _objectFound = raycastManager.GetObjectFound.gameObject;
-            ChangeShapeColor(_objectFound);
-        }
+        
     }
 
     //  Spawns random shape at random spawnpoint
@@ -57,6 +54,7 @@ public class ShapeManager : MonoBehaviour
     // TODO Store the ne wobjecy as the current object
     // TODO ShapeManager checks for shootable
 
+
     //  Spawns explosion and destroys shape object
     //  GameObject -> void
     public void DestroyShape(GameObject foundObject)
@@ -66,26 +64,29 @@ public class ShapeManager : MonoBehaviour
         //Debug.Log("Destroyed object: " + foundObject.name);
     }
 
-    // Changes object's material
+
+    // Checks object found for "Shootable" tag, updates bool ifShootable
+    // void -> void
+    public void CheckForShootable()
+    {
+        if (_objectFound.tag == "Shootable")
+        {
+            _ifShootable = true;
+        }
+        else
+        {
+            _ifShootable = false;
+        }
+    }
+
+
+    // Changes object's material to onGaze material
     // GameObject -> void
     public void ChangeShapeColor(GameObject foundObject)
     {
         GameObject objectAlreadyFound = foundObject;
 
-        //Color c = foundObject.gameObject.GetComponentInParent<Renderer>().material.color;
-        //c.g += colorAdd;
-        //c.r += colorAdd;
-        //c.b += colorAdd;
-        //foundObject.gameObject.GetComponentInParent<Renderer>().material.color = c;
-
         // TODO Break this into 2 methods: enable, disable
-
-        foundObject.gameObject.GetComponentInParent<Renderer>().material = sphereOver;
-
-        if(!foundObject.Equals(objectAlreadyFound))
-        {
-            objectAlreadyFound.gameObject.GetComponentInParent<Renderer>().material = sphereNormal;
-        }
 
     }
 }
