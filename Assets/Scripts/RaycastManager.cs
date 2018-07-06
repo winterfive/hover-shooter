@@ -37,8 +37,6 @@ public class RaycastManager : MonoBehaviour {
     {
         _currentFoundObject = hit.collider.gameObject;
 
-        Debug.Log("Current Found Object: " + GetCurrentFoundObject().name);
-
         if(!_currentFoundObject.Equals(_previousFoundObject))
         {
             _hasNewObject = true;
