@@ -1269,8 +1269,8 @@ MonoBehaviour:
   - {fileID: 213152335}
   - {fileID: 741158106}
   - {fileID: 1327769901}
+  startTime: 3
   spawnTime: 0.5
-  raycastManager: {fileID: 1213041245}
 --- !u!4 &1934252587
 Transform:
   m_ObjectHideFlags: 0
