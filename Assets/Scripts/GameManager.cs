@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour{
 
     //  Destroys object
     //  void -> void
-    public void Shoot()
-    {
-        //_currentFoundObject = raycastManager._currentFoundObject;
-        shapeManager.DestroyShape(_currentFoundObject);
-        Debug.Log("Shot an object: " + _currentFoundObject.name);
-    }
+    //public void Shoot()
+    //{
+    //    _currentfoundobject = raycastmanager._currentfoundobject;
+    //    shapemanager.destroyshape(_currentfoundobject);
+    //    debug.log("shot an object: " + _currentfoundobject.name);
+    //}
 }
