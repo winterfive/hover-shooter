@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour{
     //  void -> void
     public void Shoot()
     {
-        _currentFoundObject = raycastManager.GetCurrentFoundObject;
+        //_currentFoundObject = raycastManager._currentFoundObject;
         shapeManager.DestroyShape(_currentFoundObject);
         Debug.Log("Shot an object: " + _currentFoundObject.name);
-    }}
+    }
 }
