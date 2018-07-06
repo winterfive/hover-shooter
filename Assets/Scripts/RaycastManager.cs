@@ -6,13 +6,7 @@ public class RaycastManager : MonoBehaviour {
     
     private RaycastHit hit;
     private GameObject _objectFound;
-    private bool _hasHitObject;
     private bool _ifShootable;
-
-    public bool HasHitObject
-    {
-        get { return _hasHitObject; }
-    }
 
     public GameObject GetObjectFound
     {
@@ -32,14 +26,12 @@ public class RaycastManager : MonoBehaviour {
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {
             //Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.magenta); works
-            _hasHitObject = true;
             StoreObject();
             CheckForShootable();
         }
         else
         {
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * range, Color.blue); works
-            _hasHitObject = false;           
+            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * range, Color.blue); works           
         }        
     }
 
