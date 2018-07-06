@@ -1023,30 +1023,21 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1213041244}
-<<<<<<< HEAD
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93b87886eb92ce543995fc917d3aa42b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 100
-=======
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffebc012055484b4899e163803755608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camTransform: {fileID: 1213041248}
-  _findWithRaycast:
+  m_Camera: {fileID: 1213041248}
+  m_ExclusionLayers:
     serializedVersion: 2
-    m_Bits: 0
-  _reticle: {fileID: 0}
-  _vrInput: {fileID: 1934252588}
-  _showDebugRay: 0
-  _debugRayLength: 5
-  _debugRayDuration: 1
-  _rayLength: 500
->>>>>>> master
+    m_Bits: 4
+  m_Reticle: {fileID: 0}
+  m_VrInput: {fileID: 0}
+  m_ShowDebugRay: 1
+  m_DebugRayLength: 50
+  m_DebugRayDuration: 1
+  m_RayLength: 500
 --- !u!224 &1213041248
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1260,7 +1251,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1934252587}
   - component: {fileID: 1934252586}
-  - component: {fileID: 1934252588}
   m_Layer: 2
   m_Name: ScriptManager
   m_TagString: Untagged
@@ -1287,13 +1277,6 @@ MonoBehaviour:
   - {fileID: 741158106}
   - {fileID: 1327769901}
   spawnTime: 0.25
-<<<<<<< HEAD
-  colorAdd: 0
-  raycastManager: {fileID: 0}
-  sphereNormal: {fileID: 0}
-  sphereOver: {fileID: 0}
-=======
->>>>>>> master
 --- !u!4 &1934252587
 Transform:
   m_ObjectHideFlags: 0
@@ -1307,18 +1290,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1934252588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1934252585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-<<<<<<< HEAD
-  m_Script: {fileID: 11500000, guid: cf98bfcb609e52d4fb99b7e211c565e5, type: 3}
-=======
-  m_Script: {fileID: 11500000, guid: 8902ef04f323e444b98d2e4fd80a56ab, type: 3}
->>>>>>> master
-  m_Name: 
-  m_EditorClassIdentifier: 

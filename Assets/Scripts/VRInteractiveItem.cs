@@ -1,0 +1,52 @@
+using System;
+using UnityEngine;
+
+namespace VRStandardAssets.Utils
+{
+    // This class should be added to any gameobject in the scene
+    // that should react to input based on the user's gaze.
+    // It contains events that can be subscribed to by classes that
+    // need to know about input specifics to this gameobject.
+    public class VRInteractiveItem : MonoBehaviour
+    {
+        public event Action OnOver;             // Called when the gaze moves over this object
+        public event Action OnOut;              // Called when the gaze leaves this object
+        public event Action OnClick;            // Called when click input is detected whilst the gaze is over this object.
+
+
+        protected bool _isOver;
+
+
+        public bool IsOver
+        {
+            get { return _isOver; }              // Is the gaze currently over this object?
+        }
+
+
+        // The below functions are called by the VREyeRaycaster when the appropriate input is detected.
+        // They in turn call the appropriate events should they have subscribers.
+        public void Over()
+        {
+            _isOver = true;
+
+            if (OnOver != null)
+                OnOver();
+        }
+
+
+        public void Out()
+        {
+            _isOver = false;
+
+            if (OnOut != null)
+                OnOut();
+        }
+
+
+        public void Click()
+        {
+            if (OnClick != null)
+                OnClick();
+        }
+    }
+}

@@ -1,10 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShapeManager : MonoBehaviour
 {
     public GameObject[] Shapes;
     public Transform[] SpawnPoints;
     public float spawnTime;
+<<<<<<< HEAD
     public RaycastManager raycastManager;
     //public Material cubeNormal;
     //public Material cubeOver;
@@ -14,10 +15,15 @@ public class ShapeManager : MonoBehaviour
     private GameObject managers;
     private GameObject _objectFound;
     private bool _ifShootable;
+=======
+
+    private float startTime = 2.0f;
+>>>>>>> master
 
     //  Use this for initialization
-    void Start ()
+    void Start()
     {
+<<<<<<< HEAD
         InvokeRepeating("SpawnShapes", spawnTime, spawnTime);
         _ifShootable = false;
 	}
@@ -25,13 +31,16 @@ public class ShapeManager : MonoBehaviour
     private void Update()
     {
         
+=======
+        InvokeRepeating("SpawnShapes", startTime, spawnTime);
+>>>>>>> master
     }
 
     //  Spawns random shape at random spawnpoint
     //  void -> void
     public void SpawnShapes()
     {
-        int spawnPointIndex = UnityEngine.Random.Range(0, SpawnPoints.Length);
+        int spawnPointIndex = Random.Range(0, SpawnPoints.Length);
 
         int shapeIndex = Random.Range(0, Shapes.Length);
 
@@ -63,6 +72,7 @@ public class ShapeManager : MonoBehaviour
         Destroy(foundObject);
         //Debug.Log("Destroyed object: " + foundObject.name);
     }
+<<<<<<< HEAD
 
 
     // Checks object found for "Shootable" tag, updates bool ifShootable
@@ -90,3 +100,6 @@ public class ShapeManager : MonoBehaviour
 
     }
 }
+=======
+}
+>>>>>>> master

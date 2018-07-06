@@ -13,4 +13,9 @@ public class EventManager : MonoBehaviour {
 	void Update () {
 		
 	}
+<<<<<<< HEAD
+=======
+
+    // Need events for: onOver, onOut, hasNewObject
+>>>>>>> master
 }
