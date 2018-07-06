@@ -5,12 +5,13 @@ public class RaycastManager : MonoBehaviour {
     public float range = 100f;
     
     private RaycastHit hit;
-    private GameObject _objectFound;
+    private GameObject _currentObjectFound;
+    private GameObject _previousFoundObject;
     private bool _ifShootable;
 
     public GameObject GetObjectFound
     {
-        get { return _objectFound; }
+        get { return _currentObjectFound; }
     }
 
     public bool IfShootable
@@ -19,15 +20,13 @@ public class RaycastManager : MonoBehaviour {
     }
 
     // Sends out ray
-    // Updates bool value for _hasHitObject
     // void -> void
     void Update()
     {
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {
             //Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.magenta); works
-            StoreObject();
-            CheckForShootable();
+            CheckForNewObject();
         }
         else
         {
@@ -36,26 +35,28 @@ public class RaycastManager : MonoBehaviour {
     }
 
     //  Stores found object
+    //  Compares newly found object with previously found object
     //  void -> void
-    public void StoreObject()
+    public void CheckForNewObject()
     {
-        if(HasHitObject)
+        _currentObjectFound = hit.collider.gameObject;
+
+        if(_previousFoundObject != null)
         {
-            _objectFound = hit.collider.gameObject;
-            //Debug.Log("Object assigned to objectFound: " + hit.collider.tag); works
-            //Debug.Log("hasHitObject: " + _hasHitObject.ToString()); works
+            if(!_currentObjectFound.Equals(_previousFoundObject))
+            {
+                // send event to ShapeManager
+            }
         }
-        else
-        {
-            _objectFound = null;
-        }
+
+        _previousFoundObject = _currentObjectFound;
     }
 
     // Checks object found for "Shootable" tag, updates bool ifShootable
     // void -> void
     public void CheckForShootable()
     {
-        if(_objectFound.tag == "Shootable")
+        if(_currentObjectFound.tag == "Shootable")
         {
             _ifShootable = true;
         }
