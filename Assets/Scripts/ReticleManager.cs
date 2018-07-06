@@ -20,7 +20,7 @@ public class ReticleManager : MonoBehaviour {
     {
         if (raycastManager.HasHitObject)
         {
-            _objectFound = raycastManager.GetObjectFound.gameObject;
+            _objectFound = raycastManager.GetCurrentFoundObject.gameObject;
             PlaceReticle(_objectFound);
         }
         else
