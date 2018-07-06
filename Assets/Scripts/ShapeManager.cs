@@ -50,6 +50,12 @@ public class ShapeManager : MonoBehaviour
             Instantiate(shape, SpawnPoints[spawnPointIndex].position, Quaternion.Euler(Random.Range(-90, 90), Random.Range(-40, 40), Random.Range(-40, 40)));
         }
     }
+ 
+    // TODO Get the object from Raycaster if event is called
+    // TODO If the current object is shootable, change it's color back to normal
+    // TODO Change the new object's color to onGaze if it's shootable
+    // TODO Store the ne wobjecy as the current object
+    // TODO ShapeManager checks for shootable
 
     //  Spawns explosion and destroys shape object
     //  GameObject -> void
@@ -71,6 +77,8 @@ public class ShapeManager : MonoBehaviour
         //c.r += colorAdd;
         //c.b += colorAdd;
         //foundObject.gameObject.GetComponentInParent<Renderer>().material.color = c;
+
+        // TODO Break this into 2 methods: enable, disable
 
         foundObject.gameObject.GetComponentInParent<Renderer>().material = sphereOver;
 
