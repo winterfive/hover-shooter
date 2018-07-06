@@ -6,16 +6,11 @@ public class RaycastManager : MonoBehaviour {
     
     private RaycastHit hit;
     private GameObject _objectFound;
-    private bool _ifShootable;
+    private GameObject _previousObjectFound;
 
     public GameObject GetObjectFound
     {
         get { return _objectFound; }
-    }
-
-    public bool IfShootable
-    {
-        get { return _ifShootable; }
     }
 
     // Sends out ray
@@ -25,13 +20,7 @@ public class RaycastManager : MonoBehaviour {
     {
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {
-            //Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.magenta); works
             StoreObject();
-            CheckForShootable();
-        }
-        else
-        {
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * range, Color.blue); works           
         }        
     }
 
@@ -39,22 +28,13 @@ public class RaycastManager : MonoBehaviour {
     //  void -> void
     public void StoreObject()
     {
-            _objectFound = hit.collider.gameObject;
-            // TODO checks currentObjectFound against previosuObjectFound
-            // TODO if different, send an event to shapeManager
-    }
+        _objectFound = hit.collider.gameObject;
 
-    // Checks object found for "Shootable" tag, updates bool ifShootable
-    // void -> void
-    public void CheckForShootable()
-    {
-        if(_objectFound.tag == "Shootable")
+        if(_objectFound.Equals(_previousObjectFound))
         {
-            _ifShootable = true;  
+            //send an event to shapeManager
         }
-        else
-        {
-            _ifShootable = false;
-        }
-    }
+
+        _previousObjectFound = _objectFound;
+    }    
 }
