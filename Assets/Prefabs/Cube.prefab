@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4812836930803946}
   - component: {fileID: 65002204757859018}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: TriggerBox
-  m_TagString: Shootable
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,10 +35,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4752482714349294}
+  - component: {fileID: 33541110104872596}
   - component: {fileID: 23866942451754790}
   - component: {fileID: 54787771567775410}
   - component: {fileID: 65431119375093320}
-  - component: {fileID: 33541110104872596}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Shootable
