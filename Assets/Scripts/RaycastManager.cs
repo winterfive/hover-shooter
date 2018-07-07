@@ -3,7 +3,8 @@ using UnityEngine;
 public class RaycastManager : MonoBehaviour {
 
     public float range = 100f;
-    public static bool _hasNewObject;
+    public delegate void NewObjectFound();
+    public static event NewObjectFound OnNewObjectFound;
 
     private RaycastHit hit;
     private GameObject _currentFoundObject;
@@ -12,12 +13,6 @@ public class RaycastManager : MonoBehaviour {
     public GameObject GetCurrentFoundObject()
     {
         return _currentFoundObject;
-    }
-    
-
-    private void Start()
-    {
-        _hasNewObject = false;
     }
 
 
@@ -30,8 +25,8 @@ public class RaycastManager : MonoBehaviour {
         }        
     }
 
-    //  Stores found object
     //  Compares newly found object with previously found object
+    //  Calls event
     //  void -> void
     public void CheckForNewObject()
     {
@@ -39,13 +34,14 @@ public class RaycastManager : MonoBehaviour {
 
         if(!_currentFoundObject.Equals(_previousFoundObject))
         {
-            _hasNewObject = true;
-        }
-        else
-        {
-            _hasNewObject = false;   
+            if (OnNewObjectFound != null)
+            {
+                OnNewObjectFound();
+                //Debug.Log("Got to OnNewObjectFound");
+            }
         }
 
         _previousFoundObject = _currentFoundObject;
+        Debug.Log("Found an object: " + _currentFoundObject.tag);
     }    
 }
