@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour {
 
-    public delegate void NewObjectFound();
-    public static event NewObjectFound OnNewObjectFound;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -17,10 +16,7 @@ public class EventManager : MonoBehaviour {
 
         if(RaycastManager._hasNewObject)
         {
-            if(OnNewObjectFound != null)
-            {
-                OnNewObjectFound();
-            }
+            
         }
 	} 
 }
