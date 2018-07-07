@@ -21,11 +21,6 @@ public class ShapeManager : MonoBehaviour
         InvokeRepeating("SpawnShapes", spawnTime, spawnTime);
 	}
 
-    private void Update()
-    {
-        
-    }
-
     //  Spawns random shape at random spawnpoint
     //  void -> void
     public void SpawnShapes()
@@ -50,7 +45,7 @@ public class ShapeManager : MonoBehaviour
     // TODO Get the object from Raycaster if event is called
     // TODO If the current object is shootable, change it's color back to normal
     // TODO Change the new object's color to onGaze if it's shootable
-    // TODO Store the ne wobjecy as the current object
+    // TODO Store the new object as the current object
     // TODO ShapeManager checks for shootable
 
 
@@ -69,7 +64,7 @@ public class ShapeManager : MonoBehaviour
     public void CheckForShootable()
     {
         _currentGameObject = raycastManager.GetCurrentFoundObject();
-        // Should I assign the parent gameObject instead?
+        //Debug.Log("current object is " + _currentGameObject.name);
 
         if (_currentGameObject.tag == "Shootable")
         {
@@ -81,12 +76,12 @@ public class ShapeManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnNewObjectFound += CheckForShootable;
+        RaycastManager.OnNewObjectFound += CheckForShootable;
     }
 
     private void OnDisable()
     {
-        EventManager.OnNewObjectFound -= CheckForShootable;
+        RaycastManager.OnNewObjectFound -= CheckForShootable;
     }
 
     public void ApplyOverColor(GameObject go)
@@ -96,7 +91,7 @@ public class ShapeManager : MonoBehaviour
 
     public void ApplyNormalColor(GameObject go)
     {
-
+        Debug.Log("Applying normal color");
     }
 }
 
