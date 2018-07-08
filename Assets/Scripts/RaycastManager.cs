@@ -15,12 +15,16 @@ public class RaycastManager : MonoBehaviour {
         return _currentFoundObject;
     }
 
+    public GameObject GetPreviousFoundObject()
+    {
+        return _previousFoundObject;
+    }
+
 
     void Update()
     {
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {
-            //Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.magenta); works
             CheckForNewObject();
         }        
     }
@@ -37,11 +41,10 @@ public class RaycastManager : MonoBehaviour {
             if (OnNewObjectFound != null)
             {
                 OnNewObjectFound();
-                //Debug.Log("Got to OnNewObjectFound");
             }
         }
 
         _previousFoundObject = _currentFoundObject;
-        Debug.Log("Found an object: " + _currentFoundObject.tag);
+        //Debug.Log("Found an object: " + _currentFoundObject.tag);
     }    
 }
