@@ -4,10 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Shootable
   - Environment
   - Reticle
   - Trigger
+  - Cube
+  - Sphere
+  - Shootable
   layers:
   - Default
   - TransparentFX
