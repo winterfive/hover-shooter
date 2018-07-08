@@ -7,14 +7,12 @@ public class GameManager : MonoBehaviour{
     public ShapeManager shapeManager;
 
     private float _timer;    
-    private GameObject _currentFoundObject;    
 
 
     // Use this for initialization
     void Awake()
     {
         _timer = 0f;
-        _currentFoundObject = null;
     }
 
     private void Update()
@@ -23,7 +21,7 @@ public class GameManager : MonoBehaviour{
 
         if (_timer >= timeBetweenShots && Input.GetButton("Fire1"))
         {
-            Shoot();
+            //Shoot();
         }
     }
 
