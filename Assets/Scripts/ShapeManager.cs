@@ -14,7 +14,6 @@ public class ShapeManager : MonoBehaviour
 
     private GameObject _currentFoundObject;
     private GameObject _previousFoundObject;
-    private bool _isShootable;
     
     
     //  Use this for initialization
