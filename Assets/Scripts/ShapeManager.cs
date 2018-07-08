@@ -7,12 +7,14 @@ public class ShapeManager : MonoBehaviour
     public float startTime = 2.0f;
     public float spawnTime;
     public RaycastManager raycastManager;
-    //public Material cubeNormal;
-    //public Material cubeOver;
-    //public Material sphereNormal;
-    //public Material sphereOver;
+    public Material cubeNormal;
+    public Material cubeOver;
+    public Material sphereNormal;
+    public Material sphereOver;
 
-    private GameObject _currentGameObject;
+    private GameObject _currentFoundObject;
+    private GameObject _previousFoundObject;
+    private bool _isShootable;
     
     
     //  Use this for initialization
@@ -41,12 +43,6 @@ public class ShapeManager : MonoBehaviour
             Instantiate(shape, SpawnPoints[spawnPointIndex].position, Quaternion.Euler(Random.Range(-90, 90), Random.Range(-40, 40), Random.Range(-40, 40)));
         }
     }
- 
-    // TODO Get the object from Raycaster if event is called
-    // TODO If the current object is shootable, change it's color back to normal
-    // TODO Change the new object's color to onGaze if it's shootable
-    // TODO Store the new object as the current object
-    // TODO ShapeManager checks for shootable
 
 
     //  Spawns explosion and destroys shape object
@@ -59,17 +55,55 @@ public class ShapeManager : MonoBehaviour
     }
 
 
-    // Checks parent object of object found for "Shootable" tag
+    // Checks objects found for "Shootable" tag
     // void -> void
     public void CheckForShootable()
     {
-        _currentGameObject = raycastManager.GetCurrentFoundObject();
-        //Debug.Log("current object is " + _currentGameObject.name);
+        _currentFoundObject = raycastManager.GetCurrentFoundObject();
 
-        if (_currentGameObject.tag == "Shootable")
+        if (_currentFoundObject.tag == "Shootable")
         {
-            ApplyNormalColor(_currentGameObject);
-            // change color of previous object back to normal (if it's shootable)
+            ChangeShapeColor(_currentFoundObject);
+            // Works up to here
+        }
+
+        _previousFoundObject = raycastManager.GetPreviousFoundObject();
+
+        if(_previousFoundObject.tag == "Shootable")
+        {
+            RevertShapeColor(_previousFoundObject);
+        }
+    }
+
+
+    // Changes current found object material to over color material
+    // gameObject -> void
+    public void ChangeShapeColor(GameObject go)
+    {
+        if(go.name == "Sphere")
+        {
+            go.GetComponent<Renderer>().material = sphereOver;
+        }
+
+        if (go.name == "Cube")
+        {
+            go.GetComponent<Renderer>().material = cubeOver;
+        }
+    }
+
+
+    // Reverts previously found object material to normal color material
+    // gameObject -> void
+    public void RevertShapeColor(GameObject go)
+    {
+        if (go.name == "Sphere")
+        {
+            go.GetComponent<Renderer>().material = sphereNormal;
+        }
+
+        if (go.name == "Cube")
+        {
+            go.GetComponent<Renderer>().material = cubeNormal;
         }
     }
 
@@ -84,14 +118,6 @@ public class ShapeManager : MonoBehaviour
         RaycastManager.OnNewObjectFound -= CheckForShootable;
     }
 
-    public void ApplyOverColor(GameObject go)
-    {
-
-    }
-
-    public void ApplyNormalColor(GameObject go)
-    {
-        Debug.Log("Applying normal color");
-    }
+    
 }
 
