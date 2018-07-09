@@ -3,7 +3,12 @@ guid: 64784b1e3a106c3488c1d4b3862345a3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - raycastManager: {instanceID: 0}
+  - cubeNormal: {fileID: 2100000, guid: 7a849d0fa6b15d44eb7143a840c58e7c, type: 2}
+  - cubeOver: {fileID: 2100000, guid: fdb8527e57736a045a680b55a9b8090f, type: 2}
+  - sphereNormal: {fileID: 2100000, guid: a6bbcfbc7f79e49458ea8b418fe28ee6, type: 2}
+  - sphereOver: {fileID: 2100000, guid: 908bdbd1b1820324c946709585fc808a, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

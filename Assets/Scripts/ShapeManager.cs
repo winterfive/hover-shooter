@@ -22,6 +22,7 @@ public class ShapeManager : MonoBehaviour
         InvokeRepeating("SpawnShapes", spawnTime, spawnTime);
 	}
 
+
     //  Spawns random shape at random spawnpoint
     //  void -> void
     public void SpawnShapes()
@@ -54,24 +55,26 @@ public class ShapeManager : MonoBehaviour
     }
 
 
-    // Checks objects found for "Shootable" tag
+    // Checks found object for "Shootable" tag
     // void -> void
     public void CheckForShootable()
     {
-        _currentFoundObject = raycastManager.GetCurrentFoundObject();
+        if(raycastManager.GetCurrentFoundObject() != null)
+        {
+            _currentFoundObject = raycastManager.GetCurrentFoundObject();
+        }        
 
         if (_currentFoundObject.tag == "Shootable")
         {
             ChangeShapeColor(_currentFoundObject);
-            // Works up to here
-        }
 
-        _previousFoundObject = raycastManager.GetPreviousFoundObject();
+            _previousFoundObject = raycastManager.GetPreviousFoundObject();
 
-        if(_previousFoundObject.tag == "Shootable")
-        {
-            RevertShapeColor(_previousFoundObject);
-        }
+            if (_previousFoundObject.tag == "Shootable")
+            {
+                RevertShapeColor(_previousFoundObject);
+            }
+        }        
     }
 
 
@@ -79,6 +82,7 @@ public class ShapeManager : MonoBehaviour
     // gameObject -> void
     public void ChangeShapeColor(GameObject go)
     {
+        Debug.Log("Changing color of current object: " + go.name);
         if(go.name == "Sphere")
         {
             go.GetComponent<Renderer>().material = sphereOver;
