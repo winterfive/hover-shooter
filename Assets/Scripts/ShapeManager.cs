@@ -83,12 +83,12 @@ public class ShapeManager : MonoBehaviour
     public void ChangeShapeColor(GameObject go)
     {
         Debug.Log("Changing color of current object: " + go.name);
-        if(go.name == "Sphere")
+        if(go.name == "Sphere(Clone)")
         {
             go.GetComponent<Renderer>().material = sphereOver;
         }
 
-        if (go.name == "Cube")
+        if (go.name == "Cube(Clone)")
         {
             go.GetComponent<Renderer>().material = cubeOver;
         }
