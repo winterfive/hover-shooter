@@ -11,6 +11,7 @@ public class ShapeManager : MonoBehaviour
     public Material cubeOver;
     public Material sphereNormal;
     public Material sphereOver;
+    public GameObject explosion;    
 
     private GameObject _currentFoundObject;
     private GameObject _previousFoundObject;
@@ -47,10 +48,10 @@ public class ShapeManager : MonoBehaviour
 
     //  Spawns explosion and destroys shape object
     //  GameObject -> void
-    public void DestroyShape(GameObject foundObject)
+    public void DestroyShape()
     {
-        // TODO Instantiate(explosion, foundObject.transform.position, foundObject.transform.rotation);
-        Destroy(foundObject);
+        Instantiate(explosion, _currentFoundObject.transform.position, _currentFoundObject.transform.rotation);
+        Destroy(_currentFoundObject);
         //Debug.Log("Destroyed object: " + foundObject.name);
     }
 
