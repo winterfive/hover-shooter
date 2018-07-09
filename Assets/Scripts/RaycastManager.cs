@@ -15,11 +15,6 @@ public class RaycastManager : MonoBehaviour {
         return _currentFoundObject;
     }
 
-    public GameObject GetPreviousFoundObject()
-    {
-        return _previousFoundObject;
-    }
-
 
     void Update()
     {
@@ -34,17 +29,16 @@ public class RaycastManager : MonoBehaviour {
     //  void -> void
     public void CheckForNewObject()
     {
-        _currentFoundObject = hit.collider.gameObject;
+        GameObject foundObject = hit.collider.gameObject; 
 
-        if(!_currentFoundObject.Equals(_previousFoundObject))
+        if (!foundObject.Equals(_currentFoundObject))
         {
             if (OnNewObjectFound != null)
             {
+                _previousFoundObject = _currentFoundObject;
+                _currentFoundObject = foundObject;
                 OnNewObjectFound();
             }
         }
-
-        _previousFoundObject = _currentFoundObject;
-        //Debug.Log("Found an object: " + _currentFoundObject.tag);
     }    
 }
