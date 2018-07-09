@@ -50,8 +50,11 @@ public class ShapeManager : MonoBehaviour
     //  GameObject -> void
     public void DestroyShape()
     {
-        Instantiate(explosion, _currentFoundObject.transform.position, _currentFoundObject.transform.rotation);
-        Destroy(_currentFoundObject);
+        if(_currentFoundObject != null)
+        {
+            Instantiate(explosion, _currentFoundObject.transform.position, _currentFoundObject.transform.rotation);
+            Destroy(_currentFoundObject);
+        }        
     }
 
 

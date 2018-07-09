@@ -9,6 +9,8 @@ MonoImporter:
   - cubeOver: {fileID: 2100000, guid: fdb8527e57736a045a680b55a9b8090f, type: 2}
   - sphereNormal: {fileID: 2100000, guid: a6bbcfbc7f79e49458ea8b418fe28ee6, type: 2}
   - sphereOver: {fileID: 2100000, guid: 908bdbd1b1820324c946709585fc808a, type: 2}
+  - explosion: {fileID: 1709750546900204, guid: c95680883c7f20c4ba96bcc54fc5dd1b,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
