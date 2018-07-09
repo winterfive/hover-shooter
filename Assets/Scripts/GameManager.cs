@@ -21,14 +21,14 @@ public class GameManager : MonoBehaviour{
 
         if (_timer >= timeBetweenShots && Input.GetButton("Fire1"))
         {
-            //Shoot();
+            Shoot();
         }
     }
 
     //  Destroys object
     //  void -> void
-    //public void Shoot()
-    //{
-    //    shapeManager.DestroyShape();
-    //}
+    public void Shoot()
+    {
+        shapeManager.DestroyShape();
+    }
 }
