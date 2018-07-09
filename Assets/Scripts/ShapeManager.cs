@@ -59,20 +59,23 @@ public class ShapeManager : MonoBehaviour
     // void -> void
     public void CheckForShootable()
     {
-        if(raycastManager.GetCurrentFoundObject() != null)
+        if (raycastManager.GetCurrentFoundObject() != null)
         {
             _currentFoundObject = raycastManager.GetCurrentFoundObject();
-        }        
 
-        if (_currentFoundObject.tag == "Shootable")
-        {
-            ChangeShapeColor(_currentFoundObject);
-
-            _previousFoundObject = raycastManager.GetPreviousFoundObject();
-
-            if (_previousFoundObject.tag == "Shootable")
+            if (raycastManager.GetPreviousFoundObject() != null)
             {
-                RevertShapeColor(_previousFoundObject);
+                _previousFoundObject = raycastManager.GetPreviousFoundObject();
+
+                if (_previousFoundObject.tag == "Shootable")
+                {
+                    ChangeShapeColor(_previousFoundObject);
+                }
+            }
+
+            if (_currentFoundObject.tag == "Shootable")
+            {
+                ChangeShapeColor(_currentFoundObject);
             }
         }        
     }
