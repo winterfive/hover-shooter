@@ -15,6 +15,11 @@ public class RaycastManager : MonoBehaviour {
         return _currentFoundObject;
     }
 
+    public GameObject GetPreviousFoundObject()
+    {
+        return _previousFoundObject;
+    }
+
 
     void Update()
     {
