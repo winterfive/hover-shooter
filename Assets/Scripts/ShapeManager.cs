@@ -11,7 +11,7 @@ public class ShapeManager : MonoBehaviour
     public Material cubeOver;
     public Material sphereNormal;
     public Material sphereOver;
-    public GameObject explosion;    
+    public GameObject explosion;
 
     private GameObject _currentFoundObject;
     private GameObject _previousFoundObject;
@@ -52,7 +52,6 @@ public class ShapeManager : MonoBehaviour
     {
         Instantiate(explosion, _currentFoundObject.transform.position, _currentFoundObject.transform.rotation);
         Destroy(_currentFoundObject);
-        //Debug.Log("Destroyed object: " + foundObject.name);
     }
 
 
@@ -60,22 +59,26 @@ public class ShapeManager : MonoBehaviour
     // void -> void
     public void CheckForShootable()
     {
+        GameObject newObject, oldObject;
+
         if (raycastManager.GetCurrentFoundObject() != null)
         {
-            _currentFoundObject = raycastManager.GetCurrentFoundObject();
+            newObject = raycastManager.GetCurrentFoundObject();
             
-            if (_currentFoundObject.tag == "Shootable")
+            if (newObject.tag == "Shootable")
             {
+                _currentFoundObject = newObject;
                 ChangeShapeColor(_currentFoundObject);
             }
         }
 
         if (raycastManager.GetPreviousFoundObject() != null)
         {
-            _previousFoundObject = raycastManager.GetPreviousFoundObject();
+            oldObject = raycastManager.GetPreviousFoundObject();
 
-            if (_previousFoundObject.tag == "Shootable")
+            if (oldObject.tag == "Shootable")
             {
+                _previousFoundObject = oldObject;
                 RevertShapeColor(_previousFoundObject);
             }
         }       
