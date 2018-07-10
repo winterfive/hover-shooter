@@ -20,6 +20,11 @@ public class RaycastManager : MonoBehaviour {
         return _previousFoundObject;
     }
 
+    public RaycastHit GetRaycastHit()
+    {
+        return hit;
+    }
+
 
     void Update()
     {
