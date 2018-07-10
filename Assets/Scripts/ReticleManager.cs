@@ -9,11 +9,13 @@ public class ReticleManager : MonoBehaviour {
     public Transform _camera;
     public float _defaultDistance = 2f;      // The default distance away from the camera the reticle is placed.
     public GameObject reticle;
+    public RaycastManager raycastManager;
 
     private bool _useNormal;                  // Whether the reticle should be placed parallel to a surface.    
     private Transform _reticleTransform;
     private Vector3 _originalScale;           // Since the scale of the reticle changes, the original scale needs to be stored.
     private Quaternion _originalRotation;     // Used to store the original rotation of the reticle.
+    private RaycastHit hit;
 
 
     public bool UseNormal
@@ -63,13 +65,28 @@ public class ReticleManager : MonoBehaviour {
             _reticleTransform.localRotation = _originalRotation;
     }
 
+    public void CheckObjectFound()
+    {
+        if (raycastManager.GetCurrentFoundObject() != null)
+        {
+            _useNormal = true;
+            hit = raycastManager.GetRaycastHit();
+            SetPosition(hit);
+        }
+        else
+        {
+            _useNormal = false;
+            SetPosition();
+        }
+    }
+
     private void OnEnable()
     {
-        RaycastManager.OnNewObjectFound += SetPosition;
+        RaycastManager.OnNewObjectFound += CheckObjectFound;
     }
 
     private void OnDisable()
     {
-        RaycastManager.OnNewObjectFound -= SetPosition;
+        RaycastManager.OnNewObjectFound -= CheckObjectFound;
     }
 }
