@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33949687790493556}
   - component: {fileID: 23906550051334398}
   - component: {fileID: 64708147404153458}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Reticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
