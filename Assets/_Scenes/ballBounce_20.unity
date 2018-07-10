@@ -1185,15 +1185,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4050884203376040, guid: 736fe4f8249ce9545ad8a43854532526, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.03
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4050884203376040, guid: 736fe4f8249ce9545ad8a43854532526, type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.03
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4050884203376040, guid: 736fe4f8249ce9545ad8a43854532526, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.03
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1607893566742662, guid: 736fe4f8249ce9545ad8a43854532526, type: 2}
       propertyPath: m_Layer
@@ -1373,6 +1373,7 @@ MonoBehaviour:
   _camera: {fileID: 1213041248}
   _defaultDistance: 15
   reticle: {fileID: 1604795078}
+  raycastManager: {fileID: 1213041245}
 --- !u!114 &1934252589
 MonoBehaviour:
   m_ObjectHideFlags: 0
