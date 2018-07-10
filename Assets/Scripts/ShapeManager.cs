@@ -53,6 +53,8 @@ public class ShapeManager : MonoBehaviour
         if(_currentFoundObject != null)
         {
             Instantiate(explosion, _currentFoundObject.transform.position, _currentFoundObject.transform.rotation);
+            // Add sound effect
+            // TODO ISSUE: _currentFoundObject can be destroyed even if it's nto being looked at
             Destroy(_currentFoundObject);
         }        
     }
