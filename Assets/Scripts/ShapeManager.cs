@@ -13,10 +13,17 @@ public class ShapeManager : MonoBehaviour
     public Material sphereOver;
     public GameObject explosion;
 
+    private AudioSource explosion_sound;
     private GameObject _currentFoundObject;
     private GameObject _previousFoundObject;
-    
-    
+
+
+    private void Awake()
+    {
+        explosion_sound = GetComponent<AudioSource>();
+    }
+
+
     //  Use this for initialization
     void Start()
     {
@@ -53,8 +60,7 @@ public class ShapeManager : MonoBehaviour
         if(_currentFoundObject != null && _currentFoundObject.tag == "Shootable")
         {
             Instantiate(explosion, _currentFoundObject.transform.position, _currentFoundObject.transform.rotation);
-            // Add sound effect
-            // TODO ISSUE: _currentFoundObject can be destroyed even if it's not being looked at
+            explosion_sound.Play();
             Destroy(_currentFoundObject);
         }        
     }
