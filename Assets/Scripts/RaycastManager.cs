@@ -15,30 +15,11 @@ public class RaycastManager : MonoBehaviour {
     private Vector3 _currentNormal;
     private Vector3 _previousNormal;
 
-    public GameObject GetCurrentFoundObject()
-    {
-        return _currentFoundObject;
-    }
-
-    public GameObject GetPreviousFoundObject()
-    {
-        return _previousFoundObject;
-    }
-
-    public Vector3 GetCurrentNormal()
-    {
-        return _currentNormal;
-    }
-
-    public Vector3 GetPreviousNormal()
-    {
-        return _previousNormal;
-    }
-
-    public RaycastHit GetCurrentHit()
-    {
-        return _hit;
-    }
+    public GameObject GetCurrentFoundObject() { return _currentFoundObject; }
+    public GameObject GetPreviousFoundObject() { return _previousFoundObject; }
+    public Vector3 GetCurrentNormal() { return _currentNormal; }
+    public Vector3 GetPreviousNormal() { return _previousNormal; }
+    public RaycastHit GetCurrentHit() { return _hit; }
 
 
     void Update()
@@ -46,7 +27,7 @@ public class RaycastManager : MonoBehaviour {
         if (Physics.Raycast(transform.position, transform.forward, out _hit, range))
         {
             CheckForNewObject(_hit);
-            CheckNormal(_hit);
+            CheckForNewNormal(_hit);
         }        
     }
 
@@ -71,7 +52,7 @@ public class RaycastManager : MonoBehaviour {
     // Compares newly found normal with previously found normal
     // Calls event
     // RaycastHit -> void    
-    public void CheckNormal(RaycastHit hit)
+    public void CheckForNewNormal(RaycastHit hit)
     {
         Vector3 newNormal = hit.normal;
 
