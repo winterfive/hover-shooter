@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class RaycastManager : MonoBehaviour {
@@ -5,10 +6,13 @@ public class RaycastManager : MonoBehaviour {
     public float range = 100f;
     public delegate void NewObjectFound();
     public static event NewObjectFound OnNewObjectFound;
+    public delegate void NewNormalFound();
+    public static event NewNormalFound OnNewNormalFound;
 
-    private RaycastHit hit;
     private GameObject _currentFoundObject;
     private GameObject _previousFoundObject;
+    private RaycastHit _currentNormal;
+    private RaycastHit _previousNormal;
 
     public GameObject GetCurrentFoundObject()
     {
@@ -20,17 +24,23 @@ public class RaycastManager : MonoBehaviour {
         return _previousFoundObject;
     }
 
-    public RaycastHit GetRaycastHit()
+    public RaycastHit GetCurrentHit()
     {
-        return hit;
+        return _currentNormal;
+    }
+
+    public RaycastHit GetPreviousHit()
+    {
+        return _previousNormal;
     }
 
 
     void Update()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out hit, range))
+        if (Physics.Raycast(transform.position, transform.forward, out _currentNormal, range))
         {
             CheckForNewObject();
+            CheckNormal();
         }        
     }
 
@@ -39,7 +49,7 @@ public class RaycastManager : MonoBehaviour {
     //  void -> void
     public void CheckForNewObject()
     {
-        GameObject foundObject = hit.collider.gameObject; 
+        GameObject foundObject = _currentNormal.collider.gameObject; 
 
         if (!foundObject.Equals(_currentFoundObject))
         {
@@ -50,5 +60,28 @@ public class RaycastManager : MonoBehaviour {
                 OnNewObjectFound();
             }
         }
-    }    
+    }
+
+    // Compares newly found normal with previously found normal
+    // Calls event
+    // void -> void    
+    public void CheckNormal()
+    {
+        RaycastHit newHit = GetCurrentHit();
+
+        if(!newHit.Equals(_previousNormal))
+        {
+            if (OnNewNormalFound != null)
+            {
+                _previousNormal = _currentNormal;
+                _currentNormal = newHit;
+                OnNewNormalFound();
+            }
+        }
+    }
+
+    internal RaycastHit GetRaycastHit()
+    {
+        throw new NotImplementedException();
+    }
 }
