@@ -2,21 +2,19 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ReticleManager : MonoBehaviour {
-
-    
+public class ReticleManager : MonoBehaviour {    
     
     public Transform _camera;
-    public float _defaultDistance = 2f;      // The default distance away from the camera the reticle is placed.
+    public float _defaultDistance = 2f;
     public GameObject reticle;
     public RaycastManager raycastManager;
     private Transform _reticleTransform;
     private Vector3 _originalScale;
     private Quaternion _originalRotation;
-    private RaycastHit hit;
+    private RaycastHit _currentHit;
 
 
-    public bool UseNormal { get; set; }
+    private bool UseNormal { get; set; }
 
 
     public Transform ReticleTransform { get { return reticle.transform; } }
@@ -30,7 +28,8 @@ public class ReticleManager : MonoBehaviour {
     }
 
 
-    // This overload of SetPosition is used when the the VREyeRaycaster hasn't hit anything.
+    // This overload of SetPosition is used when the the RaycastManager hasn't hit anything.
+    // void -> void
     public void SetPosition()
     {
         // Set the position of the reticle to the default distance in front of the camera.
@@ -44,7 +43,8 @@ public class ReticleManager : MonoBehaviour {
     }
 
 
-    // This overload of SetPosition is used when the VREyeRaycaster has hit something.
+    // This overload of SetPosition is used when the RaycastManager has hit something.
+    // RaycastHit -> void
     public void SetPosition(RaycastHit hit)
     {
         _reticleTransform.position = hit.point;
@@ -59,13 +59,18 @@ public class ReticleManager : MonoBehaviour {
             _reticleTransform.localRotation = _originalRotation;
     }
 
-    public void CheckObjectFound()
+    
+    // Checks current normal for null
+    // Calls SetPosition
+    // void -> void
+    public void CheckNormalFound()
     {
-        if (raycastManager.GetCurrentFoundObject() != null)
+        Vector3 newNormal = raycastManager.GetCurrentNormal();
+        if (newNormal != null)
         {
             UseNormal = true;
-            hit = raycastManager.GetRaycastHit();
-            SetPosition(hit);
+            _currentHit = raycastManager.GetCurrentHit();
+            SetPosition(_currentHit);
         }
         else
         {
@@ -73,14 +78,15 @@ public class ReticleManager : MonoBehaviour {
             SetPosition();
         }
     }
+ 
 
     private void OnEnable()
     {
-        RaycastManager.OnNewObjectFound += CheckObjectFound;
+        RaycastManager.OnNewNormalFound += CheckNormalFound;
     }
 
     private void OnDisable()
     {
-        RaycastManager.OnNewObjectFound -= CheckObjectFound;
+        RaycastManager.OnNewNormalFound -= CheckNormalFound;
     }
 }
