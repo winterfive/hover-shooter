@@ -1199,6 +1199,15 @@ Prefab:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1607893566742662, guid: 736fe4f8249ce9545ad8a43854532526, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64708147404153458, guid: 736fe4f8249ce9545ad8a43854532526,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 736fe4f8249ce9545ad8a43854532526, type: 2}
   m_IsPrefabParent: 0
