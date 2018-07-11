@@ -66,7 +66,7 @@ public class ShapeManager : MonoBehaviour
     {
         GameObject newObject, oldObject;
 
-        if (raycastManager.GetCurrentFoundObject() != null)
+        if (raycastManager.GetCurrentFoundObject())
         {
             newObject = raycastManager.GetCurrentFoundObject();
             
@@ -77,7 +77,7 @@ public class ShapeManager : MonoBehaviour
             }
         }
 
-        if (raycastManager.GetPreviousFoundObject() != null)
+        if (raycastManager.GetPreviousFoundObject())
         {
             oldObject = raycastManager.GetPreviousFoundObject();
 
