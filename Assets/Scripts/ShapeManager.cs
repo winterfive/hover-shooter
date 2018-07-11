@@ -47,14 +47,14 @@ public class ShapeManager : MonoBehaviour
 
 
     //  Spawns explosion and destroys shape object
-    //  GameObject -> void
+    //  void -> void
     public void DestroyShape()
     {
-        if(_currentFoundObject != null)
+        if(_currentFoundObject != null && _currentFoundObject.tag == "Shootable")
         {
             Instantiate(explosion, _currentFoundObject.transform.position, _currentFoundObject.transform.rotation);
             // Add sound effect
-            // TODO ISSUE: _currentFoundObject can be destroyed even if it's nto being looked at
+            // TODO ISSUE: _currentFoundObject can be destroyed even if it's not being looked at
             Destroy(_currentFoundObject);
         }        
     }
@@ -69,12 +69,16 @@ public class ShapeManager : MonoBehaviour
         if (raycastManager.GetCurrentFoundObject())
         {
             newObject = raycastManager.GetCurrentFoundObject();
-            
-            if (newObject.tag == "Shootable")
+
+            if(_currentFoundObject != newObject)
             {
                 _currentFoundObject = newObject;
-                ChangeShapeColor(_currentFoundObject);
-            }
+
+                if (_currentFoundObject.tag == "Shootable")
+                {
+                    ChangeShapeColor(_currentFoundObject);
+                }
+            }            
         }
 
         if (raycastManager.GetPreviousFoundObject())
