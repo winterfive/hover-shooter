@@ -14,9 +14,6 @@ public class ReticleManager : MonoBehaviour {
     private RaycastHit _currentHit;
 
 
-    private bool UseNormal { get; set; }
-
-
     public Transform ReticleTransform { get { return reticle.transform; } }
 
 
@@ -49,14 +46,9 @@ public class ReticleManager : MonoBehaviour {
     {
         _reticleTransform.position = hit.point;
         _reticleTransform.localScale = _originalScale * hit.distance;
-
-        // If the reticle should use the normal of what has been hit...
-        if (UseNormal)
-            // ... set it's rotation based on it's forward vector facing along the normal.
-            _reticleTransform.rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
-        else
-            // However if it isn't using the normal then it's local rotation should be as it was originally.
-            _reticleTransform.localRotation = _originalRotation;
+        
+        // ... set it's rotation based on it's forward vector facing along the normal.
+        _reticleTransform.rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);        
     }
 
     
@@ -65,18 +57,8 @@ public class ReticleManager : MonoBehaviour {
     // void -> void
     public void CheckNormalFound()
     {
-        Vector3 newNormal = raycastManager.GetCurrentNormal();
-        if (newNormal != null)
-        {
-            UseNormal = true;
-            _currentHit = raycastManager.GetCurrentHit();
-            SetPosition(_currentHit);
-        }
-        else
-        {
-            UseNormal = false;
-            SetPosition();
-        }
+        _currentHit = raycastManager.GetCurrentHit();
+        SetPosition(_currentHit);        
     }
  
 
