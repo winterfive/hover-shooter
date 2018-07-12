@@ -377,11 +377,11 @@ GameObject:
   - component: {fileID: 186986859}
   - component: {fileID: 186986858}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &186986857
 RectTransform:
@@ -1419,7 +1419,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -1565,6 +1565,7 @@ MonoBehaviour:
   sphereNormal: {fileID: 2100000, guid: a6bbcfbc7f79e49458ea8b418fe28ee6, type: 2}
   sphereOver: {fileID: 2100000, guid: 908bdbd1b1820324c946709585fc808a, type: 2}
   explosion: {fileID: 1167741574140942, guid: 55fdc4b97edc9b24097d2bfd7d564eac, type: 2}
+  scoreManager: {fileID: 1934252590}
 --- !u!4 &1934252587
 Transform:
   m_ObjectHideFlags: 0
@@ -1618,6 +1619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a54584e46fd2c443a6b196aa32a639e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 186986858}
 --- !u!114 &1934252591
 MonoBehaviour:
   m_ObjectHideFlags: 0
