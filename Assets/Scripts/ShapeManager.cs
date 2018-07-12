@@ -12,6 +12,7 @@ public class ShapeManager : MonoBehaviour
     public Material sphereNormal;
     public Material sphereOver;
     public GameObject explosion;
+    public ScoreManager scoreManager;
 
     private AudioSource explosion_sound;
     private GameObject _currentFoundObject;
@@ -62,6 +63,7 @@ public class ShapeManager : MonoBehaviour
             Instantiate(explosion, _currentFoundObject.transform.position, _currentFoundObject.transform.rotation);
             explosion_sound.Play();
             Destroy(_currentFoundObject);
+            scoreManager.AddToScore();
         }        
     }
 
