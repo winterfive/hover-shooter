@@ -7,10 +7,7 @@ public class ShapeManager : MonoBehaviour
     public float startTime = 2.0f;
     public float spawnTime;
     public RaycastManager raycastManager;
-    public Material cubeNormal;
-    public Material cubeOver;
-    public Material sphereNormal;
-    public Material sphereOver;
+    public Material cubeNormal, cubeOver, sphereNormal, sphereOver;
     public GameObject explosion;
     public ScoreManager scoreManager;
 
@@ -33,24 +30,19 @@ public class ShapeManager : MonoBehaviour
 
 
     //  Spawns random shape at random spawnpoint
+    //  Adds thrust to shape speed to increase game difficulty
     //  void -> void
     public void SpawnShapes()
     {
         int spawnPointIndex = Random.Range(0, SpawnPoints.Length);
-
         int shapeIndex = Random.Range(0, Shapes.Length);
+        float xIndex = Random.Range(300, 700);
+        float zIndex = Random.Range(300, 700);
 
         GameObject shape = Shapes[shapeIndex];
 
-        // Sphere instances don't require a random rotation
-        if (shape.Equals("Sphere"))
-        {
-            Instantiate(shape, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
-        }
-        else
-        {
-            Instantiate(shape, SpawnPoints[spawnPointIndex].position, Quaternion.Euler(Random.Range(-90, 90), Random.Range(-40, 40), Random.Range(-40, 40)));
-        }
+        Instantiate(shape, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
+        shape.GetComponent<Rigidbody>().velocity = new Vector3(xIndex, 0f, zIndex);
     }
 
 
