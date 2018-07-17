@@ -17,6 +17,7 @@ QualitySettings:
     shadowNearPlaneOffset: 2
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
+    shadowmaskMode: 0
     blendWeights: 2
     textureQuality: 0
     anisotropicTextures: 0
@@ -31,7 +32,11 @@ QualitySettings:
     particleRaycastBudget: 16
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
-    excludedTargetPlatforms: []
+    resolutionScalingFixedDPIFactor: 1
+    excludedTargetPlatforms:
+    - Android
+    - Standalone
+    - iPhone
   - serializedVersion: 2
     name: Fastest
     pixelLightCount: 0
@@ -43,6 +48,7 @@ QualitySettings:
     shadowNearPlaneOffset: 2
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
+    shadowmaskMode: 0
     blendWeights: 1
     textureQuality: 1
     anisotropicTextures: 0
@@ -57,7 +63,11 @@ QualitySettings:
     particleRaycastBudget: 4
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
-    excludedTargetPlatforms: []
+    resolutionScalingFixedDPIFactor: 1
+    excludedTargetPlatforms:
+    - Android
+    - Standalone
+    - iPhone
   - serializedVersion: 2
     name: Simple
     pixelLightCount: 1
@@ -69,6 +79,7 @@ QualitySettings:
     shadowNearPlaneOffset: 2
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
+    shadowmaskMode: 0
     blendWeights: 2
     textureQuality: 0
     anisotropicTextures: 1
@@ -76,14 +87,17 @@ QualitySettings:
     softParticles: 0
     softVegetation: 0
     realtimeReflectionProbes: 0
-    billboardsFaceCameraPosition: 0
+    billboardsFaceCameraPosition: 1
     vSyncCount: 0
     lodBias: 0.7
     maximumLODLevel: 0
     particleRaycastBudget: 64
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
-    excludedTargetPlatforms: []
+    resolutionScalingFixedDPIFactor: 1
+    excludedTargetPlatforms:
+    - Standalone
+    - iPhone
   - serializedVersion: 2
     name: Good
     pixelLightCount: 2
@@ -95,6 +109,7 @@ QualitySettings:
     shadowNearPlaneOffset: 2
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
+    shadowmaskMode: 1
     blendWeights: 2
     textureQuality: 0
     anisotropicTextures: 1
@@ -109,7 +124,11 @@ QualitySettings:
     particleRaycastBudget: 256
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
-    excludedTargetPlatforms: []
+    resolutionScalingFixedDPIFactor: 1
+    excludedTargetPlatforms:
+    - Android
+    - iPhone
+    - Standalone
   - serializedVersion: 2
     name: Beautiful
     pixelLightCount: 3
@@ -121,6 +140,7 @@ QualitySettings:
     shadowNearPlaneOffset: 2
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
+    shadowmaskMode: 1
     blendWeights: 4
     textureQuality: 0
     anisotropicTextures: 2
@@ -135,7 +155,11 @@ QualitySettings:
     particleRaycastBudget: 1024
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
-    excludedTargetPlatforms: []
+    resolutionScalingFixedDPIFactor: 1
+    excludedTargetPlatforms:
+    - Android
+    - iPhone
+    - Standalone
   - serializedVersion: 2
     name: Fantastic
     pixelLightCount: 4
@@ -147,6 +171,7 @@ QualitySettings:
     shadowNearPlaneOffset: 2
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.19999999, z: 0.46666664}
+    shadowmaskMode: 1
     blendWeights: 4
     textureQuality: 0
     anisotropicTextures: 2
@@ -161,7 +186,11 @@ QualitySettings:
     particleRaycastBudget: 4096
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
-    excludedTargetPlatforms: []
+    resolutionScalingFixedDPIFactor: 1
+    excludedTargetPlatforms:
+    - Android
+    - iPhone
+    - Standalone
   m_PerPlatformDefaultQuality:
     Android: 2
     BlackBerry: 2
