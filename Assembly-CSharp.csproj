@@ -59,119 +59,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
-    <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\IcoBumpin.cs" />
-    <Compile Include="Assets\ProCore\ProBuilder\API Examples\Misc\HueCube.cs" />
-    <Compile Include="Assets\ProCore\ProBuilder\API Examples\Procedural Mesh\ExtrudeRandomEdges.cs" />
-    <Compile Include="Assets\ProCore\ProBuilder\API Examples\Runtime Editing\RuntimeEdit.cs" />
-    <Compile Include="Assets\ProCore\ProBuilder\API Examples\Vertex Colors\HighlightNearestFace.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\RaycastManager.cs" />
     <Compile Include="Assets\Scripts\ReticleManager.cs" />
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\ShapeManager.cs" />
-    <Compile Include="Assets\ShapeSpinner.cs" />
-    <Compile Include="Assets\Spin.cs" />
-    <Compile Include="Assets\SpinCylinder.cs" />
-    <Compile Include="Assets\SpinShapes.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\FCIntegration\BaseFCRecorderSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\FCIntegration\EXR\EXRRecorder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\FCIntegration\EXR\EXRRecorderSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\FCIntegration\GIF\GIFRecorder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\FCIntegration\GIF\GIFRecorderSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\FCIntegration\MP4\MP4Recorder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\FCIntegration\MP4\MP4RecorderSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\FCIntegration\PNG\PNGRecorder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\FCIntegration\PNG\PNGRecorderSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\FCIntegration\WEBM\WEBMRecorder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\FCIntegration\WEBM\WEBMRecorderSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\AudioRecorder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Encoder\AudioEncoder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Encoder\EncoderBase.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Encoder\ExrEncoder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Encoder\fcAPI.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Encoder\FlacEncoder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Encoder\GifEncoder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Encoder\MovieEncoder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Encoder\MP4Encoder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Encoder\OggEncoder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Encoder\PngEncoder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Encoder\WaveEncoder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Encoder\WebMEncoder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\GBufferRecorder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Misc\Bool.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\Misc\DataPath.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\MovieRecorder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\FrameCapturer\Scripts\RecorderBase.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\BaseRenderTextureInput.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\FileNameGenerator.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\FrameRateHelper.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\GenericRecorder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\ImageInputSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\ImageRecorderSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\InputBinder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\InputSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\InputSettingsComponent.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\InputSettingsList.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\OutputPath.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\Recorder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\RecorderAttribute.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\RecorderComponent.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\RecorderInput.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\RecorderSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\RecordersInventory.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\RecorderVersion.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\RecordingSession.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\SceneHook.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\TextureFlipper.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\Timeline\RecorderClip.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\Timeline\RecorderPlayableBehaviour.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\Timeline\RecorderTrack.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\Timeline\WaitForEndOfFrameComponent.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\UnityHelpers.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Core\Engine\Verbose.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Inputs\Camera360\Engine\Camera360Input.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Inputs\Camera360\Engine\Camera360InputSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Inputs\CBRenderTexture\Engine\CBRenderTextureInput.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Inputs\CBRenderTexture\Engine\CBRenderTextureInputSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Inputs\CBRenderTexture\Engine\GameViewSize.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Inputs\RenderTexture\Engine\RenderTextureInput.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Inputs\RenderTexture\Engine\RenderTextureInputSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Inputs\RenderTextureSampler\Engine\RenderTextureSampler.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Inputs\RenderTextureSampler\Engine\RenderTextureSamplerSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Inputs\ScreenCapture\Engine\ScreenCaptureInput.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Inputs\ScreenCapture\Engine\ScreenCaptureInputSettings.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Recorders\ImageRecorder\Engine\ImageRecorder.cs" />
-    <Compile Include="Assets\Unity Technologies\Recorder\Framework\Recorders\ImageRecorder\Engine\ImageRecorderSettings.cs" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_TransparentOverlay.shader" />
-    <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
-    <None Include="Assets\Unity Technologies\Recorder\Extensions\UTJ\Information.txt" />
-    <None Include="Assets\Unity Technologies\Recorder\Framework\Core\Shaders\VerticalFlipper.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_SelectionPicker.shader" />
-    <None Include="Assets\ProCore\ProBuilder\About\changelog.txt" />
-    <None Include="Assets\Unity Technologies\Recorder\Framework\Inputs\CBRenderTexture\Shaders\CopyFB.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\DiffuseVertexColor.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_FaceHighlight.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_UnlitSolidColor.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_ReferenceUnlit.shader" />
+    <Compile Include="Assets\Scripts\Spin.cs" />
     <None Include="Assets\Textures\UIOverlay.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\DiffuseTextureBlend.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_StandardVertexColor.shader" />
-    <None Include="Assets\Unity Technologies\Recorder\Framework\Inputs\RenderTextureSampler\Shaders\BS4Normalize.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_VertexPicker.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_HideVertices.shader" />
-    <None Include="Assets\Unity Technologies\Recorder\Framework\Inputs\RenderTextureSampler\Shaders\BS4SuperShader.shader" />
-    <None Include="Assets\ProCore\ProBuilder\About\ThirdPartyLicenses.txt" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_UnlitVertexColor.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_FacePicker.shader" />
-    <None Include="Assets\ProCore\ProBuilder\About\Font\SIL Open Font License.txt" />
-    <None Include="Assets\ProCore\ProBuilder\About\pc_AboutEntry_ProBuilder.txt" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_VertexShader.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_NormalPreview.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_ScrollHighlight.shader" />
-    <None Include="Assets\ProCore\ProBuilder\readme.txt" />
-    <None Include="Assets\Unity Technologies\Recorder\Framework\Inputs\RenderTextureSampler\Shaders\BS4Accumulate.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_SmoothingPreview.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Moo/Documents/Unity Projects/shape-shooter-vr/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -369,21 +263,6 @@
     </Reference>
     <Reference Include="Vuforia.UnityExtensions">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/VuforiaSupport/Managed/Runtime/Vuforia.UnityExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="ProBuilderCore-Unity5">
-      <HintPath>C:/Users/Moo/Documents/Unity Projects/shape-shooter-vr/Assets/ProCore/ProBuilder/Classes/ProBuilderCore-Unity5.dll</HintPath>
-    </Reference>
-    <Reference Include="ProBuilderMeshOps-Unity5">
-      <HintPath>C:/Users/Moo/Documents/Unity Projects/shape-shooter-vr/Assets/ProCore/ProBuilder/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
-    </Reference>
-    <Reference Include="KdTreeLib">
-      <HintPath>C:/Users/Moo/Documents/Unity Projects/shape-shooter-vr/Assets/ProCore/ProBuilder/Classes/ClassesLib/KdTreeLib.dll</HintPath>
-    </Reference>
-    <Reference Include="pb_Stl">
-      <HintPath>C:/Users/Moo/Documents/Unity Projects/shape-shooter-vr/Assets/ProCore/ProBuilder/Classes/ClassesLib/pb_Stl.dll</HintPath>
-    </Reference>
-    <Reference Include="Poly2Tri">
-      <HintPath>C:/Users/Moo/Documents/Unity Projects/shape-shooter-vr/Assets/ProCore/ProBuilder/Classes/ClassesLib/Poly2Tri.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/Moo/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
