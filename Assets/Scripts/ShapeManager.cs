@@ -7,18 +7,18 @@ public class ShapeManager : MonoBehaviour
     public float startTime = 2.0f;
     public float spawnTime;
     public RaycastManager raycastManager;
-    public Material cubeNormal, cubeOver, sphereNormal, sphereOver;
+    public Material cubeNormal, cubeOver, ballNormal, ballOver;
     public GameObject explosion;
     public ScoreManager scoreManager;
 
-    private AudioSource explosion_sound;
+    private AudioSource _explosion_sound;
     private GameObject _currentFoundObject;
     private GameObject _previousFoundObject;
 
 
     private void Awake()
     {
-        explosion_sound = GetComponent<AudioSource>();
+        _explosion_sound = GetComponent<AudioSource>();
     }
 
 
@@ -30,19 +30,14 @@ public class ShapeManager : MonoBehaviour
 
 
     //  Spawns random shape at random spawnpoint
-    //  Adds thrust to shape speed to increase game difficulty
     //  void -> void
     public void SpawnShapes()
     {
         int spawnPointIndex = Random.Range(0, SpawnPoints.Length);
         int shapeIndex = Random.Range(0, Shapes.Length);
-        float xIndex = Random.Range(300, 700);
-        float zIndex = Random.Range(300, 700);
 
         GameObject shape = Shapes[shapeIndex];
-
         Instantiate(shape, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
-        shape.GetComponent<Rigidbody>().velocity = new Vector3(xIndex, 0f, zIndex);
     }
 
 
@@ -53,7 +48,7 @@ public class ShapeManager : MonoBehaviour
         if(_currentFoundObject != null && _currentFoundObject.tag == "Shootable")
         {
             Instantiate(explosion, _currentFoundObject.transform.position, _currentFoundObject.transform.rotation);
-            explosion_sound.Play();
+            _explosion_sound.Play();
             Destroy(_currentFoundObject);
             scoreManager.AddToScore();
         }        
@@ -98,9 +93,9 @@ public class ShapeManager : MonoBehaviour
     // gameObject -> void
     public void ChangeShapeColor(GameObject go)
     {
-        if(go.name == "Sphere(Clone)")
+        if(go.name == "Ball(Clone)")
         {
-            go.GetComponent<Renderer>().material = sphereOver;
+            go.GetComponent<Renderer>().material = ballOver;
         }
 
         if (go.name == "Cube(Clone)")
@@ -114,9 +109,9 @@ public class ShapeManager : MonoBehaviour
     // gameObject -> void
     public void RevertShapeColor(GameObject go)
     {
-        if (go.name == "Sphere(Clone)")
+        if (go.name == "Ball(Clone)")
         {
-            go.GetComponent<Renderer>().material = sphereNormal;
+            go.GetComponent<Renderer>().material = ballNormal;
         }
 
         if (go.name == "Cube(Clone)")
@@ -134,8 +129,6 @@ public class ShapeManager : MonoBehaviour
     private void OnDisable()
     {
         RaycastManager.OnNewObjectFound -= CheckForShootable;
-    }
-
-    
+    }    
 }
 
