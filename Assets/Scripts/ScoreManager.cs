@@ -7,7 +7,7 @@ public class ScoreManager : MonoBehaviour
     public static int score;
     public Text scoreText;
 
-    int _shapePointValue = 10;    
+    int _shapePointValue;    
 
 
     void Start()
@@ -31,6 +31,6 @@ public class ScoreManager : MonoBehaviour
 
     void UpdateScore()
     {
-        scoreText.text = "Score: " + score;
+        //scoreText.text = score.ToString();
     }
 }
