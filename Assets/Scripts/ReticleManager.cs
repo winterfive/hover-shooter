@@ -52,7 +52,6 @@ public class ReticleManager : MonoBehaviour {
     }
 
     
-    // Checks current normal for null
     // Calls SetPosition
     // void -> void
     public void CheckNormalFound()
