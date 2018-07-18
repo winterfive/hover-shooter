@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65002204757859018}
   m_Layer: 2
   m_Name: TriggerBox
-  m_TagString: Cube
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
