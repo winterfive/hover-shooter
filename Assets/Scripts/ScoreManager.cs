@@ -17,6 +17,8 @@ public class ScoreManager : MonoBehaviour
     }
 
 
+    //  Adds points to score
+    //  void -> void
     public void AddToScore()
     {
         score += _shapePointValue;
@@ -24,6 +26,8 @@ public class ScoreManager : MonoBehaviour
     }
 
 
+    //  Displays updated score
+    //  void -> void
     void UpdateScore()
     {
         scoreText.text = score.ToString();
