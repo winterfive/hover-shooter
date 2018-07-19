@@ -10,6 +10,7 @@ public class ShapeManager : MonoBehaviour
     public Material cubeNormal, cubeOver, ballNormal, ballOver;
     public GameObject explosion;
     public ScoreManager scoreManager;
+    
 
     private AudioSource _explosion_sound;
     private GameObject _currentFoundObject;
@@ -22,7 +23,6 @@ public class ShapeManager : MonoBehaviour
     }
 
 
-    //  Use this for initialization
     void Start()
     {
         InvokeRepeating("SpawnShapes", spawnTime, spawnTime);
@@ -37,7 +37,22 @@ public class ShapeManager : MonoBehaviour
         int shapeIndex = Random.Range(0, Shapes.Length);
 
         GameObject shape = Shapes[shapeIndex];
-        Instantiate(shape, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
+        GameObject newShape = Instantiate(shape, SpawnPoints[spawnPointIndex].position, Quaternion.identity);
+        ApplyForce(newShape);  
+    }
+
+
+    // Applies force to gameobject
+    // GameObject -> void
+    public void ApplyForce(GameObject go)
+    {
+        float sideForce = 1f;
+        float upForce = 14f;
+        float xForce = Random.Range(-sideForce, sideForce);
+        //float yForce = Random.Range(upForce);
+        float zForce = Random.Range(-sideForce, sideForce);
+
+        go.GetComponent<Rigidbody>().AddForce(xForce, upForce, zForce);
     }
 
 
@@ -90,7 +105,7 @@ public class ShapeManager : MonoBehaviour
 
 
     // Changes current found object material to over color material
-    // gameObject -> void
+    // GameObject -> void
     public void ChangeShapeColor(GameObject go)
     {
         if(go.name == "Ball(Clone)")
@@ -106,7 +121,7 @@ public class ShapeManager : MonoBehaviour
 
 
     // Reverts previously found object material to normal color material
-    // gameObject -> void
+    // GameObject -> void
     public void RevertShapeColor(GameObject go)
     {
         if (go.name == "Ball(Clone)")
