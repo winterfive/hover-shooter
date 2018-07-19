@@ -1,3 +1,3 @@
 # shape-shooter-vr
 
-Version using C# Events.
+This version uses C# events, exapnded gameplay, and experiments with applying force to shapes.
