@@ -2,6 +2,7 @@
 
 public class ShapeManager : MonoBehaviour
 {
+    public Rigidbody rb;
     public GameObject[] Shapes;
     public Transform[] SpawnPoints;
     public float startTime = 2.0f;
@@ -10,8 +11,8 @@ public class ShapeManager : MonoBehaviour
     public Material cubeNormal, cubeOver, ballNormal, ballOver;
     public GameObject explosion;
     public ScoreManager scoreManager;
-    public float sideForce = 10f;
-    public float upForce = 25f;
+    public float sideForce;
+    public float upForce;
 
     private AudioSource _explosion_sound;
     private GameObject _currentFoundObject;
@@ -26,6 +27,7 @@ public class ShapeManager : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         InvokeRepeating("SpawnShapes", spawnTime, spawnTime);
 	}
 
@@ -49,10 +51,10 @@ public class ShapeManager : MonoBehaviour
     {
         
         float xForce = Random.Range(-sideForce, sideForce);
-        //float yForce = Random.Range(upForce);
+        float yForce = Random.Range(-upForce, upForce);
         float zForce = Random.Range(-sideForce, sideForce);
 
-        go.GetComponent<Rigidbody>().AddForce(xForce, upForce, zForce);
+        rb.AddForce(xForce, yForce, zForce);
         //Debug.Log("go name is: " + go.name);
     }
 
