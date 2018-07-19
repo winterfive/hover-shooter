@@ -10,7 +10,8 @@ public class ShapeManager : MonoBehaviour
     public Material cubeNormal, cubeOver, ballNormal, ballOver;
     public GameObject explosion;
     public ScoreManager scoreManager;
-    
+    public float sideForce = 10f;
+    public float upForce = 25f;
 
     private AudioSource _explosion_sound;
     private GameObject _currentFoundObject;
@@ -46,13 +47,13 @@ public class ShapeManager : MonoBehaviour
     // GameObject -> void
     public void ApplyForce(GameObject go)
     {
-        float sideForce = 1f;
-        float upForce = 14f;
+        
         float xForce = Random.Range(-sideForce, sideForce);
         //float yForce = Random.Range(upForce);
         float zForce = Random.Range(-sideForce, sideForce);
 
         go.GetComponent<Rigidbody>().AddForce(xForce, upForce, zForce);
+        //Debug.Log("go name is: " + go.name);
     }
 
 
