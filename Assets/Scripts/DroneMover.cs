@@ -43,7 +43,7 @@ public class DroneManager : MonoBehaviour {
         // Requeue drone object
     }
 
-    void ChangeDroneGlowColor()
+    void DroneShoot()
     {
 
     }
