@@ -25,9 +25,10 @@ public class DroneManager : MonoBehaviour {
 
     void SpawnDrones()
     {
-        // GetComponent random spawnpoint value
+        // Get random spawnpoint value
         // Get drone from object pool
         // Set shooting to true
+        // Get random height from range to spawn at
         // "Spawn" drone
     }
 
@@ -44,6 +45,14 @@ public class DroneManager : MonoBehaviour {
     }
 
     void DroneShoot()
+    {
+        // If(drone can see player)
+        // {  
+        //      Shoot()  Use raycastManger to make a line?
+        // }
+    }
+
+    void LookAtPlayer()
     {
 
     }
