@@ -7,6 +7,8 @@ TagManager:
   - Environment
   - Shootable
   - Trigger
+  - Ball
+  - Cube
   layers:
   - Default
   - TransparentFX

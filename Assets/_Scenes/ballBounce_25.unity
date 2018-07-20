@@ -199,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &145197043
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -393,7 +393,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 213152334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.68, y: 10, z: 11.6}
+  m_LocalPosition: {x: 0.68, y: 2, z: 11.6}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 1347461272}
@@ -594,7 +594,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 741158105}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.3, y: 10, z: 3}
+  m_LocalPosition: {x: 7.3, y: 2, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1347461272}
@@ -618,7 +618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &793667208
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -962,7 +962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1073434663
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1191,8 +1191,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.15
-  far clip plane: 50
+  near clip plane: 0.2
+  far clip plane: 84.41
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1233,7 +1233,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1327769900}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.46, y: 10, z: 3}
+  m_LocalPosition: {x: -4.46, y: 2, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1347461272}
@@ -1527,7 +1527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1910897774
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1648,6 +1648,8 @@ MonoBehaviour:
   ballOver: {fileID: 2100000, guid: 602dfb9455b6a6c4db7f3ff15c0302ac, type: 2}
   explosion: {fileID: 1167741574140942, guid: 55fdc4b97edc9b24097d2bfd7d564eac, type: 2}
   scoreManager: {fileID: 1934252590}
+  sideForce: 5
+  upForce: 13
 --- !u!4 &1934252587
 Transform:
   m_ObjectHideFlags: 0
