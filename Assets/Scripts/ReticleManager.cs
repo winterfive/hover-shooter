@@ -25,29 +25,23 @@ public class ReticleManager : MonoBehaviour {
     }
 
 
-    // This overload of SetPosition is used when the the RaycastManager hasn't hit anything.
+    // Used when RaycastManager hasn't hit anything.
     // void -> void
     public void SetPosition()
     {
-        // Set the position of the reticle to the default distance in front of the camera.
         _reticleTransform.position = _camera.position + _camera.forward * _defaultDistance;
-
-        // Set the scale based on the original and the distance from the camera.
+        // Make the reticle larger at long distance so we can see it better
         _reticleTransform.localScale = _originalScale * _defaultDistance;
-
-        // The rotation should just be the default.
         _reticleTransform.localRotation = _originalRotation;
     }
 
 
-    // This overload of SetPosition is used when the RaycastManager has hit something.
+    // Used when the RaycastManager has hit something.
     // RaycastHit -> void
     public void SetPosition(RaycastHit hit)
     {
         _reticleTransform.position = hit.point;
         _reticleTransform.localScale = _originalScale * hit.distance;
-        
-        // ... set it's rotation based on it's forward vector facing along the normal.
         _reticleTransform.rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);        
     }
 
