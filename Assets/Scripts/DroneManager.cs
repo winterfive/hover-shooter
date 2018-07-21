@@ -10,16 +10,13 @@ public class DroneManager : MonoBehaviour {
 
     public Transform[] Spawnpoints;
     public float spawnTime;
-    public float waitToSpawn;
-
-    private Vector3 camPosition;    
+    public float waitToSpawn;    
     
 
     void Start()
     {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        camPosition = Camera.main.gameObject.transform.position;
-        agent.destination = camPosition;
+        agent.destination = Camera.main.gameObject.transform.position;
     }
 
     void SpawnDrones()
