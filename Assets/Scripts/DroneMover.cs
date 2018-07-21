@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 //  Drone class can handle more then one model of drone
-//  Each model will ahve it's own animations, colors, and effects
+//  Each model will have it's own animations, colors, and effects
 
 public class DroneManager : MonoBehaviour {
 
@@ -12,15 +12,13 @@ public class DroneManager : MonoBehaviour {
     public float spawnTime;
     public float waitToSpawn;
 
-    private Vector3 camPosition;
-    
+    private Vector3 camPosition;    
     
 
     void Start()
     {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        camPosition = Camera.main.gameObject.transform.position;
-        agent.destination = camPosition;
+        agent.destination = Camera.main.gameObject.transform.position;
     }
 
     void SpawnDrones()
@@ -54,6 +52,6 @@ public class DroneManager : MonoBehaviour {
 
     void LookAtPlayer()
     {
-
+        // TODO
     }
 }
