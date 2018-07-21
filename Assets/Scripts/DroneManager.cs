@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 //  Drone class can handle more then one model of drone
-//  Each model will ahve it's own animations, colors, and effects
+//  Each model will have it's own animations, colors, and effects
 
 public class DroneManager : MonoBehaviour {
 
