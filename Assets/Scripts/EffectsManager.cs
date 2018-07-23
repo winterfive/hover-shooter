@@ -23,4 +23,9 @@ public class EffectsManager : MonoBehaviour {
         // Allow for different particles systems to be called by this method
         // via drone tag
     }
+
+    void SmokeTrail()
+    {
+        // Smoke trail rises from shot down drone, short duration
+    }
 }
