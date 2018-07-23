@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 65224234469993404}
   - component: {fileID: 54552805118003530}
   - component: {fileID: 195730861628870234}
-  - component: {fileID: 114414530034544676}
+  - component: {fileID: 114737243093112852}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -435,7 +435,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.94, z: 1}
   m_Center: {x: 0, y: -0.15, z: 0}
---- !u!114 &114414530034544676
+--- !u!114 &114737243093112852
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -443,9 +443,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1424531867977468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a0f4920b5628ef44ba9934e564e146a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ebe12397bdf6c447834c77d299f9a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Spawnpoints: []
+  spawnTime: 0
+  waitToSpawn: 0
 --- !u!195 &195730861628870234
 NavMeshAgent:
   m_ObjectHideFlags: 1
