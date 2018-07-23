@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 //  Drone class can handle more then one model of drone
-//  Each model will have it's own animations, colors, and effects
+//  Each prefab/model will have it's own animations, colors, and effects
 
 public class DroneManager : MonoBehaviour {
 
@@ -19,6 +19,10 @@ public class DroneManager : MonoBehaviour {
         agent.destination = Camera.main.gameObject.transform.position;
     }
 
+    /*
+     * Spawns drone at random spawnpoint
+     * void -> void
+     */
     void SpawnDrones()
     {
         // Get random spawnpoint value
@@ -28,7 +32,12 @@ public class DroneManager : MonoBehaviour {
         // "Spawn" drone
     }
 
-    void DestroyDrone()
+
+    /*
+     * Handles all actions required when drone is shot by player
+     * void -> void
+     */
+     void DestroyDrone()
     {
         // listens for event
         // stop color change in EffectManager
@@ -43,6 +52,7 @@ public class DroneManager : MonoBehaviour {
     void DroneShoot()
     {
         // If(drone can see player)
+       
         // {  
         //      Shoot()  Use raycastManger to make a line?
         // }
