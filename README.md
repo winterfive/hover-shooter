@@ -1,3 +1,3 @@
-# shape-shooter-vr
+# as yet unamed GearVR game
 
-This version uses C# events, exapnded gameplay, and experiments with applying force to shapes.
+
