@@ -30,7 +30,7 @@ public class DroneManager : MonoBehaviour {
     void SpawnDrones()
     {
         int spawnPointIndex = Random.Range(0, Spawnpoints.Length);
-        Instantiate(drone, Spawnpoints[spawnPointIndex].position, Spawnpoints[spawnPointIndex].rotation);
+        Instantiate(drone, Spawnpoints[spawnPointIndex].position, Spawnpoints[spawnPointIndex].rotation); 
     }
 
 
