@@ -4,30 +4,40 @@ using UnityEngine;
 using UnityEngine.AI;
 
 //  Drone class can handle more then one model of drone
-//  Each model will have it's own animations, colors, and effects
+//  Each prefab/model will have it's own animations, colors, and effects
 
 public class DroneManager : MonoBehaviour {
 
     public Transform[] Spawnpoints;
-    public float spawnTime;
-    public float waitToSpawn;    
-    
+    public GameObject drone;
+    [SerializeField] float timeBetweenSpawns;
+    [SerializeField] float waitToSpawn;
+
+    private void Awake()
+    {
+
+    }
 
     void Start()
     {
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.destination = Camera.main.gameObject.transform.position;
+        InvokeRepeating("SpawnDrones", waitToSpawn, timeBetweenSpawns);
     }
 
+    /*
+     * Spawns drone at random spawnpoint
+     * void -> void
+     */
     void SpawnDrones()
     {
-        // Get random spawnpoint value
-        // Get drone from object pool
-        // Set shooting to true
-        // Get random height from range to spawn at
-        // "Spawn" drone
+        int spawnPointIndex = Random.Range(0, Spawnpoints.Length);
+        Instantiate(drone, Spawnpoints[spawnPointIndex].position, Spawnpoints[spawnPointIndex].rotation);
     }
 
+
+    /*
+     * Handles all actions required when drone is shot by player
+     * void -> void
+     */
     void DestroyDrone()
     {
         // listens for event
@@ -43,6 +53,7 @@ public class DroneManager : MonoBehaviour {
     void DroneShoot()
     {
         // If(drone can see player)
+       
         // {  
         //      Shoot()  Use raycastManger to make a line?
         // }
