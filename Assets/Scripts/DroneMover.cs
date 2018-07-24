@@ -50,7 +50,7 @@ public class DroneMover : MonoBehaviour {
 
 
     /*
-     * Creates Vector3 w/ random value w/in range
+     * Creates Vector3 w/ random values w/in range
      * void -> Vector3
      */
     private Vector3 CreateRandomPosition()
