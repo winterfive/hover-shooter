@@ -459,6 +459,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4819d8bd376f34e819ae2228c6441c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  altitudeMin: 0.5
+  altitudeMax: 10
+  xMin: -27
+  xMax: 27
+  zMin: -7
+  zMax: 20
 --- !u!195 &195730861628870234
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -468,7 +474,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.7
-  m_Speed: 1.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
