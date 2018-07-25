@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class DroneMover : MonoBehaviour {
@@ -6,6 +7,8 @@ public class DroneMover : MonoBehaviour {
     public float altitudeMin, altitudeMax;
     public float xMin, xMax, zMin, zMax;
 
+    Color lerpedColor;
+    Color glowColor;
     NavMeshAgent agent;
     Transform camTransform;
 
@@ -14,14 +17,16 @@ public class DroneMover : MonoBehaviour {
     {
         agent = GetComponent<NavMeshAgent>();
         camTransform = Camera.main.gameObject.transform;
+        glowColor = this.gameObject.GetComponentInChildren<Renderer>().material.GetColor("_Color"); // Not getting right component?
         agent.baseOffset = UnityEngine.Random.Range(altitudeMin, altitudeMax);
         GotoRandomPoint();
+        // StartCoroutine("LerpColor");
     }
 
 
     private void Update()
     {
-       if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
             GotoPlayer();
         }
@@ -62,5 +67,16 @@ public class DroneMover : MonoBehaviour {
         randomPosition.z = Random.Range(zMin, zMax);
 
         return randomPosition;
+        
+    }
+
+    IEnumerator LerpColor()
+    {
+            lerpedColor = Color.Lerp(Color.red, Color.blue, Time.deltaTime);
+            glowColor = lerpedColor;
+            yield return new WaitForSeconds(4);
+            lerpedColor = Color.Lerp(Color.blue, Color.red, Time.deltaTime);
+            glowColor = lerpedColor;
+            yield return new WaitForSeconds(4);
     }
 }
