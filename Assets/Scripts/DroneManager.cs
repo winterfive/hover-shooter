@@ -10,6 +10,7 @@ public class DroneManager : MonoBehaviour {
 
     public Transform[] Spawnpoints;
     public GameObject drone;
+
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] float waitToSpawn;
 
@@ -30,7 +31,7 @@ public class DroneManager : MonoBehaviour {
     void SpawnDrones()
     {
         int spawnPointIndex = Random.Range(0, Spawnpoints.Length);
-        Instantiate(drone, Spawnpoints[spawnPointIndex].position, Spawnpoints[spawnPointIndex].rotation);
+        Instantiate(drone, Spawnpoints[spawnPointIndex].position, Spawnpoints[spawnPointIndex].rotation); 
     }
 
 
@@ -44,7 +45,8 @@ public class DroneManager : MonoBehaviour {
         // stop color change in EffectManager
         // Call explosion script in EffectsManager
         // stop shooting script, shooting = false
-        // begin drone failling anim (drone crashes, tiled on floor)
+        // begin drone hit anim (drone wavers adn tilts)
+        // turn on gravity for drone
         // Call smoke script in EffectsManager
         // Drone falls through floor slowly
         // Requeue drone object
