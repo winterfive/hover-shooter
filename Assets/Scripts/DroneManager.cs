@@ -7,6 +7,7 @@ public class DroneManager : MonoBehaviour {
 
     public Transform[] Spawnpoints;
     public GameObject drone;
+
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] float waitToSpawn;
 
