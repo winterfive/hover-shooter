@@ -57,10 +57,9 @@ GameObject:
   - component: {fileID: 4747709083616126}
   - component: {fileID: 33365107200957476}
   - component: {fileID: 23020607512401610}
-  - component: {fileID: 136798988259460288}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Glow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +92,6 @@ GameObject:
   - component: {fileID: 4989993035683598}
   - component: {fileID: 33615364195276768}
   - component: {fileID: 23359300996792300}
-  - component: {fileID: 65772991179252148}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -125,7 +123,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1424531867977468}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.532, z: 0}
+  m_LocalPosition: {x: -2.2, y: 1.125, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4989993035683598}
@@ -251,7 +249,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 0b6b851cfd97fa847b75c5a4a31e4dce, type: 2}
+  - {fileID: 2100000, guid: dfe5acb88f0e82c4ab21c417e067a9fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -321,7 +319,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 0b6b851cfd97fa847b75c5a4a31e4dce, type: 2}
+  - {fileID: 2100000, guid: 13fe751cedf73cf4fa60f8542e7966d3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -450,18 +448,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0974329, z: 0.9612373}
   m_Center: {x: -0, y: 0.048716426, z: -0.01938133}
---- !u!65 &65772991179252148
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1795230006372776}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114608309417125540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -479,19 +465,6 @@ MonoBehaviour:
   xMax: 27
   zMin: -7
   zMax: 20
---- !u!136 &136798988259460288
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1698982098601180}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!195 &195730861628870234
 NavMeshAgent:
   m_ObjectHideFlags: 1
