@@ -3,16 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectsManager : MonoBehaviour {
-
-    public Material[] Materials;
-    // Different array for each type of drone?
     
-
-    void ChangeDroneGlowColor()
-    {
-        // Change drone glow via lerp, array of materials
-        // Listen for drone "instantiation"
-    }
 
     void Explode(GameObject go)
     {

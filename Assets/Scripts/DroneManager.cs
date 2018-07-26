@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-//  Drone class can handle more then one model of drone
-//  Each prefab/model will have it's own animations, colors, and effects
-
 public class DroneManager : MonoBehaviour {
 
     public Transform[] Spawnpoints;
@@ -13,11 +10,6 @@ public class DroneManager : MonoBehaviour {
 
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] float waitToSpawn;
-
-    private void Awake()
-    {
-
-    }
 
     void Start()
     {
@@ -42,15 +34,18 @@ public class DroneManager : MonoBehaviour {
     void DestroyDrone()
     {
         // listens for event
-        // stop color change in EffectManager
+        // stop colorLerp in DroneMover
         // Call explosion script in EffectsManager
+        // start colorBlink corountine in DroneMover
         // stop shooting script, shooting = false
-        // begin drone hit anim (drone wavers adn tilts)
+        // begin drone hit anim (drone wavers and tilts)
         // turn on gravity for drone
         // Call smoke script in EffectsManager
         // Drone falls through floor slowly
+        // Stop colorBlink coroutine
         // Requeue drone object
     }
+
 
     void DroneShoot()
     {
@@ -61,8 +56,9 @@ public class DroneManager : MonoBehaviour {
         // }
     }
 
+
     void LookAtPlayer()
     {
-
-    }
+        // TODO
+    }    
 }

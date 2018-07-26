@@ -8,6 +8,7 @@ public class ReticleManager : MonoBehaviour {
     public float _defaultDistance = 2f;
     public GameObject reticle;
     public RaycastManager raycastManager;
+
     private Transform _reticleTransform;
     private Vector3 _originalScale;
     private Quaternion _originalRotation;
