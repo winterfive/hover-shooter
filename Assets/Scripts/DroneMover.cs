@@ -17,15 +17,14 @@ public class DroneMover : MonoBehaviour {
     {
         _agent = GetComponent<NavMeshAgent>();
         _camTransform = Camera.main.gameObject.transform;
-        _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
+        _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);        
 
         _glowTransform = FindChildWithGlow();
         _glowRend = _glowTransform.GetComponent<Renderer>();
 
         GotoRandomPoint();
 
-        StartCoroutine("LerpColor");
-       
+        StartCoroutine("LerpColor");       
     }
 
 
