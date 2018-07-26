@@ -86,8 +86,10 @@ public class DroneMover : MonoBehaviour {
 
     }
 
-
-
+    /*
+     * Finds child object with "Glow" tag
+     * void -> transform
+     */
     private Transform FindChildWithGlow()
     {
         Transform firstChild = this.transform.Find("Body");
