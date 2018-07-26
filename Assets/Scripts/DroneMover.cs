@@ -22,10 +22,13 @@ public class DroneMover : MonoBehaviour {
 
         glowObject = FindChildWithGlow();
         glowColor = glowObject.GetComponent<Renderer>().material.color;
+        glowColor = Color.cyan;
+        Debug.Log("object is: " + glowObject.tag);  // It's finding the glow object but color isn't changing
 
         GotoRandomPoint();
 
-        StartCoroutine("LerpColor");       
+        //StartCoroutine("LerpColor");
+        // Lerp is running but not affecting drone clones
     }
 
 
@@ -76,15 +79,23 @@ public class DroneMover : MonoBehaviour {
     }
 
 
-    void LerpColor()
-    {
-        //glowColor = Color.Lerp(Color.red, Color.blue, 1);
-        ////Color.Lerp(glowColor, Color.blue, Mathf.PingPong(Time.deltaTime, 1));
-        //yield return new WaitForSeconds(5);
-        ////Color.Lerp(Color.blue, glowColor, Time.deltaTime);
-        ////yield return new WaitForSeconds(4);
+    //IEnumerator LerpColor()
+    //{
+    //    glowColor = Color.Lerp(Color.red, Color.blue, 1);
+    //    //Color.Lerp(glowColor, Color.blue, Mathf.PingPong(Time.deltaTime, 1));
+    //    yield return new WaitForSeconds(3);
+    //    //Color.Lerp(Color.blue, glowColor, Time.deltaTime);
+    //    //yield return new WaitForSeconds(4);
 
-    }
+    //    for (float f = 1f; f >= 0; f -= 0.1f)
+    //    {
+    //        Color c = glowColor;
+    //        c.r = f;
+    //        Debug.Log("color value is: " + c.r);
+    //        glowColor = c;
+    //        yield return new WaitForSeconds(2);
+    //    }
+    //}
 
     /*
      * Finds child object with "Glow" tag
