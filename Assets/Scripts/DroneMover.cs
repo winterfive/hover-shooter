@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.AI;
 
 public class DroneMover : MonoBehaviour {
@@ -8,6 +8,7 @@ public class DroneMover : MonoBehaviour {
     public float xMin, xMax, zMin, zMax;
 
     Color lerpedColor;
+    Transform glowObject;
     Color glowColor;
     NavMeshAgent agent;
     Transform camTransform;
@@ -17,10 +18,14 @@ public class DroneMover : MonoBehaviour {
     {
         agent = GetComponent<NavMeshAgent>();
         camTransform = Camera.main.gameObject.transform;
-        glowColor = this.gameObject.GetComponentInChildren<Renderer>().material.GetColor("_Color"); // Not getting right component?
-        agent.baseOffset = UnityEngine.Random.Range(altitudeMin, altitudeMax);
+        agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
+
+        glowObject = FindChildWithGlow();
+        glowColor = glowObject.GetComponent<Renderer>().material.color;
+
         GotoRandomPoint();
-        // StartCoroutine("LerpColor");
+
+        StartCoroutine("LerpColor");       
     }
 
 
@@ -70,13 +75,32 @@ public class DroneMover : MonoBehaviour {
         
     }
 
-    IEnumerator LerpColor()
+
+    void LerpColor()
     {
-            lerpedColor = Color.Lerp(Color.red, Color.blue, Time.deltaTime);
-            glowColor = lerpedColor;
-            yield return new WaitForSeconds(4);
-            lerpedColor = Color.Lerp(Color.blue, Color.red, Time.deltaTime);
-            glowColor = lerpedColor;
-            yield return new WaitForSeconds(4);
+        //glowColor = Color.Lerp(Color.red, Color.blue, 1);
+        ////Color.Lerp(glowColor, Color.blue, Mathf.PingPong(Time.deltaTime, 1));
+        //yield return new WaitForSeconds(5);
+        ////Color.Lerp(Color.blue, glowColor, Time.deltaTime);
+        ////yield return new WaitForSeconds(4);
+
+    }
+
+
+
+    private Transform FindChildWithGlow()
+    {
+        Transform firstChild = this.transform.Find("Body");
+        Transform[] components = firstChild.GetComponentsInChildren<Transform>();
+            
+        foreach(Transform t in components)
+        {
+            if(t.gameObject.CompareTag("Glow"))
+            {
+                return t;
+            }
+        }
+
+        return null;
     }
 }
