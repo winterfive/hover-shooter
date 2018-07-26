@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class DroneMover : MonoBehaviour {
 
     public float altitudeMin, altitudeMax;
-    public float xMin, xMax, zMin, zMax;
+    public float xMin, xMax, zMin, zMax, speed;
 
     private Transform _glowTransform;
     private Renderer _glowRend;
@@ -81,9 +81,9 @@ public class DroneMover : MonoBehaviour {
         Color glowColor = _glowRend.material.color;
         Color altGlowColor = Color.cyan;
 
-        //_glowRend.material.color = Color.Lerp(glowColor, altGlowColor, Mathf.PingPong(Time.time, 1));
-        _glowRend.material.color = altGlowColor;  // this works
-        yield return new WaitForSeconds(3);
+        _glowRend.material.color = Color.Lerp(glowColor, altGlowColor, Mathf.PingPong(Time.time * speed, 1));
+        //_glowRend.material.color = altGlowColor;  // this works
+        yield return new WaitForSeconds(0);
     }
 
     /*
