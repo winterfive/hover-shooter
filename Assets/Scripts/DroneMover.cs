@@ -5,33 +5,34 @@ using UnityEngine.AI;
 public class DroneMover : MonoBehaviour {
 
     public float altitudeMin, altitudeMax;
-    public float xMin, xMax, zMin, zMax;
-
-    Color lerpedColor;
-    Transform glowObject;
-    Color glowColor;
-    NavMeshAgent agent;
-    Transform camTransform;
+    public float xMin, xMax, zMin, zMax, glowSpeed;
+    public Color firstGlow, secondGlow;
+    
+    private Transform _glowTransform;
+    private Renderer _glowRend;
+    private NavMeshAgent _agent;
+    private Transform _camTransform;
+    private float _timeAtSpawn;
 
 
     void Start ()
     {
-        agent = GetComponent<NavMeshAgent>();
-        camTransform = Camera.main.gameObject.transform;
-        agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
+        _agent = GetComponent<NavMeshAgent>();
+        _camTransform = Camera.main.gameObject.transform;
+        _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);        
 
-        glowObject = FindChildWithGlow();
-        glowColor = glowObject.GetComponent<Renderer>().material.color;
+        _glowTransform = FindChildWithGlow();
+        _glowRend = _glowTransform.GetComponent<Renderer>();
 
         GotoRandomPoint();
 
-        StartCoroutine("LerpColor");       
+        InvokeRepeating("LerpColor", 0f, 0.1f);
     }
 
 
     private void Update()
     {
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
         {
             GotoPlayer();
         }
@@ -44,7 +45,7 @@ public class DroneMover : MonoBehaviour {
      */
     private void GotoPlayer()
     {
-        agent.destination = camTransform.position;
+        _agent.destination = _camTransform.position;
     }
 
 
@@ -55,7 +56,7 @@ public class DroneMover : MonoBehaviour {
     void GotoRandomPoint()
     {
         Vector3 newVector = CreateRandomPosition();
-        agent.destination = newVector;        
+        _agent.destination = newVector;        
     }
 
 
@@ -68,26 +69,24 @@ public class DroneMover : MonoBehaviour {
         Vector3 randomPosition;
 
         randomPosition.x = Random.Range(xMin, xMax);
-        randomPosition.y = agent.baseOffset;
+        randomPosition.y = _agent.baseOffset;
         randomPosition.z = Random.Range(zMin, zMax);
 
-        return randomPosition;
-        
+        return randomPosition;        
     }
 
 
     void LerpColor()
     {
-        //glowColor = Color.Lerp(Color.red, Color.blue, 1);
-        ////Color.Lerp(glowColor, Color.blue, Mathf.PingPong(Time.deltaTime, 1));
-        //yield return new WaitForSeconds(5);
-        ////Color.Lerp(Color.blue, glowColor, Time.deltaTime);
-        ////yield return new WaitForSeconds(4);
+        float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
 
+        _glowRend.material.color = Color.Lerp(firstGlow, secondGlow, pingpong);
     }
 
-
-
+    /*
+     * Finds child object with "Glow" tag
+     * void -> transform
+     */
     private Transform FindChildWithGlow()
     {
         Transform firstChild = this.transform.Find("Body");
