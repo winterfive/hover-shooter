@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 65224234469993404}
   - component: {fileID: 54552805118003530}
   - component: {fileID: 195730861628870234}
-  - component: {fileID: 114608309417125540}
+  - component: {fileID: 114574855949980354}
   m_Layer: 8
   m_Name: Drone
   m_TagString: Drone
@@ -448,7 +448,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0974329, z: 0.9612373}
   m_Center: {x: -0, y: 0.048716426, z: -0.01938133}
---- !u!114 &114608309417125540
+--- !u!114 &114574855949980354
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -456,16 +456,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1424531867977468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca4819d8bd376f34e819ae2228c6441c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5561291360a791f449acf55d1ff6ad80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   altitudeMin: 0.5
-  altitudeMax: 10
+  altitudeMax: 20
   xMin: -27
   xMax: 27
   zMin: -7
-  zMax: 20
-  glowSpeed: 0.6
+  zMax: 27
+  glowSpeed: 0.4
   firstGlow: {r: 1, g: 0, b: 0, a: 0}
   secondGlow: {r: 0, g: 0, b: 0, a: 0}
 --- !u!195 &195730861628870234
