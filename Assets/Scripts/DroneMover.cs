@@ -5,39 +5,28 @@ using UnityEngine.AI;
 public class DroneMover : MonoBehaviour {
 
     public float altitudeMin, altitudeMax;
-    public float xMin, xMax, zMin, zMax, speed;
-
-    private DroneMover myDroneReference;
+    public float xMin, xMax, zMin, zMax, glowSpeed;
+    public Color firstGlow, secondGlow;
+    
     private Transform _glowTransform;
-    private Renderer _glowRenderer;
+    private Renderer _glowRend;
     private NavMeshAgent _agent;
     private Transform _camTransform;
+    private float _timeAtSpawn;
 
 
     void Start ()
     {
-        GameObject drone = GameObject.FindWithTag("Drone");
-
-        if(drone != null)
-        {
-            myDroneReference = drone.GetComponent<DroneMover>();
-        }
-
-        if(myDroneReference == null)
-        {
-            Debug.Log("Cannot find DroneMover script");
-        }
-
         _agent = GetComponent<NavMeshAgent>();
         _camTransform = Camera.main.gameObject.transform;
         _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);        
 
         _glowTransform = FindChildWithGlow();
-        _glowRenderer = _glowTransform.GetComponent<Renderer>();
+        _glowRend = _glowTransform.GetComponent<Renderer>();
 
         GotoRandomPoint();
 
-        InvokeRepeating("LerpColor", 0f, 1f);
+        InvokeRepeating("LerpColor", 0f, 0.1f);
     }
 
 
@@ -83,17 +72,15 @@ public class DroneMover : MonoBehaviour {
         randomPosition.y = _agent.baseOffset;
         randomPosition.z = Random.Range(zMin, zMax);
 
-        return randomPosition;
-        
+        return randomPosition;        
     }
 
 
     void LerpColor()
     {
-        Color glowColor = _glowRenderer.material.color;
-        Color altGlowColor = Color.cyan;
+        float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
 
-        _glowRenderer.material.color = Color.Lerp(glowColor, altGlowColor, Mathf.PingPong(Time.time * speed, 1));
+        _glowRend.material.color = Color.Lerp(firstGlow, secondGlow, pingpong);
     }
 
     /*
