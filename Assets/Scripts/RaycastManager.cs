@@ -32,7 +32,6 @@ public class RaycastManager : MonoBehaviour {
     }
 
     //  Compares newly found object with previously found object
-    //  Checks newly found object for "Drone" tag
     //  Calls event
     //  void -> void
     public void CheckForNewObject(RaycastHit hit)
@@ -41,14 +40,11 @@ public class RaycastManager : MonoBehaviour {
 
         if (!newObject.Equals(_currentFoundObject))
         {
-            if(newObject.tag == "Drone")
+            if (OnNewObjectFound != null)
             {
-                if (OnNewObjectFound != null)
-                {
-                    _previousFoundObject = _currentFoundObject;
-                    _currentFoundObject = newObject;
-                    OnNewObjectFound();
-                }
+                _previousFoundObject = _currentFoundObject;
+                _currentFoundObject = newObject;
+                OnNewObjectFound();
             }            
         }
     }
