@@ -54,11 +54,5 @@ public class DroneManager : MonoBehaviour {
         // {  
         //      Shoot()  Use raycastManger to make a line?
         // }
-    }
-
-
-    void LookAtPlayer()
-    {
-        // TODO
     }    
 }
