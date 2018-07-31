@@ -6,45 +6,32 @@ using UnityEngine.AI;
 public class DroneManager : MonoBehaviour {
 
     public Transform[] Spawnpoints;
-    public GameObject drone;
-    public int poolSize;
-    List<GameObject> droneList;
 
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] float waitToSpawn;
 
     void Start()
     {
-        droneList = new List<GameObject>();
-        for (int i = 0; i < poolSize; i++)
-        {
-            GameObject obj = Instantiate(drone);
-            obj.SetActive(false);
-            droneList.Add(obj);
-        }
-
         InvokeRepeating("SpawnDrones", waitToSpawn, timeBetweenSpawns);
     }
 
     /*
-     * Spawns drone at random spawnpoint
+     * Gets drone from object pool, spawns it at random spawnpoint
      * void -> void
      */
     void SpawnDrones()
     {
         int spawnPointIndex;
+        
+        spawnPointIndex = Random.Range(0, Spawnpoints.Length);
 
-        for(int i = 0; i < droneList.Count; i++)
-        {
-            if (!droneList[i].activeInHierarchy)
-            {
-                spawnPointIndex = Random.Range(0, Spawnpoints.Length);
-                droneList[i].transform.position = Spawnpoints[spawnPointIndex].position;
-                droneList[i].transform.rotation = Spawnpoints[spawnPointIndex].rotation;
-                droneList[i].SetActive(true);
-                break;
-            }
-        }
+        GameObject drone = NewObjectPooler.currentPooler.GetPooledObject();
+
+        if (drone == null) return;
+
+        drone.transform.position = Spawnpoints[spawnPointIndex].position;
+        drone.transform.rotation = Spawnpoints[spawnPointIndex].rotation;
+        drone.SetActive(true);
 
         //int spawnPointIndex = Random.Range(0, Spawnpoints.Length);
         //Instantiate(drone, Spawnpoints[spawnPointIndex].position, Spawnpoints[spawnPointIndex].rotation); 
