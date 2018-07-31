@@ -7,6 +7,7 @@ public class DroneActions : MonoBehaviour {
     public float altitudeMin, altitudeMax;
     public float xMin, xMax, zMin, zMax, glowSpeed;
     public Color firstGlow, secondGlow;
+    public float minAgentSpeed, maxAgentSpeed;
     
     private Transform _glowTransform;
     private Renderer _glowRend;
@@ -19,7 +20,8 @@ public class DroneActions : MonoBehaviour {
     {
         _agent = GetComponent<NavMeshAgent>();
         _camTransform = Camera.main.gameObject.transform;
-        _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);        
+        _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
+        _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
 
         _glowTransform = FindChildWithGlow();
         _glowRend = _glowTransform.GetComponent<Renderer>();
@@ -32,9 +34,9 @@ public class DroneActions : MonoBehaviour {
 
     private void Update()
     {
-        if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+        if (Time.frameCount % 5 == 0)
         {
-            GotoPlayer();
+            _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
         }
     }
 
@@ -48,13 +50,14 @@ public class DroneActions : MonoBehaviour {
         _agent.destination = _camTransform.position;
     }
 
+
     /*
      * Drone turret always pointed at player
      * void -> void
      */
      void LookAtPlayer()
     {
-
+        // TODO
     }
 
 
@@ -64,8 +67,8 @@ public class DroneActions : MonoBehaviour {
      */
     void GotoRandomPoint()
     {
-        Vector3 newVector = CreateRandomPosition();
-        _agent.destination = newVector;        
+        Vector3 midPoint = CreateRandomPosition();
+        _agent.destination = midPoint;
     }
 
 
@@ -91,6 +94,7 @@ public class DroneActions : MonoBehaviour {
 
         _glowRend.material.color = Color.Lerp(firstGlow, secondGlow, pingpong);
     }
+
 
     /*
      * Finds child object with "Glow" tag
