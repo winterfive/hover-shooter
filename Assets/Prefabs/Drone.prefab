@@ -465,7 +465,7 @@ MonoBehaviour:
   xMax: 27
   zMin: -7
   zMax: 27
-  glowSpeed: 0.4
+  glowSpeed: 0.9
   firstGlow: {r: 1, g: 0, b: 0, a: 0}
   secondGlow: {r: 0, g: 0, b: 0, a: 0}
 --- !u!195 &195730861628870234
