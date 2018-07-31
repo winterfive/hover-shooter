@@ -8,6 +8,8 @@ public class RaycastManager : MonoBehaviour {
     public static event NewObjectFound OnNewObjectFound;
     public delegate void NewNormalFound();
     public static event NewNormalFound OnNewNormalFound;
+    public delegate void NoObjectFound();
+    public static event NoObjectFound OnNoObjectFound;
 
     private RaycastHit _hit;
     private GameObject _currentFoundObject;
@@ -28,11 +30,14 @@ public class RaycastManager : MonoBehaviour {
         {
             CheckForNewObject(_hit);
             CheckForNewNormal(_hit);
-        }        
+        }
+        else
+        {
+            OnNoObjectFound();
+        }
     }
 
     //  Compares newly found object with previously found object
-    //  Checks newly found object for "Drone" tag
     //  Calls event
     //  void -> void
     public void CheckForNewObject(RaycastHit hit)
@@ -41,16 +46,13 @@ public class RaycastManager : MonoBehaviour {
 
         if (!newObject.Equals(_currentFoundObject))
         {
-            if(newObject.tag == "Drone")
+            if (OnNewNormalFound != null)
             {
-                if (OnNewObjectFound != null)
-                {
-                    _previousFoundObject = _currentFoundObject;
-                    _currentFoundObject = newObject;
-                    OnNewObjectFound();
-                }
-            }            
-        }
+                _previousFoundObject = _currentFoundObject;
+                _currentFoundObject = newObject;
+                OnNewObjectFound();
+            }
+        }        
     }
 
     // Compares newly found normal with previously found normal
@@ -60,7 +62,7 @@ public class RaycastManager : MonoBehaviour {
     {
         Vector3 newNormal = hit.normal;
 
-        if(!newNormal.Equals(_currentNormal))
+        if (!newNormal.Equals(_currentNormal))
         {
             if (OnNewNormalFound != null)
             {
