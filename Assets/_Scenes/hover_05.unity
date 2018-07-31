@@ -6460,6 +6460,8 @@ MonoBehaviour:
   - {fileID: 213152335}
   - {fileID: 741158106}
   - {fileID: 1327769901}
+  - {fileID: 761243740}
+  - {fileID: 167945827}
   timeBetweenSpawns: 2
   waitToSpawn: 1
 --- !u!4 &1934252587
