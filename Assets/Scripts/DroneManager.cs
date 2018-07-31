@@ -15,6 +15,7 @@ public class DroneManager : MonoBehaviour {
         InvokeRepeating("SpawnDrones", waitToSpawn, timeBetweenSpawns);
     }
 
+
     /*
      * Gets drone from object pool, spawns it at random spawnpoint
      * void -> void
@@ -32,9 +33,6 @@ public class DroneManager : MonoBehaviour {
         drone.transform.position = Spawnpoints[spawnPointIndex].position;
         drone.transform.rotation = Spawnpoints[spawnPointIndex].rotation;
         drone.SetActive(true);
-
-        //int spawnPointIndex = Random.Range(0, Spawnpoints.Length);
-        //Instantiate(drone, Spawnpoints[spawnPointIndex].position, Spawnpoints[spawnPointIndex].rotation); 
     }
 
 
