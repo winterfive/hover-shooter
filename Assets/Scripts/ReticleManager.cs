@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ReticleManager : MonoBehaviour {    
-    
-    public Transform cam;    
+public class ReticleManager : MonoBehaviour {
+
+    public Transform cam;
     public GameObject reticle;
     public RaycastManager raycastManager;
-    public Color targetAquiredColor, noTargetColor;
+    public Color foundEnemyColor, notFoundEnemyColor;
 
     private float _defaultDistance = 2f;
     private Transform _reticleTransform;
@@ -15,9 +15,8 @@ public class ReticleManager : MonoBehaviour {
     private Quaternion _originalRotation;
     private Color _reticleColor;
     private RaycastHit _currentHit;
-    private GameObject _currentObject;
 
-    public Transform ReticleTransform { get { return _reticleTransform; } } // Needed for destroy & explosion, later
+    public Transform GetReticleTransform() { return _reticleTransform; }
 
 
     private void Awake()
@@ -54,8 +53,33 @@ public class ReticleManager : MonoBehaviour {
 
 
     /*
-     * Changes color of reticle depending on type of object found
+     * Checks if current object seen by reticle is an enemy
      * void -> void
+     */
+    public void CheckForEnemy()
+    {
+        GameObject currentObject;
+
+        if (raycastManager.GetCurrentFoundObject())
+        {
+            currentObject = raycastManager.GetCurrentFoundObject();
+
+            if (currentObject.tag == "Drone")
+            {
+                ChangeReticleColor(foundEnemyColor);
+            }
+            
+        }
+        else
+        {
+            ChangeReticleColor(notFoundEnemyColor);
+        }
+    }
+
+
+    /*
+     * Changes color of reticle depending on type of object found
+     * Color -> void
      */
     public void ChangeReticleColor(Color color)
     {
@@ -64,48 +88,27 @@ public class ReticleManager : MonoBehaviour {
 
 
     /*
-     * Checks if current object seen by reticle is an enemy
+     * Checks if a normal has been found, calls SetPosition()
      * void -> void
      */
-    public void CheckForEnemy()
-    {
-        _currentObject = raycastManager.GetCurrentFoundObject();
-
-        if (_currentObject.tag == "Drone")
-        {
-            ChangeReticleColor(targetAquiredColor);
-        }
-        else
-        {
-            ChangeReticleColor(noTargetColor);
-        }        
-    }
-
-    
-   /*
-    * Listens for RaycastManager updates
-    * void -> void
-    */ 
     public void CheckNormalFound()
     {
         _currentHit = raycastManager.GetCurrentHit();
         SetPosition(_currentHit);
-        // TODO When raycast finds the skybox (nothing), the reticle rotation gets stuck
-        // TODO SetPosition() isn't being called
-        // TODO In shape shooter, soemthing always got hit, here we can hit the skybox!
     }
  
 
     private void OnEnable()
     {
         RaycastManager.OnNewObjectFound += CheckForEnemy;
-        RaycastManager.OnNewNormalFound += CheckNormalFound;        
+        RaycastManager.OnNewNormalFound += CheckNormalFound;
+        RaycastManager.OnNoObjectFound += SetPosition;
     }
 
     private void OnDisable()
     {
         RaycastManager.OnNewObjectFound -= CheckForEnemy;
         RaycastManager.OnNewNormalFound -= CheckNormalFound;
-
+        RaycastManager.OnNoObjectFound -= SetPosition;
     }
 }
