@@ -94,8 +94,11 @@ public class DroneActions : MonoBehaviour {
     {
         if (_turret)
         {
-            _turret.transform.rotation = Quaternion.LookRotation(_turret.transform.position - _camTransform.position);
-            // TODO restrict lookAt to y axis only
+            Vector3 newVector = new Vector3(_turret.transform.position.x - _camTransform.position.x,
+                                            0,
+                                            _turret.transform.position.z - _camTransform.position.z);
+
+            _turret.transform.rotation = Quaternion.LookRotation(newVector);
         }        
     }
 
