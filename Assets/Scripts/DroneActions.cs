@@ -25,6 +25,7 @@ public class DroneActions : MonoBehaviour {
         _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
 
         _turret = FindChildWithTag("Turret");
+        Debug.Log("_turret has the tag: " + _turret.tag);
         _glowTransform = FindChildWithTag("Glow");
         _glowRend = _glowTransform.GetComponent<Renderer>();
 
@@ -91,12 +92,11 @@ public class DroneActions : MonoBehaviour {
      */
     private void LookAtPlayer()
     {
-        // TODO so close to being complete!
-        Vector3 position = _camTransform.position - _turret.transform.position;
-        Quaternion rotation = Quaternion.LookRotation(position);
-        rotation.x = 0f;
-        rotation.z = 0f;
-        _turret.transform.rotation = rotation;
+        if (_turret)
+        {
+            _turret.transform.rotation = Quaternion.LookRotation(_turret.transform.position - _camTransform.position);
+            // TODO restrict lookAt to y axis only
+        }        
     }
 
     
@@ -106,14 +106,16 @@ public class DroneActions : MonoBehaviour {
      */
     void LerpColor()
     {
-        float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
-
-        _glowRend.material.color = Color.Lerp(firstGlow, secondGlow, pingpong);
+        if(_glowRend)
+        {
+            float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
+            _glowRend.material.color = Color.Lerp(firstGlow, secondGlow, pingpong);
+        }        
     }
 
 
     /*
-     * Finds child object with "Glow" tag
+     * Finds child object with tag
      * void -> transform
      */
     private Transform FindChildWithTag(string s)
