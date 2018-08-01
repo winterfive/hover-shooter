@@ -59,7 +59,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\DroneMover.cs" />
+    <Compile Include="Assets\Scripts\DroneActions.cs" />
+    <Compile Include="Assets\Scripts\DroneManager.cs" />
+    <Compile Include="Assets\Scripts\EffectsManager.cs" />
+    <Compile Include="Assets\Scripts\NewObjectPooler.cs" />
     <Compile Include="Assets\Scripts\OlderScripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\OlderScripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\OlderScripts\ShapeManager.cs" />
