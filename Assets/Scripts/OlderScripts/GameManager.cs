@@ -4,7 +4,6 @@ public class GameManager : MonoBehaviour{
     
     public float timeBetweenShots = 0.15f;
     public RaycastManager raycastManager;
-    //public ShapeManager shapeManager;
 
     private float _timer;    
 
