@@ -1,3 +1,3 @@
-# shape-shooter-vr
+# As Yet Unamed GearVR game
 
-This version uses C# events, exapnded gameplay, and experiments with applying force to shapes.
+This is an atmospheric VR game that pits you against some small but menacing drones.  
