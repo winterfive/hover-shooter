@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.AI;
+
 
 public class DroneActions : MonoBehaviour {
 
@@ -11,6 +11,7 @@ public class DroneActions : MonoBehaviour {
     
     private Transform _glowTransform;
     private Renderer _glowRend;
+    private Transform _turret;
     private NavMeshAgent _agent;
     private Transform _camTransform;
     private float _timeAtSpawn;
@@ -23,7 +24,8 @@ public class DroneActions : MonoBehaviour {
         _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
         _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
 
-        _glowTransform = FindChildWithGlow();
+        _turret = FindChildWithTag("Turret");
+        _glowTransform = FindChildWithTag("Glow");
         _glowRend = _glowTransform.GetComponent<Renderer>();
 
         GotoRandomPoint();
@@ -34,11 +36,12 @@ public class DroneActions : MonoBehaviour {
 
     private void Update()
     {
+        LookAtPlayer();
+
         if (Time.frameCount % 5 == 0)
         {
             if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
             {
-                //GotoRandomPoint();
                 GotoPlayer();
             }
         }
@@ -52,15 +55,6 @@ public class DroneActions : MonoBehaviour {
     private void GotoPlayer()
     {
         _agent.destination = _camTransform.position;
-    }
-
-    /*
-     * Drone turret always pointed at player
-     * void -> void
-     */
-     void LookAtPlayer()
-    {
-
     }
 
 
@@ -91,6 +85,24 @@ public class DroneActions : MonoBehaviour {
     }
 
 
+    /*
+     * Turns drone turret towards player
+     * void -> void
+     */
+    private void LookAtPlayer()
+    {
+        Vector3 position = _camTransform.position - _turret.transform.position;
+        Quaternion rotation = Quaternion.LookRotation(position);
+        rotation.x = 0f;
+        rotation.z = 0f;
+        _turret.transform.rotation = rotation;
+    }
+
+    
+    /*
+     * Pingpongs drone glow steadily from one color to another
+     * void -> void
+     */
     void LerpColor()
     {
         float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
@@ -98,18 +110,19 @@ public class DroneActions : MonoBehaviour {
         _glowRend.material.color = Color.Lerp(firstGlow, secondGlow, pingpong);
     }
 
+
     /*
      * Finds child object with "Glow" tag
      * void -> transform
      */
-    private Transform FindChildWithGlow()
+    private Transform FindChildWithTag(string s)
     {
         Transform firstChild = this.transform.Find("Body");
         Transform[] components = firstChild.GetComponentsInChildren<Transform>();
             
         foreach(Transform t in components)
         {
-            if(t.gameObject.CompareTag("Glow"))
+            if(t.gameObject.CompareTag(s))
             {
                 return t;
             }
