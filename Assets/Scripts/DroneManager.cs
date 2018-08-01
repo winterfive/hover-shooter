@@ -31,7 +31,7 @@ public class DroneManager : MonoBehaviour {
         if (drone == null) return;
 
         drone.transform.position = Spawnpoints[spawnPointIndex].position;
-        drone.transform.rotation = Spawnpoints[spawnPointIndex].rotation;
+        //drone.transform.rotation = Spawnpoints[spawnPointIndex].rotation;
         drone.SetActive(true);
     }
 
