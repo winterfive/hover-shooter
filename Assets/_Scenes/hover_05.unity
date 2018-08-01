@@ -6734,7 +6734,7 @@ MonoBehaviour:
   pooledObject: {fileID: 1424531867977468, guid: 48330a55aa2441642abb65ea588ca648,
     type: 2}
   poolSize: 30
-  willGrow: 1
+  willGrow: 0
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0
