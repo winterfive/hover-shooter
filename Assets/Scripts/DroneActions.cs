@@ -91,6 +91,7 @@ public class DroneActions : MonoBehaviour {
      */
     private void LookAtPlayer()
     {
+        // TODO so close to being complete!
         Vector3 position = _camTransform.position - _turret.transform.position;
         Quaternion rotation = Quaternion.LookRotation(position);
         rotation.x = 0f;
