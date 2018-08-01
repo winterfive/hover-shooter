@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class DroneManager : MonoBehaviour {
 
     public Transform[] Spawnpoints;
-    public GameObject drone;
 
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] float waitToSpawn;
@@ -16,14 +15,24 @@ public class DroneManager : MonoBehaviour {
         InvokeRepeating("SpawnDrones", waitToSpawn, timeBetweenSpawns);
     }
 
+
     /*
-     * Spawns drone at random spawnpoint
+     * Gets drone from object pool, spawns it at random spawnpoint
      * void -> void
      */
     void SpawnDrones()
     {
-        int spawnPointIndex = Random.Range(0, Spawnpoints.Length);
-        Instantiate(drone, Spawnpoints[spawnPointIndex].position, Spawnpoints[spawnPointIndex].rotation); 
+        int spawnPointIndex;
+        
+        spawnPointIndex = Random.Range(0, Spawnpoints.Length);
+
+        GameObject drone = NewObjectPooler.currentPooler.GetPooledObject();
+
+        if (drone == null) return;
+
+        drone.transform.position = Spawnpoints[spawnPointIndex].position;
+        drone.transform.rotation = Spawnpoints[spawnPointIndex].rotation;
+        drone.SetActive(true);
     }
 
 
