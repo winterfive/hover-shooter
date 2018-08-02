@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4409268458261086}
   - component: {fileID: 33265721034889106}
   - component: {fileID: 23251414963585954}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4747709083616126}
   - component: {fileID: 33365107200957476}
   - component: {fileID: 23020607512401610}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Glow
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 33765572532392742}
   - component: {fileID: 23659265319627238}
   - component: {fileID: 65195880945497302}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Turret
   m_TagString: Turret
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4989993035683598}
   - component: {fileID: 33615364195276768}
   - component: {fileID: 23359300996792300}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4395101308339950}
   - component: {fileID: 33306086721705858}
   - component: {fileID: 23762633308081004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GunTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
