@@ -54,14 +54,4 @@ public class DroneManager : MonoBehaviour {
         // Stop colorBlink coroutine
         // Requeue drone object
     }
-
-
-    void DroneShoot()
-    {
-        // If(drone can see player)
-       
-        // {  
-        //      Shoot()  Use raycastManger to make a line?
-        // }
-    }    
 }

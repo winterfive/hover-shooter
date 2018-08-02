@@ -33,11 +33,16 @@ public class RaycastManager : MonoBehaviour {
         }
         else
         {
-            OnNoObjectFound();
+            _currentFoundObject = null;
+
+            if (OnNoObjectFound != null)
+            {
+                OnNoObjectFound();
+            }
         }
     }
 
-    //  Compares newly found object with previously found object
+    //  Compares newly found object with previous object
     //  Calls event
     //  void -> void
     public void CheckForNewObject(RaycastHit hit)
@@ -46,10 +51,11 @@ public class RaycastManager : MonoBehaviour {
 
         if (!newObject.Equals(_currentFoundObject))
         {
-            if (OnNewNormalFound != null)
-            {
-                _previousFoundObject = _currentFoundObject;
-                _currentFoundObject = newObject;
+            _previousFoundObject = _currentFoundObject;
+            _currentFoundObject = newObject;
+
+            if (OnNewObjectFound != null)
+            {                
                 OnNewObjectFound();
             }
         }        
@@ -64,10 +70,11 @@ public class RaycastManager : MonoBehaviour {
 
         if (!newNormal.Equals(_currentNormal))
         {
+            _previousNormal = _currentNormal;
+            _currentNormal = newNormal;
+
             if (OnNewNormalFound != null)
             {
-                _previousNormal = _currentNormal;
-                _currentNormal = newNormal;
                 OnNewNormalFound();
             }
         }

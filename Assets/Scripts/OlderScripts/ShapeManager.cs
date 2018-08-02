@@ -38,7 +38,7 @@ public class ShapeManager : MonoBehaviour
         int shapeIndex = Random.Range(0, Shapes.Length);
 
         GameObject shape = Shapes[shapeIndex];
-        GameObject newShape = Instantiate(shape, SpawnPoints[spawnPointIndex].position, Quaternion.identity);
+        GameObject newShape = Instantiate(shape, SpawnPoints[spawnPointIndex].position, shape.transform.rotation);
         ApplyForce(newShape);  
     }
 

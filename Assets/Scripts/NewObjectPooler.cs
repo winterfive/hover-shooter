@@ -11,10 +11,12 @@ public class NewObjectPooler : MonoBehaviour {
 
     List<GameObject> pooledObjects;
 
+
     void Awake()
     {
         currentPooler = this;
     }
+
 
     void Start()
     {
@@ -27,6 +29,7 @@ public class NewObjectPooler : MonoBehaviour {
             pooledObjects.Add(obj);
         }
     }
+
 
     public GameObject GetPooledObject()
     {
@@ -46,5 +49,11 @@ public class NewObjectPooler : MonoBehaviour {
         }
 
         return null;
+    }
+
+
+    public void ReturnPooledObject()
+    {
+        // TODO
     }
 }

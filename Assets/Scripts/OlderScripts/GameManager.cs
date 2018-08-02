@@ -4,7 +4,6 @@ public class GameManager : MonoBehaviour{
     
     public float timeBetweenShots = 0.15f;
     public RaycastManager raycastManager;
-    public ShapeManager shapeManager;
 
     private float _timer;    
 
@@ -29,6 +28,6 @@ public class GameManager : MonoBehaviour{
     //  void -> void
     public void Shoot()
     {
-        shapeManager.DestroyShape();
+        //shapeManager.DestroyShape();
     }
 }
