@@ -6491,8 +6491,7 @@ MonoBehaviour:
   cam: {fileID: 1213041248}
   reticle: {fileID: 1604795078}
   raycastManager: {fileID: 1213041245}
-  foundEnemyColor: {r: 1, g: 0.67145586, b: 0, a: 0}
-  notFoundEnemyColor: {r: 1, g: 1, b: 1, a: 0}
+  foundEnemyColor: {r: 1, g: 0.6, b: 0, a: 1}
 --- !u!114 &1934252589
 MonoBehaviour:
   m_ObjectHideFlags: 0
