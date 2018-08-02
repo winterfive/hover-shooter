@@ -25,7 +25,6 @@ public class DroneActions : MonoBehaviour {
         _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
 
         _turret = FindChildWithTag("Turret");
-        Debug.Log("_turret has the tag: " + _turret.tag);
         _glowTransform = FindChildWithTag("Glow");
         _glowRend = _glowTransform.GetComponent<Renderer>();
 
@@ -39,7 +38,7 @@ public class DroneActions : MonoBehaviour {
     {
         LookAtPlayer();
 
-        if (Time.frameCount % 5 == 0)
+        if (Time.frameCount % 10 == 0)
         {
             if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
             {
@@ -135,5 +134,10 @@ public class DroneActions : MonoBehaviour {
         }
 
         return null;
+    }
+
+    public void ShootPlayer()
+    {
+        // TODO
     }
 }
