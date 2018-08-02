@@ -94,7 +94,7 @@ public class DroneActions : MonoBehaviour {
         if (_turret)
         {
             Vector3 newVector = new Vector3(_turret.transform.position.x - _camTransform.position.x,
-                                            0,
+                                            0f,
                                             _turret.transform.position.z - _camTransform.position.z);
 
             _turret.transform.rotation = Quaternion.LookRotation(newVector);
