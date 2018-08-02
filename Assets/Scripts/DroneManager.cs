@@ -53,5 +53,5 @@ public class DroneManager : MonoBehaviour {
         // Drone falls through floor slowly
         // Stop colorBlink coroutine
         // Requeue drone object
-    }    
+    }
 }
