@@ -7,13 +7,15 @@ public class ReticleManager : MonoBehaviour {
     public Transform cam;
     public GameObject reticle;
     public RaycastManager raycastManager;
-    public Color foundEnemyColor, notFoundEnemyColor;
+    public Color foundEnemyColor;
 
     private float _defaultDistance = 2f;
     private Transform _reticleTransform;
     private Vector3 _originalScale;
     private Quaternion _originalRotation;
     private RaycastHit _currentHit;
+    private Renderer _reticleRend;
+    private Color _enemyNotFoundColor;
 
     public Transform GetReticleTransform() { return _reticleTransform; }
 
@@ -23,6 +25,8 @@ public class ReticleManager : MonoBehaviour {
         _reticleTransform = reticle.GetComponent<Transform>();
         _originalScale = _reticleTransform.localScale;
         _originalRotation = _reticleTransform.localRotation;
+        _reticleRend = reticle.GetComponent<Renderer>();
+        _enemyNotFoundColor = _reticleRend.material.color;
     }
 
 
@@ -56,39 +60,41 @@ public class ReticleManager : MonoBehaviour {
      */
     public void CheckForEnemy()
     {
-        GameObject currentObject;
+        GameObject currentObject = raycastManager.GetCurrentFoundObject();
 
-        if (raycastManager.GetCurrentFoundObject())
+        if (currentObject.tag == "Enemy")
         {
-            currentObject = raycastManager.GetCurrentFoundObject();
-            
-            if (currentObject.name == "Drone(Clone)")
-            {
-                ChangeReticleColor(foundEnemyColor);
-            }
-            
+            SetReticleColor(foundEnemyColor);
         }
         else
         {
-            ChangeReticleColor(notFoundEnemyColor);
+            SetReticleColor();
         }
     }
 
 
     /*
-     * Changes color of reticle depending on type of object found
-     * Color -> void
+     * Sets color of reticle if no object or non-enemy object found
+     * void -> void
      */
-    public void ChangeReticleColor(Color color)
+    public void SetReticleColor()
     {
-        Color reticleColor = reticle.GetComponent<Renderer>().material.color;
-
-        reticleColor = color;
+        _reticleRend.material.SetColor("_Color", _enemyNotFoundColor);
     }
 
 
     /*
-     * Checks if a normal has been found, calls SetPosition()
+     * Sets color of reticle if enemy is found
+     * Color -> void
+     */
+    public void SetReticleColor(Color color)
+    {
+        _reticleRend.material.SetColor("_Color", color);
+    }
+
+
+    /*
+     * Checks if a normal has been found
      * void -> void
      */
     public void CheckNormalFound()
@@ -103,6 +109,7 @@ public class ReticleManager : MonoBehaviour {
         RaycastManager.OnNewObjectFound += CheckForEnemy;
         RaycastManager.OnNewNormalFound += CheckNormalFound;
         RaycastManager.OnNoObjectFound += SetPosition;
+        RaycastManager.OnNoObjectFound += SetReticleColor;
     }
 
     private void OnDisable()
@@ -110,5 +117,6 @@ public class ReticleManager : MonoBehaviour {
         RaycastManager.OnNewObjectFound -= CheckForEnemy;
         RaycastManager.OnNewNormalFound -= CheckNormalFound;
         RaycastManager.OnNoObjectFound -= SetPosition;
+        RaycastManager.OnNoObjectFound -= SetReticleColor;
     }
 }
