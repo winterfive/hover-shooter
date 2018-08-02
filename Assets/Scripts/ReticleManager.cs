@@ -13,7 +13,6 @@ public class ReticleManager : MonoBehaviour {
     private Transform _reticleTransform;
     private Vector3 _originalScale;
     private Quaternion _originalRotation;
-    private Color _reticleColor;
     private RaycastHit _currentHit;
 
     public Transform GetReticleTransform() { return _reticleTransform; }
@@ -24,7 +23,6 @@ public class ReticleManager : MonoBehaviour {
         _reticleTransform = reticle.GetComponent<Transform>();
         _originalScale = _reticleTransform.localScale;
         _originalRotation = _reticleTransform.localRotation;
-        _reticleColor = _reticleTransform.GetComponent<Renderer>().material.color;
     }
 
 
@@ -63,8 +61,8 @@ public class ReticleManager : MonoBehaviour {
         if (raycastManager.GetCurrentFoundObject())
         {
             currentObject = raycastManager.GetCurrentFoundObject();
-
-            if (currentObject.tag == "Drone")
+            
+            if (currentObject.name == "Drone(Clone)")
             {
                 ChangeReticleColor(foundEnemyColor);
             }
@@ -83,7 +81,9 @@ public class ReticleManager : MonoBehaviour {
      */
     public void ChangeReticleColor(Color color)
     {
-        _reticleColor = color;
+        Color reticleColor = reticle.GetComponent<Renderer>().material.color;
+
+        reticleColor = color;
     }
 
 
