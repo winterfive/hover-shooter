@@ -15,7 +15,7 @@ public class ReticleManager : MonoBehaviour {
     private Quaternion _originalRotation;
     private RaycastHit _currentHit;
     private Renderer _reticleRend;
-    private Color _enemyNotFoundColor;
+    private Color _defaultColor;
 
     public Transform GetReticleTransform() { return _reticleTransform; }
 
@@ -26,7 +26,7 @@ public class ReticleManager : MonoBehaviour {
         _originalScale = _reticleTransform.localScale;
         _originalRotation = _reticleTransform.localRotation;
         _reticleRend = reticle.GetComponent<Renderer>();
-        _enemyNotFoundColor = _reticleRend.material.color;
+        _defaultColor = _reticleRend.material.color;
     }
 
 
@@ -79,7 +79,7 @@ public class ReticleManager : MonoBehaviour {
      */
     public void SetReticleColor()
     {
-        _reticleRend.material.SetColor("_Color", _enemyNotFoundColor);
+        _reticleRend.material.SetColor("_Color", _defaultColor);
     }
 
 
@@ -94,20 +94,24 @@ public class ReticleManager : MonoBehaviour {
 
 
     /*
-     * Checks if a normal has been found
+     * Assigns normal of found object
      * void -> void
      */
-    public void CheckNormalFound()
+    public void CheckNormal()
     {
         _currentHit = raycastManager.GetCurrentHit();
-        SetPosition(_currentHit);
+
+        if (!_currentHit.Equals(null))
+        {
+            SetPosition(_currentHit);
+        }        
     }
  
 
     private void OnEnable()
     {
         RaycastManager.OnNewObjectFound += CheckForEnemy;
-        RaycastManager.OnNewNormalFound += CheckNormalFound;
+        RaycastManager.OnNewNormalFound += CheckNormal;
         RaycastManager.OnNoObjectFound += SetPosition;
         RaycastManager.OnNoObjectFound += SetReticleColor;
     }
@@ -115,7 +119,7 @@ public class ReticleManager : MonoBehaviour {
     private void OnDisable()
     {
         RaycastManager.OnNewObjectFound -= CheckForEnemy;
-        RaycastManager.OnNewNormalFound -= CheckNormalFound;
+        RaycastManager.OnNewNormalFound -= CheckNormal;
         RaycastManager.OnNoObjectFound -= SetPosition;
         RaycastManager.OnNoObjectFound -= SetReticleColor;
     }
