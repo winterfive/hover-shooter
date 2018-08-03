@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class DroneManager : MonoBehaviour {
 
     public Transform[] Spawnpoints;
+    public RaycastManager raycastManager;
+    public EffectsManager effectsManager;
 
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] float waitToSpawn;
@@ -40,18 +42,19 @@ public class DroneManager : MonoBehaviour {
      * Handles all actions required when drone is shot by player
      * void -> void
      */
-    void DestroyDrone()
+    public void DestroyDrone()
     {
-        // listens for event
-        // stop colorLerp in DroneMover
+        GameObject enemyShot = raycastManager.GetCurrentFoundObject();
+        Transform shotTransform = enemyShot.transform;
+
+        // glow lerp gets fast for a second, then stops
         // Call explosion script in EffectsManager
-        // start colorBlink corountine in DroneMover
         // stop shooting script, shooting = false
         // begin drone hit anim (drone wavers and tilts)
         // turn on gravity for drone
         // Call smoke script in EffectsManager
         // Drone falls through floor slowly
-        // Stop colorBlink coroutine
-        // Requeue drone object
+
+        enemyShot.SetActive(false);
     }
 }
