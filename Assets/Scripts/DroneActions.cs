@@ -24,8 +24,8 @@ public class DroneActions : MonoBehaviour {
         _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
         _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
 
-        _turret = FindChildWithTag("Turret");
-        _glowTransform = FindChildWithTag("Glow");
+        _turret = FindChildWithTag("Body", "Turret");
+        _glowTransform = FindChildWithTag("Body", "Glow");
         _glowRend = _glowTransform.GetComponent<Renderer>();
 
         GotoRandomPoint();
@@ -117,17 +117,17 @@ public class DroneActions : MonoBehaviour {
 
 
     /*
-     * Finds child object with tag
+     * Finds grandchild object with tag
      * void -> transform
      */
-    private Transform FindChildWithTag(string s)
+    private Transform FindChildWithTag(string a, string b)
     {
-        Transform firstChild = this.transform.Find("Body");
+        Transform firstChild = this.transform.Find(a);
         Transform[] components = firstChild.GetComponentsInChildren<Transform>();
             
         foreach(Transform t in components)
         {
-            if(t.gameObject.CompareTag(s))
+            if(t.gameObject.CompareTag(b))
             {
                 return t;
             }
@@ -136,8 +136,31 @@ public class DroneActions : MonoBehaviour {
         return null;
     }
 
+
+    /*
+     * Fires at player position
+     * void -> void
+     */
     public void ShootPlayer()
     {
         // TODO
+    }
+
+
+    /*
+     * Activates all actions required when drone is shot by player
+     * void -> void
+     */
+    public void DestroyDrone()
+    {
+        // glow lerp gets fast for a second, then stops
+        // Call explosion script in EffectsManager
+        // stop shooting script, shooting = false
+        // begin drone hit anim (drone wavers and tilts)
+        // turn on gravity for drone
+        // Call smoke script in EffectsManager
+        // Drone falls through floor slowly
+
+        //enemyShot.SetActive(false);
     }
 }
