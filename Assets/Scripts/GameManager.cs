@@ -1,33 +1,34 @@
 ﻿using UnityEngine;
 
-public class GameManager : MonoBehaviour{
-    
+public class GameManager : MonoBehaviour
+{
+
     public float timeBetweenShots = 0.15f;
     public delegate void ShotEnemy();
     public static event ShotEnemy OnShotEnemy;
 
-    private float _timer;    
+    private float _timer, _timeSinceLastShot;
 
 
     void Awake()
     {
         _timer = 0f;
+        _timeSinceLastShot = 0f;
     }
 
 
     private void Update()
     {
         _timer += Time.deltaTime;
-        Debug.Log("Got past timer variable");
 
-        if (Input.GetButton("Jump") && _timer >= timeBetweenShots && Time.timeScale != 0)
+        if (Input.GetButton("Fire1") && (_timer >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
         {
-            Debug.Log("Got past space button");
             if (OnShotEnemy != null)
             {
-                Debug.Log("Got to event call");
                 OnShotEnemy();
             }
+
+            _timeSinceLastShot = _timer;
         }
     }
 }

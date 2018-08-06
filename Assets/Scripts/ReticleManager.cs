@@ -62,7 +62,7 @@ public class ReticleManager : MonoBehaviour {
     {
         GameObject currentObject = raycastManager.GetCurrentFoundObject();
 
-        if (currentObject.tag == "Enemy")
+        if (currentObject.tag == "Enemy" || currentObject.tag == "Turret")
         {
             SetReticleColor(foundEnemyColor);
         }
@@ -74,7 +74,18 @@ public class ReticleManager : MonoBehaviour {
 
 
     /*
-     * Sets color of reticle if no object or non-enemy object found
+     * Assigns normal of found object
+     * void -> void
+     */
+    public void CheckNormal()
+    {
+        _currentHit = raycastManager.GetCurrentHit();
+        SetPosition(_currentHit);
+    }
+
+
+    /*
+     * Sets color of reticle if object found is not an enemy
      * void -> void
      */
     public void SetReticleColor()
@@ -92,21 +103,6 @@ public class ReticleManager : MonoBehaviour {
         _reticleRend.material.SetColor("_Color", color);
     }
 
-
-    /*
-     * Assigns normal of found object
-     * void -> void
-     */
-    public void CheckNormal()
-    {
-        _currentHit = raycastManager.GetCurrentHit();
-
-        if (!_currentHit.Equals(null))
-        {
-            SetPosition(_currentHit);
-        }        
-    }
- 
 
     private void OnEnable()
     {
