@@ -33,6 +33,7 @@ public class RaycastManager : MonoBehaviour {
         }
         else
         {
+            _currentFoundObject = null;
             if (OnNoObjectFound != null)
             {
                 OnNoObjectFound();
