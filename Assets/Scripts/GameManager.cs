@@ -3,7 +3,8 @@
 public class GameManager : MonoBehaviour{
     
     public float timeBetweenShots = 0.15f;
-    public DroneManager droneManager;
+    public delegate void ShotEnemy();
+    public static event ShotEnemy OnShotEnemy;
 
     private float _timer;    
 
@@ -17,10 +18,16 @@ public class GameManager : MonoBehaviour{
     private void Update()
     {
         _timer += Time.deltaTime;
+        Debug.Log("Got past timer variable");
 
-        if (Input.GetButton("Fire1") && _timer >= timeBetweenShots && Time.timeScale != 0)
+        if (Input.GetButton("Jump") && _timer >= timeBetweenShots && Time.timeScale != 0)
         {
-            droneManager.DestroyDrone();
+            Debug.Log("Got past space button");
+            if (OnShotEnemy != null)
+            {
+                Debug.Log("Got to event call");
+                OnShotEnemy();
+            }
         }
     }
 }
