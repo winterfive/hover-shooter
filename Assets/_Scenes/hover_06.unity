@@ -7641,8 +7641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastManager: {fileID: 1213041245}
-  droneExplosion: {fileID: 198123308384934174, guid: 55fdc4b97edc9b24097d2bfd7d564eac,
-    type: 2}
+  droneExplosion: {fileID: 19860484, guid: 242b98be3da84454a91cc66761e91d72, type: 2}
 --- !u!114 &1934252594
 MonoBehaviour:
   m_ObjectHideFlags: 0
