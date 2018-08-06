@@ -24,8 +24,8 @@ public class DroneActions : MonoBehaviour {
         _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
         _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
 
-        _turret = FindGrandchildWithTag("Turret");
-        _glowTransform = FindGrandchildWithTag("Glow");
+        _turret = FindChildWithTag("Turret");
+        _glowTransform = FindChildWithTag("Glow");
         _glowRend = _glowTransform.GetComponent<Renderer>();
 
         GotoRandomPoint();
@@ -120,13 +120,13 @@ public class DroneActions : MonoBehaviour {
      * Finds grandchild transform with tag
      * void -> transform
      */
-    private Transform FindGrandchildWithTag(string b)
+    private Transform FindChildWithTag(string a)
     {
         Transform[] components = this.GetComponentsInChildren<Transform>();
             
         foreach(Transform t in components)
         {
-            if(t.gameObject.CompareTag(b))
+            if(t.gameObject.CompareTag(a))
             {
                 return t;
             }
