@@ -59,15 +59,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\DestroyObjects.cs" />
     <Compile Include="Assets\Scripts\DroneActions.cs" />
-    <Compile Include="Assets\Scripts\DroneManager.cs" />
-    <Compile Include="Assets\Scripts\EffectsManager.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\NewObjectPooler.cs" />
-    <Compile Include="Assets\Scripts\OlderScripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\OlderScripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\OlderScripts\ShapeManager.cs" />
     <Compile Include="Assets\Scripts\RaycastManager.cs" />
     <Compile Include="Assets\Scripts\ReticleManager.cs" />
+    <Compile Include="Assets\Scripts\SpawnObjects.cs" />
     <None Include="Assets\Textures\UIOverlay.shader" />
     <None Include="Assets\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
     <Reference Include="UnityEditor.StandardEvents">
