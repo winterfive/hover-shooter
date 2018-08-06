@@ -122,8 +122,7 @@ public class DroneActions : MonoBehaviour {
      */
     private Transform FindGrandchildWithTag(string b)
     {
-        Transform firstChild = this.transform.GetChild(0);
-        Transform[] components = firstChild.GetComponentsInChildren<Transform>();
+        Transform[] components = this.GetComponentsInChildren<Transform>();
             
         foreach(Transform t in components)
         {
