@@ -145,22 +145,4 @@ public class DroneActions : MonoBehaviour {
     {
         // TODO
     }
-
-
-    /*
-     * Activates all actions required when drone is shot by player
-     * void -> void
-     */
-    public void DestroyDrone()
-    {
-        // glow lerp gets fast for a second, then stops
-        // Call explosion script in EffectsManager
-        // stop shooting script, shooting = false
-        // begin drone hit anim (drone wavers and tilts)
-        // turn on gravity for drone
-        // Call smoke script in EffectsManager
-        // Drone falls through floor slowly
-
-        //enemyShot.SetActive(false);
-    }
 }
