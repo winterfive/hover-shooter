@@ -7,8 +7,8 @@ public class SpawnObjects : MonoBehaviour {
 
     public Transform[] Spawnpoints;
 
-    [SerializeField] float timeBetweenSpawns;
-    [SerializeField] float waitToSpawn;
+    [SerializeField] private float timeBetweenSpawns;
+    [SerializeField] private float waitToSpawn;
 
     void Start()
     {
