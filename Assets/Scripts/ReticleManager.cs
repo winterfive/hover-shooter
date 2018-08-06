@@ -62,7 +62,7 @@ public class ReticleManager : MonoBehaviour {
     {
         GameObject currentObject = raycastManager.GetCurrentFoundObject();
 
-        if (currentObject.tag == "Enemy")
+        if (currentObject.tag == "Enemy" || currentObject.tag == "Turret")
         {
             SetReticleColor(foundEnemyColor);
         }
