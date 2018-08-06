@@ -50,10 +50,4 @@ public class NewObjectPooler : MonoBehaviour {
 
         return null;
     }
-
-
-    public void ReturnPooledObject()
-    {
-        // TODO
-    }
 }
