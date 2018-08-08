@@ -30,7 +30,7 @@ public class DestroyObjects : MonoBehaviour
         // Call smoke script in EffectsManager
         // Drone falls through floor slowly
 
-        
+
     }
 
     private void OnEnable()
@@ -42,4 +42,4 @@ public class DestroyObjects : MonoBehaviour
     {
         GameManager.OnShotEnemy -= DestroyEnemy;
     }
-}
+}   
