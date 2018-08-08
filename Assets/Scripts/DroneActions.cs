@@ -8,13 +8,15 @@ public class DroneActions : MonoBehaviour {
     public float xMin, xMax, zMin, zMax, glowSpeed;
     public Color firstGlow, secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
-    
+    public float lineStartWidth, lineEndWidth, lineTolerance;
+    public DroneManager droneManager;
+
     private Transform _glowTransform;
     private Renderer _glowRend;
     private Transform _turret;
     private NavMeshAgent _agent;
     private Transform _camTransform;
-    private float _timeAtSpawn;
+    private LineRenderer line;
 
 
     void Start ()
@@ -23,6 +25,8 @@ public class DroneActions : MonoBehaviour {
         _camTransform = Camera.main.gameObject.transform;
         _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
         _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
+
+        line = GetComponent<LineRenderer>();
 
         _turret = FindChildWithTag("Turret");
         _glowTransform = FindChildWithTag("Glow");
@@ -42,20 +46,12 @@ public class DroneActions : MonoBehaviour {
         {
             if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
             {
-                GotoPlayer();
+                GoToEndPoint();
             }
+
+            ShootPlayer();
         }
-    }
-
-
-    /*
-     * Changes drone destination to camera
-     * void -> void
-     */
-    private void GotoPlayer()
-    {
-        _agent.destination = _camTransform.position;
-    }
+    }    
 
 
     /*
@@ -66,6 +62,14 @@ public class DroneActions : MonoBehaviour {
     {
         Vector3 midPoint = CreateRandomPosition();
         _agent.destination = midPoint;
+    }
+
+
+    void GoToEndPoint()
+    {
+        Vector3 endPoint = droneManager.GetEndPosition();
+        endPoint.y = _agent.baseOffset;
+        _agent.destination = endPoint;
     }
 
 
@@ -108,7 +112,7 @@ public class DroneActions : MonoBehaviour {
      */
     void LerpColor()
     {
-        if(_glowRend)
+        if (_glowRend)
         {
             float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
             _glowRend.material.color = Color.Lerp(firstGlow, secondGlow, pingpong);
@@ -120,13 +124,13 @@ public class DroneActions : MonoBehaviour {
      * Finds grandchild transform with tag
      * void -> transform
      */
-    private Transform FindChildWithTag(string a)
+    private Transform FindChildWithTag (string a)
     {
         Transform[] components = this.GetComponentsInChildren<Transform>();
             
-        foreach(Transform t in components)
+        foreach (Transform t in components)
         {
-            if(t.gameObject.CompareTag(a))
+            if (t.gameObject.CompareTag(a))
             {
                 return t;
             }
@@ -142,6 +146,20 @@ public class DroneActions : MonoBehaviour {
      */
     public void ShootPlayer()
     {
-        // TODO
+        RaycastHit _hit;
+        line.startWidth = lineStartWidth;
+        line.endWidth = lineEndWidth;
+        line.Simplify(lineTolerance);
+
+        Transform gunTip = FindChildWithTag("Glow");
+
+       
+        if (Physics.Raycast(gunTip.position, transform.forward, out _hit, 100))
+        {
+            if (_hit.transform.gameObject.tag == "Player")
+            {
+                line.enabled = true;
+            }
+        }
     }
 }
