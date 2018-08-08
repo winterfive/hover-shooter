@@ -3,58 +3,84 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class DroneManager : MonoBehaviour {
+public class DroneManager : MonoBehaviour
+{
+    public Transform[] spawnpoints;
+    public Transform[] endPoints;
+    public PoolManager poolManager;
+    public GameObject prefab;
+    public int poolSize;
+    
 
-    public Transform[] Spawnpoints;
-    public RaycastManager raycastManager;
-    public EffectsManager effectsManager;
+    [SerializeField] private float timeBetweenSpawns;
+    [SerializeField] private float waitToSpawn;
 
-    [SerializeField] float timeBetweenSpawns;
-    [SerializeField] float waitToSpawn;
+    private List<GameObject> drones;
+
+
+    private void Awake()
+    {
+        drones = poolManager.CreateList(prefab, poolSize);
+    }
 
     void Start()
     {
-        InvokeRepeating("SpawnDrones", waitToSpawn, timeBetweenSpawns);
+        InvokeRepeating("SpawnEnemy", waitToSpawn, timeBetweenSpawns);
     }
 
 
     /*
-     * Gets drone from object pool, spawns it at random spawnpoint
+     * Spawns gameObject at random spawnpoint
      * void -> void
      */
-    void SpawnDrones()
+    void SpawnEnemy()
     {
         int spawnPointIndex;
-        
-        spawnPointIndex = Random.Range(0, Spawnpoints.Length);
 
-        GameObject drone = NewObjectPooler.currentPooler.GetPooledObject();
+        spawnPointIndex = Random.Range(0, spawnpoints.Length);
 
-        if (drone == null) return;
+        GameObject drone = GetObjectFromPool();
 
-        drone.transform.position = Spawnpoints[spawnPointIndex].position;
-        drone.transform.rotation = Spawnpoints[spawnPointIndex].rotation;
-        drone.SetActive(true);
+        if (drone != null)
+        {
+            drone.transform.position = spawnpoints[spawnPointIndex].position;
+            drone.transform.rotation = spawnpoints[spawnPointIndex].rotation;
+            drone.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("No more drones in list to use.");
+        }               
+    }
+
+
+    void ReturnToPool(GameObject go)
+    {
+        go.SetActive(false);
+    }
+
+
+    GameObject GetObjectFromPool()
+    {
+        foreach (GameObject drone in drones)
+        {
+            if (!drone.activeInHierarchy)
+            {
+                return drone;
+            }            
+        }
+        return null;
     }
 
 
     /*
-     * Handles all actions required when drone is shot by player
-     * void -> void
+     * Changes agent direction to random end point
+     * void -> Vector3
      */
-    public void DestroyDrone()
+    public Vector3 GetEndPosition()
     {
-        GameObject enemyShot = raycastManager.GetCurrentFoundObject();
-        Transform shotTransform = enemyShot.transform;
-
-        // glow lerp gets fast for a second, then stops
-        // Call explosion script in EffectsManager
-        // stop shooting script, shooting = false
-        // begin drone hit anim (drone wavers and tilts)
-        // turn on gravity for drone
-        // Call smoke script in EffectsManager
-        // Drone falls through floor slowly
-
-        enemyShot.SetActive(false);
+        int index = Random.Range(0, endPoints.Length);
+        Vector3 endPosition = endPoints[index].position;
+        return endPosition;
     }
 }
