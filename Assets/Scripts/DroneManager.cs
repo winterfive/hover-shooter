@@ -10,7 +10,7 @@ public class DroneManager : MonoBehaviour
     public PoolManager poolManager;
     public GameObject prefab;
     public int poolSize;
-    
+    public float xMin, xMax, yMin, yMax, zMin, zMax;    
 
     [SerializeField] private float timeBetweenSpawns;
     [SerializeField] private float waitToSpawn;
@@ -54,8 +54,9 @@ public class DroneManager : MonoBehaviour
     }
 
 
-    void ReturnToPool(GameObject go)
+    public void ReturnToPool(GameObject go)
     {
+        Debug.Log("Drone returned to pool");
         go.SetActive(false);
     }
 
@@ -70,6 +71,22 @@ public class DroneManager : MonoBehaviour
             }            
         }
         return null;
+    }
+
+
+    /*
+     * Creates Vector3 w/ random values for x & z w/in range
+     * void -> Vector3
+     */
+    public Vector3 CreateRandomPosition()
+    {
+        Vector3 randomPosition;
+
+        randomPosition.x = Random.Range(xMin, xMax);
+        randomPosition.y = Random.Range(yMin, yMax);
+        randomPosition.z = Random.Range(zMin, zMax);
+
+        return randomPosition;
     }
 
 
