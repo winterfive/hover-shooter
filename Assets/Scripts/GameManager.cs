@@ -23,10 +23,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetButton("Fire1") && (_timer >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
         {
-            if (OnShotEnemy != null)
-            {
-                OnShotEnemy();
-            }
+            OnShotEnemy();
 
             _timeSinceLastShot = _timer;
         }
