@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/hover_05.unity
-    guid: cf4bf5afc26d5bb45846cde06bc3c317
+    path: Assets/_Scenes/hover_06.unity
+    guid: 51e6145634a36a5438cc6c1905d72b57
   m_configObjects: {}

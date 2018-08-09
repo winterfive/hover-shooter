@@ -10,6 +10,8 @@ TagManager:
   - Glow
   - Turret
   - Enemy
+  - ScriptManager
+  - GunTip
   layers:
   - Default
   - TransparentFX
