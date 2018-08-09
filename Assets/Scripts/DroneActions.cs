@@ -7,8 +7,7 @@ public class DroneActions : MonoBehaviour {
     public float altitudeMin, altitudeMax;
     public float glowSpeed;
     public Color firstGlow, secondGlow;
-    public float minAgentSpeed, maxAgentSpeed;
-    public float lineStartWidth, lineEndWidth, lineTolerance;    
+    public float minAgentSpeed, maxAgentSpeed;    
 
     private Transform _glowTransform;
     private Renderer _glowRend;
@@ -55,7 +54,7 @@ public class DroneActions : MonoBehaviour {
     {
         LookAtPlayer();
 
-        if (Time.frameCount % 100 == 0)
+        if (Time.frameCount % 10 == 0)
         {
             ShootAtPlayer();
         }
@@ -157,20 +156,19 @@ public class DroneActions : MonoBehaviour {
     public void ShootAtPlayer()
     {
         RaycastHit _hit;
-        line.startWidth = lineStartWidth;
-        line.endWidth = lineEndWidth;
-        line.Simplify(lineTolerance);
 
         Transform gunTip = FindChildWithTag("GunTip");
 
         line.enabled = true;
+
+        //Debug.DrawRay(gunTip.transform.position, gunTip.up * 10, Color.green, 2);  THIS WORKS
        
-        if (Physics.Raycast(gunTip.position, transform.forward, out _hit, 100))
+        if (Physics.Raycast(gunTip.transform.position, gunTip.transform.up, out _hit, 150))
         {
-            if (_hit.transform.gameObject.tag == "Player")
+            if (_hit.transform.gameObject.tag == "MainCamera")
             {
-                line.SetPosition(0, this.transform.position);
-                line.SetPosition(1, _camTransform.position);
+                line.SetPosition(0, gunTip.transform.position);
+                line.SetPosition(1, _hit.point);
             }
         }
     }
