@@ -5,11 +5,10 @@ using UnityEngine.AI;
 public class DroneActions : MonoBehaviour {
 
     public float altitudeMin, altitudeMax;
-    public float xMin, xMax, zMin, zMax, glowSpeed;
+    public float glowSpeed;
     public Color firstGlow, secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
-    public float lineStartWidth, lineEndWidth, lineTolerance;
-    public DroneManager droneManager;
+    public float lineStartWidth, lineEndWidth, lineTolerance;    
 
     private Transform _glowTransform;
     private Renderer _glowRend;
@@ -17,6 +16,8 @@ public class DroneActions : MonoBehaviour {
     private NavMeshAgent _agent;
     private Transform _camTransform;
     private LineRenderer line;
+    private DroneManager _droneManagerReference;
+    private Vector3 endPoint;
 
 
     void Start ()
@@ -32,6 +33,18 @@ public class DroneActions : MonoBehaviour {
         _glowTransform = FindChildWithTag("Glow");
         _glowRend = _glowTransform.GetComponent<Renderer>();
 
+        GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
+        
+        if (droneManagerObject != null)
+        {
+            _droneManagerReference = droneManagerObject.GetComponent<DroneManager>();
+        }
+        
+        if (_droneManagerReference == null)
+        {
+            Debug.Log("Cannot find DroneManager script");
+        }
+
         GotoRandomPoint();
 
         InvokeRepeating("LerpColor", 0f, 0.1f);
@@ -42,15 +55,23 @@ public class DroneActions : MonoBehaviour {
     {
         LookAtPlayer();
 
-        if (Time.frameCount % 10 == 0)
+        if (Time.frameCount % 100 == 0)
         {
-            if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+            ShootAtPlayer();
+        }
+
+        if (Time.frameCount % 2 == 0)
+        {
+            if (_agent.remainingDistance < _agent.stoppingDistance || _agent.speed == 0)
             {
                 GoToEndPoint();
             }
-
-            ShootPlayer();
         }
+
+        if (Vector3.Distance(this.transform.position, endPoint) <= 1.0f)
+        {
+            _droneManagerReference.ReturnToPool(this.gameObject);
+        }        
     }    
 
 
@@ -60,32 +81,21 @@ public class DroneActions : MonoBehaviour {
      */
     void GotoRandomPoint()
     {
-        Vector3 midPoint = CreateRandomPosition();
+        Vector3 midPoint = _droneManagerReference.CreateRandomPosition();
+        midPoint.y = _agent.baseOffset;
         _agent.destination = midPoint;
     }
 
 
+    /*
+     * Assigns and directs drone to end point
+     * void -> void
+     */
     void GoToEndPoint()
     {
-        Vector3 endPoint = droneManager.GetEndPosition();
+        endPoint = _droneManagerReference.GetEndPosition();
         endPoint.y = _agent.baseOffset;
         _agent.destination = endPoint;
-    }
-
-
-    /*
-     * Creates Vector3 w/ random values for x & z w/in range
-     * void -> Vector3
-     */
-    private Vector3 CreateRandomPosition()
-    {
-        Vector3 randomPosition;
-
-        randomPosition.x = Random.Range(xMin, xMax);
-        randomPosition.y = _agent.baseOffset;
-        randomPosition.z = Random.Range(zMin, zMax);
-
-        return randomPosition;        
     }
 
 
@@ -144,21 +154,23 @@ public class DroneActions : MonoBehaviour {
      * Fires at player position
      * void -> void
      */
-    public void ShootPlayer()
+    public void ShootAtPlayer()
     {
         RaycastHit _hit;
         line.startWidth = lineStartWidth;
         line.endWidth = lineEndWidth;
         line.Simplify(lineTolerance);
 
-        Transform gunTip = FindChildWithTag("Glow");
+        Transform gunTip = FindChildWithTag("GunTip");
 
+        line.enabled = true;
        
         if (Physics.Raycast(gunTip.position, transform.forward, out _hit, 100))
         {
             if (_hit.transform.gameObject.tag == "Player")
             {
-                line.enabled = true;
+                line.SetPosition(0, this.transform.position);
+                line.SetPosition(1, _camTransform.position);
             }
         }
     }
