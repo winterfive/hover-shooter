@@ -666,12 +666,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 104552749}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.327, z: -10}
-  m_LocalScale: {x: 0.5, y: 2, z: 0.5}
+  m_LocalRotation: {x: -0.11663832, y: 0.023398655, z: 0.0027487094, w: -0.992895}
+  m_LocalPosition: {x: 0, y: -0.65467817, z: -0.15596628}
+  m_LocalScale: {x: 0.50000006, y: 2, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 1213041248}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &105305669
 GameObject:
@@ -1545,7 +1545,7 @@ Transform:
   - {fileID: 1557357679}
   - {fileID: 199318882}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &364797573
 GameObject:
@@ -5252,6 +5252,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1604795077}
+  - {fileID: 104552752}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -13.4, y: 362.7, z: 0}
@@ -7716,7 +7717,7 @@ GameObject:
   - component: {fileID: 1934252590}
   m_Layer: 2
   m_Name: ScriptManager
-  m_TagString: Untagged
+  m_TagString: ScriptManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7783,22 +7784,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b374b4d1d4fe644a663a8cc866fe80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spawnpoints:
+  spawnpoints:
   - {fileID: 213152335}
   - {fileID: 741158106}
   - {fileID: 1327769901}
+  - {fileID: 761243740}
   - {fileID: 167945827}
-  - {fileID: 0}
-  poolManager: {fileID: 1934252589}
-  prefab: {fileID: 1424531867977468, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
-  poolSize: 20
   endPoints:
   - {fileID: 2117091305}
   - {fileID: 1031263725}
   - {fileID: 1557357679}
   - {fileID: 199318882}
-  timeBetweenSpawns: 0.7
-  waitToSpawn: 2
+  poolManager: {fileID: 1934252589}
+  prefab: {fileID: 1424531867977468, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
+  poolSize: 30
+  xMin: 0
+  xMax: 0
+  yMin: 0
+  yMax: 0
+  zMin: 0
+  zMax: 0
+  timeBetweenSpawns: 0.5
+  waitToSpawn: 1
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0
