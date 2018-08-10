@@ -17,12 +17,13 @@ public class ShootBeam : MonoBehaviour {
 
     private void Update()
     {
-        if (Time.frameCount % 2 == 0)
+        if (Time.frameCount % 10 == 0)
         {
             if (Physics.Raycast(this.transform.position, this.transform.forward, out _hit, droneShotRange))
             {
-                if (_hit.transform.gameObject.tag == "MainCamera")
+                if (_hit.transform.gameObject.tag == "Player")
                 {
+                    Debug.Log("Got into tag check");
                     _line.SetPosition(0, this.transform.position);
                     _line.SetPosition(1, _hit.point);
                     _line.enabled = false;
