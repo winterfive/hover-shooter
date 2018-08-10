@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 4030676724652022}
   - component: {fileID: 195730861628870234}
   - component: {fileID: 114574855949980354}
-  - component: {fileID: 120271638268789190}
   m_Layer: 2
   m_Name: Drone
   m_TagString: Untagged
@@ -109,6 +108,8 @@ GameObject:
   - component: {fileID: 4395101308339950}
   - component: {fileID: 33306086721705858}
   - component: {fileID: 23762633308081004}
+  - component: {fileID: 120309908245346360}
+  - component: {fileID: 114071078014160146}
   m_Layer: 8
   m_Name: GunGlow
   m_TagString: GunTip
@@ -433,6 +434,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0000001, z: 1.126189}
   m_Center: {x: -0, y: 0.00000023208288, z: -0.06309456}
+--- !u!114 &114071078014160146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1850265774817028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6d7f7c1f09a184f8fc20c581771d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droneShotRange: 100
 --- !u!114 &114574855949980354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -451,15 +464,12 @@ MonoBehaviour:
   secondGlow: {r: 0, g: 0, b: 0, a: 0}
   minAgentSpeed: 0.5
   maxAgentSpeed: 5
-  lineStartWidth: 2
-  lineEndWidth: 1
-  lineTolerance: 0.5
---- !u!120 &120271638268789190
+--- !u!120 &120309908245346360
 LineRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1424531867977468}
+  m_GameObject: {fileID: 1850265774817028}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -536,7 +546,7 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 1
+      m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -554,7 +564,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1424531867977468}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.8
+  m_Radius: 1
   m_Speed: 0
   m_Acceleration: 8
   avoidancePriority: 50
