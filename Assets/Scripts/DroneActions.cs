@@ -8,14 +8,12 @@ public class DroneActions : MonoBehaviour {
     public float glowSpeed;
     public Color firstGlow, secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
-    public float lineStartWidth, lineEndWidth, lineTolerance;    
-
+    
     private Transform _glowTransform;
     private Renderer _glowRend;
     private Transform _turret;
     private NavMeshAgent _agent;
     private Transform _camTransform;
-    private LineRenderer line;
     private DroneManager _droneManagerReference;
     private Vector3 endPoint;
 
@@ -26,8 +24,6 @@ public class DroneActions : MonoBehaviour {
         _camTransform = Camera.main.gameObject.transform;
         _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
         _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
-
-        line = GetComponent<LineRenderer>();
 
         _turret = FindChildWithTag("Turret");
         _glowTransform = FindChildWithTag("Glow");
@@ -55,20 +51,15 @@ public class DroneActions : MonoBehaviour {
     {
         LookAtPlayer();
 
-        if (Time.frameCount % 100 == 0)
+        if (Time.frameCount % 10 == 0)
         {
-            ShootAtPlayer();
-        }
-
-        if (Time.frameCount % 2 == 0)
-        {
-            if (_agent.remainingDistance < _agent.stoppingDistance || _agent.speed == 0)
+            if (_agent.remainingDistance < _agent.stoppingDistance || _agent.speed < 0.1)
             {
                 GoToEndPoint();
             }
         }
 
-        if (Vector3.Distance(this.transform.position, endPoint) <= 1.0f)
+        if (Vector3.Distance(this.transform.position, endPoint) <= 1.0f || _agent.speed < 0.1)
         {
             _droneManagerReference.ReturnToPool(this.gameObject);
         }        
@@ -134,10 +125,10 @@ public class DroneActions : MonoBehaviour {
      * Finds grandchild transform with tag
      * void -> transform
      */
-    private Transform FindChildWithTag (string a)
+    private Transform FindChildWithTag(string a)
     {
         Transform[] components = this.GetComponentsInChildren<Transform>();
-            
+
         foreach (Transform t in components)
         {
             if (t.gameObject.CompareTag(a))
@@ -147,31 +138,5 @@ public class DroneActions : MonoBehaviour {
         }
 
         return null;
-    }
-
-
-    /*
-     * Fires at player position
-     * void -> void
-     */
-    public void ShootAtPlayer()
-    {
-        RaycastHit _hit;
-        line.startWidth = lineStartWidth;
-        line.endWidth = lineEndWidth;
-        line.Simplify(lineTolerance);
-
-        Transform gunTip = FindChildWithTag("GunTip");
-
-        line.enabled = true;
-       
-        if (Physics.Raycast(gunTip.position, transform.forward, out _hit, 100))
-        {
-            if (_hit.transform.gameObject.tag == "Player")
-            {
-                line.SetPosition(0, this.transform.position);
-                line.SetPosition(1, _camTransform.position);
-            }
-        }
     }
 }
