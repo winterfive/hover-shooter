@@ -54,13 +54,6 @@ public class DroneManager : MonoBehaviour
     }
 
 
-    public void ReturnToPool(GameObject go)
-    {
-        Debug.Log("Drone returned to pool");
-        go.SetActive(false);
-    }
-
-
     GameObject GetObjectFromPool()
     {
         foreach (GameObject drone in drones)
