@@ -15,8 +15,11 @@ public class DroneActions : MonoBehaviour {
     private NavMeshAgent _agent;
     private Transform _camTransform;
     private DroneManager _droneManagerReference;
-    private Vector3 endPoint;
-
+    private DroneShooting _droneShootingReference;
+    private Vector3 _endPoint;
+    private Transform _gunTipTransform;
+    private RaycastHit _hit;
+    
 
     void Start ()
     {
@@ -28,6 +31,8 @@ public class DroneActions : MonoBehaviour {
         _turret = FindChildWithTag("Turret");
         _glowTransform = FindChildWithTag("Glow");
         _glowRend = _glowTransform.GetComponent<Renderer>();
+        _gunTipTransform = FindChildWithTag("GunTip");
+
 
         GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
         
@@ -39,6 +44,18 @@ public class DroneActions : MonoBehaviour {
         if (_droneManagerReference == null)
         {
             Debug.Log("Cannot find DroneManager script");
+        }
+
+        GameObject droneShootingObject = GameObject.FindWithTag("ScriptManager");
+
+        if (droneShootingObject != null)
+        {
+            _droneShootingReference = droneShootingObject.GetComponent<DroneShooting>();
+        }
+
+        if (_droneShootingReference == null)
+        {
+            Debug.Log("Cannot find DroneShooting script");
         }
 
         GotoRandomPoint();
@@ -57,9 +74,18 @@ public class DroneActions : MonoBehaviour {
             {
                 GoToEndPoint();
             }
+
+            if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, 125))
+            {
+                if (_hit.transform.tag == "Player")
+                {
+                    _droneShootingReference.ShootAtPlayer();
+                    // TODO Change to event 
+                }
+            }
         }
 
-        if (Vector3.Distance(this.transform.position, endPoint) <= 1.0f || _agent.speed < 0.1)
+        if (Vector3.Distance(this.transform.position, _endPoint) <= 1.0f || _agent.speed < 0.1)
         {
             _droneManagerReference.ReturnObjectToPool(this.gameObject);
         }        
@@ -84,9 +110,9 @@ public class DroneActions : MonoBehaviour {
      */
     void GoToEndPoint()
     {
-        endPoint = _droneManagerReference.SelectLastPosition();
-        endPoint.y = _agent.baseOffset;
-        _agent.destination = endPoint;
+        _endPoint = _droneManagerReference.SelectLastPosition();
+        _endPoint.y = _agent.baseOffset;
+        _agent.destination = _endPoint;
     }
 
 
