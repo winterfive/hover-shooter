@@ -67,6 +67,12 @@ public class DroneManager : MonoBehaviour
     }
 
 
+    public void ReturnObjectToPool(GameObject go)
+    {
+        go.SetActive(false);
+    }
+
+
     /*
      * Creates Vector3 w/ random values for x & z w/in range
      * void -> Vector3
@@ -84,10 +90,10 @@ public class DroneManager : MonoBehaviour
 
 
     /*
-     * Changes agent direction to random end point
+     * Returns a random endPoint
      * void -> Vector3
      */
-    public Vector3 GetEndPosition()
+    public Vector3 SelectLastPosition()
     {
         int index = Random.Range(0, endPoints.Length);
         Vector3 endPosition = endPoints[index].position;
