@@ -54,13 +54,6 @@ public class DroneManager : MonoBehaviour
     }
 
 
-    public void ReturnToPool(GameObject go)
-    {
-        Debug.Log("Drone returned to pool");
-        go.SetActive(false);
-    }
-
-
     GameObject GetObjectFromPool()
     {
         foreach (GameObject drone in drones)
@@ -71,6 +64,12 @@ public class DroneManager : MonoBehaviour
             }            
         }
         return null;
+    }
+
+
+    public void ReturnObjectToPool(GameObject go)
+    {
+        go.SetActive(false);
     }
 
 
@@ -91,10 +90,10 @@ public class DroneManager : MonoBehaviour
 
 
     /*
-     * Changes agent direction to random end point
+     * Returns a random endPoint
      * void -> Vector3
      */
-    public Vector3 GetEndPosition()
+    public Vector3 SelectLastPosition()
     {
         int index = Random.Range(0, endPoints.Length);
         Vector3 endPosition = endPoints[index].position;
