@@ -61,7 +61,7 @@ public class DroneActions : MonoBehaviour {
 
         if (Vector3.Distance(this.transform.position, endPoint) <= 1.0f || _agent.speed < 0.1)
         {
-            _droneManagerReference.ReturnToPool(this.gameObject);
+            _droneManagerReference.ReturnObjectToPool(this.gameObject);
         }        
     }    
 
@@ -84,7 +84,7 @@ public class DroneActions : MonoBehaviour {
      */
     void GoToEndPoint()
     {
-        endPoint = _droneManagerReference.GetEndPosition();
+        endPoint = _droneManagerReference.SelectLastPosition();
         endPoint.y = _agent.baseOffset;
         _agent.destination = endPoint;
     }
