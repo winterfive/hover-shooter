@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4747709083616126}
   - component: {fileID: 33365107200957476}
   - component: {fileID: 23020607512401610}
+  - component: {fileID: 114054551278750938}
   m_Layer: 8
   m_Name: Glow
   m_TagString: Glow
@@ -88,6 +89,7 @@ GameObject:
   - component: {fileID: 33765572532392742}
   - component: {fileID: 23659265319627238}
   - component: {fileID: 65195880945497302}
+  - component: {fileID: 114061802342881192}
   m_Layer: 8
   m_Name: Turret
   m_TagString: Turret
@@ -461,6 +463,30 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0000001, z: 1.126189}
   m_Center: {x: -0, y: 0.00000023208288, z: -0.06309456}
+--- !u!114 &114054551278750938
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1698982098601180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e96b7708744ed841b0e7c98ccff21cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowSpeed: 0.5
+  secondGlow: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &114061802342881192
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1739037212318250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a2f55681a8919e499039695583e2f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114574855949980354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -474,12 +500,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   altitudeMin: 0.5
   altitudeMax: 16
-  glowSpeed: 1.1
-  firstGlow: {r: 1, g: 0, b: 0, a: 0}
-  secondGlow: {r: 0, g: 0, b: 0, a: 0}
   minAgentSpeed: 0.5
   maxAgentSpeed: 5
-  droneShooting: {fileID: 0}
 --- !u!195 &195730861628870234
 NavMeshAgent:
   m_ObjectHideFlags: 1
