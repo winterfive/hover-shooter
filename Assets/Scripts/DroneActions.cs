@@ -8,14 +8,14 @@ public class DroneActions : MonoBehaviour {
     public float glowSpeed;
     public Color firstGlow, secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
+    public delegate void ShotFiredAtPlayer();
+    public static event ShotFiredAtPlayer OnShotFiredAtPlayer;
     
     private Transform _glowTransform;
     private Renderer _glowRend;
     private Transform _turret;
     private NavMeshAgent _agent;
-    private Transform _camTransform;
     private DroneManager _droneManagerReference;
-    private DroneShooting _droneShootingReference;
     private Vector3 _endPoint;
     private Transform _gunTipTransform;
     private RaycastHit _hit;
@@ -24,70 +24,55 @@ public class DroneActions : MonoBehaviour {
     void Start ()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _camTransform = Camera.main.gameObject.transform;
         _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
         _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
-
-        _turret = FindChildWithTag("Turret");
+        
         _glowTransform = FindChildWithTag("Glow");
         _glowRend = _glowTransform.GetComponent<Renderer>();
         _gunTipTransform = FindChildWithTag("GunTip");
 
 
         GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
-        
         if (droneManagerObject != null)
         {
             _droneManagerReference = droneManagerObject.GetComponent<DroneManager>();
         }
-        
+
         if (_droneManagerReference == null)
         {
             Debug.Log("Cannot find DroneManager script");
         }
 
-        GameObject droneShootingObject = GameObject.FindWithTag("ScriptManager");
-
-        if (droneShootingObject != null)
-        {
-            _droneShootingReference = droneShootingObject.GetComponent<DroneShooting>();
-        }
-
-        if (_droneShootingReference == null)
-        {
-            Debug.Log("Cannot find DroneShooting script");
-        }
-
         GotoRandomPoint();
-
         InvokeRepeating("LerpColor", 0f, 0.1f);
     }
 
 
     private void Update()
     {
-        LookAtPlayer();
-
         if (Time.frameCount % 10 == 0)
         {
+            if (Physics.Raycast(_gunTipTransform.position, _gunTipTransform.up, out _hit, 1000))
+            {
+                Debug.DrawRay(_gunTipTransform.position, _gunTipTransform.up);
+                if (_hit.transform.tag == "Player")
+                {
+                    if (OnShotFiredAtPlayer != null)
+                    {
+                        OnShotFiredAtPlayer();
+                    }
+                }
+            }
+
             if (_agent.remainingDistance < _agent.stoppingDistance || _agent.speed < 0.1)
             {
                 GoToEndPoint();
-            }
-
-            if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, 125))
-            {
-                if (_hit.transform.tag == "Player")
-                {
-                    _droneShootingReference.ShootAtPlayer();
-                    // TODO Change to event 
-                }
-            }
+            }            
         }
 
         if (Vector3.Distance(this.transform.position, _endPoint) <= 1.0f || _agent.speed < 0.1)
         {
-            _droneManagerReference.ReturnObjectToPool(this.gameObject);
+            this.gameObject.SetActive(false);
         }        
     }    
 
@@ -113,24 +98,7 @@ public class DroneActions : MonoBehaviour {
         _endPoint = _droneManagerReference.SelectLastPosition();
         _endPoint.y = _agent.baseOffset;
         _agent.destination = _endPoint;
-    }
-
-
-    /*
-     * Turns drone turret towards player
-     * void -> void
-     */
-    private void LookAtPlayer()
-    {
-        if (_turret)
-        {
-            Vector3 newVector = new Vector3(_turret.transform.position.x - _camTransform.position.x,
-                                            0f,
-                                            _turret.transform.position.z - _camTransform.position.z);
-
-            _turret.transform.rotation = Quaternion.LookRotation(newVector);
-        }        
-    }
+    }    
 
     
     /*
