@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ReticleManager : MonoBehaviour {
+public class ReticleManager : GenericManager<ReticleManager> {
 
     public Transform cam;
     public GameObject reticle;

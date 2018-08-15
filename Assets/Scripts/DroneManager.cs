@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class DroneManager : MonoBehaviour
+public class DroneManager : GenericManager<DroneManager>
 {
     public Transform[] spawnpoints;
     public Transform[] endPoints;
@@ -12,20 +12,20 @@ public class DroneManager : MonoBehaviour
     public int poolSize;
     public float xMin, xMax, yMin, yMax, zMin, zMax;    
 
-    [SerializeField] private float timeBetweenSpawns;
-    [SerializeField] private float waitToSpawn;
+    [SerializeField] private float _timeBetweenSpawns;
+    [SerializeField] private float _waitToSpawn;
 
-    private List<GameObject> drones;
+    private List<GameObject> _drones;
 
 
     private void Awake()
     {
-        drones = poolManager.CreateList(prefab, poolSize);
+        _drones = poolManager.CreateList(prefab, poolSize);
     }
 
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", waitToSpawn, timeBetweenSpawns);
+        InvokeRepeating("SpawnEnemy", _waitToSpawn, _timeBetweenSpawns);
     }
 
 
@@ -56,7 +56,7 @@ public class DroneManager : MonoBehaviour
 
     GameObject GetObjectFromPool()
     {
-        foreach (GameObject drone in drones)
+        foreach (GameObject drone in _drones)
         {
             if (!drone.activeInHierarchy)
             {
@@ -64,12 +64,6 @@ public class DroneManager : MonoBehaviour
             }            
         }
         return null;
-    }
-
-
-    public void ReturnObjectToPool(GameObject go)
-    {
-        go.SetActive(false);
     }
 
 

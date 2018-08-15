@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : GenericManager<GameManager>
 {
-
     public float timeBetweenShots = 0.15f;
     public delegate void ShotEnemy();
     public static event ShotEnemy OnShotEnemy;

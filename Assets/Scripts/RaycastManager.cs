@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class RaycastManager : MonoBehaviour {
+public class RaycastManager : GenericManager<RaycastManager> {
     // Manages the Player's raycasting
 
     public float range = 100f;

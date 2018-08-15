@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : MonoBehaviour {
-
+public class PoolManager : GenericManager<PoolManager> {
 
     public List<GameObject> CreateList(GameObject prefab, int poolSize)
     {
@@ -16,7 +15,12 @@ public class PoolManager : MonoBehaviour {
             obj.SetActive(false);
             list.Add(obj);
         }
-
         return list;
+    }
+
+
+    public void ReturnToPool(GameObject go)
+    {
+        go.SetActive(false);
     }
 }
