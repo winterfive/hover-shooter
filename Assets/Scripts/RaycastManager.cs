@@ -2,8 +2,10 @@ using System;
 using UnityEngine;
 
 public class RaycastManager : MonoBehaviour {
+    // Manages the Player's raycasting
 
     public float range = 100f;
+
     public delegate void NewObjectFound();
     public static event NewObjectFound OnNewObjectFound;
     public delegate void NewNormalFound();
@@ -43,7 +45,7 @@ public class RaycastManager : MonoBehaviour {
 
     //  Compares newly found object with previous object
     //  Calls event
-    //  void -> void
+    //  RaycastHit -> void
     public void CheckForNewObject(RaycastHit hit)
     {
         GameObject newObject = hit.collider.gameObject;
