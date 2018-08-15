@@ -5,17 +5,12 @@ using UnityEngine.AI;
 public class DroneActions : MonoBehaviour {
 
     public float altitudeMin, altitudeMax;
-    public float glowSpeed;
-    public Color firstGlow, secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
     public delegate void ShotFiredAtPlayer();
     public static event ShotFiredAtPlayer OnShotFiredAtPlayer;
     
-    private Transform _glowTransform;
-    private Renderer _glowRend;
-    private Transform _turret;
     private NavMeshAgent _agent;
-    private DroneManager _droneManagerReference;
+    private DroneMovement _droneManagerReference;
     private Vector3 _endPoint;
     private Transform _gunTipTransform;
     private RaycastHit _hit;
@@ -27,15 +22,13 @@ public class DroneActions : MonoBehaviour {
         _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
         _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
         
-        _glowTransform = FindChildWithTag("Glow");
-        _glowRend = _glowTransform.GetComponent<Renderer>();
         _gunTipTransform = FindChildWithTag("GunTip");
 
 
         GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
         if (droneManagerObject != null)
         {
-            _droneManagerReference = droneManagerObject.GetComponent<DroneManager>();
+            _droneManagerReference = droneManagerObject.GetComponent<DroneMovement>();
         }
 
         if (_droneManagerReference == null)
@@ -44,7 +37,6 @@ public class DroneActions : MonoBehaviour {
         }
 
         GotoRandomPoint();
-        InvokeRepeating("LerpColor", 0f, 0.1f);
     }
 
 
@@ -98,21 +90,7 @@ public class DroneActions : MonoBehaviour {
         _endPoint = _droneManagerReference.SelectLastPosition();
         _endPoint.y = _agent.baseOffset;
         _agent.destination = _endPoint;
-    }    
-
-    
-    /*
-     * Pingpongs drone glow steadily from one color to another
-     * void -> void
-     */
-    void LerpColor()
-    {
-        if (_glowRend)
-        {
-            float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
-            _glowRend.material.color = Color.Lerp(firstGlow, secondGlow, pingpong);
-        }        
-    }
+    } 
 
 
     /*
