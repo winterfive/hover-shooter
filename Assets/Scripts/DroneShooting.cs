@@ -15,12 +15,17 @@ public class DroneShooting : MonoBehaviour {
     private PoolManager _poolManager;
 
 
+    private void Awake()
+    {
+        _poolManager = PoolManager.Instance;
+        _missles = _poolManager.CreateList(prefab, poolSize);
+    }
+
+
     private void Start()
     {
         _camPosition = Camera.main.gameObject.transform.position;
-        _localTransform = this.gameObject.transform;
-        _poolManager = PoolManager.Instance;
-        _missles = _poolManager.CreateList(prefab, poolSize);
+        _localTransform = this.gameObject.transform;        
     }
 
 
