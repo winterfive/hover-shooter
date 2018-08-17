@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-
+  
 public class DroneActions : MonoBehaviour
 {
+    /*
+     * This class handles all actions based on local drone data
+     * Drone movement, turret rotation, change of glow color.
+     */
+
     public float altitudeMin, altitudeMax;
     public float glowSpeed;
     public Color firstGlow, secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
+    public delegate void MissleFired();
+    public static event MissleFired OnMissleFired;
 
     private Transform _glowTransform;
     private Renderer _glowRend;
@@ -53,21 +60,23 @@ public class DroneActions : MonoBehaviour
     {
         LookAtPlayer();
 
+        if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, 125))
+        {
+            if (_hit.transform.tag == "Player")
+            {
+                if (OnMissleFired != null)
+                {
+                    OnMissleFired();
+                }
+            }
+        }
+
         if (Time.frameCount % 10 == 0)
         {
             if (_agent.remainingDistance < _agent.stoppingDistance || _agent.speed < 0.1)
             {
                 GoToEndPoint();
-            }
-
-            if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, 125))
-            {
-                if (_hit.transform.tag == "Player")
-                {
-                    // TODO Call Shoot() from DroneManager (event instead?)
-                    // TODO Change to event 
-                }
-            }
+            }            
         }
 
         if (Vector3.Distance(this.transform.position, _endPoint) <= 1.0f || _agent.speed < 0.1)
