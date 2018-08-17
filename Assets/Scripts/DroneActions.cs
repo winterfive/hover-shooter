@@ -13,8 +13,6 @@ public class DroneActions : MonoBehaviour
     public float glowSpeed;
     public Color firstGlow, secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
-    public delegate void MissleFired();
-    public static event MissleFired OnMissleFired;
 
     private Transform _glowTransform;
     private Renderer _glowRend;
@@ -64,10 +62,7 @@ public class DroneActions : MonoBehaviour
         {
             if (_hit.transform.tag == "Player")
             {
-                if (OnMissleFired != null)
-                {
-                    OnMissleFired();
-                }
+                _droneManagerReference.ShootMissle(_turretTransform);
             }
         }
 
