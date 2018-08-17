@@ -2,64 +2,49 @@
 using UnityEngine.AI;
 
 
-public class DroneActions : MonoBehaviour {
-
+public class DroneActions : MonoBehaviour
+{
     public float altitudeMin, altitudeMax;
     public float glowSpeed;
     public Color firstGlow, secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
-    
+
     private Transform _glowTransform;
     private Renderer _glowRend;
-    private Transform _turret;
+    private Transform _turretTransform;
     private NavMeshAgent _agent;
     private Transform _camTransform;
     private DroneManager _droneManagerReference;
-    private DroneShooting _droneShootingReference;
     private Vector3 _endPoint;
     private Transform _gunTipTransform;
     private RaycastHit _hit;
-    
 
-    void Start ()
+
+    void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         _camTransform = Camera.main.gameObject.transform;
         _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
         _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
 
-        _turret = FindChildWithTag("Turret");
+        _turretTransform = FindChildWithTag("Turret");
         _glowTransform = FindChildWithTag("Glow");
         _glowRend = _glowTransform.GetComponent<Renderer>();
         _gunTipTransform = FindChildWithTag("GunTip");
 
-
         GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
-        
+
         if (droneManagerObject != null)
         {
             _droneManagerReference = droneManagerObject.GetComponent<DroneManager>();
         }
-        
+
         if (_droneManagerReference == null)
         {
             Debug.Log("Cannot find DroneManager script");
         }
 
-        GameObject droneShootingObject = GameObject.FindWithTag("ScriptManager");
-
-        if (droneShootingObject != null)
-        {
-            _droneShootingReference = droneShootingObject.GetComponent<DroneShooting>();
-        }
-
-        if (_droneShootingReference == null)
-        {
-            Debug.Log("Cannot find DroneShooting script");
-        }
-
         GotoRandomPoint();
-
         InvokeRepeating("LerpColor", 0f, 0.1f);
     }
 
@@ -79,7 +64,7 @@ public class DroneActions : MonoBehaviour {
             {
                 if (_hit.transform.tag == "Player")
                 {
-                    _droneShootingReference.ShootAtPlayer();
+                    // TODO Call Shoot() from DroneManager (event instead?)
                     // TODO Change to event 
                 }
             }
@@ -87,16 +72,16 @@ public class DroneActions : MonoBehaviour {
 
         if (Vector3.Distance(this.transform.position, _endPoint) <= 1.0f || _agent.speed < 0.1)
         {
-            _droneManagerReference.ReturnObjectToPool(this.gameObject);
-        }        
-    }    
+            _droneManagerReference.ReturnToPool(this.gameObject);
+        }
+    }
 
 
     /*
      * Assigns and directs drone to random point
      * void -> void
      */
-    void GotoRandomPoint()
+    private void GotoRandomPoint()
     {
         Vector3 midPoint = _droneManagerReference.CreateRandomPosition();
         midPoint.y = _agent.baseOffset;
@@ -108,7 +93,7 @@ public class DroneActions : MonoBehaviour {
      * Assigns and directs drone to end point
      * void -> void
      */
-    void GoToEndPoint()
+    private void GoToEndPoint()
     {
         _endPoint = _droneManagerReference.SelectLastPosition();
         _endPoint.y = _agent.baseOffset;
@@ -122,28 +107,28 @@ public class DroneActions : MonoBehaviour {
      */
     private void LookAtPlayer()
     {
-        if (_turret)
+        if (_turretTransform)
         {
-            Vector3 newVector = new Vector3(_turret.transform.position.x - _camTransform.position.x,
+            Vector3 newVector = new Vector3(_turretTransform.transform.position.x - _camTransform.position.x,
                                             0f,
-                                            _turret.transform.position.z - _camTransform.position.z);
+                                            _turretTransform.transform.position.z - _camTransform.position.z);
 
-            _turret.transform.rotation = Quaternion.LookRotation(newVector);
-        }        
+            _turretTransform.transform.rotation = Quaternion.LookRotation(newVector);
+        }
     }
 
-    
+
     /*
      * Pingpongs drone glow steadily from one color to another
      * void -> void
      */
-    void LerpColor()
+    private void LerpColor()
     {
         if (_glowRend)
         {
             float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
             _glowRend.material.color = Color.Lerp(firstGlow, secondGlow, pingpong);
-        }        
+        }
     }
 
 
@@ -162,7 +147,6 @@ public class DroneActions : MonoBehaviour {
                 return t;
             }
         }
-
         return null;
     }
 }

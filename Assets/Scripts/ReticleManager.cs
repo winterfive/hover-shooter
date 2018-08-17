@@ -2,11 +2,11 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ReticleManager : MonoBehaviour {
+public class ReticleManager : GenericManager<ReticleManager> {
 
     public Transform cam;
     public GameObject reticle;
-    public RaycastManager raycastManager;
+    //public RaycastManager raycastManager;
     public Color foundEnemyColor;
 
     private float _defaultDistance = 2f;
@@ -16,6 +16,7 @@ public class ReticleManager : MonoBehaviour {
     private RaycastHit _currentHit;
     private Renderer _reticleRend;
     private Color _defaultColor;
+    private RaycastManager _raycastManager;
 
     public Transform GetReticleTransform() { return _reticleTransform; }
 
@@ -27,6 +28,7 @@ public class ReticleManager : MonoBehaviour {
         _originalRotation = _reticleTransform.localRotation;
         _reticleRend = reticle.GetComponent<Renderer>();
         _defaultColor = _reticleRend.material.color;
+        _raycastManager = RaycastManager.Instance;
     }
 
 
@@ -60,7 +62,7 @@ public class ReticleManager : MonoBehaviour {
      */
     public void CheckForEnemy()
     {
-        GameObject currentObject = raycastManager.GetCurrentFoundObject();
+        GameObject currentObject = _raycastManager.GetCurrentFoundObject();
 
         if (currentObject.tag == "Enemy" || currentObject.tag == "Turret" || currentObject.tag == "Glow")
         {
@@ -79,7 +81,7 @@ public class ReticleManager : MonoBehaviour {
      */
     public void CheckNormal()
     {
-        _currentHit = raycastManager.GetCurrentHit();
+        _currentHit = _raycastManager.GetCurrentHit();
         SetPosition(_currentHit);
     }
 

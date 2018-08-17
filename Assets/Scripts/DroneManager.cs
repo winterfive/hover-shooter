@@ -3,29 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class DroneManager : MonoBehaviour
+public class DroneManager : GenericManager<DroneManager>
 {
     public Transform[] spawnpoints;
     public Transform[] endPoints;
-    public PoolManager poolManager;
     public GameObject prefab;
     public int poolSize;
     public float xMin, xMax, yMin, yMax, zMin, zMax;    
 
-    [SerializeField] private float timeBetweenSpawns;
-    [SerializeField] private float waitToSpawn;
+    [SerializeField] private float _timeBetweenSpawns;
+    [SerializeField] private float _waitToSpawn;
 
-    private List<GameObject> drones;
-
+    private List<GameObject> _drones;
+    private PoolManager _poolManager;
+    
 
     private void Awake()
     {
-        drones = poolManager.CreateList(prefab, poolSize);
+        _poolManager = PoolManager.Instance;
+        _drones = _poolManager.CreateList(prefab, poolSize);
     }
 
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", waitToSpawn, timeBetweenSpawns);
+        InvokeRepeating("SpawnDrone", _waitToSpawn, _timeBetweenSpawns);
     }
 
 
@@ -33,7 +34,7 @@ public class DroneManager : MonoBehaviour
      * Spawns gameObject at random spawnpoint
      * void -> void
      */
-    void SpawnEnemy()
+    void SpawnDrone()
     {
         int spawnPointIndex;
 
@@ -54,9 +55,9 @@ public class DroneManager : MonoBehaviour
     }
 
 
-    GameObject GetObjectFromPool()
+    private GameObject GetObjectFromPool()
     {
-        foreach (GameObject drone in drones)
+        foreach (GameObject drone in _drones)
         {
             if (!drone.activeInHierarchy)
             {
@@ -67,7 +68,7 @@ public class DroneManager : MonoBehaviour
     }
 
 
-    public void ReturnObjectToPool(GameObject go)
+    public void ReturnToPool(GameObject go)
     {
         go.SetActive(false);
     }
@@ -98,5 +99,5 @@ public class DroneManager : MonoBehaviour
         int index = Random.Range(0, endPoints.Length);
         Vector3 endPosition = endPoints[index].position;
         return endPosition;
-    }
+    }    
 }
