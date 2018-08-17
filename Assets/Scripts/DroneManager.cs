@@ -7,25 +7,30 @@ public class DroneManager : GenericManager<DroneManager>
 {
     public Transform[] spawnpoints;
     public Transform[] endPoints;
-    public GameObject prefab;
-    public int poolSize;
-    public float xMin, xMax, yMin, yMax, zMin, zMax;    
-
+    public GameObject dronePrefab, misslePrefab;
+    public int dronePoolSize, misslePoolSize;
+    public float xMin, xMax, yMin, yMax, zMin, zMax;
+    public float missleSpeed;
+    
     [SerializeField] private float _timeBetweenSpawns;
     [SerializeField] private float _waitToSpawn;
 
+    private Transform _camTransform;
     private List<GameObject> _drones;
+    private List<GameObject> _missles;
     private PoolManager _poolManager;
     
 
     private void Awake()
     {
         _poolManager = PoolManager.Instance;
-        _drones = _poolManager.CreateList(prefab, poolSize);
+        _drones = _poolManager.CreateList(dronePrefab, dronePoolSize);
+        _missles = _poolManager.CreateList(misslePrefab, misslePoolSize);
     }
 
     void Start()
     {
+        _camTransform = Camera.main.gameObject.transform;
         InvokeRepeating("SpawnDrone", _waitToSpawn, _timeBetweenSpawns);
     }
 
@@ -40,7 +45,7 @@ public class DroneManager : GenericManager<DroneManager>
 
         spawnPointIndex = Random.Range(0, spawnpoints.Length);
 
-        GameObject drone = GetObjectFromPool();
+        GameObject drone = GetObjectFromPool(_drones);
 
         if (drone != null)
         {
@@ -55,13 +60,13 @@ public class DroneManager : GenericManager<DroneManager>
     }
 
 
-    private GameObject GetObjectFromPool()
+    private GameObject GetObjectFromPool(List<GameObject> l)
     {
-        foreach (GameObject drone in _drones)
+        foreach (GameObject g in l)
         {
-            if (!drone.activeInHierarchy)
+            if (!g.activeInHierarchy)
             {
-                return drone;
+                return g;
             }            
         }
         return null;
@@ -71,6 +76,18 @@ public class DroneManager : GenericManager<DroneManager>
     public void ReturnToPool(GameObject go)
     {
         go.SetActive(false);
+    }
+
+
+    public void ShootMissle(Transform t)
+    {
+        GameObject readyMissle = GetObjectFromPool(_missles);
+
+        readyMissle.transform.position = t.position;
+        readyMissle.transform.rotation = t.rotation;
+        readyMissle.SetActive(true);
+        readyMissle.GetComponent<Rigidbody>().velocity = (t.position - _camTransform.position) * missleSpeed;
+        Debug.Log("missle fired!");
     }
 
 
@@ -99,5 +116,5 @@ public class DroneManager : GenericManager<DroneManager>
         int index = Random.Range(0, endPoints.Length);
         Vector3 endPosition = endPoints[index].position;
         return endPosition;
-    }    
+    }
 }
