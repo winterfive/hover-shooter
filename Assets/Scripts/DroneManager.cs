@@ -7,7 +7,6 @@ public class DroneManager : GenericManager<DroneManager>
 {
     public Transform[] spawnpoints;
     public Transform[] endPoints;
-    public PoolManager poolManager;
     public GameObject prefab;
     public int poolSize;
     public float xMin, xMax, yMin, yMax, zMin, zMax;    
@@ -16,16 +15,18 @@ public class DroneManager : GenericManager<DroneManager>
     [SerializeField] private float _waitToSpawn;
 
     private List<GameObject> _drones;
-
+    private PoolManager _poolManager;
+    
 
     private void Awake()
     {
-        _drones = poolManager.CreateList(prefab, poolSize);
+        _poolManager = PoolManager.Instance;
+        _drones = _poolManager.CreateList(prefab, poolSize);
     }
 
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", _waitToSpawn, _timeBetweenSpawns);
+        InvokeRepeating("SpawnDrone", _waitToSpawn, _timeBetweenSpawns);
     }
 
 
@@ -33,7 +34,7 @@ public class DroneManager : GenericManager<DroneManager>
      * Spawns gameObject at random spawnpoint
      * void -> void
      */
-    void SpawnEnemy()
+    void SpawnDrone()
     {
         int spawnPointIndex;
 
@@ -54,7 +55,7 @@ public class DroneManager : GenericManager<DroneManager>
     }
 
 
-    GameObject GetObjectFromPool()
+    private GameObject GetObjectFromPool()
     {
         foreach (GameObject drone in _drones)
         {
@@ -64,6 +65,12 @@ public class DroneManager : GenericManager<DroneManager>
             }            
         }
         return null;
+    }
+
+
+    public void ReturnToPool(GameObject go)
+    {
+        go.SetActive(false);
     }
 
 
@@ -92,5 +99,5 @@ public class DroneManager : GenericManager<DroneManager>
         int index = Random.Range(0, endPoints.Length);
         Vector3 endPosition = endPoints[index].position;
         return endPosition;
-    }
+    }    
 }
