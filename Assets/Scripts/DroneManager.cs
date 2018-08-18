@@ -7,15 +7,15 @@ public class DroneManager : GenericManager<DroneManager>
 {
     public Transform[] spawnpoints;
     public Transform[] endPoints;
-    public GameObject dronePrefab, misslePrefab;
-    public int dronePoolSize, misslePoolSize;
+    public GameObject dronePrefab;
+    public int dronePoolSize;
     public float xMin, xMax, yMin, yMax, zMin, zMax;
     public float missleSpeed;
     
     [SerializeField] private float _timeBetweenSpawns;
     [SerializeField] private float _waitToSpawn;
 
-    private Transform _camTransform, _missleTransform;
+    private Transform _camTransform;
     private List<GameObject> _drones;
     private List<GameObject> _missles;
     private PoolManager _poolManager;
@@ -82,24 +82,6 @@ public class DroneManager : GenericManager<DroneManager>
     public void ReturnToPool(GameObject go)
     {
         go.SetActive(false);
-    }
-
-
-    public void ShootMissle(Transform t)
-    {
-        GameObject readyMissle = GetObjectFromPool(_missles);
-
-        if (readyMissle != null)
-        {
-            readyMissle.transform.position = t.position;
-            readyMissle.transform.rotation = Quaternion.LookRotation(_camTransform.position);
-            readyMissle.SetActive(true);
-            readyMissle.GetComponent<Rigidbody>().velocity = (t.transform.position - _camTransform.position) * missleSpeed;
-        }
-        else
-        {
-            Debug.Log("All missles are currently active.");
-        }
     }
 
 
