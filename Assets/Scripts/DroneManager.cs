@@ -19,7 +19,6 @@ public class DroneManager : GenericManager<DroneManager>
     private List<GameObject> _drones;
     private List<GameObject> _missles;
     private PoolManager _poolManager;
-    private GameObject _readyMissle;
     
 
     private void Awake()
@@ -39,11 +38,6 @@ public class DroneManager : GenericManager<DroneManager>
     private void Update()
     {
         // TODO if missle reaches player collider, set active to false
-    }
-
-    private void FixedUpdate()
-    {
-        
     }
 
 
@@ -93,14 +87,14 @@ public class DroneManager : GenericManager<DroneManager>
 
     public void ShootMissle(Transform t)
     {
-        _readyMissle = GetObjectFromPool(_missles);
+        GameObject readyMissle = GetObjectFromPool(_missles);
 
-        if (_readyMissle)
+        if (readyMissle != null)
         {
-            _readyMissle.transform.position = _missleTransform.position;
-            _readyMissle.transform.rotation = Quaternion.LookRotation(_camTransform.position);
-            _readyMissle.SetActive(true);
-            _readyMissle.GetComponent<Rigidbody>().velocity = (_readyMissle.transform.position - _camTransform.position) * missleSpeed;
+            readyMissle.transform.position = t.position;
+            readyMissle.transform.rotation = Quaternion.LookRotation(_camTransform.position);
+            readyMissle.SetActive(true);
+            readyMissle.GetComponent<Rigidbody>().velocity = (t.transform.position - _camTransform.position) * missleSpeed;
         }
         else
         {
