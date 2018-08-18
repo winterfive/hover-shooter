@@ -15,10 +15,11 @@ public class DroneManager : GenericManager<DroneManager>
     [SerializeField] private float _timeBetweenSpawns;
     [SerializeField] private float _waitToSpawn;
 
-    private Transform _camTransform;
+    private Transform _camTransform, _missleTransform;
     private List<GameObject> _drones;
     private List<GameObject> _missles;
     private PoolManager _poolManager;
+    private GameObject _readyMissle;
     
 
     private void Awake()
@@ -35,6 +36,17 @@ public class DroneManager : GenericManager<DroneManager>
     }
 
 
+    private void Update()
+    {
+        // TODO if missle reaches player collider, set active to false
+    }
+
+    private void FixedUpdate()
+    {
+        
+    }
+
+
     /*
      * Spawns gameObject at random spawnpoint
      * void -> void
@@ -47,7 +59,7 @@ public class DroneManager : GenericManager<DroneManager>
 
         GameObject drone = GetObjectFromPool(_drones);
 
-        if (drone != null)
+        if (drone)
         {
             drone.transform.position = spawnpoints[spawnPointIndex].position;
             drone.transform.rotation = spawnpoints[spawnPointIndex].rotation;
@@ -81,13 +93,19 @@ public class DroneManager : GenericManager<DroneManager>
 
     public void ShootMissle(Transform t)
     {
-        GameObject readyMissle = GetObjectFromPool(_missles);
+        _readyMissle = GetObjectFromPool(_missles);
 
-        readyMissle.transform.position = t.position;
-        readyMissle.transform.rotation = t.rotation;
-        readyMissle.SetActive(true);
-        readyMissle.GetComponent<Rigidbody>().velocity = (t.position - _camTransform.position) * missleSpeed;
-        Debug.Log("missle fired!");
+        if (_readyMissle)
+        {
+            _readyMissle.transform.position = _missleTransform.position;
+            _readyMissle.transform.rotation = Quaternion.LookRotation(_camTransform.position);
+            _readyMissle.SetActive(true);
+            _readyMissle.GetComponent<Rigidbody>().velocity = (_readyMissle.transform.position - _camTransform.position) * missleSpeed;
+        }
+        else
+        {
+            Debug.Log("All missles are currently active.");
+        }
     }
 
 
