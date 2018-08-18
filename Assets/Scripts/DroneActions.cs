@@ -19,7 +19,6 @@ public class DroneActions : MonoBehaviour
     private Transform _turretTransform;
     private NavMeshAgent _agent;
     private Transform _camTransform;
-    private DroneManager _droneManagerReference;
     private Vector3 _endPoint;
     private Transform _gunTipTransform;
     private RaycastHit _hit;
@@ -37,18 +36,6 @@ public class DroneActions : MonoBehaviour
         _glowRend = _glowTransform.GetComponent<Renderer>();
         _gunTipTransform = FindChildWithTag("GunTip");
 
-        GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
-
-        if (droneManagerObject != null)
-        {
-            _droneManagerReference = droneManagerObject.GetComponent<DroneManager>();
-        }
-
-        if (_droneManagerReference == null)
-        {
-            Debug.Log("Cannot find DroneManager script");
-        }
-
         GotoRandomPoint();
         InvokeRepeating("LerpColor", 0f, 0.1f);
     }
@@ -64,7 +51,7 @@ public class DroneActions : MonoBehaviour
             {
                 if (_hit.transform.tag == "Player")
                 {
-                    Debug.Log("DroneActions called Shoot");
+                    // TODO Change to event, call to ProjectileManager
                     _droneManagerReference.ShootMissle(_turretTransform);
                 }
             }
@@ -80,6 +67,7 @@ public class DroneActions : MonoBehaviour
 
         if (Vector3.Distance(this.transform.position, _endPoint) <= 1.0f || _agent.speed < 0.1)
         {
+            // TODO call event to poolManager to setActive(false);
             _droneManagerReference.ReturnToPool(this.gameObject);
         }
     }
@@ -91,6 +79,7 @@ public class DroneActions : MonoBehaviour
      */
     private void GotoRandomPoint()
     {
+        // TODO Add method to DroneActions?
         Vector3 midPoint = _droneManagerReference.CreateRandomPosition();
         midPoint.y = _agent.baseOffset;
         _agent.destination = midPoint;
@@ -103,6 +92,7 @@ public class DroneActions : MonoBehaviour
      */
     private void GoToEndPoint()
     {
+        // TODO Add method to DroneActions?
         _endPoint = _droneManagerReference.SelectLastPosition();
         _endPoint.y = _agent.baseOffset;
         _agent.destination = _endPoint;
