@@ -11,7 +11,7 @@ public class DroneActions : MonoBehaviour
 
     public float altitudeMin, altitudeMax;
     public float glowSpeed;
-    public Color firstGlow, secondGlow;
+    public Color secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
 
     private Transform _glowTransform;
@@ -58,11 +58,15 @@ public class DroneActions : MonoBehaviour
     {
         LookAtPlayer();
 
-        if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, 125))
-        {
-            if (_hit.transform.tag == "Player")
+        if (Time.frameCount % 50 == 0)
+        { 
+            if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, 125))
             {
-                _droneManagerReference.ShootMissle(_turretTransform);
+                if (_hit.transform.tag == "Player")
+                {
+                    Debug.Log("DroneActions called Shoot");
+                    _droneManagerReference.ShootMissle(_turretTransform);
+                }
             }
         }
 
@@ -128,10 +132,12 @@ public class DroneActions : MonoBehaviour
      */
     private void LerpColor()
     {
+        Color defaultColor = _glowRend.material.color;
+
         if (_glowRend)
         {
             float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
-            _glowRend.material.color = Color.Lerp(firstGlow, secondGlow, pingpong);
+            _glowRend.material.color = Color.Lerp(defaultColor, secondGlow, pingpong);
         }
     }
 
