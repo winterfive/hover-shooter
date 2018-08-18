@@ -68,7 +68,7 @@ public class DroneActions : MonoBehaviour
         if (Vector3.Distance(this.transform.position, _endPoint) <= 1.0f || _agent.speed < 0.1)
         {
             // TODO call event to poolManager to setActive(false);
-            _droneManagerReference.ReturnToPool(this.gameObject);
+            //ReturnToPool(this.gameObject);
         }
     }
 
