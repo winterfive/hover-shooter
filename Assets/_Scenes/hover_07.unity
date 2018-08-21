@@ -7813,7 +7813,7 @@ MonoBehaviour:
   misslePrefab: {fileID: 1234904337511844, guid: 341b9598d49f1a640a074570103a399a,
     type: 2}
   misslePoolSize: 20
-  missleSpeed: 50
+  missleSpeed: 100
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0
