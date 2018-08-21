@@ -7708,6 +7708,7 @@ GameObject:
   - component: {fileID: 1934252588}
   - component: {fileID: 1934252586}
   - component: {fileID: 1934252590}
+  - component: {fileID: 1934252591}
   m_Layer: 2
   m_Name: ScriptManager
   m_TagString: ScriptManager
@@ -7789,18 +7790,30 @@ MonoBehaviour:
   - {fileID: 199318882}
   dronePrefab: {fileID: 1424531867977468, guid: 48330a55aa2441642abb65ea588ca648,
     type: 2}
-  misslePrefab: {fileID: 0}
   dronePoolSize: 25
-  misslePoolSize: 25
   xMin: -23
   xMax: 23
   yMin: 0.5
   yMax: 17
   zMin: -9
   zMax: 23
-  missleSpeed: 5
   _timeBetweenSpawns: 0.5
   _waitToSpawn: 3
+--- !u!114 &1934252591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1934252585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c376fafe1e562d4f880956e60cd32b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  misslePrefab: {fileID: 1234904337511844, guid: 341b9598d49f1a640a074570103a399a,
+    type: 2}
+  misslePoolSize: 20
+  missleSpeed: 50
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0
