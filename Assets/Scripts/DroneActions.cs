@@ -17,8 +17,6 @@ public class DroneActions : MonoBehaviour
     public float glowSpeed;
     public Color secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
-    public delegate void TargetAcquiredHandler(GameObject go, Transform t);
-    public event TargetAcquiredHandler TargetAcquired;
 
     private Transform _glowTransform;
     private Renderer _glowRend;
@@ -29,6 +27,7 @@ public class DroneActions : MonoBehaviour
     private Transform _gunTipTransform;
     private RaycastHit _hit;
     private DroneManager _droneManagerReference;
+    private ProjectileManager _projectileManagerReference;
 
 
     void Start()
@@ -57,6 +56,18 @@ public class DroneActions : MonoBehaviour
         {
             Debug.Log("Cannot find DroneManager script");
         }
+
+        GameObject projectileManagerObject = GameObject.FindWithTag("ScriptManager");
+
+        if (projectileManagerObject != null)
+        {
+            _projectileManagerReference = projectileManagerObject.GetComponent<ProjectileManager>();
+        }
+
+        if (_projectileManagerReference == null)
+        {
+            Debug.Log("Cannot find projectileManager script");
+        }
     }
 
 
@@ -70,10 +81,7 @@ public class DroneActions : MonoBehaviour
             {
                 if (_hit.transform.tag == "Player")
                 {
-                    if (TargetAcquired != null)
-                    {
-                        TargetAcquired(this.gameObject, _gunTipTransform);
-                    }
+                    _projectileManagerReference.ShootMissle(_gunTipTransform);
                 }
             }
         }
