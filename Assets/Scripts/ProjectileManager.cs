@@ -43,17 +43,11 @@ public class ProjectileManager : GenericManager<ProjectileManager> {
         {
             _readyMissle.transform.position = t.position;
             _readyMissle.transform.rotation = Quaternion.LookRotation(_camTransform.position);
-            _readyMissle.SetActive(true);
-            
+            _readyMissle.SetActive(true);            
         }
         else
         {
             Debug.Log("All missles are currently active.");
         }
-    }
-
-    private void OnEnable()
-    {
-        DroneActions.TargetAcquiredHandler += ShootMissle;
     }
 }
