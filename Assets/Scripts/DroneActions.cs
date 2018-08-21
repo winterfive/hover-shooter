@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class DroneActions : MonoBehaviour
 {
     /*
-     * This class handles all actions required of each Drone that
+     * This class handles all actions that
      * are performed differently per each instance.
      * Drone movement (random points to go to)
      * Turret rotation
@@ -17,6 +17,8 @@ public class DroneActions : MonoBehaviour
     public float glowSpeed;
     public Color secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
+    public delegate void TargetAcquiredHandler(GameObject go, Transform t);
+    public event TargetAcquiredHandler TargetAcquired;
 
     private Transform _glowTransform;
     private Renderer _glowRend;
@@ -26,6 +28,7 @@ public class DroneActions : MonoBehaviour
     private Vector3 _endPoint;
     private Transform _gunTipTransform;
     private RaycastHit _hit;
+    private DroneManager _droneManagerReference;
 
 
     void Start()
@@ -42,6 +45,18 @@ public class DroneActions : MonoBehaviour
 
         GotoRandomPoint();
         InvokeRepeating("LerpColor", 0f, 0.1f);
+
+        GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
+
+        if (droneManagerObject != null)
+        {
+            _droneManagerReference = droneManagerObject.GetComponent<DroneManager>();
+        }
+
+        if (_droneManagerReference == null)
+        {
+            Debug.Log("Cannot find DroneManager script");
+        }
     }
 
 
@@ -55,8 +70,10 @@ public class DroneActions : MonoBehaviour
             {
                 if (_hit.transform.tag == "Player")
                 {
-                    // TODO Change to event, call to ProjectileManager
-                    _droneManagerReference.ShootMissle(_turretTransform);
+                    if (TargetAcquired != null)
+                    {
+                        TargetAcquired(this.gameObject, _gunTipTransform);
+                    }
                 }
             }
         }
@@ -71,8 +88,7 @@ public class DroneActions : MonoBehaviour
 
         if (Vector3.Distance(this.transform.position, _endPoint) <= 1.0f || _agent.speed < 0.1)
         {
-            // TODO call event to poolManager to setActive(false);
-            //ReturnToPool(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -83,7 +99,6 @@ public class DroneActions : MonoBehaviour
      */
     private void GotoRandomPoint()
     {
-        // TODO Add method to DroneActions?
         Vector3 midPoint = _droneManagerReference.CreateRandomPosition();
         midPoint.y = _agent.baseOffset;
         _agent.destination = midPoint;
@@ -96,7 +111,6 @@ public class DroneActions : MonoBehaviour
      */
     private void GoToEndPoint()
     {
-        // TODO Add method to DroneActions?
         _endPoint = _droneManagerReference.SelectLastPosition();
         _endPoint.y = _agent.baseOffset;
         _agent.destination = _endPoint;
