@@ -11,7 +11,6 @@ public class ProjectileManager : GenericManager<ProjectileManager> {
     private List<GameObject> _missles;
     private Transform _camTransform;
     private GameObject _readyMissle;
-    private Transform _readyMissleTransform;
 
 	
 	void Awake()
@@ -24,14 +23,20 @@ public class ProjectileManager : GenericManager<ProjectileManager> {
 
     void Update()
     {
-        // Add code for missle location check to deactivate/return to pool		
-	}
+        // Add code for missle location check to deactivate/return to pool
 
-    private void FixedUpdate()
-    {
-        if (_readyMissle)
+        if (_readyMissle != null)
         {
-            Vector3 direction = Vector3.MoveTowards(_readyMissleTransform.position, _camTransform.position, missleSpeed);            
+            if (Vector3.Distance(_readyMissle.transform.position, _camTransform.position) > 0.5)
+            {
+                float step = missleSpeed * Time.deltaTime;
+                _readyMissle.transform.position = Vector3.MoveTowards(_readyMissle.transform.position, _camTransform.position, step);
+                Debug.Log("step is: " + step);
+            }
+            else
+            {
+                _readyMissle.SetActive(false);
+            }
         }
     }
 
