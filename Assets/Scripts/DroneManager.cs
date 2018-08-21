@@ -13,8 +13,7 @@ public class DroneManager : GenericManager<DroneManager>
     
     [SerializeField] private float _timeBetweenSpawns;
     [SerializeField] private float _waitToSpawn;
-
-    private Transform _camTransform;
+    
     private List<GameObject> _drones;
     private PoolManager _poolManager;
     
@@ -27,7 +26,6 @@ public class DroneManager : GenericManager<DroneManager>
 
     void Start()
     {
-        _camTransform = Camera.main.gameObject.transform;
         InvokeRepeating("SpawnDrone", _waitToSpawn, _timeBetweenSpawns);
     }
 
