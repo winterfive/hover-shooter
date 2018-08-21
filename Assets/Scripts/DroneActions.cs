@@ -5,8 +5,12 @@ using UnityEngine.AI;
 public class DroneActions : MonoBehaviour
 {
     /*
-     * This class handles all actions based on local drone data
-     * Drone movement, turret rotation, change of glow color.
+     * This class handles all actions required of each Drone that
+     * are performed differently per each instance.
+     * Drone movement (random points to go to)
+     * Turret rotation
+     * Change of glow color
+     * Event to FireMissle
      */
 
     public float altitudeMin, altitudeMax;
