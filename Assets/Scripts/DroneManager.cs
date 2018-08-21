@@ -7,13 +7,13 @@ public class DroneManager : GenericManager<DroneManager>
 {
     public Transform[] spawnpoints;
     public Transform[] endPoints;
-    public GameObject prefab;
-    public int poolSize;
-    public float xMin, xMax, yMin, yMax, zMin, zMax;    
-
+    public GameObject dronePrefab;
+    public int dronePoolSize;
+    public float xMin, xMax, yMin, yMax, zMin, zMax;
+    
     [SerializeField] private float _timeBetweenSpawns;
     [SerializeField] private float _waitToSpawn;
-
+    
     private List<GameObject> _drones;
     private PoolManager _poolManager;
     
@@ -21,7 +21,7 @@ public class DroneManager : GenericManager<DroneManager>
     private void Awake()
     {
         _poolManager = PoolManager.Instance;
-        _drones = _poolManager.CreateList(prefab, poolSize);
+        _drones = _poolManager.CreateList(dronePrefab, dronePoolSize);
     }
 
     void Start()
@@ -40,9 +40,9 @@ public class DroneManager : GenericManager<DroneManager>
 
         spawnPointIndex = Random.Range(0, spawnpoints.Length);
 
-        GameObject drone = GetObjectFromPool();
+        GameObject drone = _poolManager.GetObjectFromPool(_drones);
 
-        if (drone != null)
+        if (drone)
         {
             drone.transform.position = spawnpoints[spawnPointIndex].position;
             drone.transform.rotation = spawnpoints[spawnPointIndex].rotation;
@@ -52,25 +52,6 @@ public class DroneManager : GenericManager<DroneManager>
         {
             Debug.Log("No more drones in list to use.");
         }               
-    }
-
-
-    private GameObject GetObjectFromPool()
-    {
-        foreach (GameObject drone in _drones)
-        {
-            if (!drone.activeInHierarchy)
-            {
-                return drone;
-            }            
-        }
-        return null;
-    }
-
-
-    public void ReturnToPool(GameObject go)
-    {
-        go.SetActive(false);
     }
 
 
@@ -99,5 +80,5 @@ public class DroneManager : GenericManager<DroneManager>
         int index = Random.Range(0, endPoints.Length);
         Vector3 endPosition = endPoints[index].position;
         return endPosition;
-    }    
+    }
 }

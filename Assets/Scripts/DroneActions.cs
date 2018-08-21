@@ -1,12 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-
+  
 public class DroneActions : MonoBehaviour
 {
+    /*
+     * This class handles all actions that
+     * are performed differently per each instance.
+     * Drone movement (random points to go to)
+     * Turret rotation
+     * Change of glow color
+     * Event to FireMissle
+     */
+
     public float altitudeMin, altitudeMax;
     public float glowSpeed;
-    public Color firstGlow, secondGlow;
+    public Color secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
 
     private Transform _glowTransform;
@@ -14,10 +23,11 @@ public class DroneActions : MonoBehaviour
     private Transform _turretTransform;
     private NavMeshAgent _agent;
     private Transform _camTransform;
-    private DroneManager _droneManagerReference;
     private Vector3 _endPoint;
     private Transform _gunTipTransform;
     private RaycastHit _hit;
+    private DroneManager _droneManagerReference;
+    private ProjectileManager _projectileManagerReference;
 
 
     void Start()
@@ -33,7 +43,6 @@ public class DroneActions : MonoBehaviour
         _gunTipTransform = FindChildWithTag("GunTip");
 
         GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
-
         if (droneManagerObject != null)
         {
             _droneManagerReference = droneManagerObject.GetComponent<DroneManager>();
@@ -42,6 +51,17 @@ public class DroneActions : MonoBehaviour
         if (_droneManagerReference == null)
         {
             Debug.Log("Cannot find DroneManager script");
+        }
+
+        GameObject projectileManagerObject = GameObject.FindWithTag("ScriptManager");
+        if (projectileManagerObject != null)
+        {
+            _projectileManagerReference = projectileManagerObject.GetComponent<ProjectileManager>();
+        }
+
+        if (_projectileManagerReference == null)
+        {
+            Debug.Log("Cannot find projectileManager script");
         }
 
         GotoRandomPoint();
@@ -53,26 +73,28 @@ public class DroneActions : MonoBehaviour
     {
         LookAtPlayer();
 
+        if (Time.frameCount % 50 == 0)
+        { 
+            if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, 125))
+            {
+                if (_hit.transform.tag == "Player")
+                {
+                    _projectileManagerReference.ShootMissle(_gunTipTransform);
+                }
+            }
+        }
+
         if (Time.frameCount % 10 == 0)
         {
             if (_agent.remainingDistance < _agent.stoppingDistance || _agent.speed < 0.1)
             {
                 GoToEndPoint();
-            }
-
-            if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, 125))
-            {
-                if (_hit.transform.tag == "Player")
-                {
-                    // TODO Call Shoot() from DroneManager (event instead?)
-                    // TODO Change to event 
-                }
-            }
+            }            
         }
 
         if (Vector3.Distance(this.transform.position, _endPoint) <= 1.0f || _agent.speed < 0.1)
         {
-            _droneManagerReference.ReturnToPool(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -124,10 +146,12 @@ public class DroneActions : MonoBehaviour
      */
     private void LerpColor()
     {
+        Color defaultColor = _glowRend.material.color;
+
         if (_glowRend)
         {
             float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
-            _glowRend.material.color = Color.Lerp(firstGlow, secondGlow, pingpong);
+            _glowRend.material.color = Color.Lerp(defaultColor, secondGlow, pingpong);
         }
     }
 

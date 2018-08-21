@@ -23,4 +23,17 @@ public class PoolManager : GenericManager<PoolManager> {
     {
         go.SetActive(false);
     }
+
+
+    public GameObject GetObjectFromPool(List<GameObject> l)
+    {
+        foreach (GameObject g in l)
+        {
+            if (!g.activeInHierarchy)
+            {
+                return g;
+            }
+        }
+        return null;
+    }
 }
