@@ -42,11 +42,7 @@ public class DroneActions : MonoBehaviour
         _glowRend = _glowTransform.GetComponent<Renderer>();
         _gunTipTransform = FindChildWithTag("GunTip");
 
-        GotoRandomPoint();
-        InvokeRepeating("LerpColor", 0f, 0.1f);
-
         GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
-
         if (droneManagerObject != null)
         {
             _droneManagerReference = droneManagerObject.GetComponent<DroneManager>();
@@ -58,7 +54,6 @@ public class DroneActions : MonoBehaviour
         }
 
         GameObject projectileManagerObject = GameObject.FindWithTag("ScriptManager");
-
         if (projectileManagerObject != null)
         {
             _projectileManagerReference = projectileManagerObject.GetComponent<ProjectileManager>();
@@ -68,6 +63,9 @@ public class DroneActions : MonoBehaviour
         {
             Debug.Log("Cannot find projectileManager script");
         }
+
+        GotoRandomPoint();
+        InvokeRepeating("LerpColor", 0f, 0.1f);
     }
 
 
