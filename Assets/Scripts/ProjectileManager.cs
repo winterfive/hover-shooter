@@ -11,39 +11,40 @@ public class ProjectileManager : GenericManager<ProjectileManager> {
     private List<GameObject> _missles;
     private Transform _camTransform;
     private GameObject _readyMissle;
-    private Transform _guntTipTransform;
+    private Transform _readyMissleTransform;
 
 	
-	void Awake ()
+	void Awake()
     {
         _poolManager = PoolManager.Instance;
         _missles = _poolManager.CreateList(misslePrefab, misslePoolSize);
+        _camTransform = Camera.main.transform;
     }
 
 
-    void Update ()
+    void Update()
     {
         // Add code for missle location check to deactivate/return to pool		
 	}
 
     private void FixedUpdate()
     {
-       if (_readyMissle != null)
-       {
-            _readyMissle.GetComponent<Rigidbody>().velocity = (_guntTipTransform.transform.position - _camTransform.position) * missleSpeed;
-       }
+        if (_readyMissle)
+        {
+            Vector3 direction = Vector3.MoveTowards(_readyMissleTransform.position, _camTransform.position, missleSpeed);            
+        }
     }
 
 
-    public void ShootMissle(Transform t)
+    public void ShootMissle(Transform gunTip)
     {
         _readyMissle = _poolManager.GetObjectFromPool(_missles);
 
         if (_readyMissle != null)
         {
-            _readyMissle.transform.position = t.position;
+            _readyMissle.transform.position = gunTip.position;
             _readyMissle.transform.rotation = Quaternion.LookRotation(_camTransform.position);
-            _readyMissle.SetActive(true);            
+            _readyMissle.SetActive(true);
         }
         else
         {
