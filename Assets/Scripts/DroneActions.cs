@@ -68,11 +68,12 @@ public class DroneActions : MonoBehaviour
             {
                 if (_hit.transform.tag == "Player")
                 {
-                    _projectileManagerReference.ShootMissle(_gunTipTransform);
+                    ShootMissle();
                 }
             }
         }
 
+        // Check if drone is close to midPoint
         if (Time.frameCount % 10 == 0)
         {
             if (_agent.remainingDistance < _agent.stoppingDistance || _agent.speed < 0.1)
@@ -81,6 +82,7 @@ public class DroneActions : MonoBehaviour
             }            
         }
 
+        // Check if drone is at endPoint
         if (Vector3.Distance(this.transform.position, _endPoint) <= 1.0f || _agent.speed < 0.1)
         {
             this.gameObject.SetActive(false);
@@ -124,6 +126,9 @@ public class DroneActions : MonoBehaviour
     public void ShootMissle()
     {
         // TODO
+        // get missle from pool
+        // set missle position, direction
+        // set to active
     }
 
 
