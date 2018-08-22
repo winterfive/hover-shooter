@@ -39,4 +39,9 @@ public class ProjectileManager : GenericManager<ProjectileManager> {
     {
         DroneActions.OnMissleFired += ShootMissle;
     }
+
+    private void OnDisable()
+    {
+        DroneActions.OnMissleFired -= ShootMissle;
+    }
 }
