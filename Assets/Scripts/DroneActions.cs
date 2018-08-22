@@ -53,18 +53,7 @@ public class DroneActions : MonoBehaviour
             Debug.Log("Cannot find DroneManager script");
         }
 
-        GameObject projectileManagerObject = GameObject.FindWithTag("ScriptManager");
-        if (projectileManagerObject != null)
-        {
-            _projectileManagerReference = projectileManagerObject.GetComponent<ProjectileManager>();
-        }
-
-        if (_projectileManagerReference == null)
-        {
-            Debug.Log("Cannot find projectileManager script");
-        }
-
-        GotoRandomPoint();
+        _droneManagerReference.CreateRandomPosition();
         InvokeRepeating("LerpColor", 0f, 0.1f);
     }
 
@@ -88,7 +77,7 @@ public class DroneActions : MonoBehaviour
         {
             if (_agent.remainingDistance < _agent.stoppingDistance || _agent.speed < 0.1)
             {
-                GoToEndPoint();
+                _droneManagerReference.SelectLastPosition();
             }            
         }
 
@@ -96,30 +85,6 @@ public class DroneActions : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
-    }
-
-
-    /*
-     * Assigns and directs drone to random point
-     * void -> void
-     */
-    private void GotoRandomPoint()
-    {
-        Vector3 midPoint = _droneManagerReference.CreateRandomPosition();
-        midPoint.y = _agent.baseOffset;
-        _agent.destination = midPoint;
-    }
-
-
-    /*
-     * Assigns and directs drone to end point
-     * void -> void
-     */
-    private void GoToEndPoint()
-    {
-        _endPoint = _droneManagerReference.SelectLastPosition();
-        _endPoint.y = _agent.baseOffset;
-        _agent.destination = _endPoint;
     }
 
 
@@ -153,6 +118,12 @@ public class DroneActions : MonoBehaviour
             float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
             _glowRend.material.color = Color.Lerp(defaultColor, secondGlow, pingpong);
         }
+    }
+
+
+    public void ShootMissle()
+    {
+        // TODO
     }
 
 
