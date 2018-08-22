@@ -65,12 +65,12 @@ public class DroneActions : MonoBehaviour
     private void Update()
     {
         int timeBetweenShots = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
-        float timeOfPreviosuShot = 0f;
+        float timeOfPreviousShot = 0f;
 
         LookAtPlayer();
 
         // Drone shot timing is fixed but each drone has a different time between shots
-        if (Time.time > timeOfPreviosuShot + timeBetweenShots)
+        if (Time.time > timeOfPreviousShot + timeBetweenShots)
         { 
             if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, droneRange))
             {
@@ -79,7 +79,7 @@ public class DroneActions : MonoBehaviour
                     if (OnMissleFired != null)
                     {
                         OnMissleFired(_gunTipTransform);
-                        timeOfPreviosuShot = Time.time;
+                        timeOfPreviousShot = Time.time;
                     }
                 }
             }
