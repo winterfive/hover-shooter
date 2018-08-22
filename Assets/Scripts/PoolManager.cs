@@ -19,12 +19,6 @@ public class PoolManager : GenericManager<PoolManager> {
     }
 
 
-    public void ReturnToPool(GameObject go)
-    {
-        go.SetActive(false);
-    }
-
-
     public GameObject GetObjectFromPool(List<GameObject> l)
     {
         foreach (GameObject g in l)

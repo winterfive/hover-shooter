@@ -59,16 +59,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\DestroyObjects.cs" />
+    <Compile Include="Assets\DroneGlow.cs" />
     <Compile Include="Assets\Scripts\DroneActions.cs" />
+    <Compile Include="Assets\Scripts\DroneManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\NewObjectPooler.cs" />
-    <Compile Include="Assets\Scripts\OlderScripts\ScoreManager.cs" />
-    <Compile Include="Assets\Scripts\OlderScripts\ShapeManager.cs" />
+    <Compile Include="Assets\Scripts\GenericManager.cs" />
+    <Compile Include="Assets\Scripts\PoolManager.cs" />
+    <Compile Include="Assets\Scripts\ProjectileManager.cs" />
     <Compile Include="Assets\Scripts\RaycastManager.cs" />
     <Compile Include="Assets\Scripts\ReticleManager.cs" />
-    <Compile Include="Assets\Scripts\SpawnObjects.cs" />
+    <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <None Include="Assets\Textures\UIOverlay.shader" />
+    <None Include="Assets\Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Moo/Documents/Unity Projects/shape-shooter-vr/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

@@ -5,12 +5,12 @@ using UnityEngine.AI;
 public class DroneActions : MonoBehaviour
 {
     /*
-     * This class handles all actions that
+     * This class is placed on the drone prefab and handles all actions that
      * are performed differently per each instance.
      * Drone movement (random points to go to)
      * Turret rotation
      * Change of glow color
-     * Event to FireMissle
+     * Timing of ShootMissle
      */
 
     public float altitudeMin, altitudeMax;
@@ -53,18 +53,7 @@ public class DroneActions : MonoBehaviour
             Debug.Log("Cannot find DroneManager script");
         }
 
-        GameObject projectileManagerObject = GameObject.FindWithTag("ScriptManager");
-        if (projectileManagerObject != null)
-        {
-            _projectileManagerReference = projectileManagerObject.GetComponent<ProjectileManager>();
-        }
-
-        if (_projectileManagerReference == null)
-        {
-            Debug.Log("Cannot find projectileManager script");
-        }
-
-        GotoRandomPoint();
+        _droneManagerReference.CreateRandomPosition();
         InvokeRepeating("LerpColor", 0f, 0.1f);
     }
 
@@ -79,47 +68,25 @@ public class DroneActions : MonoBehaviour
             {
                 if (_hit.transform.tag == "Player")
                 {
-                    _projectileManagerReference.ShootMissle(_gunTipTransform);
+                    // Use event to tell ProjectileManger that a missle has been fired, _gunTipTransform
                 }
             }
         }
 
+        // Check if drone is close to midPoint
         if (Time.frameCount % 10 == 0)
         {
             if (_agent.remainingDistance < _agent.stoppingDistance || _agent.speed < 0.1)
             {
-                GoToEndPoint();
+                _droneManagerReference.SelectLastPosition();
             }            
         }
 
+        // Check if drone is at endPoint
         if (Vector3.Distance(this.transform.position, _endPoint) <= 1.0f || _agent.speed < 0.1)
         {
             this.gameObject.SetActive(false);
         }
-    }
-
-
-    /*
-     * Assigns and directs drone to random point
-     * void -> void
-     */
-    private void GotoRandomPoint()
-    {
-        Vector3 midPoint = _droneManagerReference.CreateRandomPosition();
-        midPoint.y = _agent.baseOffset;
-        _agent.destination = midPoint;
-    }
-
-
-    /*
-     * Assigns and directs drone to end point
-     * void -> void
-     */
-    private void GoToEndPoint()
-    {
-        _endPoint = _droneManagerReference.SelectLastPosition();
-        _endPoint.y = _agent.baseOffset;
-        _agent.destination = _endPoint;
     }
 
 
