@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ProjectileActions : MonoBehaviour
 {
-
     public int missleSpeed;
     
     private GameObject _missle;
@@ -20,12 +17,6 @@ public class ProjectileActions : MonoBehaviour
 
     void Update()
     {
-        // if (missle has hit player)
-        //{
-            // set active to false
-            // call PLayerHit()
-        //}
-
         if (Vector3.Distance(_missle.transform.position, _camTransform.position) > 0.5)
         {
             float step = missleSpeed * Time.deltaTime;
