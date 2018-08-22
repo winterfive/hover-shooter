@@ -19,7 +19,7 @@ public class DroneActions : MonoBehaviour
     public float minAgentSpeed, maxAgentSpeed;
     public delegate void MissleFired(Transform t);
     public static MissleFired OnMissleFired;
-    public int minTimeBetweenShots, maxTimeBetweenShots;
+    public int minTimeBetweenShots, maxTimeBetweenShots, timeBetweenShots;
     public float droneRange;
 
     private Transform _glowTransform;
@@ -32,6 +32,7 @@ public class DroneActions : MonoBehaviour
     private RaycastHit _hit;
     private DroneManager _droneManagerReference;
     private ProjectileManager _projectileManagerReference;
+    private float _timeOfPreviousShot;
 
 
     void Start()
@@ -59,18 +60,18 @@ public class DroneActions : MonoBehaviour
 
         GoToRandomPoint();
         InvokeRepeating("LerpColor", 0f, 0.1f);
+
+        timeBetweenShots = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+        _timeOfPreviousShot = 0f;
     }
 
 
     private void Update()
-    {
-        int timeBetweenShots = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
-        float timeOfPreviousShot = 0f;
-
+    {        
         LookAtPlayer();
 
         // Drone shot timing is fixed but each drone has a different time between shots
-        if (Time.time > timeOfPreviousShot + timeBetweenShots)
+        if (Time.time > _timeOfPreviousShot + timeBetweenShots)
         { 
             if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, droneRange))
             {
@@ -79,7 +80,7 @@ public class DroneActions : MonoBehaviour
                     if (OnMissleFired != null)
                     {
                         OnMissleFired(_gunTipTransform);
-                        timeOfPreviousShot = Time.time;
+                        _timeOfPreviousShot = Time.time;
                     }
                 }
             }
