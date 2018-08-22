@@ -5,13 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Environment
-  - Trigger
-  - Shootable
   - Glow
   - Turret
   - Enemy
   - ScriptManager
   - GunTip
+  - Missle
   layers:
   - Default
   - TransparentFX
