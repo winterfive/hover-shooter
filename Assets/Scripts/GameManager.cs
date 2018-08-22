@@ -26,15 +26,5 @@ public class GameManager : GenericManager<GameManager>
 
             _timeSinceLastShot = _timer;
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag ("Missle"))
-        {
-            // remove a point of health from player (PlayerManager)
-            // activate player hit effect
-            other.gameObject.SetActive(false);
-        }
-    }
+    }    
 }
