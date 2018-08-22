@@ -17,6 +17,10 @@ public class DroneActions : MonoBehaviour
     public float glowSpeed;
     public Color secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
+    public delegate void MissleFired(Transform t);
+    public static MissleFired OnMissleFired;
+    public int minTimeBetweenShots, maxTimeBetweenShots;
+    public float droneRange;
 
     private Transform _glowTransform;
     private Renderer _glowRend;
@@ -53,32 +57,40 @@ public class DroneActions : MonoBehaviour
             Debug.Log("Cannot find DroneManager script");
         }
 
-        _droneManagerReference.CreateRandomPosition();
+        GoToRandomPoint();
         InvokeRepeating("LerpColor", 0f, 0.1f);
     }
 
 
     private void Update()
     {
+        int timeBetweenShots = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+        float timeOfPreviosuShot = 0f;
+
         LookAtPlayer();
 
-        if (Time.frameCount % 50 == 0)
+        // Drone shot timing is fixed but each drone has a different time between shots
+        if (Time.time > timeOfPreviosuShot + timeBetweenShots)
         { 
-            if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, 125))
+            if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, droneRange))
             {
                 if (_hit.transform.tag == "Player")
                 {
-                    // Use event to tell ProjectileManger that a missle has been fired, _gunTipTransform
+                    if (OnMissleFired != null)
+                    {
+                        OnMissleFired(_gunTipTransform);
+                        timeOfPreviosuShot = Time.time;
+                    }
                 }
             }
         }
-
-        // Check if drone is close to midPoint
+        
+        // Check if drone is close to random/mid point
         if (Time.frameCount % 10 == 0)
         {
             if (_agent.remainingDistance < _agent.stoppingDistance || _agent.speed < 0.1)
             {
-                _droneManagerReference.SelectLastPosition();
+                GoToEndPoint();
             }            
         }
 
@@ -120,6 +132,30 @@ public class DroneActions : MonoBehaviour
             float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
             _glowRend.material.color = Color.Lerp(defaultColor, secondGlow, pingpong);
         }
+    }
+
+
+    /*
+     * Assigns and directs drone to random point
+     * void -> void
+     */
+    private void GoToRandomPoint()
+    {
+        Vector3 midPoint = _droneManagerReference.CreateRandomPosition();
+        midPoint.y = _agent.baseOffset;
+        _agent.destination = midPoint;
+    }
+
+
+    /*
+     * Assigns and directs drone to end point
+     * void -> void
+     */
+    private void GoToEndPoint()
+    {
+        _endPoint = _droneManagerReference.SelectLastPosition();
+        _endPoint.y = _agent.baseOffset;
+        _agent.destination = _endPoint;
     }
 
 
