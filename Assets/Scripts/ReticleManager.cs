@@ -1,12 +1,9 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ReticleManager : GenericManager<ReticleManager> {
 
     public Transform cam;
     public GameObject reticle;
-    //public RaycastManager raycastManager;
     public Color foundEnemyColor;
 
     private float _defaultDistance = 2f;
