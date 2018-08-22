@@ -5,12 +5,12 @@ using UnityEngine.AI;
 public class DroneActions : MonoBehaviour
 {
     /*
-     * This class handles all actions that
+     * This class is placed on the drone prefab and handles all actions that
      * are performed differently per each instance.
      * Drone movement (random points to go to)
      * Turret rotation
      * Change of glow color
-     * Event to FireMissle
+     * Timing of ShootMissle
      */
 
     public float altitudeMin, altitudeMax;
@@ -68,7 +68,7 @@ public class DroneActions : MonoBehaviour
             {
                 if (_hit.transform.tag == "Player")
                 {
-                    ShootMissle();
+                    // Use event to tell ProjectileManger that a missle has been fired, _gunTipTransform
                 }
             }
         }
@@ -120,15 +120,6 @@ public class DroneActions : MonoBehaviour
             float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
             _glowRend.material.color = Color.Lerp(defaultColor, secondGlow, pingpong);
         }
-    }
-
-
-    public void ShootMissle()
-    {
-        // TODO
-        // get missle from pool
-        // set missle position, direction
-        // set to active
     }
 
 
