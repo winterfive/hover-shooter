@@ -15,6 +15,8 @@ public class PlayerManager : GenericManager<PlayerManager> {
     private void CheckPlayerDamage(GameObject go)
     {
         // Check projectile
+        // If missle, call this
+        // If drone bomb, call this
     }
     
 
