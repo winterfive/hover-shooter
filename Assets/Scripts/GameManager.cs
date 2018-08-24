@@ -3,8 +3,8 @@
 public class GameManager : GenericManager<GameManager>
 {
     public float timeBetweenShots = 0.15f;
-    public delegate void ShotEnemy();
-    public static event ShotEnemy OnShotEnemy;
+    public delegate void Shoot();
+    public static event Shoot OnShoot;
 
     private float _timer, _timeSinceLastShot;
 
@@ -22,9 +22,9 @@ public class GameManager : GenericManager<GameManager>
 
         if (Input.GetButton("Fire1") && (_timer >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
         {
-            OnShotEnemy();
+            OnShoot();
 
             _timeSinceLastShot = _timer;
         }
-    }
+    }    
 }

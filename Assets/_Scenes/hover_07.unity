@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -1620,7 +1620,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 381316857}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 17, z: 1}
@@ -7709,6 +7709,7 @@ GameObject:
   - component: {fileID: 1934252586}
   - component: {fileID: 1934252590}
   - component: {fileID: 1934252591}
+  - component: {fileID: 1934252592}
   m_Layer: 2
   m_Name: ScriptManager
   m_TagString: ScriptManager
@@ -7797,7 +7798,7 @@ MonoBehaviour:
   yMax: 17
   zMin: -9
   zMax: 23
-  _timeBetweenSpawns: 0.5
+  _timeBetweenSpawns: 0.8
   _waitToSpawn: 3
 --- !u!114 &1934252591
 MonoBehaviour:
@@ -7812,8 +7813,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   misslePrefab: {fileID: 1234904337511844, guid: 341b9598d49f1a640a074570103a399a,
     type: 2}
-  misslePoolSize: 20
-  missleSpeed: 100
+  misslePoolSize: 10
+--- !u!114 &1934252592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1934252585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a77856c5cd7cfc44bd7befaa77b8118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBetweenShots: 0.15
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0

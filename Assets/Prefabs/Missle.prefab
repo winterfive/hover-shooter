@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54457473998983212}
   m_Layer: 2
   m_Name: DroneMissle
-  m_TagString: Untagged
+  m_TagString: Missle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

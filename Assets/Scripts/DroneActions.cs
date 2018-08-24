@@ -17,6 +17,10 @@ public class DroneActions : MonoBehaviour
     public float glowSpeed;
     public Color secondGlow;
     public float minAgentSpeed, maxAgentSpeed;
+    public delegate void MissleFired(Transform t);
+    public static MissleFired OnMissleFired;
+    public int minTimeBetweenShots, maxTimeBetweenShots;
+    public float droneRange;
 
     private Transform _glowTransform;
     private Renderer _glowRend;
@@ -28,6 +32,8 @@ public class DroneActions : MonoBehaviour
     private RaycastHit _hit;
     private DroneManager _droneManagerReference;
     private ProjectileManager _projectileManagerReference;
+    private float _timeOfPreviousShot;
+    private float _timeBetweenShots;
 
 
     void Start()
@@ -53,32 +59,41 @@ public class DroneActions : MonoBehaviour
             Debug.Log("Cannot find DroneManager script");
         }
 
-        _droneManagerReference.CreateRandomPosition();
+        GoToRandomPoint();
         InvokeRepeating("LerpColor", 0f, 0.1f);
+
+        _timeBetweenShots = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+        _timeOfPreviousShot = 2f;
     }
 
 
     private void Update()
-    {
+    {        
         LookAtPlayer();
 
-        if (Time.frameCount % 50 == 0)
+        // Drone shot timing is fixed but each drone has a different time between shots
+        // TODO? Can this be changed to InvokeRepeating?
+        if (Time.time > _timeOfPreviousShot + _timeBetweenShots)
         { 
-            if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, 125))
+            if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, droneRange))
             {
                 if (_hit.transform.tag == "Player")
                 {
-                    // Use event to tell ProjectileManger that a missle has been fired, _gunTipTransform
+                    if (OnMissleFired != null)
+                    {
+                        OnMissleFired(_gunTipTransform);
+                        _timeOfPreviousShot = Time.time;
+                    }
                 }
             }
         }
-
-        // Check if drone is close to midPoint
+        
+        // Check if drone is close to random/mid point
         if (Time.frameCount % 10 == 0)
         {
             if (_agent.remainingDistance < _agent.stoppingDistance || _agent.speed < 0.1)
             {
-                _droneManagerReference.SelectLastPosition();
+                GoToEndPoint();
             }            
         }
 
@@ -120,6 +135,30 @@ public class DroneActions : MonoBehaviour
             float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
             _glowRend.material.color = Color.Lerp(defaultColor, secondGlow, pingpong);
         }
+    }
+
+
+    /*
+     * Assigns and directs drone to random point
+     * void -> void
+     */
+    private void GoToRandomPoint()
+    {
+        Vector3 midPoint = _droneManagerReference.CreateRandomPosition();
+        midPoint.y = _agent.baseOffset;
+        _agent.destination = midPoint;
+    }
+
+
+    /*
+     * Assigns and directs drone to end point
+     * void -> void
+     */
+    private void GoToEndPoint()
+    {
+        _endPoint = _droneManagerReference.SelectLastPosition();
+        _endPoint.y = _agent.baseOffset;
+        _agent.destination = _endPoint;
     }
 
 
