@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ProjectileActions : MonoBehaviour
 {
     public int missleSpeed;
-    public Transform[] targetPoints;
     
     private GameObject _missle;
     private Transform _camTransform;
@@ -19,6 +19,14 @@ public class ProjectileActions : MonoBehaviour
 
     void Update()
     {
+        if (_missle.activeInHierarchy)
+        {
+            MissleFly();
+        }
+    }
+
+    private void MissleFly()
+    {
         if (Vector3.Distance(_missle.transform.position, _camTransform.position) > 0.5)
         {
             float step = missleSpeed * Time.deltaTime;
@@ -32,7 +40,4 @@ public class ProjectileActions : MonoBehaviour
             _missle.SetActive(false);
         }
     }
-
-
-    
 }
