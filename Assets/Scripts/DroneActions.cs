@@ -19,7 +19,7 @@ public class DroneActions : MonoBehaviour
     public float minAgentSpeed, maxAgentSpeed;
     public delegate void MissleFired(Transform t);
     public static MissleFired OnMissleFired;
-    public int minTimeBetweenShots, maxTimeBetweenShots, timeBetweenShots;
+    public int minTimeBetweenShots, maxTimeBetweenShots;
     public float droneRange;
 
     private Transform _glowTransform;
@@ -33,6 +33,7 @@ public class DroneActions : MonoBehaviour
     private DroneManager _droneManagerReference;
     private ProjectileManager _projectileManagerReference;
     private float _timeOfPreviousShot;
+    private float _timeBetweenShots;
 
 
     void Start()
@@ -61,8 +62,8 @@ public class DroneActions : MonoBehaviour
         GoToRandomPoint();
         InvokeRepeating("LerpColor", 0f, 0.1f);
 
-        timeBetweenShots = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
-        _timeOfPreviousShot = 0f;
+        _timeBetweenShots = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+        _timeOfPreviousShot = 2f;
     }
 
 
@@ -71,7 +72,8 @@ public class DroneActions : MonoBehaviour
         LookAtPlayer();
 
         // Drone shot timing is fixed but each drone has a different time between shots
-        if (Time.time > _timeOfPreviousShot + timeBetweenShots)
+        // TODO? Can this be changed to InvokeRepeating?
+        if (Time.time > _timeOfPreviousShot + _timeBetweenShots)
         { 
             if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, droneRange))
             {
