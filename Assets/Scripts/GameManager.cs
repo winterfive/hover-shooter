@@ -22,9 +22,26 @@ public class GameManager : GenericManager<GameManager>
 
         if (Input.GetButton("Fire1") && (_timer >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
         {
-            OnShoot();
+            //OnShoot();
 
             _timeSinceLastShot = _timer;
         }
+
+        //if (player has shield up button pressed)
+        //{
+        //    if (shield has energy to use)
+        //    {
+        //        while (shield energy level > 0)
+        //        {
+        //            tell UIManager to display shield in HMD
+        //            tell UI Manager to remove power level from shield for each second up
+        //            also remove energy based on enemy projectile hits ?
+        //        }
+        //    }
+        //    else
+        //    {
+        //        let player know there's no energy for shield
+        //    }
+        //}
     }    
 }
