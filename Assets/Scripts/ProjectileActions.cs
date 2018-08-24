@@ -35,8 +35,17 @@ public class ProjectileActions : MonoBehaviour
         }
         else
         {
-            // Missle has hit Player
-            // Call playerHit event
+            //Missle has hit something
+            //Check what missle hit
+            //if (missle hit player)
+            //{
+            //    BroadcastMessage OnPlayerHit;
+            //}
+            //else
+            //{
+            //    BroadcastMessage OnShieldHit;
+            //}
+
             _missle.SetActive(false);
         }
     }
