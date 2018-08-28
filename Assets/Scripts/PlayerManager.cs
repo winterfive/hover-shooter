@@ -4,49 +4,57 @@ using UnityEngine;
 
 public class PlayerManager : GenericManager<PlayerManager> { 
 
-    public int playerScore;
     public int playerHealth;
-    public delegate void ChangeScore();
-    public static ChangeScore OnChangeScore;
-    public delegate void ChangePlayerHealth();
-    public static ChangePlayerHealth OnChangePlayerHealth;
+    public delegate void UpdatePlayerScore();
+    public static UpdatePlayerScore OnUpdatePlayerScore;
+    public delegate void UpdatePlayerHealth();
+    public static UpdatePlayerHealth OnUpdatePlayerHealth;
+    public ProjectileActions projectileActions;
+
+    private int playerScore;
 
 
-    private void CheckPlayerDamage(GameObject go)
+    private void Awake()
     {
-        // Check projectile
-        // If missle, call this
-        // If drone bomb, call this
+        playerScore = 0;
     }
-    
 
-    private void UpdateScore()
+
+    /*
+     * Updates player score and broadcasts to UI
+     * int -> void
+     */
+    private void UpdateScore(int scoreValue)
     {
-        // Listens to ProjectileActions for missleHit
-        // Depending on type of projectile has hit, adjust score value
-        if (OnChangeScore != null)
+        playerScore += scoreValue;
+        // Listens to ProjectileActions for missleHit, adjusts player score accordingly
+
+        if (OnUpdatePlayerScore != null)
         {
-            OnChangeScore();
+            OnUpdatePlayerScore();
         }
     }
 
-    private void UpdateHealth()
+
+    /*
+     * Updates player health value and broadcasts to UI
+     * int -> void
+     */
+    private void UpdateHealthValue(int healthValue)
     {
-        // Listens to ProjectileManager for missleHit
-        // Updates health depending on type of projectile that has hit player
-        if (OnChangePlayerHealth != null)
+        if (OnUpdatePlayerHealth != null)
         {
-            OnChangePlayerHealth();
+            OnUpdatePlayerHealth();
         }
     }
 
     private void OnEnable()
     {
-        
+        ProjectileActions.OnPlayerHit += UpdateHealthValue;
     }
 
     private void OnDisable()
     {
-        
+        ProjectileActions.OnPlayerHit -= UpdateHealthValue;
     }
 }
