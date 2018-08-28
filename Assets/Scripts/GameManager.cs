@@ -7,17 +7,19 @@ public class GameManager : GenericManager<GameManager>
     public static event Shoot OnShoot;
 
     private float _timeSinceLastShot;
+    private bool IsShieldUp;
 
 
     void Awake()
     {
-        _timer = 0f;
         _timeSinceLastShot = 0f;
+        IsShieldUp = false;
     }
 
 
     private void Update()
     {
+        // Add check for if shield is up
         if (Input.GetButton("Fire1") && (Time.time >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
         {
             //OnShoot();
@@ -29,6 +31,7 @@ public class GameManager : GenericManager<GameManager>
         //{
         //    if (shield has energy to use)
         //    {
+        //        IsShieldUp = true;
         //        while (shield energy level > 0)
         //        {
         //            tell UIManager to display shield in HMD
@@ -40,6 +43,10 @@ public class GameManager : GenericManager<GameManager>
         //    {
         //        tell UIManager to let player know there's no energy for shield
         //    }
+        //}
+        //else
+        //{
+        //    IsShieldUp = false;
         //}
     }    
 }
