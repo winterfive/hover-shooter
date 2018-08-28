@@ -48,7 +48,7 @@ public class DroneManager : GenericManager<DroneManager>
         }
         else
         {
-            Debug.Log("No more drones in list to use.");
+            // Debug.Log("There are no drones available right now.");
         }               
     }
 
