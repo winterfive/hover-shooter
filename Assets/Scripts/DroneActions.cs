@@ -5,8 +5,8 @@ using UnityEngine.AI;
 public class DroneActions : MonoBehaviour
 {
     /*
-     * This class is placed on the drone prefab and handles all actions that
-     * are performed differently per each instance.
+     * This class is placed on the drone prefab parent object and 
+     * handles all actions that are performed differently per each instance.
      * Drone movement (random points to go to)
      * Turret rotation
      * Change of glow color
@@ -63,7 +63,7 @@ public class DroneActions : MonoBehaviour
         InvokeRepeating("LerpColor", 0f, 0.1f);
 
         _timeBetweenShots = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
-        _timeOfPreviousShot = 2f;
+        _timeOfPreviousShot = 0f;
     }
 
 
@@ -72,7 +72,6 @@ public class DroneActions : MonoBehaviour
         LookAtPlayer();
 
         // Drone shot timing is fixed but each drone has a different time between shots
-        // TODO? Can this be changed to InvokeRepeating?
         if (Time.time > _timeOfPreviousShot + _timeBetweenShots)
         { 
             if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, droneRange))

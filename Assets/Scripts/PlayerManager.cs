@@ -2,33 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : GenericManager<PlayerManager> { 
 
-    public int playerScore;
     public int playerHealth;
-    
+    public delegate void UpdatePlayerScore();
+    public static UpdatePlayerScore OnUpdatePlayerScore;
+    public delegate void UpdatePlayerHealth();
+    public static UpdatePlayerHealth OnUpdatePlayerHealth;
+    public ProjectileActions projectileActions;
 
-    private void UpdateScore()
+    private int playerScore;
+
+
+    private void Awake()
     {
-        // Listens to ProjectileActions for missleHit
-        // Depending on type of projectile has hit, adjust score value
-        // Broadcast change in score value
+        playerScore = 0;
     }
 
-    private void UpdateHealth()
+
+    /*
+     * Updates player score and broadcasts to UI
+     * int -> void
+     */
+    private void UpdateScore(int scoreValue)
     {
-        // Listens to ProjectileManager for missleHit
-        // Updates health depending on type of projectile that has hit player
-        // Broadcast change in health value
+        playerScore += scoreValue;
+        // Listens to ProjectileActions for missleHit, adjusts player score accordingly
+
+        if (OnUpdatePlayerScore != null)
+        {
+            OnUpdatePlayerScore();
+        }
+    }
+
+
+    /*
+     * Updates player health value and broadcasts to UI
+     * int -> void
+     */
+    private void UpdateHealthValue(int healthValue)
+    {
+        if (OnUpdatePlayerHealth != null)
+        {
+            OnUpdatePlayerHealth();
+        }
     }
 
     private void OnEnable()
     {
-        
+        ProjectileActions.OnPlayerHit += UpdateHealthValue;
     }
 
     private void OnDisable()
     {
-        
+        ProjectileActions.OnPlayerHit -= UpdateHealthValue;
     }
 }

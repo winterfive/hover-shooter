@@ -6,25 +6,47 @@ public class GameManager : GenericManager<GameManager>
     public delegate void Shoot();
     public static event Shoot OnShoot;
 
-    private float _timer, _timeSinceLastShot;
+    private float _timeSinceLastShot;
+    private bool IsShieldUp;
 
 
     void Awake()
     {
-        _timer = 0f;
         _timeSinceLastShot = 0f;
+        IsShieldUp = false;
     }
 
 
     private void Update()
     {
-        _timer += Time.deltaTime;
-
-        if (Input.GetButton("Fire1") && (_timer >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
+        // Add check for if shield is up
+        if (Input.GetButton("Fire1") && (Time.time >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
         {
-            OnShoot();
+            //OnShoot();
 
-            _timeSinceLastShot = _timer;
+            _timeSinceLastShot = Time.time;
         }
+
+        //if (player has shield up button pressed)
+        //{
+        //    if (shield has energy to use)
+        //    {
+        //        IsShieldUp = true;
+        //        while (shield energy level > 0)
+        //        {
+        //            tell UIManager to display shield in HMD
+        //            tell UI Manager to remove power level from shield for each second up
+        //            also remove energy based on enemy projectile hits ?
+        //        }
+        //    }
+        //    else
+        //    {
+        //        tell UIManager to let player know there's no energy for shield
+        //    }
+        //}
+        //else
+        //{
+        //    IsShieldUp = false;
+        //}
     }    
 }

@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : GenericManager<UIManager> {
+    
 
-    // Listens for change in score
+    private void UpdateHealthUI()
+    {
+        // TODO update health display in game
+    }
 
-    // Listens for change in player health
 
     private void OnEnable()
     {
-        
+        PlayerManager.OnUpdatePlayerHealth += UpdateHealthUI;
     }
 
 
     private void OnDisable()
     {
-        
+        PlayerManager.OnUpdatePlayerHealth -= UpdateHealthUI;
     }
+
+    
 }
