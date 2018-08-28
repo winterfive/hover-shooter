@@ -31,7 +31,7 @@ public class ProjectileManager : GenericManager<ProjectileManager> {
         }
         else
         {
-            Debug.Log("No missles are available right now");
+            // Debug.Log("No missles are available right now");
         }
     }
 
