@@ -44,7 +44,7 @@ public class ProjectileActions : MonoBehaviour
     }
 
 
-    void FixedUpdate()
+    void Update()
     {
         if (_missle.activeInHierarchy)
         {
