@@ -6,7 +6,7 @@ public class GameManager : GenericManager<GameManager>
     public delegate void Shoot();
     public static event Shoot OnShoot;
 
-    private float _timer, _timeSinceLastShot;
+    private float _timeSinceLastShot;
 
 
     void Awake()
@@ -18,13 +18,11 @@ public class GameManager : GenericManager<GameManager>
 
     private void Update()
     {
-        _timer += Time.deltaTime;
-
-        if (Input.GetButton("Fire1") && (_timer >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
+        if (Input.GetButton("Fire1") && (Time.time >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
         {
             //OnShoot();
 
-            _timeSinceLastShot = _timer;
+            _timeSinceLastShot = Time.time;
         }
 
         //if (player has shield up button pressed)
@@ -40,7 +38,7 @@ public class GameManager : GenericManager<GameManager>
         //    }
         //    else
         //    {
-        //        let player know there's no energy for shield
+        //        tell UIManager to let player know there's no energy for shield
         //    }
         //}
     }    
