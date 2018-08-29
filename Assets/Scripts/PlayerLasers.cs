@@ -12,41 +12,63 @@ public class PlayerLasers : MonoBehaviour {
 
     private LineRenderer _line;
     private Transform _reticle;
+    private GameObject _gunTip;
 
 
     private void Start()
     {
-        _line = this.gameObject.GetComponent<LineRenderer>();
-        _line.enabled = false;        
+        _gunTip = this.gameObject;
+        _line = _gunTip.GetComponent<LineRenderer>();
+        _line.enabled = false;
+        reticleManager = ReticleManager.Instance;
     }
 
     public void ShootLasers()
     {
-        StopCoroutine("FireLasers");
-        StartCoroutine("FireLasers");
-    }
+        //StopCoroutine("FireLasers");
+        //StartCoroutine("FireLasers");
 
-    private IEnumerator FireLasers()
-    {
         _reticle = reticleManager.GetReticleTransform();
 
-        if (_reticle)
+        if (_reticle != null)
         {
+            Debug.Log("Firing lasers");
             _line.enabled = true;
 
-            Ray ray = new Ray(transform.position, transform.forward);
+            Ray ray = new Ray(_gunTip.transform.localPosition, _gunTip.transform.forward);
 
-            _line.SetPosition(0, ray.origin);
+            _line.SetPosition(0, _gunTip.transform.position);
             _line.SetPosition(1, _reticle.position);
 
+            // thsi is happening so fast that the laser doesnt show up
+            // use a coroutine!
             _line.enabled = false;
-            yield return null;
         }
-        else
-        {
-            yield return null;
-        }        
     }
+
+    //private IEnumerator FireLasers()
+    //{
+    //    Debug.Log("Got to FireLasers");
+    //    _reticle = reticleManager.GetReticleTransform();
+
+    //    if (_reticle != null)
+    //    {
+    //        _line.enabled = true;
+
+    //        Ray ray = new Ray(transform.position, transform.forward);
+
+    //        _line.SetPosition(0, ray.origin);
+    //        _line.SetPosition(1, _reticle.position);
+
+    //        _line.enabled = false;
+
+    //        yield return null;
+    //    }
+    //    else
+    //    {
+    //        yield return null;
+    //    }        
+    //}
 
     private void OnEnable()
     {
