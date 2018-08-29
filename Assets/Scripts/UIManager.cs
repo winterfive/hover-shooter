@@ -7,13 +7,13 @@ public class UIManager : GenericManager<UIManager> {
 
     private void UpdateHealthUI(int i)
     {
-        // TODO update health display in HMD
+        Debug.Log("Player health is: " + i);
     }
 
 
     private void UpdateScoreUI(int j)
     {
-        // TOD update score display in HMD
+        Debug.Log("The score is: " + j);
     }
 
 
