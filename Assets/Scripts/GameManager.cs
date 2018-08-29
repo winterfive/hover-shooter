@@ -33,14 +33,15 @@ public class GameManager : GenericManager<GameManager>
     private void Update()
     {
         // Add check for if shield is up
-        if (Input.GetButton("Fire1") && (Time.time >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
+        if (Input.GetButtonDown("Fire1") && (Time.time >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
         {
-            //OnShoot();
+            OnShoot();
 
             _timeSinceLastShot = Time.time;
         }
 
         //if (player has shield up button pressed)
+        // Move to it's own method, call that method here
         //{
         //    if (shield has energy to use)
         //    {
