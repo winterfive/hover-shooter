@@ -8,7 +8,7 @@ public class ProjectileActions : MonoBehaviour
     public static PlayerHit OnPlayerHit;
     public delegate void ShieldHit();
     public static ShieldHit OnShieldHit;
-    
+
     private GameObject _missle;
     private Transform _camTransform;
     private Transform _target;
