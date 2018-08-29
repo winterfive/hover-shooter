@@ -66,7 +66,7 @@ public class GameManager : GenericManager<GameManager>
 
     /*
      * Updates player score and broadcasts to UI
-     * int -> void
+     * void -> void
      */
     private void UpdateScore()
     {
@@ -79,7 +79,7 @@ public class GameManager : GenericManager<GameManager>
 
     /*
      * Updates player health value and broadcasts to UI
-     * int -> void
+     * void -> void
      */
     private void UpdateHealth()
     {
