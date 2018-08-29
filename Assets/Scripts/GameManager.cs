@@ -4,16 +4,20 @@ public class GameManager : GenericManager<GameManager>
 {
     public float timeBetweenShots = 0.15f;
     public delegate void Shoot();
-    public static event Shoot OnShoot;
+    public static event Shoot OnShoot;    
+    public delegate void UpdatePlayerScore(int i);
+    public static UpdatePlayerScore OnUpdatePlayerScore;
 
     private float _timeSinceLastShot;
-    private bool IsShieldUp;
+    private bool _IsShieldUp;
+    private int _score;
 
 
     void Awake()
     {
         _timeSinceLastShot = 0f;
-        IsShieldUp = false;
+        _IsShieldUp = false;
+        _score = 0;
     }
 
 
@@ -48,5 +52,21 @@ public class GameManager : GenericManager<GameManager>
         //{
         //    IsShieldUp = false;
         //}
-    }    
+    }
+
+
+    /*
+     * Updates player score and broadcasts to UI
+     * int -> void
+     */
+    private void UpdateScore(int hitValue)
+    {
+        _score += hitValue;
+        // Listens to ProjectileActions for missleHit, adjusts player score accordingly
+
+        if (OnUpdatePlayerScore != null)
+        {
+            OnUpdatePlayerScore(_score);
+        }
+    }
 }
