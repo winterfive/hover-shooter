@@ -5,21 +5,29 @@ using UnityEngine;
 public class UIManager : GenericManager<UIManager> {
     
 
-    private void UpdateHealthUI()
+    private void UpdateHealthUI(int i)
     {
-        // TODO update health display in game
+        // TODO update health display in HMD
+    }
+
+
+    private void UpdateScoreUI(int j)
+    {
+        // TOD update score display in HMD
     }
 
 
     private void OnEnable()
     {
-        PlayerManager.OnUpdatePlayerHealth += UpdateHealthUI;
+        GameManager.OnUpdatePlayerHealth += UpdateHealthUI;
+        GameManager.OnUpdatePlayerScore += UpdateScoreUI;
     }
 
 
     private void OnDisable()
     {
-        PlayerManager.OnUpdatePlayerHealth -= UpdateHealthUI;
+        GameManager.OnUpdatePlayerHealth -= UpdateHealthUI;
+        GameManager.OnUpdatePlayerScore -= UpdateScoreUI;
     }
 
     

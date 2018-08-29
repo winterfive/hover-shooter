@@ -9,7 +9,6 @@ public class ProjectileManager : GenericManager<ProjectileManager> {
 
     private PoolManager _poolManager;
     private List<GameObject> _missles;
-    private readonly Transform _gunTipTransform;
     private GameObject _missle;
 
     void Awake()

@@ -7706,7 +7706,6 @@ GameObject:
   - component: {fileID: 1934252587}
   - component: {fileID: 1934252589}
   - component: {fileID: 1934252588}
-  - component: {fileID: 1934252586}
   - component: {fileID: 1934252590}
   - component: {fileID: 1934252591}
   - component: {fileID: 1934252592}
@@ -7717,18 +7716,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1934252586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1934252585}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a54584e46fd2c443a6b196aa32a639e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
 --- !u!4 &1934252587
 Transform:
   m_ObjectHideFlags: 0
@@ -7826,6 +7813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenShots: 0.15
+  missleHitValue: 1
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0

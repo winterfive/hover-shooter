@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class DroneManager : GenericManager<DroneManager>
 {
+    /*
+     * This class handles the spawning of drones and drone movement
+     */
+
     public Transform[] spawnpoints;
     public Transform[] endPoints;
     public GameObject dronePrefab;
