@@ -2,15 +2,23 @@
 
 public class GameManager : GenericManager<GameManager>
 {
+    /*
+     * Class handles all player values (score, health, shield), player actions, and 
+     * gameplay actions (game over, start, restart, etc)
+     */
+     
     public float timeBetweenShots = 0.15f;
     public delegate void Shoot();
     public static event Shoot OnShoot;    
     public delegate void UpdatePlayerScore(int i);
     public static UpdatePlayerScore OnUpdatePlayerScore;
+    public delegate void UpdatePlayerHealth(int j);
+    public static UpdatePlayerHealth OnUpdatePlayerHealth;
+    public int missleHitValue;
 
     private float _timeSinceLastShot;
     private bool _IsShieldUp;
-    private int _score;
+    private int _score, _playerHealth;
 
 
     void Awake()
@@ -18,6 +26,7 @@ public class GameManager : GenericManager<GameManager>
         _timeSinceLastShot = 0f;
         _IsShieldUp = false;
         _score = 0;
+        _playerHealth = 100;
     }
 
 
@@ -59,14 +68,37 @@ public class GameManager : GenericManager<GameManager>
      * Updates player score and broadcasts to UI
      * int -> void
      */
-    private void UpdateScore(int hitValue)
+    private void UpdateScore()
     {
-        _score += hitValue;
-        // Listens to ProjectileActions for missleHit, adjusts player score accordingly
-
         if (OnUpdatePlayerScore != null)
         {
             OnUpdatePlayerScore(_score);
         }
+    }
+
+
+    /*
+     * Updates player health value and broadcasts to UI
+     * int -> void
+     */
+    private void UpdateHealth()
+    {
+        _playerHealth -= 1;
+
+        if (OnUpdatePlayerHealth != null)
+        {
+            OnUpdatePlayerHealth(_playerHealth);
+        }
+    }
+
+
+    private void OnEnable()
+    {
+        ProjectileActions.OnPlayerHit += UpdateHealth;
+    }
+
+    private void OnDisable()
+    {
+        ProjectileActions.OnPlayerHit -= UpdateHealth;
     }
 }
