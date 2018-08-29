@@ -11,14 +11,12 @@ public class PlayerLasers : MonoBehaviour {
     public ReticleManager reticleManager;
 
     private LineRenderer _line;
-    private GameObject _gunTip;
     private Transform _reticle;
 
 
     private void Start()
     {
-        _gunTip = this.gameObject;
-        _line = _gunTip.GetComponent<LineRenderer>();
+        _line = this.gameObject.GetComponent<LineRenderer>();
         _line.enabled = false;        
     }
 
