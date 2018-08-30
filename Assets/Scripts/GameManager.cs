@@ -33,20 +33,17 @@ public class GameManager : GenericManager<GameManager>
 
     private void Update()
     {
-        if (!_IsShieldUp)
+        if (Input.GetButtonDown("Fire1") && (Time.time >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0 && !_IsShieldUp)
         {
-            if (Input.GetButtonDown("Fire1") && (Time.time >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
-            {
-                ShootAtEnemy();
+            ShootAtEnemy();
 
-                _timeSinceLastShot = Time.time;
-            }
-        }
-        else
-        {
-            // UseShield();
+            _timeSinceLastShot = Time.time;
         }
 
+        //if (Input.GetButton("Shield") && !Input.GetButtonDown("Fire1"))
+        //{
+        //    UseShield();
+        //}
     }
 
 
@@ -71,24 +68,23 @@ public class GameManager : GenericManager<GameManager>
      */
     private void UseShield()
     {
-        //if (player is holding shield button down)
-        //{
-        //    if (shieldPower > 0)
-        //    {
-        //        while (shieldPower > 0)
-        //        {
-        //            _IsShieldUp = true;
-        //            display shield
-        //            tell UI Manager to remove power level from shield for each second up
-        //            also remove energy based on enemy projectile hits ?
-        //        }
-        //    }
-        //    else
-        //    {
-        //        tell UIManager to let player know shield has no power
-        //        _IsShieldUp = false;
-        //    }
-        //}        
+    //    if (shieldPower > 0)
+    //    {
+    //        _IsShieldUp = true;
+
+    //        while (shieldPower > 0)
+    //        {            
+    //            display shield
+    //            remove power from shield per each second in use in gameManager
+    //            tell UI Manager to remove power level from shield for each second up
+    //            also remove energy based on enemy projectile hits ?
+    //        }
+    //    }
+    //    else
+    //    {
+    //        tell UIManager to let player know shield has no power
+    //        _IsShieldUp = false;
+    //    }        
     }
 
 
