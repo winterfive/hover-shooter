@@ -57,6 +57,10 @@ public class GameManager : GenericManager<GameManager>
 
         //if (shot hits enemy)
         //{
+        //    this enemy check is already happening in ReticleManager
+        //    Have ReticleManager broadcast to GameManager?
+        //    ReticleManager needs that info constantly, GameManager only needs it when player takes a shot
+        //    Move check to GameManager, broadcast to ReticleManager?
         //    call destroy enemy
         //}
     }
