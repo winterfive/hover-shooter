@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameManager : GenericManager<GameManager>
 {
@@ -20,6 +21,7 @@ public class GameManager : GenericManager<GameManager>
     private float _timeSinceLastShot;
     private bool _IsShieldUp;
     private int _score, _playerHealth;
+    private RaycastManager _raycastManager;
 
 
     void Awake()
@@ -28,6 +30,7 @@ public class GameManager : GenericManager<GameManager>
         _IsShieldUp = false;
         _score = 0;
         _playerHealth = 100;
+        _raycastManager = RaycastManager.Instance;
     }
 
 
@@ -48,23 +51,35 @@ public class GameManager : GenericManager<GameManager>
 
 
     /*
-     * Broadcasts to PlayerLasers and checks object shot at
+     * Broadcasts to PlayerLasers, checks object shot at and destroys it
      * void -> void
      */
     private void ShootAtEnemy()
     {
         OnShoot();
 
-        //if (shot hits enemy)
-        //{
-        //    this enemy check is already happening in ReticleManager
-        //    Have ReticleManager broadcast to GameManager?
-        //    ReticleManager needs that info constantly, GameManager only needs it when player takes a shot
-        //    Move check to GameManager, broadcast to ReticleManager?
-        //    call destroy enemy
-        //}
+        DestroyDrone();        
     }
 
+
+    private void DestroyDrone()
+    {
+        GameObject shotObject = _raycastManager.GetCurrentFoundObject().transform.root.gameObject;
+
+        if (shotObject != null)
+        {
+            if (shotObject.tag == "Enemy" || shotObject.tag == "Turret" || shotObject.tag == "Glow")
+            {
+                shotObject.GetComponent<NavMeshAgent>().speed = 0;
+                shotObject.GetComponent<DroneActions>().IsShooting = false;
+                // TODO!!!!!!!!!!!!!!!!!!!!!
+                StopCoroutine("DissolveEnemy");
+                StartCoroutine("DissolveEnemy");
+                shotObject.SetActive(false);
+            }
+        }
+    }
+      
 
     /*
      * Handles use of shield
