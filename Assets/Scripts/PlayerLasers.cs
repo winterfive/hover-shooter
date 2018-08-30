@@ -47,10 +47,6 @@ public class PlayerLasers : MonoBehaviour {
 
             _line.enabled = false;
         }
-        else
-        {
-            yield return null;
-        }
     }
 
     private void OnEnable()
