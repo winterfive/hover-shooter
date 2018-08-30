@@ -36,7 +36,7 @@ public class DroneActions : MonoBehaviour
     private float _timeBetweenShots;
 
 
-    void Start()
+    private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _camTransform = Camera.main.gameObject.transform;
@@ -47,7 +47,11 @@ public class DroneActions : MonoBehaviour
         _glowTransform = FindChildWithTag("Glow");
         _glowRend = _glowTransform.GetComponent<Renderer>();
         _gunTipTransform = FindChildWithTag("GunTip");
+    }
 
+
+    void Start()
+    {
         GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
         if (droneManagerObject != null)
         {
