@@ -1253,6 +1253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reticleManager: {fileID: 1934252588}
+  laserDuration: 0.1
 --- !u!1 &186614838
 GameObject:
   m_ObjectHideFlags: 0
@@ -6085,6 +6086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reticleManager: {fileID: 1934252588}
+  laserDuration: 0.1
 --- !u!1 &1308071616
 GameObject:
   m_ObjectHideFlags: 0
@@ -8238,6 +8240,7 @@ GameObject:
   - component: {fileID: 1934252590}
   - component: {fileID: 1934252591}
   - component: {fileID: 1934252592}
+  - component: {fileID: 1934252586}
   m_Layer: 2
   m_Name: ScriptManager
   m_TagString: ScriptManager
@@ -8245,6 +8248,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1934252586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1934252585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee658a53630b6c64998281188c06381b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1934252587
 Transform:
   m_ObjectHideFlags: 0
