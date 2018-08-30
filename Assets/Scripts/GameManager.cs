@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GameManager : GenericManager<GameManager>
 {
@@ -32,36 +33,62 @@ public class GameManager : GenericManager<GameManager>
 
     private void Update()
     {
-        // Add check for if shield is up
-        if (Input.GetButtonDown("Fire1") && (Time.time >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
+        if (!_IsShieldUp)
         {
-            OnShoot();
+            if (Input.GetButtonDown("Fire1") && (Time.time >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
+            {
+                ShootAtEnemy();
 
-            _timeSinceLastShot = Time.time;
+                _timeSinceLastShot = Time.time;
+            }
+        }
+        else
+        {
+            // UseShield();
         }
 
-        //if (player has shield up button pressed)
-        // Move to it's own method, call that method here
+    }
+
+
+    /*
+     * Broadcasts to PlayerLasers and checks object shot at
+     * void -> void
+     */
+    private void ShootAtEnemy()
+    {
+        OnShoot();
+
+        //if (shot hits enemy)
         //{
-        //    if (shield has energy to use)
+        //    call destroy enemy
+        //}
+    }
+
+
+    /*
+     * Handles use of shield
+     * void -> void
+     */
+    private void UseShield()
+    {
+        //if (player is holding shield button down)
+        //{
+        //    if (shieldPower > 0)
         //    {
-        //        IsShieldUp = true;
-        //        while (shield energy level > 0)
+        //        while (shieldPower > 0)
         //        {
-        //            tell UIManager to display shield in HMD
+        //            _IsShieldUp = true;
+        //            display shield
         //            tell UI Manager to remove power level from shield for each second up
         //            also remove energy based on enemy projectile hits ?
         //        }
         //    }
         //    else
         //    {
-        //        tell UIManager to let player know there's no energy for shield
+        //        tell UIManager to let player know shield has no power
+        //        _IsShieldUp = false;
         //    }
-        //}
-        //else
-        //{
-        //    IsShieldUp = false;
-        //}
+        //}        
     }
 
 
