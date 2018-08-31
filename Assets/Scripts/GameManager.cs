@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.AI;
 
 public class GameManager : GenericManager<GameManager>
 {
@@ -19,6 +21,7 @@ public class GameManager : GenericManager<GameManager>
     private float _timeSinceLastShot;
     private bool _IsShieldUp;
     private int _score, _playerHealth;
+    private RaycastManager _raycastManager;
 
 
     void Awake()
@@ -27,41 +30,80 @@ public class GameManager : GenericManager<GameManager>
         _IsShieldUp = false;
         _score = 0;
         _playerHealth = 100;
+        _raycastManager = RaycastManager.Instance;
     }
 
 
     private void Update()
     {
-        // Add check for if shield is up
-        if (Input.GetButtonDown("Fire1") && (Time.time >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0)
+        if (Input.GetButtonDown("Fire1") && (Time.time >= timeBetweenShots + _timeSinceLastShot) && Time.timeScale != 0 && !_IsShieldUp)
         {
-            OnShoot();
+            ShootAtEnemy();
 
             _timeSinceLastShot = Time.time;
         }
 
-        //if (player has shield up button pressed)
-        // Move to it's own method, call that method here
+        //if (Input.GetButton("Shield") && !Input.GetButtonDown("Fire1"))
         //{
-        //    if (shield has energy to use)
-        //    {
-        //        IsShieldUp = true;
-        //        while (shield energy level > 0)
-        //        {
-        //            tell UIManager to display shield in HMD
-        //            tell UI Manager to remove power level from shield for each second up
-        //            also remove energy based on enemy projectile hits ?
-        //        }
-        //    }
-        //    else
-        //    {
-        //        tell UIManager to let player know there's no energy for shield
-        //    }
+        //    UseShield();
         //}
-        //else
-        //{
-        //    IsShieldUp = false;
-        //}
+    }
+
+
+    /*
+     * Broadcasts to PlayerLasers, checks object shot at and destroys it
+     * void -> void
+     */
+    private void ShootAtEnemy()
+    {
+        OnShoot();
+
+        DestroyDrone();        
+    }
+
+
+    private void DestroyDrone()
+    {
+        GameObject shotObject = _raycastManager.GetCurrentFoundObject().transform.root.gameObject;
+
+        if (shotObject != null)
+        {
+            if (shotObject.tag == "Enemy" || shotObject.tag == "Turret" || shotObject.tag == "Glow")
+            {
+                shotObject.GetComponent<NavMeshAgent>().speed = 0;
+                shotObject.GetComponent<DroneActions>().IsShooting = false;
+                // TODO!!!!!!!!!!!!!!!!!!!!!
+                StopCoroutine("DissolveEnemy");
+                StartCoroutine("DissolveEnemy");
+                shotObject.SetActive(false);
+            }
+        }
+    }
+      
+
+    /*
+     * Handles use of shield
+     * void -> void
+     */
+    private void UseShield()
+    {
+    //    if (shieldPower > 0)
+    //    {
+    //        _IsShieldUp = true;
+
+    //        while (shieldPower > 0)
+    //        {            
+    //            display shield
+    //            remove power from shield per each second in use in gameManager
+    //            tell UI Manager to remove power level from shield for each second up
+    //            also remove energy based on enemy projectile hits ?
+    //        }
+    //    }
+    //    else
+    //    {
+    //        tell UIManager to let player know shield has no power
+    //        _IsShieldUp = false;
+    //    }        
     }
 
 
