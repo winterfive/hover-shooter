@@ -723,10 +723,10 @@ Light:
   m_GameObject: {fileID: 125701571}
   m_Enabled: 1
   serializedVersion: 8
-  m_Type: 3
-  m_Color: {r: 0.1137255, g: 0.26592568, b: 0.972549, a: 1}
-  m_Intensity: 30
-  m_Range: 40
+  m_Type: 2
+  m_Color: {r: 0.02352941, g: 0.39289653, b: 1, a: 1}
+  m_Intensity: 5
+  m_Range: 30
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -1078,10 +1078,10 @@ Light:
   m_GameObject: {fileID: 170076733}
   m_Enabled: 1
   serializedVersion: 8
-  m_Type: 3
+  m_Type: 2
   m_Color: {r: 1, g: 0.042137526, b: 0.023584902, a: 1}
-  m_Intensity: 30
-  m_Range: 40
+  m_Intensity: 5
+  m_Range: 30
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -2183,10 +2183,10 @@ Light:
   m_GameObject: {fileID: 560257131}
   m_Enabled: 1
   serializedVersion: 8
-  m_Type: 3
-  m_Color: {r: 0.9607843, g: 0.9540293, b: 0, a: 1}
-  m_Intensity: 30
-  m_Range: 40
+  m_Type: 2
+  m_Color: {r: 0.98319924, g: 1, b: 0.02352941, a: 1}
+  m_Intensity: 5
+  m_Range: 30
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -4157,7 +4157,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 57cf3123efd674e46a552b4949eeb7d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5461,7 +5461,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1213041244}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.0034902452, y: -0.013961832, z: -0.000048735263, w: 0.99989647}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5470,7 +5470,7 @@ RectTransform:
   - {fileID: 1226095920}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.4, y: -721.6, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 2}
@@ -5573,7 +5573,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 03830152d0f457841ace6fd7be85dc66, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6124,10 +6124,10 @@ Light:
   m_GameObject: {fileID: 1308071616}
   m_Enabled: 1
   serializedVersion: 8
-  m_Type: 3
-  m_Color: {r: 0, g: 0.94509804, b: 0.06444453, a: 1}
-  m_Intensity: 30
-  m_Range: 40
+  m_Type: 2
+  m_Color: {r: 0, g: 1, b: 0.060747623, a: 1}
+  m_Intensity: 5
+  m_Range: 30
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -6502,7 +6502,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 57cf3123efd674e46a552b4949eeb7d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8094,13 +8094,13 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1908643886}
-  m_LocalRotation: {x: 0.5367882, y: -0.036788233, z: 0.023436688, w: 0.8425888}
+  m_LocalRotation: {x: 0.5220012, y: -0.03719166, z: 0.022791073, w: 0.85182875}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1407379265}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 65, y: -5, z: 0}
+  m_LocalEulerAnglesHint: {x: 63, y: -5, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 25}
@@ -8115,7 +8115,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
   m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
@@ -8135,7 +8135,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
