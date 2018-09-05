@@ -144,6 +144,10 @@ public class DroneActions : MonoBehaviour
      */
     private void LerpColor()
     {
+        // Lerp color not working
+        // pingpong value is pingponging
+        // color changes from red to black but doesnt change back to red
+        // ???
         Color defaultColor = _glowRend.material.color;
 
         if (_glowRend)
