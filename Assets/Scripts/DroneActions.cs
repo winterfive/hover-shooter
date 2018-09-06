@@ -35,6 +35,7 @@ public class DroneActions : MonoBehaviour
     private float _timeOfPreviousShot;
     private float _timeBetweenShots;
     private bool _isShooting;
+    private Color _defaultColor;
 
     public bool IsShooting { get; set; }
 
@@ -49,6 +50,7 @@ public class DroneActions : MonoBehaviour
         _turretTransform = FindChildWithTag("Turret");
         _glowTransform = FindChildWithTag("Glow");
         _glowRend = _glowTransform.GetComponent<Renderer>();
+        _defaultColor = _glowRend.material.color;
         _gunTipTransform = FindChildWithTag("GunTip");
         _isShooting = true;
     }
@@ -144,12 +146,6 @@ public class DroneActions : MonoBehaviour
      */
     private void LerpColor()
     {
-        // Lerp color not working
-        // pingpong value is pingponging
-        // color changes from red to black but doesnt change back to red
-        // ???
-        Color defaultColor = _glowRend.material.color;
-
         if (_glowRend)
         {
             float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
