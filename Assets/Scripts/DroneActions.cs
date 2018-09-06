@@ -149,7 +149,7 @@ public class DroneActions : MonoBehaviour
         if (_glowRend)
         {
             float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
-            _glowRend.material.color = Color.Lerp(defaultColor, secondGlow, pingpong);
+            _glowRend.material.color = Color.Lerp(_defaultColor, secondGlow, pingpong);
         }
     }
 
