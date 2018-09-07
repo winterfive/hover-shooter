@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4030676724652022}
   - component: {fileID: 195730861628870234}
-  - component: {fileID: 114574855949980354}
+  - component: {fileID: 114425296854067620}
   m_Layer: 2
   m_Name: Drone
   m_TagString: Untagged
@@ -461,7 +461,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0000001, z: 1.126189}
   m_Center: {x: -0, y: 0.00000023208288, z: -0.06309456}
---- !u!114 &114574855949980354
+--- !u!114 &114425296854067620
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -473,13 +473,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   altitudeMin: 0.5
-  altitudeMax: 16
-  glowSpeed: 0.5
-  secondGlow: {r: 0, g: 0, b: 0, a: 1}
-  minAgentSpeed: 0.5
-  maxAgentSpeed: 5
-  minTimeBetweenShots: 5
-  maxTimeBetweenShots: 30
+  altitudeMax: 18
+  glowSpeed: 0.7
+  secondGlow: {r: 0, g: 0, b: 0, a: 0}
+  minAgentSpeed: 2
+  maxAgentSpeed: 6
+  minTimeBetweenShots: 15
+  maxTimeBetweenShots: 25
   droneRange: 100
 --- !u!195 &195730861628870234
 NavMeshAgent:
@@ -498,7 +498,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 0
-  m_Height: 20
+  m_Height: 0.5
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
