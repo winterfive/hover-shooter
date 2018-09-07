@@ -5461,7 +5461,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1213041244}
-  m_LocalRotation: {x: 0, y: -0.038475025, z: 0, w: 0.99925965}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5470,7 +5470,7 @@ RectTransform:
   - {fileID: 1226095920}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -4.41, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 2}
@@ -7413,7 +7413,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4050884203376040, guid: 736fe4f8249ce9545ad8a43854532526, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 7
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4050884203376040, guid: 736fe4f8249ce9545ad8a43854532526, type: 2}
       propertyPath: m_LocalRotation.x
@@ -8346,6 +8346,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenShots: 0.15
   missleHitValue: 1
+  destroyDroneDuration: 1
+  destructionColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.7, g: 0, b: 0, a: 0.69803923}
+  - {r: 0.35, g: 0, b: 0, a: 0.34901962}
+  - {r: 0, g: 0, b: 0, a: 0}
+  waitBetweenColors: 0.3
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0
