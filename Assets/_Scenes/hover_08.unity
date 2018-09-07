@@ -8318,7 +8318,7 @@ MonoBehaviour:
   zMin: -9
   zMax: 23
   _timeBetweenSpawns: 0.8
-  _waitToSpawn: 3
+  _waitToSpawn: 5
 --- !u!114 &1934252591
 MonoBehaviour:
   m_ObjectHideFlags: 0
