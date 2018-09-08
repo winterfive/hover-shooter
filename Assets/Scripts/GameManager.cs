@@ -51,7 +51,6 @@ public class GameManager : GenericManager<GameManager>
         //if (Input.GetButton("Shield") && !Input.GetButtonDown("Fire1"))
         //{
         //    UseShield();
-        //}
     }
 
 
@@ -70,6 +69,7 @@ public class GameManager : GenericManager<GameManager>
     private void DestroyDrone()
     {
         _shotObject = _raycastManager.GetCurrentFoundObject().transform.root.gameObject;
+        Debug.Log("_shotObject object is: " + _shotObject.tag);
 
         if (_shotObject != null)
         {
