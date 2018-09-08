@@ -42,7 +42,7 @@ public class DroneActions : MonoBehaviour
 
     private void Awake()
     {
-        _agent = GetComponent<NavMeshAgent>();
+         _agent = GetComponent<NavMeshAgent>();
         _camTransform = Camera.main.gameObject.transform;
         _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
         _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
@@ -58,6 +58,8 @@ public class DroneActions : MonoBehaviour
 
     void Start()
     {
+        NavMeshHit hit;
+
         GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
         if (droneManagerObject != null)
         {
@@ -69,7 +71,17 @@ public class DroneActions : MonoBehaviour
             Debug.Log("Cannot find DroneManager script");
         }
 
-        GoToRandomPoint();
+        if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
+        {
+            GoToRandomPoint();
+        }
+        else
+        {
+            _agent.FindClosestEdge(out hit);
+            _agent.Warp(_hit.point);
+            Debug.Log("Drone position reset"); // This never outputs
+        }
+        
         InvokeRepeating("LerpColor", 0f, 0.1f);
 
         _timeBetweenShots = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
@@ -162,7 +174,7 @@ public class DroneActions : MonoBehaviour
     {
         Vector3 midPoint = _droneManagerReference.CreateRandomPosition();
         midPoint.y = _agent.baseOffset;
-        _agent.destination = midPoint;
+        _agent.destination = midPoint;        
     }
 
 
