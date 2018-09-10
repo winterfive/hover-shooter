@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,11 +18,15 @@ public class GameManager : GenericManager<GameManager>
     public delegate void UpdatePlayerHealth(int j);
     public static UpdatePlayerHealth OnUpdatePlayerHealth;
     public int missleHitValue;
+    public float destroyDroneDuration;
+    public Color[] destructionColors;
+    public float waitBetweenColors;
 
     private float _timeSinceLastShot;
     private bool _IsShieldUp;
     private int _score, _playerHealth;
     private RaycastManager _raycastManager;
+    private GameObject _shotObject;
 
 
     void Awake()
@@ -46,7 +51,6 @@ public class GameManager : GenericManager<GameManager>
         //if (Input.GetButton("Shield") && !Input.GetButtonDown("Fire1"))
         //{
         //    UseShield();
-        //}
     }
 
 
@@ -64,20 +68,42 @@ public class GameManager : GenericManager<GameManager>
 
     private void DestroyDrone()
     {
-        GameObject shotObject = _raycastManager.GetCurrentFoundObject().transform.root.gameObject;
+        _shotObject = _raycastManager.GetCurrentFoundObject().transform.root.gameObject;
+        Debug.Log("_shotObject object is: " + _shotObject.tag);
 
-        if (shotObject != null)
+        if (_shotObject != null)
         {
-            if (shotObject.tag == "Enemy" || shotObject.tag == "Turret" || shotObject.tag == "Glow")
+            if (_shotObject.tag == "Enemy")
             {
-                shotObject.GetComponent<NavMeshAgent>().speed = 0;
-                shotObject.GetComponent<DroneActions>().IsShooting = false;
-                // TODO!!!!!!!!!!!!!!!!!!!!!
-                StopCoroutine("DissolveEnemy");
-                StartCoroutine("DissolveEnemy");
-                shotObject.SetActive(false);
+                _shotObject.GetComponent<NavMeshAgent>().speed = 0;
+                _shotObject.GetComponent<DroneActions>().IsShooting = false;
+                StartCoroutine("DestroyEnemy");
+                _shotObject.SetActive(false);
             }
         }
+    }
+
+
+    private IEnumerator DestroyEnemy()
+    {
+        Renderer[] components = this.GetComponentsInChildren<Renderer>();
+
+        foreach (Renderer r in components)
+        {
+            r.material.mainTexture = null;
+        }
+
+        foreach (Color c in destructionColors)
+        {
+            foreach (Renderer r in components)
+            {
+                r.material.color = c;
+            }
+
+            yield return new WaitForSeconds(waitBetweenColors);
+        }
+
+        yield return new WaitForSeconds(destroyDroneDuration);
     }
       
 
