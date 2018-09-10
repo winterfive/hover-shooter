@@ -8226,7 +8226,7 @@ MonoBehaviour:
   xMin: -23
   xMax: 23
   yMin: 0.5
-  yMax: 17
+  yMax: 15
   zMin: -9
   zMax: 23
   _timeBetweenSpawns: 0.8
