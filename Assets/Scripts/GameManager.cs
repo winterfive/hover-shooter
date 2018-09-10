@@ -102,6 +102,7 @@ public class GameManager : GenericManager<GameManager>
             foreach (Renderer r in components)
             {
                 r.material.color = c;
+                Debug.Log("Fading out drone to color: " + c);
             }
 
             yield return new WaitForSeconds(waitBetweenColors);
