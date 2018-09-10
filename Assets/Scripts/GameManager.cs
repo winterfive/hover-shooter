@@ -79,12 +79,12 @@ public class GameManager : GenericManager<GameManager>
     }
 
 
-    private void DestroyEnemy()
+    private IEnumerator DestroyEnemy()
     {
         shotObject.GetComponent<NavMeshAgent>().speed = 0;
         shotObject.GetComponent<DroneActions>().IsShooting = false;
-        StartCoroutine("FadeEffect");
-        shotObject.SetActive(false);
+        yield return StartCoroutine("FadeEffect");
+        ReturnToPool(); // This is happening before color change can be seen, research running code after coroutine TODO
     }
 
 
@@ -109,6 +109,12 @@ public class GameManager : GenericManager<GameManager>
         }
 
         yield return new WaitForSeconds(destroyDroneDuration);
+    }
+
+
+    private void ReturnToPool()
+    {
+        shotObject.SetActive(false);
     }
       
 
