@@ -26,7 +26,6 @@ public class GameManager : GenericManager<GameManager>
     private bool _IsShieldUp;
     private int _score, _playerHealth;
     private RaycastManager _raycastManager;
-    private GameObject _shotObject;
 
 
     void Awake()
@@ -61,26 +60,26 @@ public class GameManager : GenericManager<GameManager>
     private void ShootAtEnemy()
     {
         OnShoot();
-
         DestroyDrone();        
     }
 
 
     private void DestroyDrone()
     {
-        _shotObject = _raycastManager.GetCurrentFoundObject().transform.root.gameObject;
-        Debug.Log("_shotObject object is: " + _shotObject.tag);
+        GameObject shotObject;
 
-        if (_shotObject != null)
+        if (_raycastManager.GetCurrentFoundObject() != null)
         {
-            if (_shotObject.tag == "Enemy")
+            shotObject = _raycastManager.GetCurrentFoundObject().transform.root.gameObject;
+
+            if (shotObject.tag == "Enemy")
             {
-                _shotObject.GetComponent<NavMeshAgent>().speed = 0;
-                _shotObject.GetComponent<DroneActions>().IsShooting = false;
+                shotObject.GetComponent<NavMeshAgent>().speed = 0;
+                shotObject.GetComponent<DroneActions>().IsShooting = false;
                 StartCoroutine("DestroyEnemy");
-                _shotObject.SetActive(false);
+                shotObject.SetActive(false);
             }
-        }
+        }        
     }
 
 
