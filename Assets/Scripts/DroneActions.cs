@@ -42,7 +42,7 @@ public class DroneActions : MonoBehaviour
 
     private void Awake()
     {
-         _agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>();
         _camTransform = Camera.main.gameObject.transform;
         _agent.baseOffset = Random.Range(altitudeMin, altitudeMax);
         _agent.speed = Random.Range(minAgentSpeed, maxAgentSpeed);
@@ -58,8 +58,6 @@ public class DroneActions : MonoBehaviour
 
     void Start()
     {
-        NavMeshHit hit;
-
         GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
         if (droneManagerObject != null)
         {
@@ -77,9 +75,8 @@ public class DroneActions : MonoBehaviour
         }
         else
         {
-            _agent.FindClosestEdge(out hit);
-            _agent.Warp(_hit.point);
-            Debug.Log("Drone position reset"); // This never outputs
+            _agent.gameObject.SetActive(false);
+            Debug.Log("Drone returned to pool (not on navMesh)");
         }
         
         InvokeRepeating("LerpColor", 0f, 0.1f);
