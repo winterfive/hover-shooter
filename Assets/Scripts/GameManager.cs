@@ -26,6 +26,7 @@ public class GameManager : GenericManager<GameManager>
     private bool _IsShieldUp;
     private int _score, _playerHealth;
     private RaycastManager _raycastManager;
+    private GameObject shotObject;
 
 
     void Awake()
@@ -60,32 +61,36 @@ public class GameManager : GenericManager<GameManager>
     private void ShootAtEnemy()
     {
         OnShoot();
-        DestroyDrone();        
+        CheckForEnemy();        
     }
 
 
-    private void DestroyDrone()
+    private void CheckForEnemy()
     {
-        GameObject shotObject;
-
         if (_raycastManager.GetCurrentFoundObject() != null)
         {
             shotObject = _raycastManager.GetCurrentFoundObject().transform.root.gameObject;
 
             if (shotObject.tag == "Enemy")
             {
-                shotObject.GetComponent<NavMeshAgent>().speed = 0;
-                shotObject.GetComponent<DroneActions>().IsShooting = false;
-                StartCoroutine("DestroyEnemy");
-                shotObject.SetActive(false);
+                DestroyEnemy();
             }
         }        
     }
 
 
-    private IEnumerator DestroyEnemy()
+    private void DestroyEnemy()
     {
-        Renderer[] components = this.GetComponentsInChildren<Renderer>();
+        shotObject.GetComponent<NavMeshAgent>().speed = 0;
+        shotObject.GetComponent<DroneActions>().IsShooting = false;
+        StartCoroutine("FadeEffect");
+        shotObject.SetActive(false);
+    }
+
+
+    private IEnumerator FadeEffect()
+    {
+        Renderer[] components = shotObject.GetComponentsInChildren<Renderer>();
 
         foreach (Renderer r in components)
         {
