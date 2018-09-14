@@ -8263,7 +8263,7 @@ MonoBehaviour:
   - {r: 0.7, g: 0, b: 0, a: 0.69803923}
   - {r: 0.35, g: 0, b: 0, a: 0.34901962}
   - {r: 0, g: 0, b: 0, a: 0}
-  waitBetweenColors: 0.5
+  waitBetweenColors: 0.3
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0
