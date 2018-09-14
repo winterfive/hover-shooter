@@ -18,7 +18,6 @@ public class GameManager : GenericManager<GameManager>
     public delegate void UpdatePlayerHealth(int j);
     public static UpdatePlayerHealth OnUpdatePlayerHealth;
     public int missleHitValue;
-    public float destroyDroneDuration;
     public Color[] destructionColors;
     public float waitBetweenColors;
 
@@ -61,7 +60,8 @@ public class GameManager : GenericManager<GameManager>
     private void ShootAtEnemy()
     {
         OnShoot();
-        CheckForEnemy();        
+        CheckForEnemy();
+        UpdateScore();
     }
 
 
@@ -79,12 +79,11 @@ public class GameManager : GenericManager<GameManager>
     }
 
 
-    private IEnumerator DestroyEnemy()
+    private void DestroyEnemy()
     {
         shotObject.GetComponent<NavMeshAgent>().speed = 0;
         shotObject.GetComponent<DroneActions>().IsShooting = false;
-        yield return StartCoroutine("FadeEffect");
-        ReturnToPool(); // This is happening before color change can be seen, research running code after coroutine TODO
+        StartCoroutine(FadeEffect());
     }
 
 
@@ -108,12 +107,7 @@ public class GameManager : GenericManager<GameManager>
             yield return new WaitForSeconds(waitBetweenColors);
         }
 
-        yield return new WaitForSeconds(destroyDroneDuration);
-    }
-
-
-    private void ReturnToPool()
-    {
+        yield return new WaitForSeconds(1f);
         shotObject.SetActive(false);
     }
       
