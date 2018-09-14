@@ -18,7 +18,6 @@ public class GameManager : GenericManager<GameManager>
     public delegate void UpdatePlayerHealth(int j);
     public static UpdatePlayerHealth OnUpdatePlayerHealth;
     public int missleHitValue;
-    public float destroyDroneDuration;
     public Color[] destructionColors;
     public float waitBetweenColors;
 
@@ -26,7 +25,8 @@ public class GameManager : GenericManager<GameManager>
     private bool _IsShieldUp;
     private int _score, _playerHealth;
     private RaycastManager _raycastManager;
-    private GameObject _shotObject;
+    private GameObject shotObject;
+    private bool _hasFaded;
 
 
     void Awake()
@@ -61,32 +61,45 @@ public class GameManager : GenericManager<GameManager>
     private void ShootAtEnemy()
     {
         OnShoot();
-
-        DestroyDrone();        
+        CheckForEnemy();
     }
 
 
-    private void DestroyDrone()
+    private void CheckForEnemy()
     {
-        _shotObject = _raycastManager.GetCurrentFoundObject().transform.root.gameObject;
-        Debug.Log("_shotObject object is: " + _shotObject.tag);
-
-        if (_shotObject != null)
+        if (_raycastManager.GetCurrentFoundObject() != null)
         {
-            if (_shotObject.tag == "Enemy")
+            shotObject = _raycastManager.GetCurrentFoundObject().transform.root.gameObject;
+
+            if (shotObject.tag == "Enemy")
             {
-                _shotObject.GetComponent<NavMeshAgent>().speed = 0;
-                _shotObject.GetComponent<DroneActions>().IsShooting = false;
-                StartCoroutine("DestroyEnemy");
-                _shotObject.SetActive(false);
+                DestroyEnemy();
             }
-        }
+        }        
     }
 
 
-    private IEnumerator DestroyEnemy()
+    private void DestroyEnemy()
     {
-        Renderer[] components = this.GetComponentsInChildren<Renderer>();
+        shotObject.GetComponent<NavMeshAgent>().speed = 0;
+        shotObject.GetComponent<DroneActions>().IsShooting = false;
+        StartCoroutine(ReturnToPool());
+
+        UpdateScore();
+    }
+
+
+    private IEnumerator ReturnToPool()
+    {
+        yield return StartCoroutine(FadeEffect());
+        shotObject.SetActive(false);
+    }
+
+
+    private IEnumerator FadeEffect()
+    {
+        // TODO This required turning on transparent in the material which is not good for mobile :(
+        Renderer[] components = shotObject.GetComponentsInChildren<Renderer>();
 
         foreach (Renderer r in components)
         {
@@ -98,12 +111,11 @@ public class GameManager : GenericManager<GameManager>
             foreach (Renderer r in components)
             {
                 r.material.color = c;
+                Debug.Log("Fading out drone to color: " + c);
             }
 
             yield return new WaitForSeconds(waitBetweenColors);
         }
-
-        yield return new WaitForSeconds(destroyDroneDuration);
     }
       
 

@@ -6,7 +6,7 @@ public class ReticleManager : GenericManager<ReticleManager> {
     public GameObject reticle;
     public Color foundEnemyColor;
 
-    private float _defaultDistance = 2f;
+    private float _defaultDistance = 10f;
     private Transform _reticleTransform;
     private Vector3 _originalScale;
     private Quaternion _originalRotation;
