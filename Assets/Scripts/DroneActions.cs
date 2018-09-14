@@ -69,7 +69,7 @@ public class DroneActions : MonoBehaviour
             Debug.Log("Cannot find DroneManager script");
         }
 
-        if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
+        if (_agent.isOnNavMesh && _agent.isActiveAndEnabled && !_agent.isStopped)
         {
             GoToRandomPoint();
         }
