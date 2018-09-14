@@ -92,14 +92,13 @@ public class GameManager : GenericManager<GameManager>
     private IEnumerator ReturnToPool()
     {
         yield return StartCoroutine(FadeEffect());
-        Debug.Log("got to here");
-        // shotObjust is disappearing immediately on being shot, is there another call somewhere else?
         shotObject.SetActive(false);
     }
 
 
     private IEnumerator FadeEffect()
     {
+        // TODO This required turning on transparent in the material which is not good for mobile :(
         Renderer[] components = shotObject.GetComponentsInChildren<Renderer>();
 
         foreach (Renderer r in components)
