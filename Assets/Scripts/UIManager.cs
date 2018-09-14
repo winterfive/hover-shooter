@@ -7,13 +7,13 @@ public class UIManager : GenericManager<UIManager> {
 
     private void UpdateHealthUI(int i)
     {
-        Debug.Log("Player health is: " + i);
+        //Debug.Log("Player health is: " + i);
     }
 
 
     private void UpdateScoreUI(int j)
     {
-        Debug.Log("The score is: " + j);
+        //Debug.Log("The score is: " + j);
     }
 
 
