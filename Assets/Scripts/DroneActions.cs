@@ -69,7 +69,7 @@ public class DroneActions : MonoBehaviour
             Debug.Log("Cannot find DroneManager script");
         }
 
-        if (_agent.isOnNavMesh && _agent.isActiveAndEnabled && !_agent.isStopped)
+        if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
         {
             GoToRandomPoint();
         }
@@ -78,8 +78,11 @@ public class DroneActions : MonoBehaviour
             _agent.gameObject.SetActive(false);
             Debug.Log("Drone returned to pool (not on navMesh)");
         }
-        
-        InvokeRepeating("LerpColor", 0f, 0.1f);
+
+        if (_agent.speed > 0)
+        {
+            InvokeRepeating("LerpColor", 0f, 0.1f);
+        }        
 
         _timeBetweenShots = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
         _timeOfPreviousShot = 0f;
@@ -99,14 +102,14 @@ public class DroneActions : MonoBehaviour
         // Check if drone is close to random/mid point
         if (Time.frameCount % 10 == 0)
         {
-            if (_agent.remainingDistance < _agent.stoppingDistance || _agent.speed < 0.1)
+            if (_agent.remainingDistance < _agent.stoppingDistance)
             {
                 GoToEndPoint();
             }            
         }
 
         // Check if drone is at endPoint
-        if (Vector3.Distance(this.transform.position, _endPoint) <= 1.0f || _agent.speed < 0.1)
+        if (Vector3.Distance(this.transform.position, _endPoint) <= 1.0f)
         {
             this.gameObject.SetActive(false);
         }

@@ -26,6 +26,7 @@ public class GameManager : GenericManager<GameManager>
     private int _score, _playerHealth;
     private RaycastManager _raycastManager;
     private GameObject shotObject;
+    private bool _hasFaded;
 
 
     void Awake()
@@ -61,7 +62,6 @@ public class GameManager : GenericManager<GameManager>
     {
         OnShoot();
         CheckForEnemy();
-        UpdateScore();
     }
 
 
@@ -83,7 +83,18 @@ public class GameManager : GenericManager<GameManager>
     {
         shotObject.GetComponent<NavMeshAgent>().speed = 0;
         shotObject.GetComponent<DroneActions>().IsShooting = false;
-        StartCoroutine(FadeEffect());
+        StartCoroutine(ReturnToPool());
+
+        UpdateScore();
+    }
+
+
+    private IEnumerator ReturnToPool()
+    {
+        yield return StartCoroutine(FadeEffect());
+        Debug.Log("got to here");
+        // shotObjust is disappearing immediately on being shot, is there another call somewhere else?
+        shotObject.SetActive(false);
     }
 
 
@@ -106,9 +117,6 @@ public class GameManager : GenericManager<GameManager>
 
             yield return new WaitForSeconds(waitBetweenColors);
         }
-
-        yield return new WaitForSeconds(1f);
-        shotObject.SetActive(false);
     }
       
 
