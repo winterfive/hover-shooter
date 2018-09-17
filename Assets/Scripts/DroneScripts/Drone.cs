@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class Drone : MonoBehaviour
 {
@@ -39,9 +37,18 @@ public class Drone : MonoBehaviour
 
     /*
      * Creates Vector3 w/ random values for x & z w/in range
-     * void -> Vector3
+     * float, float, float, float, float, float -> Vector3
      */
-    public void CreateRandomPosition() { }
+    public Vector3 CreateRandomPosition(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax)
+    {
+        Vector3 randomPosition;
+
+        randomPosition.x = Random.Range(xMin, xMax);
+        randomPosition.y = Random.Range(yMin, yMax);
+        randomPosition.z = Random.Range(zMin, zMax);
+
+        return randomPosition;
+    }
 
 
     /*
