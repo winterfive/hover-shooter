@@ -47,9 +47,4 @@ public class AttackDrone : Drone, ILookAt<Transform>
             _thisTransform.transform.rotation = Quaternion.LookRotation(newVector);
         }
     }
-
-    void ILookAt<Transform>.LookAt(Transform transformBeingLookedAt)
-    {
-        throw new NotImplementedException();
-    }
 }
