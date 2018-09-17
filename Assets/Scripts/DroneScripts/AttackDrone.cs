@@ -54,6 +54,7 @@ public class AttackDrone : Drone, ILookAt<Transform>
 
 
     public new Vector3 CreateRandomPosition()
+    // Move this to Drone and pass the x y z values to it 
     {
         Vector3 randomPosition;
 
