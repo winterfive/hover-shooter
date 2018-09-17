@@ -4,15 +4,6 @@ using UnityEngine.AI;
   
 public class DroneActions : MonoBehaviour
 {
-    /*
-     * This class is placed on the drone prefab parent object and 
-     * handles all actions that are performed differently per each instance.
-     * Drone movement (random points to go to)
-     * Turret rotation
-     * Change of glow color
-     * Timing of ShootMissle
-     */
-
     public float altitudeMin, altitudeMax;
     public float glowSpeed;
     public Color secondGlow;
