@@ -1,8 +1,12 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
+
 
 public class AttackDrone : Drone, ILookAt<Transform>
 {
+    public Transform[] spawnPoints;
+    public Transform[] endPoints;
+
     private Transform _camTransform;
     private Transform _thisTransform;
 
@@ -46,5 +50,25 @@ public class AttackDrone : Drone, ILookAt<Transform>
 
             _thisTransform.transform.rotation = Quaternion.LookRotation(newVector);
         }
+    }
+
+
+    public new Vector3 CreateRandomPosition()
+    {
+        Vector3 randomPosition;
+
+        randomPosition.x = Random.Range(xMin, xMax);
+        randomPosition.y = Random.Range(yMin, yMax);
+        randomPosition.z = Random.Range(zMin, zMax);
+
+        return randomPosition;
+    }
+
+
+    public new Vector3 SelectLastPosition()
+    {
+        int index = Random.Range(0, endPoints.Length);
+        Vector3 endPosition = endPoints[index].position;
+        return endPosition;
     }
 }
