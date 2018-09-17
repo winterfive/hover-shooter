@@ -1,34 +1,29 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 public class AttackDrone : Drone, ILookAt<Transform>
 {
     public Transform[] spawnPoints;
     public Transform[] endPoints;
+    public new float xMin, xMax, yMin, yMax, zMin, zMax;
 
     private Transform _camTransform;
     private Transform _thisTransform;
+    private NavMeshAgent _agent;
 
     void Awake()
     {
         _camTransform = Camera.main.transform;
         _thisTransform = this.gameObject.transform;
+        _agent = this.gameObject.GetComponent<NavMeshAgent>();
+        _agent.destination = CreateRandomPosition(xMin, xMax, yMin, yMax, zMin, zMax);
     }
 
-    //void Start()
-    //{
-    //    GameObject attackDroneManagerObject = GameObject.FindWithTag("ScriptManager");
-    //    if (attackDroneManagerObject != null)
-    //    {
-    //        _attackDroneManagerReference = attackDroneManagerObject.GetComponent<DroneManager>();
-    //    }
-
-    //    if (_droneManagerReference == null)
-    //    {
-    //        Debug.Log("Cannot find DroneManager script");
-    //    }
-    //}
+    void Start()
+    {
+        
+    }
 
     void Update()
     {
@@ -50,19 +45,6 @@ public class AttackDrone : Drone, ILookAt<Transform>
 
             _thisTransform.transform.rotation = Quaternion.LookRotation(newVector);
         }
-    }
-
-
-    public new Vector3 CreateRandomPosition()
-    // Move this to Drone and pass the x y z values to it 
-    {
-        Vector3 randomPosition;
-
-        randomPosition.x = Random.Range(xMin, xMax);
-        randomPosition.y = Random.Range(yMin, yMax);
-        randomPosition.z = Random.Range(zMin, zMax);
-
-        return randomPosition;
     }
 
 
