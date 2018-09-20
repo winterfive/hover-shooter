@@ -17,12 +17,11 @@ public class AttackDrone : Drone, ILookAt<Transform>
         _camTransform = Camera.main.transform;
         _thisTransform = this.gameObject.transform;
         _agent = this.gameObject.GetComponent<NavMeshAgent>();
-        _agent.destination = CreateRandomPosition(xMin, xMax, yMin, yMax, zMin, zMax);
     }
 
     void Start()
     {
-        
+        _agent.destination = CreateRandomPosition(xMin, xMax, yMin, yMax, zMin, zMax);
     }
 
     void Update()
@@ -48,7 +47,7 @@ public class AttackDrone : Drone, ILookAt<Transform>
     }
 
 
-    public new Vector3 SelectLastPosition()
+    public Vector3 SelectLastPosition()
     {
         int index = Random.Range(0, endPoints.Length);
         Vector3 endPosition = endPoints[index].position;
