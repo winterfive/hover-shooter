@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class AttackDrone : Drone, ILookAt<Transform>
 {
-    public Transform[] spawnPoints;
-    public Transform[] endPoints;
-    public new float xMin, xMax, yMin, yMax, zMin, zMax;
+    public float xMin, xMax, yMin, yMax, zMin, zMax;
 
     private Transform _camTransform;
     private Transform _thisTransform;
