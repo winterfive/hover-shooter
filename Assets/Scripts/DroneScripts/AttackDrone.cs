@@ -27,6 +27,11 @@ public class AttackDrone : Drone, ILookAt<Transform>
     void Update()
     {
         LookAt(_camTransform);
+
+        if(_agent.remainingDistance <= _agent.stoppingDistance)
+        {
+            _agent.destination = ReturnRandomValueFromArray(endPoints).position;
+        }
     }
 
 
@@ -44,13 +49,5 @@ public class AttackDrone : Drone, ILookAt<Transform>
 
             _thisTransform.transform.rotation = Quaternion.LookRotation(newVector);
         }
-    }
-
-
-    public Vector3 SelectLastPosition()
-    {
-        int index = Random.Range(0, endPoints.Length);
-        Vector3 endPosition = endPoints[index].position;
-        return endPosition;
     }
 }
