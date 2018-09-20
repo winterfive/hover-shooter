@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Drone : MonoBehaviour
 {
@@ -52,8 +53,12 @@ public class Drone : MonoBehaviour
 
 
     /*
-     * Returns a random endPoint
-     * void -> Vector3
+     * Returns a random value from generic array
+     * T -> Vector3
      */
-    public void SelectLastPosition() { }
+    public T ReturnRandomValueFromArray<T> (T[] arr)
+    {
+        T value = arr[Random.Range(0, arr.Length)];
+        return value;
+    }
 }
