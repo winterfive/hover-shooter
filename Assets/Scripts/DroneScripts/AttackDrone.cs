@@ -1,34 +1,50 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class AttackDrone : Drone, ILookAt<Transform>
+public class AttackDrone : MonoBehaviour
 {
-    public float xMin, xMax, yMin, yMax, zMin, zMax;
-
-    private Transform _camTransform;
     private Transform _thisTransform;
+    private Vector3 _camPosition;
     private NavMeshAgent _agent;
+    private AttackDroneManager _attackDroneManagerReference;
+
 
     void Awake()
     {
-        _camTransform = Camera.main.transform;
+        _camPosition = Camera.main.transform.position;
         _thisTransform = this.gameObject.transform;
         _agent = this.gameObject.GetComponent<NavMeshAgent>();
     }
 
+
     void Start()
     {
-        _agent.destination = CreateRandomPosition(xMin, xMax, yMin, yMax, zMin, zMax);
+        GameObject attackDroneManagerObject = GameObject.FindWithTag("ScriptManager");
+        if (attackDroneManagerObject != null)
+        {
+            _attackDroneManagerReference = attackDroneManagerObject.GetComponent<AttackDroneManager>();
+        }
+
+        if (_attackDroneManagerReference == null)
+        {
+            Debug.Log("Cannot find AttackDroneManager script");
+        }
+
+        if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
+        {
+            SetRandomDestination();
+        }
+        else
+        {
+            _agent.gameObject.SetActive(false);
+            Debug.Log("Drone returned to pool (not on navMesh)");
+        }
     }
+
 
     void Update()
     {
-        LookAt(_camTransform);
-
-        if(_agent.remainingDistance <= _agent.stoppingDistance)
-        {
-            _agent.destination = ReturnRandomValueFromArray(endPoints).position;
-        }
+        LookAt(_camPosition);
     }
 
 
@@ -36,15 +52,23 @@ public class AttackDrone : Drone, ILookAt<Transform>
      * This implementation only rotates on the y axis
      * Transform -> void
      */
-    public void LookAt(Transform t)
+    public void LookAt(Vector3 v)
     {
-        if (_thisTransform)
+        if (_thisTransform.gameObject.activeInHierarchy)
         {
-            Vector3 newVector = new Vector3(_thisTransform.transform.position.x - t.position.x,
+            Vector3 newVector = new Vector3(_thisTransform.transform.position.x - v.x,
                                             0f,
-                                            _thisTransform.transform.position.z - t.position.z);
+                                            _thisTransform.transform.position.z - v.z);
 
             _thisTransform.transform.rotation = Quaternion.LookRotation(newVector);
         }
+    }
+
+
+    private void SetRandomDestination()
+    {
+        Vector3 midPoint = _attackDroneManagerReference.CreateRandomPosition();
+        midPoint.y = _agent.baseOffset;
+        _agent.destination = midPoint;
     }
 }

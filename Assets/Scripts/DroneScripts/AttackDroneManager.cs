@@ -5,83 +5,51 @@ using UnityEngine;
 public class AttackDroneManager : DroneManager {
 
     /*
-     * This class handles the spawning of attackDrones and their movement
+     * This class handles values needed for spawning and moving attackDrones
      */
 
-    public Transform[] spawnpoints;
+    public Transform[] spawnPoints;
     public Transform[] endPoints;
-    public GameObject dronePrefab;
+    public GameObject prefab;
     public int poolSize;
     public float xMin, xMax, yMin, yMax, zMin, zMax;
 
     [SerializeField] private float _timeBetweenSpawns;
     [SerializeField] private float _waitToSpawn;
 
-    private List<GameObject> _attackDrones;
     private PoolManager _poolManager;
+    private List<GameObject> _attackDrones;
+    private GameObject _activeAttackDrone;
 
 
     private void Awake()
     {
         _poolManager = PoolManager.Instance;
-        _drones = _poolManager.CreateList(dronePrefab, dronePoolSize);
+        _attackDrones = _poolManager.CreateList(prefab, poolSize);
     }
 
     void Start()
     {
-        InvokeRepeating("SpawnDrone", _waitToSpawn, _timeBetweenSpawns);
+        if(Time.time > _waitToSpawn)
+        {
+            StartCoroutine("SpawnAttackDrone");
+        }
     }
 
 
-    /*
-     * Spawns gameObject at random spawnpoint
-     * void -> void
-     */
-    void SpawnDrone()
+    private IEnumerator SpawnAttackDrone()
     {
-        int spawnPointIndex;
-
-        spawnPointIndex = Random.Range(0, spawnpoints.Length);
-
-        GameObject drone = _poolManager.GetObjectFromPool(_drones);
-
-        if (drone)
+        _activeAttackDrone = _poolManager.GetObjectFromPool(_attackDrones);
+               
+        if(_activeAttackDrone)
         {
-            drone.transform.position = spawnpoints[spawnPointIndex].position;
-            drone.transform.rotation = spawnpoints[spawnPointIndex].rotation;
-            drone.SetActive(true);
+            SetObject(spawnPoints, _activeAttackDrone);
         }
         else
         {
-            // Debug.Log("There are no drones available right now.");
+            Debug.Log("There are no attackDrones available right now.");
         }
-    }
 
-
-    /*
-     * Creates Vector3 w/ random values for x & z w/in range
-     * void -> Vector3
-     */
-    public Vector3 CreateRandomPosition()
-    {
-        Vector3 randomPosition;
-
-        randomPosition.x = Random.Range(xMin, xMax);
-        randomPosition.y = Random.Range(yMin, yMax);
-        randomPosition.z = Random.Range(zMin, zMax);
-
-        return randomPosition;
-    }
-
-
-    /*
-     * Returns a random endPoint
-     * void -> Vector3
-     */
-    public Vector3 SelectLastPosition()
-    {
-        int index = Random.Range(0, endPoints.Length);
-        Vector3 endPosition = endPoints[index].position;
-        return endPosition;
+        yield return new WaitForSeconds(_timeBetweenSpawns);
     }
 }

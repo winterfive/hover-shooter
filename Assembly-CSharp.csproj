@@ -60,7 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\DroneActions.cs" />
-    <Compile Include="Assets\Scripts\DroneManager.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\AttackDrone.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\AttackDroneManager.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\DroneManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GenericManager.cs" />
     <Compile Include="Assets\Scripts\PlayerLasers.cs" />

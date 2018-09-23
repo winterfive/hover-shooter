@@ -21,7 +21,7 @@ public class DroneActions : MonoBehaviour
     private Vector3 _endPoint;
     private Transform _gunTipTransform;
     private RaycastHit _hit;
-    private DroneManager _droneManagerReference;
+    private MovingObjectManager _droneManagerReference;
     private ProjectileManager _projectileManagerReference;
     private float _timeOfPreviousShot;
     private float _timeBetweenShots;
@@ -52,7 +52,7 @@ public class DroneActions : MonoBehaviour
         GameObject droneManagerObject = GameObject.FindWithTag("ScriptManager");
         if (droneManagerObject != null)
         {
-            _droneManagerReference = droneManagerObject.GetComponent<DroneManager>();
+            _droneManagerReference = droneManagerObject.GetComponent<MovingObjectManager>();
         }
 
         if (_droneManagerReference == null)

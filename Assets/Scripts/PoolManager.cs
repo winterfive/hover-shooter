@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PoolManager : GenericManager<PoolManager> {
 
+    /*
+     * Creates pool of gameObjects
+     * gameObject, int -> list
+     */
     public List<GameObject> CreateList(GameObject prefab, int poolSize)
     {
         List<GameObject> list = new List<GameObject>();

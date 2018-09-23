@@ -4,83 +4,36 @@ using UnityEngine;
 public class DroneManager : GenericManager<DroneManager>
 {
     /*
-     * This class handles the spawning of drones and drone movement
+     * This class comment... TODO
      */
-
-    public Transform[] spawnpoints;
-    public Transform[] endPoints;
-    public GameObject dronePrefab;
-    public int dronePoolSize;
-    public float xMin, xMax, yMin, yMax, zMin, zMax;
-    
-    [SerializeField] private float _timeBetweenSpawns;
-    [SerializeField] private float _waitToSpawn;
-    
-    private List<GameObject> _drones;
-    private PoolManager _poolManager;
-    
-
-    private void Awake()
-    {
-        _poolManager = PoolManager.Instance;
-        _drones = _poolManager.CreateList(dronePrefab, dronePoolSize);
-    }
-
-    void Start()
-    {
-        InvokeRepeating("SpawnDrone", _waitToSpawn, _timeBetweenSpawns);
-    }
 
 
     /*
-     * Spawns gameObject at random spawnpoint
-     * void -> void
+     * Returns a random vecror3 from a range of values for x, y, z
+     * float, float, float, float, float, float -> Vector3
      */
-    void SpawnDrone()
+    public Vector3 CreateRandomVector(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax)
     {
-        int spawnPointIndex;
+        Vector3 randomVector;
 
-        spawnPointIndex = Random.Range(0, spawnpoints.Length);
+        randomVector.x = Random.Range(xMin, xMax);
+        randomVector.y = Random.Range(yMin, yMax);
+        randomVector.z = Random.Range(zMin, zMax);
 
-        GameObject drone = _poolManager.GetObjectFromPool(_drones);
-
-        if (drone)
-        {
-            drone.transform.position = spawnpoints[spawnPointIndex].position;
-            drone.transform.rotation = spawnpoints[spawnPointIndex].rotation;
-            drone.SetActive(true);
-        }
-        else
-        {
-            // Debug.Log("There are no drones available right now.");
-        }               
+        return randomVector;
     }
 
 
-    /*
-     * Creates Vector3 w/ random values for x & z w/in range
-     * void -> Vector3
+    /* Sets object transform to match random transform from array
+     * Transform[], gameObject -> void
      */
-    public Vector3 CreateRandomPosition()
+    public void SetObject(Transform[] arr, GameObject go)
     {
-        Vector3 randomPosition;
-
-        randomPosition.x = Random.Range(xMin, xMax);
-        randomPosition.y = Random.Range(yMin, yMax);
-        randomPosition.z = Random.Range(zMin, zMax);
-
-        return randomPosition;
-    }
-
-
-    /*
-     * Returns a random endPoint
-     * void -> Vector3
-     */
-    public Vector3 SelectLastPosition()
-    {
-        int index = Random.Range(0, endPoints.Length);
-        Vector3 endPosition = endPoints[index].position;
-        return endPosition;
-    }
+        int index = Random.Range(0, arr.Length);
+        Transform startingPoint = arr[index];
+        go.transform.position = startingPoint.position;
+        go.transform.rotation = startingPoint.rotation;
+        go.SetActive(true);
+    }    
 }
+
