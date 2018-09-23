@@ -24,16 +24,11 @@ public class DroneManager : GenericManager<DroneManager>
     }
 
 
-    /* Sets object transform to match random transform from array
-     * Transform[], gameObject -> void
-     */
-    public void SetObject(Transform[] arr, GameObject go)
+    public T GetRandomValueFromArray<T>(T[] arr)
     {
         int index = Random.Range(0, arr.Length);
-        Transform startingPoint = arr[index];
-        go.transform.position = startingPoint.position;
-        go.transform.rotation = startingPoint.rotation;
-        go.SetActive(true);
+        T value = arr[index];
+        return value;
     }
 }
 

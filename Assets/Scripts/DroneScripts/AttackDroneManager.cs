@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackDroneManager : DroneManager {
 
     /*
-     * This class handles values needed for spawning and moving attackDrones
+     * This class handles values & methods needed for spawning and moving attackDrones
      */
 
     public Transform[] spawnPoints;
@@ -44,7 +44,10 @@ public class AttackDroneManager : DroneManager {
                
         if(_activeAttackDrone)
         {
-            SetObject(spawnPoints, _activeAttackDrone);
+            Transform startPoint = GetRandomValueFromArray(spawnPoints);
+            _activeAttackDrone.transform.position = startPoint.position;
+            _activeAttackDrone.transform.rotation = startPoint.rotation;
+            _activeAttackDrone.gameObject.SetActive(true);
         }
         else
         {
@@ -58,6 +61,14 @@ public class AttackDroneManager : DroneManager {
     public Vector3 CreateRandomDestination()
     {
         Vector3 newPoint = CreateRandomVector(xMin, xMax, yMin, yMax, zMin, zMax);
+        return newPoint;
+    }
+
+
+    public Vector3 SetEndPoint()
+    {
+        int point = Random.Range(0, endPoints.Length);
+        Vector3 newPoint = endPoints[point].position;
         return newPoint;
     }
 }

@@ -7,6 +7,7 @@ public class AttackDrone : MonoBehaviour
     private Vector3 _camPosition;
     private NavMeshAgent _agent;
     private AttackDroneManager _attackDroneManagerReference;
+    private bool _movingToMidpoint;
 
 
     void Awake()
@@ -14,6 +15,7 @@ public class AttackDrone : MonoBehaviour
         _camPosition = Camera.main.transform.position;
         _thisTransform = this.gameObject.transform;
         _agent = this.gameObject.GetComponent<NavMeshAgent>();
+        _movingToMidpoint = false;
     }
 
 
@@ -27,11 +29,12 @@ public class AttackDrone : MonoBehaviour
             if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
             {
                 SetRandomDestination();
+                _movingToMidpoint = true;
             }
             else
             {
                 _agent.gameObject.SetActive(false);
-                Debug.Log("Drone returned to pool (not on navMesh)");
+                Debug.Log("Attack drone returned to pool (not on navMesh)");
             }
         }
 
@@ -46,7 +49,22 @@ public class AttackDrone : MonoBehaviour
     {
         LookAt(_camPosition);
 
-        // Check if agent close to destination, if so, set to an endpoint
+        // Check if drone is close to mid point or end point
+        if (Time.frameCount % 10 == 0)
+        {
+            if (_agent.remainingDistance < _agent.stoppingDistance)
+            {
+                if (_movingToMidpoint)
+                {
+                    GoToEndPoint();
+                    _movingToMidpoint = false;
+                }
+                else
+                {
+                    _thisTransform.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
 
@@ -72,5 +90,13 @@ public class AttackDrone : MonoBehaviour
         Vector3 point = _attackDroneManagerReference.CreateRandomDestination();
         point.y = _agent.baseOffset;
         _agent.destination = point;
+    }
+
+
+    private void GoToEndPoint()
+    {
+        Vector3 endPoint = _attackDroneManagerReference.SetEndPoint();
+        endPoint.y = _agent.baseOffset;
+        _agent.destination = endPoint;
     }
 }
