@@ -28,6 +28,7 @@ public class AttackDroneManager : DroneManager {
         _attackDrones = _poolManager.CreateList(prefab, poolSize);
     }
 
+
     void Start()
     {
         if(Time.time > _waitToSpawn)
@@ -51,5 +52,12 @@ public class AttackDroneManager : DroneManager {
         }
 
         yield return new WaitForSeconds(_timeBetweenSpawns);
+    }
+
+
+    public Vector3 CreateRandomDestination()
+    {
+        Vector3 newPoint = CreateRandomVector(xMin, xMax, yMin, yMax, zMin, zMax);
+        return newPoint;
     }
 }

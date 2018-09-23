@@ -23,28 +23,30 @@ public class AttackDrone : MonoBehaviour
         if (attackDroneManagerObject != null)
         {
             _attackDroneManagerReference = attackDroneManagerObject.GetComponent<AttackDroneManager>();
+
+            if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
+            {
+                SetRandomDestination();
+            }
+            else
+            {
+                _agent.gameObject.SetActive(false);
+                Debug.Log("Drone returned to pool (not on navMesh)");
+            }
         }
 
         if (_attackDroneManagerReference == null)
         {
             Debug.Log("Cannot find AttackDroneManager script");
-        }
-
-        if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
-        {
-            SetRandomDestination();
-        }
-        else
-        {
-            _agent.gameObject.SetActive(false);
-            Debug.Log("Drone returned to pool (not on navMesh)");
-        }
+        }        
     }
 
 
     void Update()
     {
         LookAt(_camPosition);
+
+        // Check if agent close to destination, if so, set to an endpoint
     }
 
 
@@ -67,8 +69,8 @@ public class AttackDrone : MonoBehaviour
 
     private void SetRandomDestination()
     {
-        Vector3 midPoint = _attackDroneManagerReference.CreateRandomPosition();
-        midPoint.y = _agent.baseOffset;
-        _agent.destination = midPoint;
+        Vector3 point = _attackDroneManagerReference.CreateRandomDestination();
+        point.y = _agent.baseOffset;
+        _agent.destination = point;
     }
 }

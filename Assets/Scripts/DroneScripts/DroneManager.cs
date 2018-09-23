@@ -34,6 +34,6 @@ public class DroneManager : GenericManager<DroneManager>
         go.transform.position = startingPoint.position;
         go.transform.rotation = startingPoint.rotation;
         go.SetActive(true);
-    }    
+    }
 }
 
