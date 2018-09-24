@@ -82,7 +82,7 @@ public class GameManager : GenericManager<GameManager>
     private void DestroyEnemy()
     {
         shotObject.GetComponent<NavMeshAgent>().speed = 0;
-        shotObject.GetComponent<DroneActions>().IsShooting = false;
+        //shotObject.GetComponent<DroneActions>().IsShooting = false;
         StartCoroutine(ReturnToPool());
 
         UpdateScore();

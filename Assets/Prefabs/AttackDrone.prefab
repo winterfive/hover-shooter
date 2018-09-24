@@ -37,9 +37,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4030676724652022}
   - component: {fileID: 195730861628870234}
-  - component: {fileID: 114077537499780980}
+  - component: {fileID: 114076485384458094}
   m_Layer: 2
-  m_Name: Drone
+  m_Name: AttackDrone
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -461,7 +461,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0000001, z: 1.126189}
   m_Center: {x: -0, y: 0.00000023208288, z: -0.06309456}
---- !u!114 &114077537499780980
+--- !u!114 &114076485384458094
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -472,19 +472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45939bab8cb139e40bdac84a433e0ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  endPoints: []
-  xMin: 0
-  xMax: 0
-  yMin: 0
-  yMax: 0
-  zMin: 0
-  zMax: 0
 --- !u!195 &195730861628870234
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -503,6 +490,6 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 0
   m_Height: 0.5
-  m_BaseOffset: 0
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1

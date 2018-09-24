@@ -13,48 +13,48 @@ public class AttackDroneManager : DroneManager {
     public GameObject prefab;
     public int poolSize;
     public float xMin, xMax, yMin, yMax, zMin, zMax;
-
-    [SerializeField] private float _timeBetweenSpawns;
-    [SerializeField] private float _waitToSpawn;
+    public float timeBetweenSpawns;
+    public float waitToSpawn;
 
     private PoolManager _poolManager;
     private List<GameObject> _attackDrones;
     private GameObject _activeAttackDrone;
+    private PlayerManager _playerManager;
 
 
     private void Awake()
     {
         _poolManager = PoolManager.Instance;
+        _playerManager = PlayerManager.Instance;    // Should these references go to the parent class?
         _attackDrones = _poolManager.CreateList(prefab, poolSize);
     }
 
 
     void Start()
     {
-        if(Time.time > _waitToSpawn)
-        {
-            StartCoroutine("SpawnAttackDrone");
-        }
+        StartCoroutine(SpawnAttackDrone());
     }
 
 
     private IEnumerator SpawnAttackDrone()
     {
-        _activeAttackDrone = _poolManager.GetObjectFromPool(_attackDrones);
-               
-        if(_activeAttackDrone)
+        while (_playerManager.IsAlive())
         {
-            Transform startPoint = GetRandomValueFromArray(spawnPoints);
-            _activeAttackDrone.transform.position = startPoint.position;
-            _activeAttackDrone.transform.rotation = startPoint.rotation;
-            _activeAttackDrone.gameObject.SetActive(true);
-        }
-        else
-        {
-            Debug.Log("There are no attackDrones available right now.");
-        }
+            _activeAttackDrone = _poolManager.GetObjectFromPool(_attackDrones);
 
-        yield return new WaitForSeconds(_timeBetweenSpawns);
+            if (_activeAttackDrone)
+            {
+                Transform startPoint = GetRandomValueFromArray(spawnPoints);
+                _activeAttackDrone.transform.position = startPoint.position;
+                _activeAttackDrone.transform.rotation = startPoint.rotation;
+                _activeAttackDrone.gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("There aren't any attackDrones available right now.");
+            }
+        }
+        yield return new WaitForSeconds(timeBetweenSpawns);
     }
 
 

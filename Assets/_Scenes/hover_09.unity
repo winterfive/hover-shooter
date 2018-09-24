@@ -8151,6 +8151,9 @@ GameObject:
   - component: {fileID: 1934252588}
   - component: {fileID: 1934252592}
   - component: {fileID: 1934252586}
+  - component: {fileID: 1934252590}
+  - component: {fileID: 1934252589}
+  - component: {fileID: 1934252591}
   m_Layer: 2
   m_Name: ScriptManager
   m_TagString: ScriptManager
@@ -8196,6 +8199,60 @@ MonoBehaviour:
   cam: {fileID: 1213041248}
   reticle: {fileID: 1604795078}
   foundEnemyColor: {r: 0.8773585, g: 0.61872786, b: 0, a: 1}
+--- !u!114 &1934252589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1934252585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a23d8ac91880a245bb1a971d3a07176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoints:
+  - {fileID: 213152335}
+  - {fileID: 741158106}
+  - {fileID: 1327769901}
+  - {fileID: 761243740}
+  - {fileID: 167945827}
+  endPoints:
+  - {fileID: 2117091305}
+  - {fileID: 1031263725}
+  - {fileID: 1557357679}
+  - {fileID: 199318882}
+  prefab: {fileID: 1424531867977468, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
+  poolSize: 20
+  xMin: -23
+  xMax: 23
+  yMin: 0.5
+  yMax: 16
+  zMin: 5
+  zMax: 24
+  timeBetweenSpawns: 0.5
+  waitToSpawn: 4
+--- !u!114 &1934252590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1934252585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d99152e11cddc4786e3b81c04d85b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1934252591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1934252585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417e7d05bd42aef45a1f528d034da3ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1934252592
 MonoBehaviour:
   m_ObjectHideFlags: 0

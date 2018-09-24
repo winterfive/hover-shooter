@@ -59,13 +59,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\DroneActions.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\AttackDrone.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\AttackDroneManager.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\DroneManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GenericManager.cs" />
     <Compile Include="Assets\Scripts\PlayerLasers.cs" />
+    <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\PoolManager.cs" />
     <Compile Include="Assets\Scripts\ProjectileActions.cs" />
     <Compile Include="Assets\Scripts\ProjectileManager.cs" />
