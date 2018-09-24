@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class PlayerManager : GenericManager<PlayerManager>
 { 
-    private bool isAlive;
+    private bool _isAlive = true;
 
-    public bool IsAlive() { return isAlive; }
+    public bool IsAlive() { return _isAlive; }
 
-    private void Awake()
+    private void Update()
     {
-        // value change so that droen spawning isn't a runon
-        while (Time.time < 30f)
+        if (Time.time > 20f)
         {
-            isAlive = true;
-        }        
+            _isAlive = false;
+        }
     }
 
     // TODO player health > 0, true, else isAlive is false
