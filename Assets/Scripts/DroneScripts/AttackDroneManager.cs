@@ -13,6 +13,7 @@ public class AttackDroneManager : DroneManager {
     public GameObject prefab;
     public int poolSize;
     public float xMin, xMax, yMin, yMax, zMin, zMax;
+    public float minSpeed, maxSpeed;
     public float timeBetweenSpawns;
     public float waitToSpawn;
 
@@ -53,8 +54,9 @@ public class AttackDroneManager : DroneManager {
             {
                 Debug.Log("There aren't any attackDrones available right now.");
             }
-        }
-        yield return new WaitForSeconds(timeBetweenSpawns);
+
+            yield return new WaitForSeconds(timeBetweenSpawns);
+        }            
     }
 
 
