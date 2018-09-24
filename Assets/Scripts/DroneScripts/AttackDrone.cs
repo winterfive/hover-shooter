@@ -29,6 +29,7 @@ public class AttackDrone : MonoBehaviour
             if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
             {
                 SetRandomDestination();
+                _agent.speed = Random.Range(_attackDroneManagerReference.minSpeed, _attackDroneManagerReference.maxSpeed);
                 _movingToMidpoint = true;
             }
             else
