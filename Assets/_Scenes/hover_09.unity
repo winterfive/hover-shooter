@@ -8229,7 +8229,9 @@ MonoBehaviour:
   yMax: 16
   zMin: 5
   zMax: 24
-  timeBetweenSpawns: 0.5
+  minSpeed: 1
+  maxSpeed: 6
+  timeBetweenSpawns: 0.8
   waitToSpawn: 4
 --- !u!114 &1934252590
 MonoBehaviour:
