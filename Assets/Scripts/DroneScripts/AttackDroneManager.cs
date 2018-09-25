@@ -14,6 +14,7 @@ public class AttackDroneManager : DroneManager {
     public int poolSize;
     public float xMin, xMax, yMin, yMax, zMin, zMax;
     public float minSpeed, maxSpeed;
+    public float altitudeMin, altitudeMax;
     public float timeBetweenSpawns;
     public float waitToSpawn;
 
