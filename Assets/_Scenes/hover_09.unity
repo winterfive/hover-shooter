@@ -8231,6 +8231,8 @@ MonoBehaviour:
   zMax: 24
   minSpeed: 1
   maxSpeed: 6
+  altitudeMin: 0.5
+  altitudeMax: 16
   timeBetweenSpawns: 0.8
   waitToSpawn: 4
 --- !u!114 &1934252590
