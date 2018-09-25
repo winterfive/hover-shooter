@@ -30,6 +30,7 @@ public class AttackDrone : MonoBehaviour
             {
                 SetRandomDestination();
                 _agent.speed = Random.Range(_attackDroneManagerReference.minSpeed, _attackDroneManagerReference.maxSpeed);
+                _agent.baseOffset = Random.Range(_attackDroneManagerReference.altitudeMin, _attackDroneManagerReference.altitudeMax);
                 _movingToMidpoint = true;
             }
             else
