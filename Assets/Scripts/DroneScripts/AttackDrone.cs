@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class AttackDrone : MonoBehaviour
@@ -8,6 +9,7 @@ public class AttackDrone : MonoBehaviour
     private NavMeshAgent _agent;
     private AttackDroneManager _attackDroneManagerReference;
     private bool _movingToMidpoint;
+    private Transform turretTransform;
 
 
     void Awake()
@@ -28,6 +30,7 @@ public class AttackDrone : MonoBehaviour
 
             if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
             {
+                turretTransform = _attackDroneManagerReference.FindChildWithTag("turret").transform;
                 SetRandomDestination();
                 _agent.speed = Random.Range(_attackDroneManagerReference.minSpeed, _attackDroneManagerReference.maxSpeed);
                 _agent.baseOffset = Random.Range(_attackDroneManagerReference.altitudeMin, _attackDroneManagerReference.altitudeMax);
@@ -69,21 +72,18 @@ public class AttackDrone : MonoBehaviour
         }
     }
 
-
-    /*
-     * This implementation only rotates on the y axis
-     * Transform -> void
+    
+     /*
+     * Changes position and rotation of turret to look at target using only y axis
+     * Vector3 -> void
      */
-    public void LookAt(Vector3 v)
+    public void LookAt(Vector3 target)
     {
-        if (_thisTransform.gameObject.activeInHierarchy)
-        {
-            Vector3 newVector = new Vector3(_thisTransform.transform.position.x - v.x,
-                                            0f,
-                                            _thisTransform.transform.position.z - v.z);
+        Vector3 newVector = new Vector3(turretTransform.position.x - target.x,
+                                        0f,
+                                        turretTransform.position.z - target.z);
 
-            _thisTransform.transform.rotation = Quaternion.LookRotation(newVector);
-        }
+        turretTransform.rotation = Quaternion.LookRotation(v);
     }
 
 
