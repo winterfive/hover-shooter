@@ -1,12 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class PlayerManager : GenericManager<PlayerManager>
 { 
-    private bool _isAlive = true;
+    private bool _isAlive;
+    [SerializeField] int _playerHealth;
 
     public bool IsAlive() { return _isAlive; }
+    public int GetPlayerHealth() { return _playerHealth; }
+
+
+    private void Awake()
+    {
+        _isAlive = true;
+    }
 
     private void Update()
     {
@@ -14,7 +21,10 @@ public class PlayerManager : GenericManager<PlayerManager>
         {
             _isAlive = false;
         }
-    }
 
-    // TODO player health > 0, true, else isAlive is false
+        //if (_playerHealth <= 0)
+        //{
+        //    _isAlive = false;
+        //}
+    }
 }
