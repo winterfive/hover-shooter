@@ -17,6 +17,8 @@ public class AttackDroneManager : DroneManager {
     public float altitudeMin, altitudeMax;
     public float timeBetweenSpawns;
     public float waitToSpawn;
+    public float glowSpeed;
+    public Color secondGlow;
 
     private PoolManager _poolManager;
     private List<GameObject> _attackDrones;
@@ -27,7 +29,7 @@ public class AttackDroneManager : DroneManager {
     private void Awake()
     {
         _poolManager = PoolManager.Instance;
-        _playerManager = PlayerManager.Instance;    // Should these references go to the parent class?
+        _playerManager = PlayerManager.Instance;
         _attackDrones = _poolManager.CreateList(prefab, poolSize);
     }
 
