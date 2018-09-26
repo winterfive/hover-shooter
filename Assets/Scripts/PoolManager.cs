@@ -34,15 +34,4 @@ public class PoolManager : GenericManager<PoolManager> {
         }
         return null;
     }
-
-
-    /*
-     * Puts object back into it's pool
-     * This is the only method allowed to do so.
-     * GameObject -> void
-     */
-    public void SetToFalse(GameObject go)
-    {
-        go.SetActive(false);
-    }
 }
