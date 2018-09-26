@@ -4,50 +4,59 @@ using UnityEngine.AI;
 public class AttackDrone : MonoBehaviour
 {
     private Vector3 _camPosition;
+    private GameObject _this;
     private NavMeshAgent _agent;
     private AttackDroneManager _attackDroneManagerReference;
     private bool _movingToMidpoint;
     private Transform _turretTransform;
     private Renderer _glowRenderer;
     private Color _defaultGlowColor;
+    private Color _otherGlowColor;
+    private float _glowSpeed;
 
 
     void Awake()
     {
+        GameObject attackDroneManagerObject = GameObject.FindWithTag("ScriptManager");
+        if (attackDroneManagerObject != null)
+        {
+            _attackDroneManagerReference = attackDroneManagerObject.GetComponent<AttackDroneManager>();            
+        }
+        else
+        {
+            Debug.Log("Cannot find AttackDroneManager script");
+            // Return to pool
+            _attackDroneManagerReference.SetToInactive(_this);
+        }
+
         _camPosition = Camera.main.transform.position;
-        _agent = this.gameObject.GetComponent<NavMeshAgent>();
+        _this = this.gameObject;
+        _agent = _this.GetComponent<NavMeshAgent>();
         _movingToMidpoint = false;
         _turretTransform = FindChildWithTag("Turret");
         _glowRenderer = FindChildWithTag("Glow").GetComponent<Renderer>();
         _defaultGlowColor = _glowRenderer.material.color;
+        _glowSpeed = _attackDroneManagerReference.glowSpeed;
+        _otherGlowColor = _attackDroneManagerReference.secondGlowColor;
     }
 
 
-    void Start()
+    private void Start()
     {
-        GameObject attackDroneManagerObject = GameObject.FindWithTag("ScriptManager");
-        if (attackDroneManagerObject != null)
+        if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
         {
-            _attackDroneManagerReference = attackDroneManagerObject.GetComponent<AttackDroneManager>();
-
-            if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
-            {
-                SetRandomDestination(); //TODO Move this method to parent
-                _agent.speed = Random.Range(_attackDroneManagerReference.minSpeed, _attackDroneManagerReference.maxSpeed);  //TODO make a method for this in parent
-                _agent.baseOffset = Random.Range(_attackDroneManagerReference.altitudeMin, _attackDroneManagerReference.altitudeMax);   //TODO "
-                _movingToMidpoint = true;
-            }
-            else
-            {
-                _attackDroneManagerReference.ReturnToPool(this.gameObject);
-                Debug.Log("Attack drone returned to pool (not on navMesh)");
-            }
+            SetMidPoint();
+            _agent.speed = _attackDroneManagerReference.GetRandomSpeed();
+            _agent.baseOffset = _attackDroneManagerReference.GetRandomOffset();
+            
+            _movingToMidpoint = true;
         }
-
-        if (_attackDroneManagerReference == null)
+        else
         {
-            Debug.Log("Cannot find AttackDroneManager script");
-        }        
+            Debug.Log("Attack drone returned to pool (not on navMesh)");
+            // Return to pool
+            _attackDroneManagerReference.SetToInactive(_this);
+        }
     }
 
 
@@ -68,7 +77,8 @@ public class AttackDrone : MonoBehaviour
                 }
                 else
                 {
-                    _attackDroneManagerReference.ReturnToPool(this.gameObject);
+                    // Return to pool
+                    _attackDroneManagerReference.SetToInactive(_this);
                 }
             }
         }
@@ -89,9 +99,9 @@ public class AttackDrone : MonoBehaviour
     }
 
 
-    private void SetRandomDestination()
+    private void SetMidPoint()
     {
-        Vector3 point = _attackDroneManagerReference.CreateRandomDestination();
+        Vector3 point = _attackDroneManagerReference.SetMidPoint();
         point.y = _agent.baseOffset;
         _agent.destination = point;
     }
@@ -111,7 +121,7 @@ public class AttackDrone : MonoBehaviour
      */
     public Transform FindChildWithTag(string a)
     {
-        Transform[] components = this.GetComponentsInChildren<Transform>();
+        Transform[] components = _this.GetComponentsInChildren<Transform>();
 
         foreach (Transform t in components)
         {
@@ -132,8 +142,8 @@ public class AttackDrone : MonoBehaviour
     {
         if (_glowRenderer)
         {
-            float pingpong = Mathf.PingPong(Time.time * _attackDroneManagerReference.glowSpeed, 1.0f);
-            _glowRenderer.material.color = Color.Lerp(_defaultGlowColor, _attackDroneManagerReference.secondGlowColor, pingpong);
+            float pingpong = Mathf.PingPong(Time.time * _glowSpeed, 1.0f);
+            _glowRenderer.material.color = Color.Lerp(_defaultGlowColor, _otherGlowColor, pingpong);
         }
     }
 }
