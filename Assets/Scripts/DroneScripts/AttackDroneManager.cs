@@ -18,7 +18,7 @@ public class AttackDroneManager : PooledObjectManager {
     public float timeBetweenSpawns;
     public float waitToSpawn;
     public float glowSpeed;
-    public Color secondGlow;
+    public Color secondGlowColor;
 
     private PoolManager _poolManager;
     private List<GameObject> _attackDrones;
@@ -40,6 +40,10 @@ public class AttackDroneManager : PooledObjectManager {
     }
 
 
+    /*
+     * Spawns attack drone at one of five starting points
+     * void -> void
+     */
     private IEnumerator SpawnAttackDrone()
     {
         while (_playerManager.IsAlive())
@@ -63,17 +67,36 @@ public class AttackDroneManager : PooledObjectManager {
     }
 
 
-    public Vector3 CreateRandomDestination()
+    public Vector3 SetMidPoint()
     {
-        Vector3 newPoint = CreateRandomVector(xMin, xMax, yMin, yMax, zMin, zMax);
-        return newPoint;
+        Vector3 mid = CreateRandomVector(xMin, xMax, yMin, yMax, zMin, zMax);
+        return mid;
     }
 
 
     public Vector3 SetEndPoint()
     {
-        int point = Random.Range(0, endPoints.Length);
-        Vector3 newPoint = endPoints[point].position;
-        return newPoint;
+        Vector3 end = GetRandomValueFromArray(endPoints).position;
+        return end;
+    }
+
+
+    public float GetRandomSpeed()
+    {
+        float value = Random.Range(minSpeed, maxSpeed);
+        return value;
+    }
+
+
+    public float GetRandomOffset()
+    {
+        float o = Random.Range(altitudeMin, altitudeMax);
+        return o;
+    }
+
+
+    public void SetToInactive(GameObject go)
+    {
+        ReturnToPool(go);
     }
 }
