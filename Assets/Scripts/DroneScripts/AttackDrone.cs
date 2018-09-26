@@ -25,7 +25,8 @@ public class AttackDrone : MonoBehaviour
         else
         {
             Debug.Log("Cannot find AttackDroneManager script");
-            // Return to pool TODO
+            // Return to pool
+            _attackDroneManagerReference.SetToInactive(_this);
         }
 
         _camPosition = Camera.main.transform.position;
@@ -52,9 +53,9 @@ public class AttackDrone : MonoBehaviour
         }
         else
         {
+            Debug.Log("Attack drone returned to pool (not on navMesh)");
             // Return to pool
             _attackDroneManagerReference.SetToInactive(_this);
-            Debug.Log("Attack drone returned to pool (not on navMesh)");
         }
     }
 
