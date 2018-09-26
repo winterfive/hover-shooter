@@ -8,10 +8,6 @@ public class PooledObjectManager : GenericManager<PooledObjectManager>
      */
 
 
-    /*
-     * Returns a random vecror3 from a range of values for x, y, z
-     * float, float, float, float, float, float -> Vector3
-     */
     public Vector3 CreateRandomVector(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax)
     {
         Vector3 randomVector;
@@ -32,6 +28,11 @@ public class PooledObjectManager : GenericManager<PooledObjectManager>
     }
 
 
+    /*
+     * Returns object to its pool
+     * This is the ONLY path for return in the project
+     * GameObject -> void
+     */
     public void ReturnToPool(GameObject go)
     {
         go.SetActive(false);
