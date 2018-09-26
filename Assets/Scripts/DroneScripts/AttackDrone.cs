@@ -39,7 +39,7 @@ public class AttackDrone : MonoBehaviour
             }
             else
             {
-                // TODO using event, send this to the poolmanager for setactive(false)
+                _attackDroneManagerReference.ReturnToPool(this.gameObject);
                 Debug.Log("Attack drone returned to pool (not on navMesh)");
             }
         }
@@ -68,7 +68,7 @@ public class AttackDrone : MonoBehaviour
                 }
                 else
                 {
-                    this.gameObject.SetActive(false);
+                    _attackDroneManagerReference.ReturnToPool(this.gameObject);
                 }
             }
         }
@@ -91,8 +91,6 @@ public class AttackDrone : MonoBehaviour
 
     private void SetRandomDestination()
     {
-        // TODO Move the guts of this to parent, ahve this method call the method in parent
-        // TODO Maybe move to DroneManager
         Vector3 point = _attackDroneManagerReference.CreateRandomDestination();
         point.y = _agent.baseOffset;
         _agent.destination = point;
@@ -101,8 +99,6 @@ public class AttackDrone : MonoBehaviour
 
     private void GoToEndPoint()
     {
-        // TODO Move the guts of this to parent, have this method call the method in parent
-        // TODO Maybe move to DroneManager
         Vector3 endPoint = _attackDroneManagerReference.SetEndPoint();
         endPoint.y = _agent.baseOffset;
         _agent.destination = endPoint;
@@ -137,7 +133,7 @@ public class AttackDrone : MonoBehaviour
         if (_glowRenderer)
         {
             float pingpong = Mathf.PingPong(Time.time * _attackDroneManagerReference.glowSpeed, 1.0f);
-            _glowRenderer.material.color = Color.Lerp(_defaultGlowColor, _attackDroneManagerReference.secondGlow, pingpong);
+            _glowRenderer.material.color = Color.Lerp(_defaultGlowColor, _attackDroneManagerReference.secondGlowColor, pingpong);
         }
     }
 }
