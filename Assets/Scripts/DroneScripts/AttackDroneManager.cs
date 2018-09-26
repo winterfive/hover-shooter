@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackDroneManager : DroneManager {
+public class AttackDroneManager : PooledObjectManager {
 
     /*
      * This class handles values & methods needed for spawning and moving attackDrones
