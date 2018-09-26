@@ -30,24 +30,5 @@ public class DroneManager : GenericManager<DroneManager>
         T value = arr[index];
         return value;
     }
-
-
-    /*
-     * Finds child transform with tag
-     * void -> transform
-     */
-    public Transform FindChildWithTag(string a)
-    {
-        Transform[] components = this.GetComponentsInChildren<Transform>();
-
-        foreach (Transform t in components)
-        {
-            if (t.gameObject.CompareTag(a))
-            {
-                return t;
-            }
-        }
-        return null;
-    }
 }
 
