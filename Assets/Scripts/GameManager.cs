@@ -6,27 +6,24 @@ using UnityEngine.AI;
 public class GameManager : GenericManager<GameManager>
 {
     /*
-     * Class handles all player values (score, health, shield), player actions, and 
+     * Class handles all player input, score and 
      * gameplay actions (game over, start, restart, etc)
      */
      
     public float timeBetweenShots = 0.15f;
     public delegate void Shoot();
     public static event Shoot OnShoot;    
-    public delegate void UpdatePlayerScore(int i);
-    public static UpdatePlayerScore OnUpdatePlayerScore;
+    public delegate void UpdateScore(int i);
+    public static UpdateScore OnUpdateScore;
     public delegate void UpdatePlayerHealth(int j);
-    public static UpdatePlayerHealth OnUpdatePlayerHealth;
-    public int missleHitValue;
-    public Color[] destructionColors;
-    public float waitBetweenColors;
+    public static UpdatePlayerHealth OnUpdatePlayerHealth;    
 
     private float _timeSinceLastShot;
     private bool _IsShieldUp;
-    private int _score, _playerHealth;
+    private int _score;
     private RaycastManager _raycastManager;
-    private GameObject shotObject;
-    private bool _hasFaded;
+    private CheckForEnemy _checkForEnemy;
+    private EffectsManager _effectsManager;
 
 
     void Awake()
@@ -34,8 +31,9 @@ public class GameManager : GenericManager<GameManager>
         _timeSinceLastShot = 0f;
         _IsShieldUp = false;
         _score = 0;
-        _playerHealth = 100;
         _raycastManager = RaycastManager.Instance;
+        _effectsManager = EffectsManager.Instance;
+        _checkForEnemy = CheckForEnemy.Instance;
     }
 
 
@@ -51,72 +49,41 @@ public class GameManager : GenericManager<GameManager>
         //if (Input.GetButton("Shield") && !Input.GetButtonDown("Fire1"))
         //{
         //    UseShield();
+        //}
+
+        //if (player is shot)
+        //{
+        //    take away player health
+        //}
     }
 
 
     /*
-     * Broadcasts to PlayerLasers, checks object shot at and destroys it
+     * Broadcasts to PlayerLasers
      * void -> void
      */
     private void ShootAtEnemy()
     {
-        OnShoot();
-        CheckForEnemy();
-    }
-
-
-    private void CheckForEnemy()
-    {
-        if (_raycastManager.GetCurrentFoundObject() != null)
+        if (OnShoot != null)
         {
-            shotObject = _raycastManager.GetCurrentFoundObject().transform.root.gameObject;
+            OnShoot();
 
-            if (shotObject.tag == "Enemy")
+            if (_checkForEnemy.IsEnemy())
             {
                 DestroyEnemy();
             }
-        }        
+        }
     }
 
 
     private void DestroyEnemy()
     {
-        shotObject.GetComponent<NavMeshAgent>().speed = 0;
+        //shotObject.GetComponent<NavMeshAgent>().speed = 0;
         //shotObject.GetComponent<DroneActions>().IsShooting = false;
-        StartCoroutine(ReturnToPool());
-
+        _effectsManager.DissolveEnemy();
         UpdateScore();
     }
-
-
-    private IEnumerator ReturnToPool()
-    {
-        yield return StartCoroutine(FadeEffect());
-        shotObject.SetActive(false);
-    }
-
-
-    private IEnumerator FadeEffect()
-    {
-        // TODO This required turning on transparent in the material which is not good for mobile :(
-        Renderer[] components = shotObject.GetComponentsInChildren<Renderer>();
-
-        foreach (Renderer r in components)
-        {
-            r.material.mainTexture = null;
-        }
-
-        foreach (Color c in destructionColors)
-        {
-            foreach (Renderer r in components)
-            {
-                r.material.color = c;
-                Debug.Log("Fading out drone to color: " + c);
-            }
-
-            yield return new WaitForSeconds(waitBetweenColors);
-        }
-    }
+    
       
 
     /*
@@ -151,9 +118,9 @@ public class GameManager : GenericManager<GameManager>
      */
     private void UpdateScore()
     {
-        if (OnUpdatePlayerScore != null)
+        if (OnUpdateScore != null)
         {
-            OnUpdatePlayerScore(_score);
+            OnUpdateScore(_score);
         }
     }
 
