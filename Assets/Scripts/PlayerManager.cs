@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class PlayerManager : GenericManager<PlayerManager>
 { 
+    /*
+     * Holds all values for player (health, alive?)
+     */
+
     private bool _isAlive;
     [SerializeField] int _playerHealth;
 
