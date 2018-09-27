@@ -18,6 +18,7 @@ public class ReticleManager : GenericManager<ReticleManager> {
     private Renderer _reticleRend;
     private Color _defaultColor;
     private RaycastManager _raycastManager;
+    private CheckForEnemy _checkForEnemy;
 
     public Transform GetReticleTransform() { return _reticleTransform; }
 
@@ -30,6 +31,7 @@ public class ReticleManager : GenericManager<ReticleManager> {
         _reticleRend = reticle.GetComponent<Renderer>();
         _defaultColor = _reticleRend.material.color;
         _raycastManager = RaycastManager.Instance;
+        _checkForEnemy = CheckForEnemy.Instance;
     }
 
 
@@ -60,9 +62,16 @@ public class ReticleManager : GenericManager<ReticleManager> {
     /*
      * Calls for reticle to change color to enemyFound color
      */
-     private void EnemyFound()
+     private void CheckIfEnemy()
     {
-        SetReticleColor(foundEnemyColor);
+        if (_checkForEnemy.IsEnemy())
+        {
+            SetReticleColor(foundEnemyColor);
+        }
+        else
+        {
+            SetReticleColor();
+        }
     }
 
 
@@ -99,8 +108,7 @@ public class ReticleManager : GenericManager<ReticleManager> {
 
     private void OnEnable()
     {
-        CheckForEnemy.OnEnemySpotted += EnemyFound;
-        RaycastManager.OnNewObjectFound += SetPosition;
+        RaycastManager.OnNewObjectFound += CheckIfEnemy;
         RaycastManager.OnNewNormalFound += CheckNormal;
         RaycastManager.OnNoObjectFound += SetPosition;
         RaycastManager.OnNoObjectFound += SetReticleColor;
@@ -109,8 +117,7 @@ public class ReticleManager : GenericManager<ReticleManager> {
 
     private void OnDisable()
     {
-        CheckForEnemy.OnEnemySpotted -= EnemyFound;
-        RaycastManager.OnNewObjectFound -= SetPosition;
+        RaycastManager.OnNewObjectFound -= CheckIfEnemy;
         RaycastManager.OnNewNormalFound -= CheckNormal;
         RaycastManager.OnNoObjectFound -= SetPosition;
         RaycastManager.OnNoObjectFound -= SetReticleColor;
