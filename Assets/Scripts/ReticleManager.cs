@@ -1,7 +1,11 @@
 using UnityEngine;
 
-public class ReticleManager : GenericManager<ReticleManager> {
+/*
+* Handles reticle movement, rotation, and color
+*/
 
+public class ReticleManager : GenericManager<ReticleManager> {
+    
     public Transform cam;
     public GameObject reticle;
     public Color foundEnemyColor;
@@ -14,6 +18,7 @@ public class ReticleManager : GenericManager<ReticleManager> {
     private Renderer _reticleRend;
     private Color _defaultColor;
     private RaycastManager _raycastManager;
+    private CheckForEnemy _checkForEnemy;
 
     public Transform GetReticleTransform() { return _reticleTransform; }
 
@@ -26,6 +31,7 @@ public class ReticleManager : GenericManager<ReticleManager> {
         _reticleRend = reticle.GetComponent<Renderer>();
         _defaultColor = _reticleRend.material.color;
         _raycastManager = RaycastManager.Instance;
+        _checkForEnemy = CheckForEnemy.Instance;
     }
 
 
@@ -42,7 +48,7 @@ public class ReticleManager : GenericManager<ReticleManager> {
 
 
     /*
-     * Sets reticle to indicate object found
+     * Sets reticle to indicate object being looked at
      * RaycastHit -> void
      */
     public void SetPosition(RaycastHit hit)
@@ -54,14 +60,11 @@ public class ReticleManager : GenericManager<ReticleManager> {
 
 
     /*
-     * Checks if current object seen by reticle is an enemy
-     * void -> void
+     * Calls for reticle to change color to enemyFound color
      */
-    public void CheckForEnemy()
+     private void CheckIfEnemy()
     {
-        GameObject currentObject = _raycastManager.GetCurrentFoundObject();
-
-        if (currentObject.tag == "Enemy" || currentObject.tag == "Turret" || currentObject.tag == "Glow")
+        if (_checkForEnemy.IsEnemy())
         {
             SetReticleColor(foundEnemyColor);
         }
@@ -105,15 +108,16 @@ public class ReticleManager : GenericManager<ReticleManager> {
 
     private void OnEnable()
     {
-        RaycastManager.OnNewObjectFound += CheckForEnemy;
+        RaycastManager.OnNewObjectFound += CheckIfEnemy;
         RaycastManager.OnNewNormalFound += CheckNormal;
         RaycastManager.OnNoObjectFound += SetPosition;
         RaycastManager.OnNoObjectFound += SetReticleColor;
     }
 
+
     private void OnDisable()
     {
-        RaycastManager.OnNewObjectFound -= CheckForEnemy;
+        RaycastManager.OnNewObjectFound -= CheckIfEnemy;
         RaycastManager.OnNewNormalFound -= CheckNormal;
         RaycastManager.OnNoObjectFound -= SetPosition;
         RaycastManager.OnNoObjectFound -= SetReticleColor;

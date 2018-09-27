@@ -8154,6 +8154,7 @@ GameObject:
   - component: {fileID: 1934252590}
   - component: {fileID: 1934252589}
   - component: {fileID: 1934252591}
+  - component: {fileID: 1934252593}
   m_Layer: 2
   m_Name: ScriptManager
   m_TagString: ScriptManager
@@ -8236,7 +8237,7 @@ MonoBehaviour:
   timeBetweenSpawns: 0.8
   waitToSpawn: 4
   glowSpeed: 0.7
-  secondGlow: {r: 0, g: 0, b: 0, a: 0}
+  secondGlowColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1934252590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8259,6 +8260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417e7d05bd42aef45a1f528d034da3ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerHealth: 0
 --- !u!114 &1934252592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8278,6 +8280,17 @@ MonoBehaviour:
   - {r: 0.35, g: 0, b: 0, a: 0.34901962}
   - {r: 0, g: 0, b: 0, a: 0}
   waitBetweenColors: 0.3
+--- !u!114 &1934252593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1934252585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cca581722a25034d8670a3f9091151f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0
