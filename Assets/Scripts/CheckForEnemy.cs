@@ -4,16 +4,18 @@
  * Checks player raycast hit for enemy
  */
 public class CheckForEnemy : GenericManager<CheckForEnemy> {
-
-    public delegate void EnemySpotted();
-    public static event EnemySpotted OnEnemySpotted;
-
+    
     private RaycastManager _raycastManager;
+    private bool _isEnemy;
+
+    public bool IsEnemy() { return _isEnemy; }
+
 
 	// Use this for initialization
 	void Start ()
     {
-        _raycastManager = RaycastManager.Instance;		
+        _raycastManager = RaycastManager.Instance;
+        _isEnemy = false;
 	}
 
 
@@ -27,10 +29,11 @@ public class CheckForEnemy : GenericManager<CheckForEnemy> {
 
         if (currentObject.tag == "Enemy" || currentObject.tag == "Turret" || currentObject.tag == "Glow")
         {
-            if (OnEnemySpotted != null)
-            {
-                OnEnemySpotted();
-            }
+            _isEnemy = true;
+        }
+        else
+        {
+            _isEnemy = false;
         }
     }
 
