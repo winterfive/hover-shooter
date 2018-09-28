@@ -20,14 +20,14 @@ public class UIManager : GenericManager<UIManager> {
     private void OnEnable()
     {
         GameManager.OnUpdatePlayerHealth += UpdateHealthUI;
-        GameManager.OnUpdatePlayerScore += UpdateScoreUI;
+        GameManager.OnUpdateScore += UpdateScoreUI;
     }
 
 
     private void OnDisable()
     {
         GameManager.OnUpdatePlayerHealth -= UpdateHealthUI;
-        GameManager.OnUpdatePlayerScore -= UpdateScoreUI;
+        GameManager.OnUpdateScore -= UpdateScoreUI;
     }
 
     
