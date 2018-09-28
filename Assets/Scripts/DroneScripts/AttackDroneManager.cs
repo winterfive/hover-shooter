@@ -20,14 +20,11 @@ public class AttackDroneManager : PooledObjectManager {
     public float glowSpeed;
     public Color secondGlowColor;
     public int damageValue, pointValue;
-    public Color destroyColor1, destroyColor2, destroyColor3;
-    public float waitBetweenColors;
 
     private PoolManager _poolManager;
     private List<GameObject> _attackDrones;
     private GameObject _activeAttackDrone;
     private PlayerManager _playerManager;
-    private Color[] _destructionColors;
 
 
     private void Awake()
@@ -40,9 +37,6 @@ public class AttackDroneManager : PooledObjectManager {
 
     void Start()
     {
-        _destructionColors[0] = destroyColor1;
-        _destructionColors[1] = destroyColor2;
-        _destructionColors[2] = destroyColor3;
         StartCoroutine(SpawnAttackDrone());
     }
 
