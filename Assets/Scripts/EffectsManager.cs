@@ -17,15 +17,16 @@ public class EffectsManager : GenericManager<EffectsManager> {
 	}
 
 
-    public void DissolveEnemy()
+    public void EnemyDisapears()
     {
-
+        _shotObject = _raycastManager.GetCurrentFoundObject();
     }
 
 
     private IEnumerator FadeEffect()
     {
         // TODO This required turning on transparent in the material which is not good for mobile :(
+        // Change fade out to changing to darker red color then particle explosion using that color
         Renderer[] components = _shotObject.GetComponentsInChildren<Renderer>();
 
         foreach (Renderer r in components)
