@@ -13,16 +13,17 @@ public class GameManager : GenericManager<GameManager>
     public float timeBetweenShots = 0.15f;
     public delegate void Shoot();
     public static event Shoot OnShoot;    
-    public delegate void UpdateScore(int i);
+    public delegate void UpdateScore(int j);
     public static UpdateScore OnUpdateScore;
-    public delegate void UpdatePlayerHealth(int j);
+    public delegate void UpdatePlayerHealth(int i);
     public static UpdatePlayerHealth OnUpdatePlayerHealth;    
 
     private float _timeSinceLastShot;
     private bool _IsShieldUp;
     private int _score;
-    private RaycastManager _raycastManager;
     private CheckForEnemy _checkForEnemy;
+    private int _changeToHealthValue;
+    private int _changeToScoreValue;
     private EffectsManager _effectsManager;
 
 
@@ -31,9 +32,8 @@ public class GameManager : GenericManager<GameManager>
         _timeSinceLastShot = 0f;
         _IsShieldUp = false;
         _score = 0;
-        _raycastManager = RaycastManager.Instance;
-        _effectsManager = EffectsManager.Instance;
         _checkForEnemy = CheckForEnemy.Instance;
+        _effectsManager = EffectsManager.Instance;
     }
 
 
@@ -59,7 +59,8 @@ public class GameManager : GenericManager<GameManager>
 
 
     /*
-     * Broadcasts to PlayerLasers
+     * Broadcasts to PlayerLasers and checks if object fired on
+     * is an enemy
      * void -> void
      */
     private void ShootAtEnemy()
@@ -70,18 +71,16 @@ public class GameManager : GenericManager<GameManager>
 
             if (_checkForEnemy.IsEnemy())
             {
-                DestroyEnemy();
+                ShootDrone();
             }
         }
     }
 
 
-    private void DestroyEnemy()
+    private void ShootDrone()
     {
-        //shotObject.GetComponent<NavMeshAgent>().speed = 0;
-        //shotObject.GetComponent<DroneActions>().IsShooting = false;
-        _effectsManager.DissolveEnemy();
-        UpdateScore();
+        _effectsManager.EnemyDisapears();
+        UpdatePlayerScore();
     }
     
       
@@ -113,29 +112,27 @@ public class GameManager : GenericManager<GameManager>
 
 
     /*
-     * Updates player score and broadcasts to UI
+     * Broadcasts change in player score to UI
      * void -> void
      */
-    private void UpdateScore()
+    private void UpdatePlayerScore()
     {
         if (OnUpdateScore != null)
         {
-            OnUpdateScore(_score);
+            OnUpdateScore(_changeToScoreValue);
         }
     }
 
 
     /*
-     * Updates player health value and broadcasts to UI
+     * Broadcasts change in player health to UI
      * void -> void
      */
     private void UpdateHealth()
     {
-        _playerHealth -= 1;
-
         if (OnUpdatePlayerHealth != null)
         {
-            OnUpdatePlayerHealth(_playerHealth);
+            OnUpdatePlayerHealth(_changeToHealthValue);
         }
     }
 
