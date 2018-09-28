@@ -19,16 +19,4 @@ public class PlayerManager : GenericManager<PlayerManager>
         _isAlive = true;
     }
 
-    private void Update()
-    {
-        if (Time.time > 20f)
-        {
-            _isAlive = false;
-        }
-
-        //if (_playerHealth <= 0)
-        //{
-        //    _isAlive = false;
-        //}
-    }
 }
