@@ -4,7 +4,7 @@ using UnityEngine;
 public class PooledObjectManager : GenericManager<PooledObjectManager>
 {
     /*
-     * This class comment... TODO
+     * Parent class for all pooled objects
      */
 
 
@@ -30,7 +30,7 @@ public class PooledObjectManager : GenericManager<PooledObjectManager>
 
     /*
      * Returns object to its pool
-     * This is the ONLY path for return in the project
+     * This is the ONLY method for return in the project
      * GameObject -> void
      */
     public void ReturnToPool(GameObject go)
