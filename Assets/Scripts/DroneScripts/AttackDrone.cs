@@ -14,6 +14,9 @@ public class AttackDrone : MonoBehaviour
     private Color _otherGlowColor;
     private float _glowSpeed;
 
+    // TODO Every drone will need a stopEverything method based on a bool
+    // so that it will stop moving/glowing once it's been shot
+
 
     void Awake()
     {
@@ -66,7 +69,7 @@ public class AttackDrone : MonoBehaviour
         LerpColor();
 
         // Check if drone is close to mid point or end point
-        if (Time.frameCount % 10 == 0)
+        if (Time.frameCount % 30 == 0)
         {
             if (_agent.remainingDistance < _agent.stoppingDistance)
             {
