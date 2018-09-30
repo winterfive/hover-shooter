@@ -6,7 +6,7 @@ public class BombDroneManager : PooledObjectManager {
 
     /*
      * This class handles values & methods needed for spawning and moving bombDrones
-     * BombDrones do not shoot at the player.  They flaot slowly to the player and once within
+     * BombDrones do not shoot at the player.  They move slowly to the player and once within
      * a certain range, detonate, inflicting a large amount of damage to the player.
      */
 
@@ -24,8 +24,8 @@ public class BombDroneManager : PooledObjectManager {
     private List<GameObject> _bombDrones;
     private GameObject _activeBombDrone;
     private PlayerManager _playerManager;
-    private bool _bombDroneAlive;
     private Transform _camTransform;
+    private bool _uniqueIsActive;
 
 
     private void Awake()
@@ -33,14 +33,14 @@ public class BombDroneManager : PooledObjectManager {
         _poolManager = PoolManager.Instance;
         _playerManager = PlayerManager.Instance;
         _bombDrones = _poolManager.CreateList(prefab, poolSize);
-        _bombDroneAlive = false;
         _camTransform = Camera.main.transform;
+        _uniqueIsActive = false;// TODO code this as controller into spawn or not
     }
 
 
     void Start()
     {
-        if (!_bombDroneAlive)
+        if (!_uniqueIsActive)
         {
             SpawnBombDrone();
         }        
@@ -63,6 +63,7 @@ public class BombDroneManager : PooledObjectManager {
                 _activeBombDrone.transform.position = startPoint.position;
                 _activeBombDrone.transform.rotation = startPoint.rotation;
                 _activeBombDrone.gameObject.SetActive(true);
+                _uniqueIsActive = true;
             }
             else
             {
@@ -74,15 +75,15 @@ public class BombDroneManager : PooledObjectManager {
 
     public Vector3 SetEndPoint()
     {
-        Vector3 end = _camTransform.position + new Vector3(0f, 1f, 1f);
+        Vector3 end = _camTransform.position;
         return end;
     }
 
 
     public float GetRandomSpeed()
     {
-        float value = Random.Range(minSpeed, maxSpeed);
-        return value;
+        float s = Random.Range(minSpeed, maxSpeed);
+        return s;
     }
 
 

@@ -59,9 +59,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CheckForEnemy.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\AttackDrone.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\AttackDroneManager.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\BombDroneManager.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\DroneManager.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\PooledObjectManager.cs" />
+    <Compile Include="Assets\Scripts\EffectsManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GenericManager.cs" />
     <Compile Include="Assets\Scripts\PlayerLasers.cs" />
