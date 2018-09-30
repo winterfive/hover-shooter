@@ -1630,7 +1630,7 @@ Transform:
   - {fileID: 1557357679}
   - {fileID: 199318882}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &364797573
 GameObject:
@@ -1967,7 +1967,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &482011660
 GameObject:
@@ -6472,7 +6472,7 @@ Transform:
   - {fileID: 761243740}
   - {fileID: 167945827}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1385219244
 GameObject:
@@ -6685,7 +6685,7 @@ Transform:
   - {fileID: 1308071617}
   - {fileID: 1908643887}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1409510448
 GameObject:
@@ -7280,6 +7280,53 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1490970842}
+--- !u!1 &1535299275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1535299278}
+  - component: {fileID: 1535299276}
+  m_Layer: 2
+  m_Name: BombDroneTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!136 &1535299276
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1535299275}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!224 &1535299278
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1535299275}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -9.4}
+  m_LocalScale: {x: 5, y: 15, z: 5}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 10.2}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1557357678
 GameObject:
   m_ObjectHideFlags: 0
@@ -8155,6 +8202,7 @@ GameObject:
   - component: {fileID: 1934252589}
   - component: {fileID: 1934252591}
   - component: {fileID: 1934252593}
+  - component: {fileID: 1934252594}
   m_Layer: 2
   m_Name: ScriptManager
   m_TagString: ScriptManager
@@ -8184,7 +8232,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1934252588
 MonoBehaviour:
@@ -8238,6 +8286,8 @@ MonoBehaviour:
   waitToSpawn: 4
   glowSpeed: 0.7
   secondGlowColor: {r: 0, g: 0, b: 0, a: 0}
+  damageValue: 0
+  pointValue: 0
 --- !u!114 &1934252590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8273,13 +8323,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenShots: 0.15
-  missleHitValue: 1
-  destructionColors:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0.7, g: 0, b: 0, a: 0.69803923}
-  - {r: 0.35, g: 0, b: 0, a: 0.34901962}
-  - {r: 0, g: 0, b: 0, a: 0}
-  waitBetweenColors: 0.3
 --- !u!114 &1934252593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8291,6 +8334,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cca581722a25034d8670a3f9091151f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1934252594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1934252585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72296d4856f621245b24db35f9fa1a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoints:
+  - {fileID: 213152335}
+  - {fileID: 741158106}
+  - {fileID: 1327769901}
+  prefab: {fileID: 1617544713365868, guid: 3a03a5c181f233b419dc3b4161d06206, type: 2}
+  poolSize: 1
+  minSpeed: 0.5
+  maxSpeed: 3
+  altitudeMin: 1
+  altitudeMax: 6
+  waitToSpawn: 0
+  timeBetweenSpawns: 0
+  glowSpeed: 0
+  secondGlowColor: {r: 0, g: 0, b: 0, a: 0}
+  damageValue: 0
+  pointValue: 0
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0
@@ -8789,7 +8859,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2108288319
 GameObject:
