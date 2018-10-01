@@ -28,8 +28,6 @@ public class AttackDrone : MonoBehaviour
         else
         {
             Debug.Log("Cannot find AttackDroneManager script");
-            // Return to pool
-            _attackDroneManagerReference.SetToInactive(_this);
         }
 
         _camPosition = Camera.main.transform.position;
@@ -48,11 +46,10 @@ public class AttackDrone : MonoBehaviour
     {
         if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
         {
-            SetMidPoint();
+            TravelToMidPoint();
+            _movingToMidpoint = true;
             _agent.speed = _attackDroneManagerReference.GetRandomSpeed();
             _agent.baseOffset = _attackDroneManagerReference.GetRandomOffset();
-            
-            _movingToMidpoint = true;
         }
         else
         {
@@ -102,7 +99,7 @@ public class AttackDrone : MonoBehaviour
     }
 
 
-    private void SetMidPoint()
+    private void TravelToMidPoint()
     {
         Vector3 point = _attackDroneManagerReference.SetMidPoint();
         point.y = _agent.baseOffset;
