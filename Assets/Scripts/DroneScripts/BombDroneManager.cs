@@ -15,10 +15,11 @@ public class BombDroneManager : PooledObjectManager {
     public int poolSize;
     public float minSpeed, maxSpeed;
     public float altitudeMin, altitudeMax;
-    public float waitToSpawn, timeBetweenSpawns;
+    public float xMin, xMax, yMin, yMax, zMin, zMax;
     public float glowSpeed;
     public Color secondGlowColor;
     public int damageValue, pointValue;
+    public int detonationDistance;
     
     private PoolManager _poolManager;
     private List<GameObject> _bombDrones;
@@ -34,7 +35,7 @@ public class BombDroneManager : PooledObjectManager {
         _playerManager = PlayerManager.Instance;
         _bombDrones = _poolManager.CreateList(prefab, poolSize);
         _camTransform = Camera.main.transform;
-        _uniqueIsActive = false;// TODO code this as controller into spawn or not
+        _uniqueIsActive = false;
     }
 
 
@@ -53,7 +54,7 @@ public class BombDroneManager : PooledObjectManager {
      */
     private void SpawnBombDrone()
     {
-        if (_playerManager.IsAlive())
+        if (_playerManager.IsAlive() && _uniqueIsActive == false)
         {
             _activeBombDrone = _poolManager.GetObjectFromPool(_bombDrones);
 
@@ -70,6 +71,13 @@ public class BombDroneManager : PooledObjectManager {
                 Debug.Log("The bombDrone isn't available right now.");
             }
         }            
+    }
+
+
+    public Vector3 SetMidPoint()
+    {
+        Vector3 mid = CreateRandomVector(xMin, xMax, yMin, yMax, zMin, zMax);
+        return mid;
     }
 
 
@@ -97,5 +105,6 @@ public class BombDroneManager : PooledObjectManager {
     public void SetToInactive(GameObject go)
     {
         ReturnToPool(go);
+        _uniqueIsActive = false;
     }
 }
