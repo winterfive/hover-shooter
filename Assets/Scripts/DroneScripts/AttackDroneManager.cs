@@ -19,6 +19,7 @@ public class AttackDroneManager : PooledObjectManager {
     public float waitToSpawn;
     public float glowSpeed;
     public Color secondGlowColor;
+    public int damageValue, pointValue;
 
     private PoolManager _poolManager;
     private List<GameObject> _attackDrones;
