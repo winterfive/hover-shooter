@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\CheckForEnemy.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\AttackDrone.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\AttackDroneManager.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\BombDrone.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\BombDroneManager.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\DroneManager.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\PooledObjectManager.cs" />
