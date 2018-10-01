@@ -21,11 +21,11 @@ GameObject:
   - component: {fileID: 4773826291986832}
   - component: {fileID: 33399682028081816}
   - component: {fileID: 23336717638036770}
-  - component: {fileID: 135603103793306022}
-  - component: {fileID: 195618707689302678}
+  - component: {fileID: 114110803542473330}
+  - component: {fileID: 195634405944054582}
   m_Layer: 8
   m_Name: Sphere
-  m_TagString: Enemy
+  m_TagString: BombDrone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,19 +85,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1617544713365868}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!135 &135603103793306022
-SphereCollider:
+--- !u!114 &114110803542473330
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1617544713365868}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &195618707689302678
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ce825b0b3f5f749a9be7f8770689a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!195 &195634405944054582
 NavMeshAgent:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

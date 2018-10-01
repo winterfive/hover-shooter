@@ -11,7 +11,8 @@ TagManager:
   - ScriptManager
   - GunTip
   - Missle
-  - BombDroneTarget
+  - Undefined
+  - BombDrone
   layers:
   - Default
   - TransparentFX
