@@ -39,7 +39,6 @@ public class BombDrone : Drone
         //_defaultGlowColor = _glowRenderer.material.color;
         //_glowSpeed = _bombDroneManagerReference.glowSpeed;
         //_otherGlowColor = _bombDroneManagerReference.secondGlowColor;
-        _detonationDistance = _bombDroneManagerReference.detonationDistance;
         _isAlive = true;
     }
 
@@ -64,7 +63,10 @@ public class BombDrone : Drone
 
     void Update()
     {
-        //LerpColor();
+        //LerpColor(_defaultGlowColor, 
+        //          _bombDroneManagerReference.secondGlowColor,
+        //          _bombDroneManagerReference.glowSpeed,
+        //          _glowRenderer);
 
         if (Time.frameCount % 30 == 0)
         {

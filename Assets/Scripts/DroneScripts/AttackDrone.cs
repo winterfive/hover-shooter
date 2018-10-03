@@ -63,7 +63,10 @@ public class AttackDrone : Drone
     void Update()
     {
         LookAt(_camPosition);
-        LerpColor();
+        LerpColor(_defaultGlowColor, 
+                  _attackDroneManagerReference.secondGlowColor,
+                  _attackDroneManagerReference.glowSpeed,
+                  _glowRenderer);
 
         // Check if drone is close to mid point or end point
         if (Time.frameCount % 30 == 0)
@@ -112,19 +115,5 @@ public class AttackDrone : Drone
         Vector3 endPoint = _attackDroneManagerReference.SetEndPoint();
         endPoint.y = _agent.baseOffset;
         _agent.destination = endPoint;
-    }
-
-
-    /*
-     * Pingpongs color steadily from one color to another
-     * void -> void
-     */
-    private void LerpColor()
-    {
-        if (_glowRenderer)
-        {
-            float pingpong = Mathf.PingPong(Time.time * _glowSpeed, 1.0f);
-            _glowRenderer.material.color = Color.Lerp(_defaultGlowColor, _otherGlowColor, pingpong);
-        }
     }
 }
