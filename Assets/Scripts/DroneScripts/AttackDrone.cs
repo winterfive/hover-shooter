@@ -11,8 +11,6 @@ public class AttackDrone : Drone
     private Transform _turretTransform;
     private Renderer _glowRenderer;
     private Color _defaultGlowColor;
-    private Color _otherGlowColor;
-    private float _glowSpeed;
 
     // TODO Every drone will need a stopEverything method based on a bool
     // so that it will stop moving/glowing once it's been shot
@@ -37,8 +35,6 @@ public class AttackDrone : Drone
         _turretTransform = FindChildWithTag("Turret", _this);
         _glowRenderer = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
         _defaultGlowColor = _glowRenderer.material.color;
-        _glowSpeed = _attackDroneManagerReference.glowSpeed;
-        _otherGlowColor = _attackDroneManagerReference.secondGlowColor;
     }
 
 
@@ -63,7 +59,14 @@ public class AttackDrone : Drone
     void Update()
     {
         LookAt(_camPosition);
-        LerpColor();
+
+        if (_glowRenderer)
+        {
+            LerpColor(_defaultGlowColor,
+                  _attackDroneManagerReference.secondGlowColor,
+                  _attackDroneManagerReference.glowSpeed,
+                  _glowRenderer);
+        }        
 
         // Check if drone is close to mid point or end point
         if (Time.frameCount % 30 == 0)
@@ -112,19 +115,5 @@ public class AttackDrone : Drone
         Vector3 endPoint = _attackDroneManagerReference.SetEndPoint();
         endPoint.y = _agent.baseOffset;
         _agent.destination = endPoint;
-    }
-
-
-    /*
-     * Pingpongs color steadily from one color to another
-     * void -> void
-     */
-    private void LerpColor()
-    {
-        if (_glowRenderer)
-        {
-            float pingpong = Mathf.PingPong(Time.time * _glowSpeed, 1.0f);
-            _glowRenderer.material.color = Color.Lerp(_defaultGlowColor, _otherGlowColor, pingpong);
-        }
     }
 }

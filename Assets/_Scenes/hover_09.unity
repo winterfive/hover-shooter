@@ -8344,11 +8344,16 @@ MonoBehaviour:
   maxSpeed: 4
   altitudeMin: 1
   altitudeMax: 6
+  xMin: -20
+  xMax: 20
+  yMin: 0.5
+  yMax: 4
+  zMin: 0
+  zMax: 22
   glowSpeed: 0
   secondGlowColor: {r: 0, g: 0, b: 0, a: 0}
   damageValue: 0
   pointValue: 0
-  detonationDistance: 5
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0

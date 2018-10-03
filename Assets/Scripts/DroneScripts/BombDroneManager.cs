@@ -19,14 +19,13 @@ public class BombDroneManager : PooledObjectManager {
     public float glowSpeed;
     public Color secondGlowColor;
     public int damageValue, pointValue;
-    public int detonationDistance;
     
     private PoolManager _poolManager;
     private List<GameObject> _bombDrones;
     private GameObject _activeBombDrone;
     private PlayerManager _playerManager;
     private Transform _camTransform;
-    private bool _uniqueIsActive;
+    //private bool _uniqueIsActive;
 
 
     private void Awake()
@@ -35,13 +34,13 @@ public class BombDroneManager : PooledObjectManager {
         _playerManager = PlayerManager.Instance;
         _bombDrones = _poolManager.CreateList(prefab, poolSize);
         _camTransform = Camera.main.transform;
-        _uniqueIsActive = false;
+        _activeBombDrone = null;
     }
 
 
-    void Start()
+    void Update()
     {
-        if (!_uniqueIsActive)
+        if (_activeBombDrone == null || !_activeBombDrone.activeInHierarchy)
         {
             SpawnBombDrone();
         }        
@@ -53,8 +52,9 @@ public class BombDroneManager : PooledObjectManager {
      * void -> void
      */
     private void SpawnBombDrone()
+        //TODO Issue with spawn, its spawning and then dissapearing and spawning again elsewhere/ blinking
     {
-        if (_playerManager.IsAlive() && _uniqueIsActive == false)
+        if (_playerManager.IsAlive())
         {
             _activeBombDrone = _poolManager.GetObjectFromPool(_bombDrones);
 
@@ -64,7 +64,6 @@ public class BombDroneManager : PooledObjectManager {
                 _activeBombDrone.transform.position = startPoint.position;
                 _activeBombDrone.transform.rotation = startPoint.rotation;
                 _activeBombDrone.gameObject.SetActive(true);
-                _uniqueIsActive = true;
             }
             else
             {
@@ -105,6 +104,5 @@ public class BombDroneManager : PooledObjectManager {
     public void SetToInactive(GameObject go)
     {
         ReturnToPool(go);
-        _uniqueIsActive = false;
     }
 }

@@ -10,8 +10,6 @@ public class BombDrone : Drone
     private BombDroneManager _bombDroneManagerReference;
     private Renderer _glowRenderer;
     private Color _defaultGlowColor;
-    private Color _otherGlowColor;
-    private float _glowSpeed;
     private bool _isAlive;
     private int _detonationDistance;
     private bool _movingToMidPoint;
@@ -37,9 +35,6 @@ public class BombDrone : Drone
         _agent = _this.GetComponent<NavMeshAgent>();
         //_glowRenderer = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
         //_defaultGlowColor = _glowRenderer.material.color;
-        //_glowSpeed = _bombDroneManagerReference.glowSpeed;
-        //_otherGlowColor = _bombDroneManagerReference.secondGlowColor;
-        _detonationDistance = _bombDroneManagerReference.detonationDistance;
         _isAlive = true;
     }
 
@@ -64,26 +59,27 @@ public class BombDrone : Drone
 
     void Update()
     {
-        //LerpColor();
+        if (_glowRenderer)
+        {
+            //LerpColor(_defaultGlowColor, 
+            //          _bombDroneManagerReference.secondGlowColor,
+            //          _bombDroneManagerReference.glowSpeed,
+            //          _glowRenderer);
+        }
 
         if (Time.frameCount % 30 == 0)
         {
-            // Check if drone is close to mid point or end point
-            if (Time.frameCount % 30 == 0)
+            if (_agent.remainingDistance < _agent.stoppingDistance)
             {
-                if (_agent.remainingDistance < _agent.stoppingDistance)
+                if (_movingToMidPoint)
                 {
-                    if (_movingToMidPoint)
-                    {
-                        GoToEndPoint();
-                        //TODO Slowly Change altitude to cam height
-                        _movingToMidPoint = false;
-                    }
-                    else
-                    {
-                        // Return to pool
-                        _bombDroneManagerReference.SetToInactive(_this);
-                    }
+                    GoToEndPoint();
+                    _movingToMidPoint = false;
+                }
+                else
+                {
+                    // Return to pool
+                    _bombDroneManagerReference.SetToInactive(_this);
                 }
             }
         }
@@ -104,18 +100,4 @@ public class BombDrone : Drone
         endPoint.y = _agent.baseOffset;
         _agent.destination = endPoint;
     }
-
-
-    /*
-     * Pingpongs color steadily from one color to another
-     * void -> void
-     */
-    //private void LerpColor()
-    //{
-    //    if (_glowRenderer)
-    //    {
-    //        float pingpong = Mathf.PingPong(Time.time * _glowSpeed, 1.0f);
-    //        _glowRenderer.material.color = Color.Lerp(_defaultGlowColor, _otherGlowColor, pingpong);
-    //    }
-    //}
 }
