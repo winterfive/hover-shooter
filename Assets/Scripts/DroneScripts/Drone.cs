@@ -31,6 +31,4 @@ public class Drone : MonoBehaviour {
         float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
         glow.material.color = Color.Lerp(color1, color2, pingpong);
     }
-
-    void LookAt() { }
 }
