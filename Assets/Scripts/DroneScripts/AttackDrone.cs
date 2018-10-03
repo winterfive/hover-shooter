@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class AttackDrone : MonoBehaviour
+public class AttackDrone : Drone
 {
     private Vector3 _camPosition;
     private GameObject _this;
@@ -34,8 +34,8 @@ public class AttackDrone : MonoBehaviour
         _this = this.gameObject;
         _agent = _this.GetComponent<NavMeshAgent>();
         _movingToMidpoint = false;
-        _turretTransform = FindChildWithTag("Turret");
-        _glowRenderer = FindChildWithTag("Glow").GetComponent<Renderer>();
+        _turretTransform = FindChildWithTag("Turret", _this);
+        _glowRenderer = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
         _defaultGlowColor = _glowRenderer.material.color;
         _glowSpeed = _attackDroneManagerReference.glowSpeed;
         _otherGlowColor = _attackDroneManagerReference.secondGlowColor;
@@ -112,25 +112,6 @@ public class AttackDrone : MonoBehaviour
         Vector3 endPoint = _attackDroneManagerReference.SetEndPoint();
         endPoint.y = _agent.baseOffset;
         _agent.destination = endPoint;
-    }
-
-
-    /*
-     * Finds child transform with tag
-     * void -> transform
-     */
-    public Transform FindChildWithTag(string a)
-    {
-        Transform[] components = _this.GetComponentsInChildren<Transform>();
-
-        foreach (Transform t in components)
-        {
-            if (t.gameObject.CompareTag(a))
-            {
-                return t;
-            }
-        }
-        return null;
     }
 
 
