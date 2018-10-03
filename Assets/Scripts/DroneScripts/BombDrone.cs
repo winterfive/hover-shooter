@@ -2,7 +2,7 @@
 using UnityEngine.AI;
 using System.Collections;
 
-public class BombDrone : MonoBehaviour
+public class BombDrone : Drone
 {
     private Vector3 _camPosition;
     private GameObject _this;
@@ -35,9 +35,9 @@ public class BombDrone : MonoBehaviour
         _camPosition = Camera.main.transform.position;
         _this = this.gameObject;
         _agent = _this.GetComponent<NavMeshAgent>();
-        //_glowRenderer = FindChildWithTag("Glow").GetComponent<Renderer>();
+        //_glowRenderer = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
         //_defaultGlowColor = _glowRenderer.material.color;
-        // _glowSpeed = _bombDroneManagerReference.glowSpeed;
+        //_glowSpeed = _bombDroneManagerReference.glowSpeed;
         //_otherGlowColor = _bombDroneManagerReference.secondGlowColor;
         _detonationDistance = _bombDroneManagerReference.detonationDistance;
         _isAlive = true;
@@ -103,25 +103,6 @@ public class BombDrone : MonoBehaviour
         Vector3 endPoint = _bombDroneManagerReference.SetEndPoint();
         endPoint.y = _agent.baseOffset;
         _agent.destination = endPoint;
-    }
-
-
-    /*
-     * Finds child transform with tag
-     * void -> transform
-     */
-    public Transform FindChildWithTag(string a)
-    {
-        Transform[] components = _this.GetComponentsInChildren<Transform>();
-
-        foreach (Transform t in components)
-        {
-            if (t.gameObject.CompareTag(a))
-            {
-                return t;
-            }
-        }
-        return null;
     }
 
 
