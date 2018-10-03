@@ -76,7 +76,6 @@ public class BombDrone : Drone
                     if (_movingToMidPoint)
                     {
                         GoToEndPoint();
-                        //TODO Slowly Change altitude to cam height
                         _movingToMidPoint = false;
                     }
                     else
