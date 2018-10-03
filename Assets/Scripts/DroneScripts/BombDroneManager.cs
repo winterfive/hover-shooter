@@ -19,7 +19,6 @@ public class BombDroneManager : PooledObjectManager {
     public float glowSpeed;
     public Color secondGlowColor;
     public int damageValue, pointValue;
-    public int detonationDistance;
     
     private PoolManager _poolManager;
     private List<GameObject> _bombDrones;
