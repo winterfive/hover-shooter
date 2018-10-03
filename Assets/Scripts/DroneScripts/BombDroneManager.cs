@@ -53,7 +53,7 @@ public class BombDroneManager : PooledObjectManager {
      */
     private void SpawnBombDrone()
     {
-        if (_playerManager.IsAlive() && _uniqueIsActive == false)
+        if (_playerManager.IsAlive())
         {
             _activeBombDrone = _poolManager.GetObjectFromPool(_bombDrones);
 
