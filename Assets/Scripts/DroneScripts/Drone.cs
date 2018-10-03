@@ -23,4 +23,6 @@ public class Drone : MonoBehaviour {
     }
 
     void LerpColor() { }
+
+    void LookAt() { }
 }
