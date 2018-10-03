@@ -22,7 +22,15 @@ public class Drone : MonoBehaviour {
         return null;
     }
 
-    void LerpColor() { }
+    /*
+     * Pingpongs color steadily from one color to another
+     * void -> void
+     */
+    public void LerpColor(Color color1, Color color2, float glowSpeed, Renderer glow)
+    {
+        float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
+        glow.material.color = Color.Lerp(color1, color2, pingpong);
+    }
 
     void LookAt() { }
 }
