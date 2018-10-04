@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackDroneValues {
+public class AttackDroneValues : GenericManager<AttackDroneValues> {
 
     /*
      * This class holds values needed by the attackDrone class
