@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombDroneManager : PooledObjectManager {
+public class BombDroneManager : PoolingManager {
 
     /*
      * This class handles values & methods needed for spawning and moving bombDrones

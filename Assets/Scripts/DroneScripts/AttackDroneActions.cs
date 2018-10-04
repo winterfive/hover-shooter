@@ -1,31 +1,28 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class AttackDrone : Drone
+public class AttackDroneActions : DroneActions
 {
     private Vector3 _camPosition;
     private GameObject _this;
     private NavMeshAgent _agent;
-    private AttackDroneManager _attackDroneManagerReference;
+    private AttackDroneValues _ADVRef;
     private bool _movingToMidpoint;
     private Transform _turretTransform;
     private Renderer _glowRenderer;
     private Color _defaultGlowColor;
 
-    // TODO Every drone will need a stopEverything method based on a bool
-    // so that it will stop moving/glowing once it's been shot
-
 
     void Awake()
     {
-        GameObject attackDroneManagerObject = GameObject.FindWithTag("ScriptManager");
-        if (attackDroneManagerObject != null)
+        GameObject attackDroneValuesObject = GameObject.FindWithTag("ScriptManager");
+        if (attackDroneValuesObject != null)
         {
-            _attackDroneManagerReference = attackDroneManagerObject.GetComponent<AttackDroneManager>();            
+            _ADVRef = attackDroneValuesObject.GetComponent<AttackDroneValues>();            
         }
         else
         {
-            Debug.Log("Cannot find AttackDroneManager script");
+            Debug.Log("Cannot find AttackDroneValues script");
         }
 
         _camPosition = Camera.main.transform.position;
@@ -44,14 +41,14 @@ public class AttackDrone : Drone
         {
             TravelToMidPoint();
             _movingToMidpoint = true;
-            _agent.speed = _attackDroneManagerReference.GetRandomSpeed();
-            _agent.baseOffset = _attackDroneManagerReference.GetRandomOffset();
+            _agent.speed = ReturnRandomValue(_ADVRef.minSpeed, _ADVRef.maxSpeed);
+            _agent.baseOffset = ReturnRandomValue(_ADVRef.altitudeMin, _ADVRef.altitudeMax);
         }
         else
         {
             Debug.Log("Attack drone returned to pool (not on navMesh)");
             // Return to pool
-            _attackDroneManagerReference.SetToInactive(_this);
+            _this.SetActive(false);
         }
     }
 
@@ -63,8 +60,8 @@ public class AttackDrone : Drone
         if (_glowRenderer)
         {
             LerpColor(_defaultGlowColor,
-                  _attackDroneManagerReference.secondGlowColor,
-                  _attackDroneManagerReference.glowSpeed,
+                  _ADVRef.secondGlowColor,
+                  _ADVRef.glowSpeed,
                   _glowRenderer);
         }        
 
@@ -81,7 +78,7 @@ public class AttackDrone : Drone
                 else
                 {
                     // Return to pool
-                    _attackDroneManagerReference.SetToInactive(_this);
+                    _this.SetActive(false);
                 }
             }
         }
@@ -104,7 +101,7 @@ public class AttackDrone : Drone
 
     private void TravelToMidPoint()
     {
-        Vector3 point = _attackDroneManagerReference.SetMidPoint();
+        Vector3 point = CreateRandomVector(_ADVRef.xMin, _ADVRef.xMax, 0f, 0f, _ADVRef.xMin, _ADVRef.zMax);
         point.y = _agent.baseOffset;
         _agent.destination = point;
     }
@@ -112,7 +109,8 @@ public class AttackDrone : Drone
 
     private void GoToEndPoint()
     {
-        Vector3 endPoint = _attackDroneManagerReference.SetEndPoint();
+        Transform t = GetRandomValueFromArray(_ADVRef.endPoints);
+        Vector3 endPoint = t.position;
         endPoint.y = _agent.baseOffset;
         _agent.destination = endPoint;
     }
