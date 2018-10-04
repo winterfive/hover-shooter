@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectsManager : GenericManager<EffectsManager> {
+public class EffectsManager : SetAsSingleton<EffectsManager> {
 
     public Color[] destructionColors;
     public float waitBetweenColors;

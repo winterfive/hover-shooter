@@ -4,7 +4,7 @@ using UnityEngine;
 * Handles reticle movement, rotation, and color
 */
 
-public class ReticleManager : GenericManager<ReticleManager> {
+public class ReticleManager : SetAsSingleton<ReticleManager> {
     
     public Transform cam;
     public GameObject reticle;

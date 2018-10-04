@@ -3,7 +3,7 @@
 /*
  * Checks player raycast hit for enemy
  */
-public class CheckForEnemy : GenericManager<CheckForEnemy> {
+public class CheckForEnemy : SetAsSingleton<CheckForEnemy> {
     
     private RaycastManager _raycastManager;
     private bool _isEnemy;

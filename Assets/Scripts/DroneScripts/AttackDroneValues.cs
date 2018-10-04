@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackDroneValues : GenericManager<AttackDroneValues> {
+public class AttackDroneValues : SetAsSingleton<AttackDroneValues> {
 
     /*
      * This class holds values needed by the attackDrone class

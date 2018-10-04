@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
- * Methods for all drone actions except spawning and objectPooling
+ * Methods for various drone actions except spawning and objectPooling
  */
 
 public class DroneActions : MonoBehaviour {

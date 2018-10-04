@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RaycastManager : GenericManager<RaycastManager> {
+public class RaycastManager : SetAsSingleton<RaycastManager> {
     // Manages raycasting from the player's POV
 
     public float range = 100f;

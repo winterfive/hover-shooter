@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileManager : GenericManager<ProjectileManager> {
+public class ProjectileManager : SetAsSingleton<ProjectileManager> {
 
     public GameObject misslePrefab;
     public int misslePoolSize;
