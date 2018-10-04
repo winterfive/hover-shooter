@@ -2,7 +2,7 @@
 using UnityEngine.AI;
 using System.Collections;
 
-public class BombDrone : Drone
+public class BombDroneActions : Drone
 {
     private Vector3 _camPosition;
     private GameObject _this;

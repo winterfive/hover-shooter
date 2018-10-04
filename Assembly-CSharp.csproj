@@ -60,12 +60,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CheckForEnemy.cs" />
-    <Compile Include="Assets\Scripts\DroneScripts\AttackDrone.cs" />
-    <Compile Include="Assets\Scripts\DroneScripts\AttackDroneManager.cs" />
-    <Compile Include="Assets\Scripts\DroneScripts\BombDrone.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\AttackDroneActions.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\AttackDroneSpawnManager.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\AttackDroneValues.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\BombDroneActions.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\BombDroneManager.cs" />
-    <Compile Include="Assets\Scripts\DroneScripts\DroneManager.cs" />
-    <Compile Include="Assets\Scripts\DroneScripts\PooledObjectManager.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\DroneActions.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\PoolingManager.cs" />
     <Compile Include="Assets\Scripts\EffectsManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GenericManager.cs" />
