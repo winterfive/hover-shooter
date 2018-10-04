@@ -17,6 +17,9 @@ public class AttackDroneSpawnManager : PoolingManager {
 
     private void Awake()
     {
+        _ADV = AttackDroneValues.Instance;
+        _playerManager = PlayerManager.Instance;
+        _droneActions = DroneActions.Instance;
         _attackDrones = CreateList(_ADV.prefab, _ADV.poolSize);
     }
 

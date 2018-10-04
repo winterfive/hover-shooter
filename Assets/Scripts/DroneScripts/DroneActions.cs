@@ -6,7 +6,7 @@ using UnityEngine;
  * Methods for various drone actions except spawning and objectPooling
  */
 
-public class DroneActions : MonoBehaviour {
+public class DroneActions : SetAsSingleton<DroneActions> {
 
     /*
      * Sets object at a random starting point
