@@ -6,6 +6,7 @@ using UnityEngine;
 
 /*
  * Handles Bomb Drone spawning
+ * Bomb Drone is unique
  */
 public class BombDroneSpawnManager : PoolingManager {
 
@@ -43,22 +44,22 @@ public class BombDroneSpawnManager : PoolingManager {
      */
     private void SpawnBombDrone()
     {
-        while (_playerManager.IsAlive())
-        {
-            _activeBombDrone = GetObjectFromPool(_bombDrones);
+        //if (_playerManager.isalive())
+        //{
+        //    _activebombdrone = getobjectfrompool(_bombdrones);
 
-            if (_activeBombDrone)
-            {
-                _droneActions.SetAtStart(_BDV.spawnPoints, _activeBombDrone);
-                _activeBombDrone.SetActive(true);
-            }
-            else
-            {
-                Debug.Log("The single bomb drone is already active.");
-            }
+        //    if (_activebombdrone)
+        //    {
+        //        _droneactions.setatstart(_bdv.spawnpoints, _activebombdrone);
+        //        _activebombdrone.setactive(true);
+        //    }
+        //    else
+        //    {
+        //        debug.log("The bomb drone is already active.");
+        //    }
 
-            StartCoroutine(WaitBetweenBombDrones());
-        }
+        //    startcoroutine(waitbetweenbombdrones());
+        //}
     }
 
 
