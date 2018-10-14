@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
- * Methods for all drone actions except spawning and objectPooling
+ * Methods for various drone actions except spawning and objectPooling
  */
 
-public class DroneActions : MonoBehaviour {
+public class DroneActions : SetAsSingleton<DroneActions> {
 
     /*
      * Sets object at a random starting point

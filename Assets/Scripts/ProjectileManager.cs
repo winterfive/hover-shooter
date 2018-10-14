@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileManager : GenericManager<ProjectileManager> {
+public class ProjectileManager : SetAsSingleton<ProjectileManager> {
 
     public GameObject misslePrefab;
     public int misslePoolSize;
 
-    private PoolManager _poolManager;
+    private PoolingManager _poolingManager;
     private List<GameObject> _missles;
     private GameObject _missle;
 
     void Awake()
     {
-        _poolManager = PoolManager.Instance;
-        _missles = _poolManager.CreateList(misslePrefab, misslePoolSize);
+        _poolingManager = PoolingManager.Instance;
+        _missles = _poolingManager.CreateList(misslePrefab, misslePoolSize);
     }
 
 
     public void ShootMissle(Transform t)
     {
-        _missle = _poolManager.GetObjectFromPool(_missles);
+        _missle = _poolingManager.GetObjectFromPool(_missles);
 
         if (_missle)
         {

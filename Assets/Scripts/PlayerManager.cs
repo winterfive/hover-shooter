@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-public class PlayerManager : GenericManager<PlayerManager>
+public class PlayerManager : SetAsSingleton<PlayerManager>
 { 
     /*
      * Holds all values for player (health, alive?)

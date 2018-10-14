@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolingManager : GenericManager<PoolingManager>
+public class PoolingManager : SetAsSingleton<PoolingManager>
 {
     /*
      * Creates pool of GameObjects

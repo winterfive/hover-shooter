@@ -1,41 +1,35 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
 
-public class BombDroneActions : Drone
+public class BombDroneActions : DroneActions
 {
     private Vector3 _camPosition;
     private GameObject _this;
     private NavMeshAgent _agent;
-    private BombDroneManager _bombDroneManagerReference;
-    private Renderer _glowRenderer;
-    private Color _defaultGlowColor;
-    private bool _isAlive;
-    private int _detonationDistance;
-    private bool _movingToMidPoint;
-
-    // TODO Every drone will need a stopEverything method based on a bool
-    // so that it will stop moving/glowing once it's been shot
+    private BombDroneValues _BDVRef;
+    private bool _movingToMidpoint;
+    //private Renderer _glowRenderer;
+    //private Color _defaultGlowColor;
 
 
     void Awake()
     {
-        GameObject bombDroneManagerObject = GameObject.FindWithTag("ScriptManager");
-        if (bombDroneManagerObject != null)
+        GameObject bombDroneValuesObject = GameObject.FindWithTag("ScriptManager");
+        if (bombDroneValuesObject != null)
         {
-            _bombDroneManagerReference = bombDroneManagerObject.GetComponent<BombDroneManager>();            
+            _BDVRef = bombDroneValuesObject.GetComponent<BombDroneValues>();
         }
         else
         {
-            Debug.Log("Cannot find AttackDroneManager script");
+            Debug.Log("Cannot find BombDroneValues script");
         }
 
         _camPosition = Camera.main.transform.position;
         _this = this.gameObject;
         _agent = _this.GetComponent<NavMeshAgent>();
+        _movingToMidpoint = false;
         //_glowRenderer = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
         //_defaultGlowColor = _glowRenderer.material.color;
-        _isAlive = true;
     }
 
 
@@ -43,52 +37,53 @@ public class BombDroneActions : Drone
     {
         if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
         {
-            AssignMidPoint();
-            _movingToMidPoint = true;
-            _agent.speed = _bombDroneManagerReference.GetRandomSpeed();
-            _agent.baseOffset = _bombDroneManagerReference.GetRandomOffset();
+            TravelToMidPoint();
+            _movingToMidpoint = true;
+            _agent.speed = ReturnRandomValue(_BDVRef.minSpeed, _BDVRef.maxSpeed);
+            _agent.baseOffset = ReturnRandomValue(_BDVRef.altitudeMin, _BDVRef.altitudeMax);
         }
         else
         {
-            Debug.Log("Attack drone returned to pool (not on navMesh)");
+            Debug.Log("Bomb drone returned to pool (not on navMesh)");
             // Return to pool
-            _bombDroneManagerReference.SetToInactive(_this);
+            _this.SetActive(false);
         }
     }
 
 
     void Update()
     {
-        if (_glowRenderer)
-        {
-            //LerpColor(_defaultGlowColor, 
-            //          _bombDroneManagerReference.secondGlowColor,
-            //          _bombDroneManagerReference.glowSpeed,
-            //          _glowRenderer);
-        }
+        //if (_glowRenderer)
+        //{
+        //    LerpColor(_defaultGlowColor,
+        //          _BDVRef.secondGlowColor,
+        //          _BDVRef.glowSpeed,
+        //          _glowRenderer);
+        //}
 
+        // Check if drone is close to mid point or end point
         if (Time.frameCount % 30 == 0)
         {
             if (_agent.remainingDistance < _agent.stoppingDistance)
             {
-                if (_movingToMidPoint)
+                if (_movingToMidpoint)
                 {
                     GoToEndPoint();
-                    _movingToMidPoint = false;
+                    _movingToMidpoint = false;
                 }
                 else
                 {
                     // Return to pool
-                    _bombDroneManagerReference.SetToInactive(_this);
+                    _this.SetActive(false);
                 }
             }
         }
     }
 
 
-    private void AssignMidPoint()
+    private void TravelToMidPoint()
     {
-        Vector3 point = _bombDroneManagerReference.SetMidPoint();
+        Vector3 point = CreateRandomVector(_BDVRef.xMin, _BDVRef.xMax, 0f, 0f, _BDVRef.xMin, _BDVRef.zMax);
         point.y = _agent.baseOffset;
         _agent.destination = point;
     }
@@ -96,7 +91,7 @@ public class BombDroneActions : Drone
 
     private void GoToEndPoint()
     {
-        Vector3 endPoint = _bombDroneManagerReference.SetEndPoint();
+        Vector3 endPoint = _camPosition;
         endPoint.y = _agent.baseOffset;
         _agent.destination = endPoint;
     }

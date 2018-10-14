@@ -7,7 +7,7 @@ public class AttackDroneActions : DroneActions
     private GameObject _this;
     private NavMeshAgent _agent;
     private AttackDroneValues _ADVRef;
-    private bool _movingToMidpoint;
+    //private bool _movingToMidpoint;
     private Transform _turretTransform;
     private Renderer _glowRenderer;
     private Color _defaultGlowColor;
@@ -28,7 +28,7 @@ public class AttackDroneActions : DroneActions
         _camPosition = Camera.main.transform.position;
         _this = this.gameObject;
         _agent = _this.GetComponent<NavMeshAgent>();
-        _movingToMidpoint = false;
+        //_movingToMidpoint = false;
         _turretTransform = FindChildWithTag("Turret", _this);
         _glowRenderer = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
         _defaultGlowColor = _glowRenderer.material.color;
@@ -39,8 +39,7 @@ public class AttackDroneActions : DroneActions
     {
         if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
         {
-            TravelToMidPoint();
-            _movingToMidpoint = true;
+            TravelToRandomPoint();
             _agent.speed = ReturnRandomValue(_ADVRef.minSpeed, _ADVRef.maxSpeed);
             _agent.baseOffset = ReturnRandomValue(_ADVRef.altitudeMin, _ADVRef.altitudeMax);
         }
@@ -65,21 +64,31 @@ public class AttackDroneActions : DroneActions
                   _glowRenderer);
         }        
 
-        // Check if drone is close to mid point or end point
+        //// Check if drone is close to mid point or end point
+        //if (Time.frameCount % 30 == 0)
+        //{
+        //    if (_agent.remainingDistance < _agent.stoppingDistance)
+        //    {
+        //        if (_movingToMidpoint)
+        //        {
+        //            GoToEndPoint();
+        //            _movingToMidpoint = false;
+        //        }
+        //        else
+        //        {
+        //            // Return to pool
+        //            _movingToMidpoint = true;
+        //            _this.SetActive(false);
+        //        }
+        //    }
+        //}
+
+        // Check if drone is close to destination
         if (Time.frameCount % 30 == 0)
         {
             if (_agent.remainingDistance < _agent.stoppingDistance)
             {
-                if (_movingToMidpoint)
-                {
-                    GoToEndPoint();
-                    _movingToMidpoint = false;
-                }
-                else
-                {
-                    // Return to pool
-                    _this.SetActive(false);
-                }
+                TravelToRandomPoint();
             }
         }
     }
@@ -99,7 +108,7 @@ public class AttackDroneActions : DroneActions
     }
 
 
-    private void TravelToMidPoint()
+    private void TravelToRandomPoint()
     {
         Vector3 point = CreateRandomVector(_ADVRef.xMin, _ADVRef.xMax, 0f, 0f, _ADVRef.xMin, _ADVRef.zMax);
         point.y = _agent.baseOffset;
@@ -107,11 +116,10 @@ public class AttackDroneActions : DroneActions
     }
 
 
-    private void GoToEndPoint()
-    {
-        Transform t = GetRandomValueFromArray(_ADVRef.endPoints);
-        Vector3 endPoint = t.position;
-        endPoint.y = _agent.baseOffset;
-        _agent.destination = endPoint;
-    }
+    //private void GoToEndPoint()
+    //{
+    //    Vector3 endPoint = GetRandomValueFromArray(_ADVRef.endPoints).position;
+    //    endPoint.y = _agent.baseOffset;
+    //    _agent.destination = endPoint;
+    //}
 }

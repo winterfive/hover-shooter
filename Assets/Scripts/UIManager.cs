@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : GenericManager<UIManager> {
+public class UIManager : SetAsSingleton<UIManager> {
     
 
     private void UpdateHealthUI(int i)

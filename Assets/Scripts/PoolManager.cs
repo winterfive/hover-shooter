@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : GenericManager<PoolManager> {
+public class PoolManager : SetAsSingleton<PoolManager> {
 
     /*
      * Creates pool of gameObjects

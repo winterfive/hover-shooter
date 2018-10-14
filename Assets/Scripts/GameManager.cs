@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GameManager : GenericManager<GameManager>
+public class GameManager : SetAsSingleton<GameManager>
 {
     /*
      * Class handles all player input, score and 
