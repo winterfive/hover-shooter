@@ -40,7 +40,6 @@ public class AttackDroneActions : DroneActions
         if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
         {
             TravelToMidPoint();
-            _movingToMidpoint = true;
             _agent.speed = ReturnRandomValue(_ADVRef.minSpeed, _ADVRef.maxSpeed);
             _agent.baseOffset = ReturnRandomValue(_ADVRef.altitudeMin, _ADVRef.altitudeMax);
         }
@@ -65,21 +64,31 @@ public class AttackDroneActions : DroneActions
                   _glowRenderer);
         }        
 
-        // Check if drone is close to mid point or end point
+        //// Check if drone is close to mid point or end point
+        //if (Time.frameCount % 30 == 0)
+        //{
+        //    if (_agent.remainingDistance < _agent.stoppingDistance)
+        //    {
+        //        if (_movingToMidpoint)
+        //        {
+        //            GoToEndPoint();
+        //            _movingToMidpoint = false;
+        //        }
+        //        else
+        //        {
+        //            // Return to pool
+        //            _movingToMidpoint = true;
+        //            _this.SetActive(false);
+        //        }
+        //    }
+        //}
+
+        // Check if drone is close to destination
         if (Time.frameCount % 30 == 0)
         {
             if (_agent.remainingDistance < _agent.stoppingDistance)
             {
-                if (_movingToMidpoint)
-                {
-                    GoToEndPoint();
-                    _movingToMidpoint = false;
-                }
-                else
-                {
-                    // Return to pool
-                    _this.SetActive(false);
-                }
+                TravelToMidPoint();
             }
         }
     }
@@ -109,8 +118,7 @@ public class AttackDroneActions : DroneActions
 
     private void GoToEndPoint()
     {
-        Transform t = GetRandomValueFromArray(_ADVRef.endPoints);
-        Vector3 endPoint = t.position;
+        Vector3 endPoint = GetRandomValueFromArray(_ADVRef.endPoints).position;
         endPoint.y = _agent.baseOffset;
         _agent.destination = endPoint;
     }
