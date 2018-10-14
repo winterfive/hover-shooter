@@ -7,7 +7,7 @@ public class AttackDroneActions : DroneActions
     private GameObject _this;
     private NavMeshAgent _agent;
     private AttackDroneValues _ADVRef;
-    private bool _movingToMidpoint;
+    //private bool _movingToMidpoint;
     private Transform _turretTransform;
     private Renderer _glowRenderer;
     private Color _defaultGlowColor;
@@ -28,7 +28,7 @@ public class AttackDroneActions : DroneActions
         _camPosition = Camera.main.transform.position;
         _this = this.gameObject;
         _agent = _this.GetComponent<NavMeshAgent>();
-        _movingToMidpoint = false;
+        //_movingToMidpoint = false;
         _turretTransform = FindChildWithTag("Turret", _this);
         _glowRenderer = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
         _defaultGlowColor = _glowRenderer.material.color;
@@ -39,7 +39,7 @@ public class AttackDroneActions : DroneActions
     {
         if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
         {
-            TravelToMidPoint();
+            TravelToRandomPoint();
             _agent.speed = ReturnRandomValue(_ADVRef.minSpeed, _ADVRef.maxSpeed);
             _agent.baseOffset = ReturnRandomValue(_ADVRef.altitudeMin, _ADVRef.altitudeMax);
         }
@@ -88,7 +88,7 @@ public class AttackDroneActions : DroneActions
         {
             if (_agent.remainingDistance < _agent.stoppingDistance)
             {
-                TravelToMidPoint();
+                TravelToRandomPoint();
             }
         }
     }
@@ -108,7 +108,7 @@ public class AttackDroneActions : DroneActions
     }
 
 
-    private void TravelToMidPoint()
+    private void TravelToRandomPoint()
     {
         Vector3 point = CreateRandomVector(_ADVRef.xMin, _ADVRef.xMax, 0f, 0f, _ADVRef.xMin, _ADVRef.zMax);
         point.y = _agent.baseOffset;
@@ -116,10 +116,10 @@ public class AttackDroneActions : DroneActions
     }
 
 
-    private void GoToEndPoint()
-    {
-        Vector3 endPoint = GetRandomValueFromArray(_ADVRef.endPoints).position;
-        endPoint.y = _agent.baseOffset;
-        _agent.destination = endPoint;
-    }
+    //private void GoToEndPoint()
+    //{
+    //    Vector3 endPoint = GetRandomValueFromArray(_ADVRef.endPoints).position;
+    //    endPoint.y = _agent.baseOffset;
+    //    _agent.destination = endPoint;
+    //}
 }
