@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 0.85
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: a4f78a684965a2d4bbc20a4b86231606, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 22075fe14147f4549bc723fe3ff7830b, type: 2}
   m_HaloStrength: 0
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -4880,7 +4880,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1213041244}
-  m_LocalRotation: {x: -0.20787677, y: 0.017925385, z: 0.0038101582, w: 0.97798336}
+  m_LocalRotation: {x: -0.2881384, y: -0.044269953, z: -0.013336378, w: 0.956472}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4888,7 +4888,7 @@ RectTransform:
   - {fileID: 1226095920}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -24, y: -1437.9, z: 0}
+  m_LocalEulerAnglesHint: {x: -33.53, y: -1445.3, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 2}
@@ -7570,12 +7570,11 @@ MonoBehaviour:
   yMax: 8
   zMin: -5
   zMax: 20
-  minSpeed: 1
-  maxSpeed: 5
+  minSpeed: 9
+  maxSpeed: 9
   altitudeMin: 0.5
   altitudeMax: 10
-  waitToSpawn: 0
-  timeBetweenSpawns: 0
+  timeBetweenSpawns: 10
   glowSpeed: 0
   secondGlowColor: {r: 0, g: 0, b: 0, a: 0}
   damageValue: 0
