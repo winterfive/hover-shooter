@@ -26,13 +26,13 @@ RenderSettings:
   m_AmbientIntensity: 0.85
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 436986617e362b548958b5e514efd35e, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 22075fe14147f4549bc723fe3ff7830b, type: 2}
   m_HaloStrength: 0
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
-  m_DefaultReflectionMode: 0
+  m_DefaultReflectionMode: 1
   m_DefaultReflectionResolution: 16
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 0
@@ -1544,7 +1544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &344646100
 Transform:
   m_ObjectHideFlags: 0
@@ -4880,7 +4880,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1213041244}
-  m_LocalRotation: {x: -0.05381742, y: 0, z: 0, w: 0.99855083}
+  m_LocalRotation: {x: -0.2881384, y: -0.044269953, z: -0.013336378, w: 0.956472}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4888,7 +4888,7 @@ RectTransform:
   - {fileID: 1226095920}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -6.17, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -33.53, y: -1445.3, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 2}
@@ -7570,12 +7570,11 @@ MonoBehaviour:
   yMax: 8
   zMin: -5
   zMax: 20
-  minSpeed: 1
-  maxSpeed: 5
+  minSpeed: 9
+  maxSpeed: 9
   altitudeMin: 0.5
   altitudeMax: 10
-  waitToSpawn: 0
-  timeBetweenSpawns: 0
+  timeBetweenSpawns: 10
   glowSpeed: 0
   secondGlowColor: {r: 0, g: 0, b: 0, a: 0}
   damageValue: 0
@@ -7597,11 +7596,6 @@ MonoBehaviour:
   - {fileID: 1327769901}
   - {fileID: 761243740}
   - {fileID: 167945827}
-  endPoints:
-  - {fileID: 2117091305}
-  - {fileID: 1031263725}
-  - {fileID: 1557357679}
-  - {fileID: 199318882}
   prefab: {fileID: 1424531867977468, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
   poolSize: 20
   xMin: -18
@@ -7610,8 +7604,8 @@ MonoBehaviour:
   yMax: 12
   zMin: -4
   zMax: 20
-  minSpeed: 3
-  maxSpeed: 9
+  minSpeed: 2
+  maxSpeed: 10
   altitudeMin: 0.5
   altitudeMax: 12
   timeBetweenSpawns: 1

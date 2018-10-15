@@ -26,26 +26,21 @@ public class BombDroneSpawnManager : PoolingManager {
     }
 
 
-    void Update()
+    void Start()
     {
-        if (Time.time % 30 == 0)
-        {
-            if (_activeBombDrone == null || !_activeBombDrone.activeInHierarchy)
-            {
-                SpawnBombDrone();
-            }
-        }        
+        StartCoroutine(SpawnBombDrone());
     }
 
 
     /*
-     * Spawns attack drones at one of the spawnPoints
+     * Spawns bomb drone at one of the spawnPoints
      * void -> void
      */
-    private void SpawnBombDrone()
+    private IEnumerator SpawnBombDrone()
     {
-        if (_playerManager.IsAlive())
+        while (_playerManager.IsAlive())
         {
+            yield return new WaitForSeconds(_BDV.timeBetweenSpawns);
             _activeBombDrone = GetObjectFromPool(_bombDrones);
 
             if (_activeBombDrone)
@@ -55,16 +50,10 @@ public class BombDroneSpawnManager : PoolingManager {
             }
             else
             {
-                Debug.Log("The bomb drone is already active.");
+                Debug.Log("Bomb Drone is busy right now.");
             }
+        }        
 
-            //startcoroutine(waitbetweenbombdrones());
-        }
+        yield return null;
     }
-
-
-    //private IEnumerator WaitBetweenBombDrones()
-    //{
-    //    yield return new WaitForSeconds(_BDV.timeBetweenSpawns);
-    //}
 }

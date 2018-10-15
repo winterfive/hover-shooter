@@ -14,7 +14,7 @@ public class BombDroneValues : SetAsSingleton<BombDroneValues> {
     public float xMin, xMax, yMin, yMax, zMin, zMax;
     public float minSpeed, maxSpeed;
     public float altitudeMin, altitudeMax;
-    public float waitToSpawn, timeBetweenSpawns;
+    public float timeBetweenSpawns;
     public float glowSpeed;
     public Color secondGlowColor;
     public int damageValue, pointValue;    
