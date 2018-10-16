@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissleValues : SetAsSingleton<DroneMissleValues> {
+public class MissleValues : SetAsSingleton<MissleValues> {
 
     public int poolSize;
     public int minMSPeed, maxMSpeed;
-    public int minMFireRate, maxMFireRate;
+    public float minMFireRate, maxMFireRate;
     public GameObject prefab;
+    public int droneRange;
 
 }
