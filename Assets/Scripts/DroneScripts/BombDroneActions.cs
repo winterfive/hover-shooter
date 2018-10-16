@@ -31,11 +31,11 @@ public class BombDroneActions : DroneActions
     }
 
 
-    private void Start()
+    private void OnEnable()
     {
         if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
         {
-            GoToEndPoint();
+            GoToPlayer();
             _agent.speed = ReturnRandomValue(_BDVRef.minSpeed, _BDVRef.maxSpeed);
             _agent.baseOffset = ReturnRandomValue(_BDVRef.altitudeMin, _BDVRef.altitudeMax);
         }
@@ -58,7 +58,7 @@ public class BombDroneActions : DroneActions
         //          _glowRenderer);
         //}
 
-        // Check if drone is close to mid point or end point
+        // Check if drone is close end point
         if (Time.frameCount % 30 == 0)
         {
             if(_this.activeInHierarchy)
@@ -73,7 +73,7 @@ public class BombDroneActions : DroneActions
     }
 
 
-    private void GoToEndPoint()
+    private void GoToPlayer()
     {
         Vector3 endPoint = _camPosition;
         endPoint.y = _agent.baseOffset;
