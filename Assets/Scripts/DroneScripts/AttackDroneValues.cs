@@ -9,7 +9,6 @@ public class AttackDroneValues : SetAsSingleton<AttackDroneValues> {
      */
 
     public Transform[] spawnPoints;
-    //public Transform[] endPoints;
     public GameObject prefab;
     public int poolSize;
     public float xMin, xMax, yMin, yMax, zMin, zMax;

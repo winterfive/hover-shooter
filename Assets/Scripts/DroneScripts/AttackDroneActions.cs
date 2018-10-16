@@ -7,7 +7,6 @@ public class AttackDroneActions : DroneActions
     private GameObject _this;
     private NavMeshAgent _agent;
     private AttackDroneValues _ADVRef;
-    //private bool _movingToMidpoint;
     private Transform _turretTransform;
     private Renderer _glowRenderer;
     private Color _defaultGlowColor;
@@ -18,7 +17,7 @@ public class AttackDroneActions : DroneActions
         GameObject attackDroneValuesObject = GameObject.FindWithTag("ScriptManager");
         if (attackDroneValuesObject != null)
         {
-            _ADVRef = attackDroneValuesObject.GetComponent<AttackDroneValues>();            
+            _ADVRef = attackDroneValuesObject.GetComponent<AttackDroneValues>();
         }
         else
         {
@@ -28,14 +27,13 @@ public class AttackDroneActions : DroneActions
         _camPosition = Camera.main.transform.position;
         _this = this.gameObject;
         _agent = _this.GetComponent<NavMeshAgent>();
-        //_movingToMidpoint = false;
         _turretTransform = FindChildWithTag("Turret", _this);
         _glowRenderer = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
         _defaultGlowColor = _glowRenderer.material.color;
     }
 
 
-    private void Start()
+    private void OnEnable()
     {
         if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
         {
@@ -62,26 +60,7 @@ public class AttackDroneActions : DroneActions
                   _ADVRef.secondGlowColor,
                   _ADVRef.glowSpeed,
                   _glowRenderer);
-        }        
-
-        //// Check if drone is close to mid point or end point
-        //if (Time.frameCount % 30 == 0)
-        //{
-        //    if (_agent.remainingDistance < _agent.stoppingDistance)
-        //    {
-        //        if (_movingToMidpoint)
-        //        {
-        //            GoToEndPoint();
-        //            _movingToMidpoint = false;
-        //        }
-        //        else
-        //        {
-        //            // Return to pool
-        //            _movingToMidpoint = true;
-        //            _this.SetActive(false);
-        //        }
-        //    }
-        //}
+        }
 
         // Check if drone is close to destination
         if (Time.frameCount % 30 == 0)
@@ -93,11 +72,11 @@ public class AttackDroneActions : DroneActions
         }
     }
 
-    
-     /*
-     * Changes position and rotation of turret to look at target using only y axis
-     * Vector3 -> void
-     */
+
+    /*
+    * Changes position and rotation of turret to look at target using only y axis
+    * Vector3 -> void
+    */
     public void LookAt(Vector3 target)
     {
         Vector3 newVector = new Vector3(_turretTransform.position.x - target.x,
@@ -114,12 +93,4 @@ public class AttackDroneActions : DroneActions
         point.y = _agent.baseOffset;
         _agent.destination = point;
     }
-
-
-    //private void GoToEndPoint()
-    //{
-    //    Vector3 endPoint = GetRandomValueFromArray(_ADVRef.endPoints).position;
-    //    endPoint.y = _agent.baseOffset;
-    //    _agent.destination = endPoint;
-    //}
 }
