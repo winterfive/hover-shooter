@@ -5,9 +5,8 @@ using UnityEngine;
 public class MissleValues : SetAsSingleton<MissleValues> {
 
     public int poolSize;
-    public int minMSPeed, maxMSpeed;
+    public int mSpeed;
     public float minMFireRate, maxMFireRate;
     public GameObject prefab;
     public int droneRange;
-
 }
