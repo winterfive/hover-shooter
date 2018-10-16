@@ -1684,7 +1684,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 381316857}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 17, z: 1}
@@ -7627,11 +7627,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolSize: 5
-  mSPeed: 0
-  minMFireRate: 0
-  maxMFireRate: 0
-  prefab: {fileID: 0}
-  droneRange: 0
+  missleSpeed: 9
+  minMissleFireRate: 7
+  maxMissleFireRate: 15
+  prefab: {fileID: 1995977473683020, guid: 0d20cd457177a644cb26ec655d288348, type: 2}
+  droneRange: 75
 --- !u!114 &1934252592
 MonoBehaviour:
   m_ObjectHideFlags: 0
