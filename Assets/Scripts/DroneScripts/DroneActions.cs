@@ -12,7 +12,7 @@ public class DroneActions : SetAsSingleton<DroneActions> {
      * Sets object at a random starting point
      * spawnPoint[], GameObject -> void
      */
-    public void SetAtStart(Transform[] points, GameObject go)
+    public void SetAtRandomPoint(Transform[] points, GameObject go)
     {
         Transform startPoint = GetRandomValueFromArray(points);
         go.transform.position = startPoint.position;

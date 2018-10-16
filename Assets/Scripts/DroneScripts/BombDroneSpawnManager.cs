@@ -45,7 +45,7 @@ public class BombDroneSpawnManager : PoolingManager {
 
             if (_activeBombDrone)
             {
-                _droneActions.SetAtStart(_BDV.spawnPoints, _activeBombDrone);
+                _droneActions.SetAtRandomPoint(_BDV.spawnPoints, _activeBombDrone);
                 _activeBombDrone.SetActive(true);
             }
             else
