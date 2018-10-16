@@ -42,7 +42,7 @@ public class AttackDroneSpawnManager : PoolingManager {
 
             if (_activeAttackDrone)
             {
-                _droneActions.SetAtStart(_ADV.spawnPoints, _activeAttackDrone);
+                _droneActions.SetAtRandomPoint(_ADV.spawnPoints, _activeAttackDrone);
                 _activeAttackDrone.SetActive(true);
             }
             else
