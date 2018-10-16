@@ -8,7 +8,6 @@ public class MissleActions : MonoBehaviour
      * individual missle (flight, what it hits).
      */
 
-    public int missleSpeed;
     public delegate void PlayerHit();
     public static PlayerHit OnPlayerHit;
     public delegate void ShieldHit();
@@ -17,7 +16,7 @@ public class MissleActions : MonoBehaviour
     private MissleValues _MVRef;
     private GameObject _missle;
     private Transform _camTransform;
-    private Transform _target;
+    private int _missleSpeed;
 
 
     // Use this for initialization
@@ -35,11 +34,13 @@ public class MissleActions : MonoBehaviour
 
         _camTransform = Camera.main.transform;
         _missle = this.gameObject;
+        _missleSpeed = _MVRef.missleSpeed;        
     }
 
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
+        // TODO This isn't being triggered at all, missles are sticking to player
         if (col.gameObject.tag == "Player")
         {
             if (OnPlayerHit != null)
@@ -62,10 +63,7 @@ public class MissleActions : MonoBehaviour
 
     void Update()
     {
-        if (_missle.activeInHierarchy)
-        {
-            MissleFly();
-        }       
+        MissleFly();       
     }
 
 
@@ -77,7 +75,7 @@ public class MissleActions : MonoBehaviour
     {
         if (Vector3.Distance(_missle.transform.position, _camTransform.position) > 0.5)
         {
-            float step = missleSpeed * Time.deltaTime;
+            float step = _missleSpeed * Time.deltaTime;
             _missle.transform.position = Vector3.MoveTowards(_missle.transform.position, _camTransform.position, step);
             _missle.transform.LookAt(_camTransform);
         }
