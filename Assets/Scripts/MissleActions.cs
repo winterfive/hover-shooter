@@ -1,28 +1,44 @@
 ﻿using System;
 using UnityEngine;
 
-public class ProjectileActions : MonoBehaviour
+public class MissleActions : MonoBehaviour
 {
-    public int missleSpeed;
+    /*
+     * Class handles all missle actions as they pertain to the 
+     * individual missle (flight, what it hits).
+     */
+
     public delegate void PlayerHit();
     public static PlayerHit OnPlayerHit;
     public delegate void ShieldHit();
     public static ShieldHit OnShieldHit;
 
+    private MissleValues _MVRef;
     private GameObject _missle;
     private Transform _camTransform;
-    private Transform _target;
+    private int _missleSpeed;
 
 
     // Use this for initialization
     void Awake()
     {
+        GameObject missleValuesObjectRef = GameObject.FindWithTag("ScriptManager");
+        if (missleValuesObjectRef != null)
+        {
+            _MVRef = missleValuesObjectRef.GetComponent<MissleValues>();
+        }
+        else
+        {
+            Debug.Log("Cannot find MissleValues script");
+        }
+
         _camTransform = Camera.main.transform;
         _missle = this.gameObject;
+        _missleSpeed = _MVRef.missleSpeed;        
     }
 
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
@@ -46,10 +62,7 @@ public class ProjectileActions : MonoBehaviour
 
     void Update()
     {
-        if (_missle.activeInHierarchy)
-        {
-            MissleFly();
-        }       
+        MissleFly();       
     }
 
 
@@ -61,7 +74,7 @@ public class ProjectileActions : MonoBehaviour
     {
         if (Vector3.Distance(_missle.transform.position, _camTransform.position) > 0.5)
         {
-            float step = missleSpeed * Time.deltaTime;
+            float step = _missleSpeed * Time.deltaTime;
             _missle.transform.position = Vector3.MoveTowards(_missle.transform.position, _camTransform.position, step);
             _missle.transform.LookAt(_camTransform);
         }

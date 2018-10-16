@@ -1560,7 +1560,7 @@ Transform:
   - {fileID: 1557357679}
   - {fileID: 199318882}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &364797573
 GameObject:
@@ -1684,7 +1684,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 381316857}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 17, z: 1}
@@ -1897,7 +1897,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &509358960
 GameObject:
@@ -6191,7 +6191,7 @@ Transform:
   - {fileID: 1308071617}
   - {fileID: 1908643887}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1409510448
 GameObject:
@@ -7494,14 +7494,15 @@ GameObject:
   - component: {fileID: 1934252587}
   - component: {fileID: 1934252588}
   - component: {fileID: 1934252592}
+  - component: {fileID: 1934252595}
   - component: {fileID: 1934252586}
   - component: {fileID: 1934252594}
   - component: {fileID: 1934252593}
   - component: {fileID: 1934252590}
   - component: {fileID: 1934252596}
   - component: {fileID: 1934252589}
+  - component: {fileID: 1934252597}
   - component: {fileID: 1934252591}
-  - component: {fileID: 1934252595}
   m_Layer: 2
   m_Name: ScriptManager
   m_TagString: ScriptManager
@@ -7570,11 +7571,11 @@ MonoBehaviour:
   yMax: 8
   zMin: -5
   zMax: 20
-  minSpeed: 9
-  maxSpeed: 9
-  altitudeMin: 0.5
-  altitudeMax: 10
-  timeBetweenSpawns: 2
+  minSpeed: 2
+  maxSpeed: 5
+  altitudeMin: 2
+  altitudeMax: 6
+  timeBetweenSpawns: 8
   glowSpeed: 0
   secondGlowColor: {r: 0, g: 0, b: 0, a: 0}
   damageValue: 0
@@ -7598,18 +7599,18 @@ MonoBehaviour:
   - {fileID: 167945827}
   prefab: {fileID: 1424531867977468, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
   poolSize: 20
-  xMin: -18
-  xMax: 18
+  xMin: -22
+  xMax: 22
   yMin: 0.5
   yMax: 12
   zMin: -4
-  zMax: 20
+  zMax: 24
   minSpeed: 2
   maxSpeed: 10
   altitudeMin: 0.5
   altitudeMax: 12
   timeBetweenSpawns: 1
-  waitToSpawn: 4
+  waitToSpawn: 6
   glowSpeed: 0.7
   secondGlowColor: {r: 0, g: 0, b: 0, a: 0}
   damageValue: 1
@@ -7622,12 +7623,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1934252585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c376fafe1e562d4f880956e60cd32b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fa0c7402bc39f54e90feecbf87bb632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  misslePrefab: {fileID: 1234904337511844, guid: 341b9598d49f1a640a074570103a399a,
-    type: 2}
-  misslePoolSize: 10
+  poolSize: 5
+  missleSpeed: 9
+  minMissleFireRate: 7
+  maxMissleFireRate: 15
+  prefab: {fileID: 1995977473683020, guid: 0d20cd457177a644cb26ec655d288348, type: 2}
+  droneRange: 75
 --- !u!114 &1934252592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7683,6 +7687,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2175cdeb36221a249940549596c0dbc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1934252597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1934252585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c748ff7bb75cd46aded2c2ce09e089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1946205525
@@ -8123,68 +8138,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2102991211}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &2105003886
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2105003889}
-  - component: {fileID: 2105003888}
-  - component: {fileID: 2105003887}
-  m_Layer: 2
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2105003887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2105003886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &2105003888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2105003886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &2105003889
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2105003886}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2113617852
 GameObject:
   m_ObjectHideFlags: 0

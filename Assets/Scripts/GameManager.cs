@@ -139,11 +139,11 @@ public class GameManager : SetAsSingleton<GameManager>
 
     private void OnEnable()
     {
-        ProjectileActions.OnPlayerHit += UpdateHealth;
+        MissleActions.OnPlayerHit += UpdateHealth;
     }
 
     private void OnDisable()
     {
-        ProjectileActions.OnPlayerHit -= UpdateHealth;
+        MissleActions.OnPlayerHit -= UpdateHealth;
     }
 }
