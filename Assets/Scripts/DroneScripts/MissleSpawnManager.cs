@@ -20,6 +20,8 @@ public class MissleSpawnManager : PoolingManager {
     private void SpawnMissle(Transform gunTip)
     {
         _activeMissle = GetObjectFromPool(_missles);
+        _activeMissle.transform.position = gunTip.position;
+        _activeMissle.transform.rotation = gunTip.rotation;
         _activeMissle.SetActive(true);
     }
 
