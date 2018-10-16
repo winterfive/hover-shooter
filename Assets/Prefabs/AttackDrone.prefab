@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4030676724652022}
   - component: {fileID: 195730861628870234}
   - component: {fileID: 114417266885303250}
+  - component: {fileID: 114489201222522468}
   m_Layer: 2
   m_Name: AttackDrone
   m_TagString: Enemy
@@ -471,6 +472,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45939bab8cb139e40bdac84a433e0ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114489201222522468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424531867977468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ba829ebba0a5248883923ee7d9133d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114774116277043854
