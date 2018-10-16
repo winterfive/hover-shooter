@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MissleSpawnManager : PoolingManager {
 
-    private DroneMissleValues _DMV;
+    private MissleValues _MV;
     private List<GameObject> _missles;
     private Sprite _activeMissle;
     private MissleActions _missleActions;
@@ -12,8 +12,8 @@ public class MissleSpawnManager : PoolingManager {
 
     private void Awake()
     {
-        _DMV = DroneMissleValues.Instance;
-        _missles = CreateList(_DMV.prefab, _DMV.poolSize);
+        _MV = MissleValues.Instance;
+        _missles = CreateList(_MV.prefab, _MV.poolSize);
     }
 
 
