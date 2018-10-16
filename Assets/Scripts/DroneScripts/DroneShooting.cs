@@ -30,7 +30,7 @@ public class DroneShooting : DroneActions {
 
         _this = this.gameObject;
         _gunTipTransform = FindChildWithTag("GunTip", _this);
-        _timeBetweenMissles = Random.Range(_MVRef.minMFireRate, _MVRef.maxMFireRate);
+        _timeBetweenMissles = Random.Range(_MVRef.minMissleFireRate, _MVRef.maxMissleFireRate);
         _droneRange = _MVRef.droneRange;
         _timeOfPreviousShot = 0f;
     }
@@ -38,10 +38,7 @@ public class DroneShooting : DroneActions {
 
     private void Update()
     {
-        if (Time.time % 30 == 0)
-        {
-            ShootMissles();
-        }       
+        ShootMissles();       
     }
     
 
