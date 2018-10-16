@@ -4751,64 +4751,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1153420079}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &1157257597
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4030676724652022, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4030676724652022, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4030676724652022, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4030676724652022, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4030676724652022, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4030676724652022, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4030676724652022, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4030676724652022, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 48330a55aa2441642abb65ea588ca648, type: 2}
-  m_IsPrefabParent: 0
---- !u!1 &1157257598 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1734717434660110, guid: 48330a55aa2441642abb65ea588ca648,
-    type: 2}
-  m_PrefabInternal: {fileID: 1157257597}
---- !u!114 &1157257599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1157257598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59ba829ebba0a5248883923ee7d9133d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1165133044
 GameObject:
   m_ObjectHideFlags: 0
@@ -7552,14 +7494,15 @@ GameObject:
   - component: {fileID: 1934252587}
   - component: {fileID: 1934252588}
   - component: {fileID: 1934252592}
+  - component: {fileID: 1934252595}
   - component: {fileID: 1934252586}
   - component: {fileID: 1934252594}
   - component: {fileID: 1934252593}
   - component: {fileID: 1934252590}
   - component: {fileID: 1934252596}
   - component: {fileID: 1934252589}
+  - component: {fileID: 1934252597}
   - component: {fileID: 1934252591}
-  - component: {fileID: 1934252595}
   m_Layer: 2
   m_Name: ScriptManager
   m_TagString: ScriptManager
@@ -7680,12 +7623,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1934252585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c376fafe1e562d4f880956e60cd32b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fa0c7402bc39f54e90feecbf87bb632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  misslePrefab: {fileID: 1995977473683020, guid: 0d20cd457177a644cb26ec655d288348,
-    type: 2}
-  misslePoolSize: 5
+  poolSize: 5
+  mSPeed: 0
+  minMFireRate: 0
+  maxMFireRate: 0
+  prefab: {fileID: 0}
+  droneRange: 0
 --- !u!114 &1934252592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7741,6 +7687,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2175cdeb36221a249940549596c0dbc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1934252597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1934252585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c748ff7bb75cd46aded2c2ce09e089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1946205525
