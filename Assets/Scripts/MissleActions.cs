@@ -3,12 +3,18 @@ using UnityEngine;
 
 public class MissleActions : MonoBehaviour
 {
+    /*
+     * Class handles all missle actions as they pertain to the 
+     * individual missle (flight, what it hits).
+     */
+
     public int missleSpeed;
     public delegate void PlayerHit();
     public static PlayerHit OnPlayerHit;
     public delegate void ShieldHit();
     public static ShieldHit OnShieldHit;
 
+    private MissleValues _MVRef;
     private GameObject _missle;
     private Transform _camTransform;
     private Transform _target;
@@ -17,6 +23,16 @@ public class MissleActions : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        GameObject missleValuesObjectRef = GameObject.FindWithTag("ScriptManager");
+        if (missleValuesObjectRef != null)
+        {
+            _MVRef = missleValuesObjectRef.GetComponent<MissleValues>();
+        }
+        else
+        {
+            Debug.Log("Cannot find MissleValues script");
+        }
+
         _camTransform = Camera.main.transform;
         _missle = this.gameObject;
     }
