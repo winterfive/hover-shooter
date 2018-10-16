@@ -6,7 +6,7 @@ public class MissleSpawnManager : PoolingManager {
 
     private MissleValues _MV;
     private List<GameObject> _missles;
-    private Sprite _activeMissle;
+    private GameObject _activeMissle;
     private MissleActions _missleActions;
 
 
@@ -17,5 +17,21 @@ public class MissleSpawnManager : PoolingManager {
     }
 
 
+    private void SpawnMissle(Transform gunTip)
+    {
+        _activeMissle = GetObjectFromPool(_missles);
+        _activeMissle.SetActive(true);
+    }
 
+
+    private void OnEnable()
+    {
+        DroneShooting.OnMissleFired += SpawnMissle;
+    }
+
+
+    private void OnDisable()
+    {
+        DroneShooting.OnMissleFired -= SpawnMissle;
+    }
 }
