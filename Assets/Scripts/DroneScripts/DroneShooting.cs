@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class DroneShooting : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private MissleValues _DMVRef;
+    private GameObject _gunTip;
+
+    private void Awake()
+    {
+        GameObject missleValuesObject = GameObject.FindWithTag("ScriptManager");
+        if (missleValuesObject != null)
+        {
+            _DMVRef = missleValuesObject.GetComponent<MissleValues>();
+        }
+        else
+        {
+            Debug.Log("Cannot find DroneMissleValues script");
+        }
+    }
+
+    
+
+    // Need call to shoot in update
 
     private void ShootMissles()
     {
