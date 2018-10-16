@@ -40,7 +40,6 @@ public class MissleActions : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        // TODO This isn't being triggered at all, missles are sticking to player
         if (col.gameObject.tag == "Player")
         {
             if (OnPlayerHit != null)
