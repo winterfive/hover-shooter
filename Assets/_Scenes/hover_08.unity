@@ -7503,6 +7503,7 @@ GameObject:
   - component: {fileID: 1934252589}
   - component: {fileID: 1934252597}
   - component: {fileID: 1934252591}
+  - component: {fileID: 1934252598}
   m_Layer: 2
   m_Name: ScriptManager
   m_TagString: ScriptManager
@@ -7700,6 +7701,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c748ff7bb75cd46aded2c2ce09e089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1934252598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1934252585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a18cf77a1550d347b9f8b6facca2113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destructionColors:
+  - {r: 1, g: 0.1305469, b: 0, a: 1}
+  - {r: 0.8301887, g: 0.105731584, b: 0.7408976, a: 1}
+  - {r: 0.63546735, g: 0.1715023, b: 0.7735849, a: 1}
+  - {r: 0.3873633, g: 0.20652369, b: 0.4811321, a: 1}
+  waitBetweenColors: 0.5
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0
