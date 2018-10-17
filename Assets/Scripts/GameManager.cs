@@ -79,7 +79,7 @@ public class GameManager : SetAsSingleton<GameManager>
 
     private void ShootDrone()
     {
-        _effectsManager.EnemyDisapears();
+        _effectsManager.TerminateEnemy();
         UpdatePlayerScore();
     }
     

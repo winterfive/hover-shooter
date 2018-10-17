@@ -9,17 +9,20 @@ public class EffectsManager : SetAsSingleton<EffectsManager> {
 
     private GameObject _shotObject;
     private RaycastManager _raycastManager;
+    private PoolingManager _poolingManager;
 
     
     void Awake ()
     {
         _raycastManager = RaycastManager.Instance;
+        _poolingManager = PoolingManager.Instance;
 	}
 
 
-    public void EnemyDisapears()
+    public void TerminateEnemy()
     {
         _shotObject = _raycastManager.GetCurrentFoundObject();
+        StartCoroutine(FadeEffect());
     }
 
 
@@ -44,5 +47,7 @@ public class EffectsManager : SetAsSingleton<EffectsManager> {
 
             yield return new WaitForSeconds(waitBetweenColors);
         }
+
+        _poolingManager.ReturnToPool(_shotObject);
     }
 }
