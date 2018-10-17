@@ -38,7 +38,7 @@ public class DroneShooting : DroneActions {
 
     private void Update()
     {
-        ShootMissles();       
+        ShootMissles();           
     }
     
 
