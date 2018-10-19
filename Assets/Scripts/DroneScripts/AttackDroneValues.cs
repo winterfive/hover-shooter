@@ -18,5 +18,5 @@ public class AttackDroneValues : SetAsSingleton<AttackDroneValues> {
     public float waitToSpawn;
     public float glowSpeed;
     public Color secondGlowColor;
-    public int damageValue, pointValue;    
+    public int damageValue, pointValue;
 }
