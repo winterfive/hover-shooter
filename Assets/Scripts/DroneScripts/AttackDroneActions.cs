@@ -10,6 +10,9 @@ public class AttackDroneActions : DroneActions
     private Transform _turretTransform;
     private Renderer _glowRenderer;
     private Color _defaultGlowColor;
+    private bool _isShot;
+
+    public bool IsShot { get; set; }
 
 
     void Awake()
@@ -30,6 +33,7 @@ public class AttackDroneActions : DroneActions
         _turretTransform = FindChildWithTag("Turret", _this);
         _glowRenderer = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
         _defaultGlowColor = _glowRenderer.material.color;
+        _isShot = false;
     }
 
 
@@ -46,30 +50,33 @@ public class AttackDroneActions : DroneActions
             Debug.Log("Attack drone returned to pool (not on navMesh)");
             // Return to pool
             _this.SetActive(false);
-        }
+        }        
     }
 
 
     void Update()
     {
-        LookAt(_camPosition);
-
-        if (_glowRenderer)
+        if(!IsShot)
         {
-            LerpColor(_defaultGlowColor,
-                  _ADVRef.secondGlowColor,
-                  _ADVRef.glowSpeed,
-                  _glowRenderer);
-        }
+            LookAt(_camPosition);
 
-        // Check if drone is close to destination
-        if (Time.frameCount % 30 == 0)
-        {
-            if (_agent.remainingDistance < _agent.stoppingDistance)
+            if (_glowRenderer)
             {
-                TravelToRandomPoint();
+                LerpColor(_defaultGlowColor,
+                        _ADVRef.secondGlowColor,
+                        _ADVRef.glowSpeed,
+                        _glowRenderer);
             }
-        }
+
+            // Check if drone is close to destination
+            if (Time.frameCount % 30 == 0)
+            {
+                if (_agent.remainingDistance < _agent.stoppingDistance)
+                {
+                    TravelToRandomPoint();
+                }
+            }
+        } 
     }
 
 
