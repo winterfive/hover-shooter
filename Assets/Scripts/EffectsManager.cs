@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EffectsManager : SetAsSingleton<EffectsManager> {
 
@@ -22,14 +23,13 @@ public class EffectsManager : SetAsSingleton<EffectsManager> {
     public void TerminateEnemy()
     {
         _shotObject = _raycastManager.GetCurrentFoundObject();
+        StopEnemyActions();
         StartCoroutine(FadeEffect());
     }
 
 
     private IEnumerator FadeEffect()
     {
-        // TODO This required turning on transparent in the material which is not good for mobile :(
-        // Change fade out to changing to darker red color then particle explosion using that color
         Renderer[] components = _shotObject.GetComponentsInChildren<Renderer>();
 
         foreach (Renderer r in components)
@@ -42,12 +42,18 @@ public class EffectsManager : SetAsSingleton<EffectsManager> {
             foreach (Renderer r in components)
             {
                 r.material.color = c;
-                Debug.Log("Fading out drone to color: " + c);
             }
 
             yield return new WaitForSeconds(waitBetweenColors);
         }
 
         _poolingManager.ReturnToPool(_shotObject);
+    }
+
+
+    private void StopEnemyActions()
+    {
+        // TODO AttackDroneActions is null
+        _shotObject.GetComponent<AttackDroneActions>().IsShot = true;
     }
 }
