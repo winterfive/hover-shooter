@@ -67,12 +67,15 @@
     <Compile Include="Assets\Scripts\DroneScripts\BombDroneSpawnManager.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\BombDroneValues.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\DroneActions.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\DroneShooting.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\MissleSpawnManager.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\MissleValues.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\PoolingManager.cs" />
     <Compile Include="Assets\Scripts\EffectsManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\MissleActions.cs" />
     <Compile Include="Assets\Scripts\PlayerLasers.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
-    <Compile Include="Assets\Scripts\ProjectileActions.cs" />
     <Compile Include="Assets\Scripts\ProjectileManager.cs" />
     <Compile Include="Assets\Scripts\RaycastManager.cs" />
     <Compile Include="Assets\Scripts\ReticleManager.cs" />
