@@ -2,7 +2,7 @@
 
 /*
  * Handles methods that all drones need
- * - "Spawning" at oen of the startPoint transforms
+ * - "Spawning" at one of the startPoint transforms
  * - Disabled when shot
  * 
  */
