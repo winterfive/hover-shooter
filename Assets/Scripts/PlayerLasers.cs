@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerLasers : MonoBehaviour {
 
     /*
-     * Script placed on empty gameObjects at the tips of
+     * Script placed on empty gameObject at the tips of
      * the player's guns to enable laser fire
      */
 
