@@ -19,7 +19,7 @@ public class ReticleManager : SetAsSingleton<ReticleManager> {
     private RaycastManager _raycastManager;
     private CheckForEnemy _checkForEnemy;
 
-    //public Transform GetReticleTransform() { return _reticleTransform; }
+    public Transform GetReticleTransform() { return _reticleTransform; }
 
 
     private void Awake()
