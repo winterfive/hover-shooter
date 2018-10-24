@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
 /*
- * Methods for various drone actions except spawning and objectPooling
+ * Handles methods that all drones need
+ * - "Spawning" at oen of the startPoint transforms
+ * - Disabled when shot
+ * 
  */
 
 public class DroneActions : SetAsSingleton<DroneActions> {
@@ -18,34 +21,34 @@ public class DroneActions : SetAsSingleton<DroneActions> {
     }
 
 
-    /*
-     * Finds child transform with tag
-     * String, GameObject -> Transform
-     */
-    public Transform FindChildWithTag(string a, GameObject go)
-    {
-        Transform[] components = go.GetComponentsInChildren<Transform>();
+    ///*
+    // * Finds child transform with tag
+    // * String, GameObject -> Transform
+    // */
+    //public Transform FindChildWithTag(string a, GameObject go)
+    //{
+    //    Transform[] components = go.GetComponentsInChildren<Transform>();
 
-        foreach (Transform t in components)
-        {
-            if (t.gameObject.CompareTag(a))
-            {
-                return t;
-            }
-        }
-        return null;
-    }
+    //    foreach (Transform t in components)
+    //    {
+    //        if (t.gameObject.CompareTag(a))
+    //        {
+    //            return t;
+    //        }
+    //    }
+    //    return null;
+    //}
 
 
-    /*
-     * Pingpongs color steadily from one color to another
-     * Color, Color, float, Renderer -> void
-     */
-    public void LerpColor(Color color1, Color color2, float glowSpeed, Renderer glow)
-    {
-        float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
-        glow.material.color = Color.Lerp(color1, color2, pingpong);
-    }
+    ///*
+    // * Pingpongs color steadily from one color to another
+    // * Color, Color, float, Renderer -> void
+    // */
+    //public void LerpColor(Color color1, Color color2, float glowSpeed, Renderer glow)
+    //{
+    //    float pingpong = Mathf.PingPong(Time.time * glowSpeed, 1.0f);
+    //    glow.material.color = Color.Lerp(color1, color2, pingpong);
+    //}
 
 
     /*
@@ -69,12 +72,5 @@ public class DroneActions : SetAsSingleton<DroneActions> {
         int index = Random.Range(0, arr.Length);
         T value = arr[index];
         return value;
-    }
-
-
-    public float ReturnRandomValue(float x, float y)
-    {
-        float newFloat = Random.Range(x, y);
-        return newFloat;
     }
 }
