@@ -9,8 +9,7 @@ public class ReticleManager : SetAsSingleton<ReticleManager> {
     public Transform cam;
     public GameObject reticle;
     public Color foundEnemyColor;
-
-    private float _defaultDistance = 10f;
+    
     private Transform _reticleTransform;
     private Vector3 _originalScale;
     private Quaternion _originalRotation;
@@ -41,8 +40,8 @@ public class ReticleManager : SetAsSingleton<ReticleManager> {
      */
     public void SetPosition()
     {
-        _reticleTransform.position = cam.position + cam.forward * _defaultDistance;
-        _reticleTransform.localScale = _originalScale * _defaultDistance;
+        _reticleTransform.position = cam.position + cam.forward;
+        _reticleTransform.localScale = _originalScale;
         _reticleTransform.localRotation = _originalRotation;
     }
 
