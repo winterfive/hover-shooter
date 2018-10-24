@@ -14,14 +14,14 @@ public class RaycastManager : SetAsSingleton<RaycastManager> {
 
     private RaycastHit _hit;
     private GameObject _currentFoundObject;
-    private GameObject _previousFoundObject;
+    //private GameObject _previousFoundObject;
     private Vector3 _currentNormal;
-    private Vector3 _previousNormal;
+    //private Vector3 _previousNormal;
 
     public GameObject GetCurrentFoundObject() { return _currentFoundObject; }
     //public GameObject GetPreviousFoundObject() { return _previousFoundObject; }
     public Vector3 GetCurrentNormal() { return _currentNormal; }
-    public Vector3 GetPreviousNormal() { return _previousNormal; }
+    //public Vector3 GetPreviousNormal() { return _previousNormal; }
     public RaycastHit GetCurrentHit() { return _hit; }
 
 
