@@ -485,6 +485,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45939bab8cb139e40bdac84a433e0ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _this: {fileID: 0}
+  _agent: {fileID: 0}
+  _ADVRef: {fileID: 0}
+  _isShot: 0
+  _defaultGlowColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  _glowRend: {fileID: 0}
+  <IsShot>k__BackingField: 0
 --- !u!114 &114792791292557250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -496,7 +507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b39b2c14c33884dbeb369efef314bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!195 &195730861628870234
 NavMeshAgent:
   m_ObjectHideFlags: 1
