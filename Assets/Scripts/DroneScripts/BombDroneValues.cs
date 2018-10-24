@@ -17,5 +17,6 @@ public class BombDroneValues : SetAsSingleton<BombDroneValues> {
     public float timeBetweenSpawns;
     public float glowSpeed;
     public Color secondGlowColor;
-    public int damageValue, pointValue;    
+    public int damageValue, pointValue;
+    public int proximityToPlayer;
 }
