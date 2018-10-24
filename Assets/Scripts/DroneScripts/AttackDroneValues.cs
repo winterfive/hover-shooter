@@ -19,5 +19,4 @@ public class AttackDroneValues : SetAsSingleton<AttackDroneValues> {
     public float glowSpeed;
     public Color secondGlowColor;
     public int damageValue, pointValue;
-    public Camera cam;
 }
