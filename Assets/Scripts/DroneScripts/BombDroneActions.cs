@@ -7,8 +7,6 @@ public class BombDroneActions : DroneActions
     private GameObject _this;
     private NavMeshAgent _agent;
     private BombDroneValues _BDVRef;
-    //private Renderer _glowRenderer;
-    //private Color _defaultGlowColor;
 
 
     void Awake()
@@ -26,8 +24,6 @@ public class BombDroneActions : DroneActions
         _camPosition = Camera.main.transform.position;
         _this = this.gameObject;
         _agent = _this.GetComponent<NavMeshAgent>();
-        //_glowRenderer = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
-        //_defaultGlowColor = _glowRenderer.material.color;
     }
 
 
@@ -36,8 +32,8 @@ public class BombDroneActions : DroneActions
         if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
         {
             GoToPlayer();
-            _agent.speed = ReturnRandomValue(_BDVRef.minSpeed, _BDVRef.maxSpeed);
-            _agent.baseOffset = ReturnRandomValue(_BDVRef.altitudeMin, _BDVRef.altitudeMax);
+            _agent.speed = Random.Range(_BDVRef.minSpeed, _BDVRef.maxSpeed);
+            _agent.baseOffset = Random.Range(_BDVRef.altitudeMin, _BDVRef.altitudeMax);
         }
         else
         {
@@ -50,14 +46,6 @@ public class BombDroneActions : DroneActions
 
     void Update()
     {
-        //if (_glowRenderer)
-        //{
-        //    LerpColor(_defaultGlowColor,
-        //          _BDVRef.secondGlowColor,
-        //          _BDVRef.glowSpeed,
-        //          _glowRenderer);
-        //}
-
         // Check if drone is close end point
         if (Time.frameCount % 30 == 0)
         {
