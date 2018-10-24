@@ -19,7 +19,7 @@ public class ReticleManager : SetAsSingleton<ReticleManager> {
     private RaycastManager _raycastManager;
     private CheckForEnemy _checkForEnemy;
 
-    public Transform GetReticleTransform() { return _reticleTransform; }
+    //public Transform GetReticleTransform() { return _reticleTransform; }
 
 
     private void Awake()
@@ -38,28 +38,31 @@ public class ReticleManager : SetAsSingleton<ReticleManager> {
      * Sets reticle to default position and scale
      * void -> void
      */
-    public void SetPosition()
+    public void SetReticleToDefault()
     {
         _reticleTransform.position = cam.position + cam.forward;
         _reticleTransform.localScale = _originalScale;
         _reticleTransform.localRotation = _originalRotation;
+        _reticleRend.material.color = _defaultColor;
     }
 
 
     /*
-     * Sets reticle to indicate object being looked at
+     * Sets reticle to found object's position and rotation
      * RaycastHit -> void
      */
-    public void SetPosition(RaycastHit hit)
+    public void SetReticleToObject()
     {
-        _reticleTransform.position = hit.point;
-        _reticleTransform.localScale = _originalScale * hit.distance;
-        _reticleTransform.rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
+        _currentHit = _raycastManager.GetCurrentHit();
+        _reticleTransform.position = _currentHit.point;
+        _reticleTransform.localScale = _originalScale * _currentHit.distance;
+        _reticleTransform.rotation = Quaternion.FromToRotation(Vector3.forward, _currentHit.normal);
     }
 
 
     /*
-     * Calls for reticle to change color to enemyFound color
+     * Calls for enemyCheck to see what color the reticle should be
+     * void -> void
      */
      private void CheckIfEnemy()
     {
@@ -69,34 +72,13 @@ public class ReticleManager : SetAsSingleton<ReticleManager> {
         }
         else
         {
-            SetReticleColor();
+            SetReticleColor(_defaultColor);
         }
     }
 
 
     /*
-     * Assigns normal of found object
-     * void -> void
-     */
-    public void CheckNormal()
-    {
-        _currentHit = _raycastManager.GetCurrentHit();
-        SetPosition(_currentHit);
-    }
-
-
-    /*
-     * Sets color of reticle if object found is not an enemy
-     * void -> void
-     */
-    public void SetReticleColor()
-    {
-        _reticleRend.material.SetColor("_Color", _defaultColor);
-    }
-
-
-    /*
-     * Sets color of reticle if enemy is found
+     * Sets color of reticle
      * Color -> void
      */
     public void SetReticleColor(Color color)
@@ -108,17 +90,15 @@ public class ReticleManager : SetAsSingleton<ReticleManager> {
     private void OnEnable()
     {
         RaycastManager.OnNewObjectFound += CheckIfEnemy;
-        RaycastManager.OnNewNormalFound += CheckNormal;
-        RaycastManager.OnNoObjectFound += SetPosition;
-        RaycastManager.OnNoObjectFound += SetReticleColor;
+        RaycastManager.OnNewNormalFound += SetReticleToObject;
+        RaycastManager.OnNoObjectFound += SetReticleToDefault;
     }
 
 
     private void OnDisable()
     {
         RaycastManager.OnNewObjectFound -= CheckIfEnemy;
-        RaycastManager.OnNewNormalFound -= CheckNormal;
-        RaycastManager.OnNoObjectFound -= SetPosition;
-        RaycastManager.OnNoObjectFound -= SetReticleColor;
+        RaycastManager.OnNewNormalFound -= SetReticleToObject;
+        RaycastManager.OnNoObjectFound -= SetReticleToDefault;
     }
 }
