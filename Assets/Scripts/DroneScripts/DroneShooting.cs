@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DroneShooting : DroneActions {
+public class DroneShooting : MonoBehaviour {
 
     public delegate void MissleFired(Transform t);
     public static event MissleFired OnMissleFired;
 
     private MissleValues _MVRef;
-    private GameObject _this;
-    private Transform _gunTipTransform;
+    private Transform _thisTransform;
     private float _timeBetweenMissles;
     private float _timeOfPreviousShot;
     private RaycastHit _hit;
@@ -28,8 +25,7 @@ public class DroneShooting : DroneActions {
             Debug.Log("Cannot find MissleValues script");
         }
 
-        _this = this.gameObject;
-        _gunTipTransform = FindChildWithTag("GunTip", _this);
+        _thisTransform = this.gameObject.transform;
         _timeBetweenMissles = Random.Range(_MVRef.minMissleFireRate, _MVRef.maxMissleFireRate);
         _droneRange = _MVRef.droneRange;
         _timeOfPreviousShot = 0f;
@@ -46,13 +42,13 @@ public class DroneShooting : DroneActions {
     {
         if (Time.time > _timeOfPreviousShot + _timeBetweenMissles)
         {
-            if (Physics.Raycast(_gunTipTransform.position, -_gunTipTransform.forward, out _hit, _droneRange))
+            if (Physics.Raycast(_thisTransform.position, _thisTransform.forward, out _hit, _droneRange))
             {
-                if (_hit.transform.tag == "Player")
+                if (_hit.transform.tag == "Player" || _hit.transform.tag == "Shield")
                 {
                     if (OnMissleFired != null)
                     {
-                        OnMissleFired(_gunTipTransform);
+                        OnMissleFired(_thisTransform);
                         _timeOfPreviousShot = Time.time;
                     }
                 }
