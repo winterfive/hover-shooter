@@ -22,7 +22,9 @@ GameObject:
   - component: {fileID: 33399682028081816}
   - component: {fileID: 23336717638036770}
   - component: {fileID: 195634405944054582}
-  - component: {fileID: 114331761651324330}
+  - component: {fileID: 114841647978512784}
+  - component: {fileID: 54316585843745024}
+  - component: {fileID: 135565824182394426}
   m_Layer: 8
   m_Name: Sphere
   m_TagString: BombDrone
@@ -58,7 +60,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: d5bf847a632a62f41a9800ea6fdf8967, type: 2}
+  - {fileID: 2100000, guid: 0b6b851cfd97fa847b75c5a4a31e4dce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,7 +87,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1617544713365868}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114331761651324330
+--- !u!54 &54316585843745024
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1617544713365868}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 0
+--- !u!114 &114841647978512784
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -96,6 +113,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ce825b0b3f5f749a9be7f8770689a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &135565824182394426
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1617544713365868}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &195634405944054582
 NavMeshAgent:
   m_ObjectHideFlags: 1
