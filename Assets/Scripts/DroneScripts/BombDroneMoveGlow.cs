@@ -24,10 +24,7 @@ public class BombDroneMoveGlow : DroneActions
         _camPosition = _BDVRef.cam.transform.position;
         _this = this.gameObject;
         _agent = _this.GetComponent<NavMeshAgent>();
-    }
-
-    // TODO BombDrone not moving or mesh appearing when this script is on the prefab
-    // When it's removed from prefab, prefab is spawned and doesnt move.  
+    }  
 
 
     private void OnEnable()
@@ -46,6 +43,10 @@ public class BombDroneMoveGlow : DroneActions
         }
     }
 
+
+    /*
+     * If bomb drone reaches the player...
+     */
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "PlayerTrigger")
