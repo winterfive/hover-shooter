@@ -54,6 +54,6 @@ public class EffectsManager : SetAsSingleton<EffectsManager> {
     private void StopEnemyActions()
     {
         // TODO AttackDroneActions is null
-        _shotObject.GetComponent<AttackDroneActions>().IsShot = true;
+        //_shotObject.GetComponent<AttackDroneMoveGlow>().IsShot = true;
     }
 }

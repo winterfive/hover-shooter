@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{60623B0D-AC82-55A7-963E-D209A0563589}</ProjectGuid>
+    <ProjectGuid>{EFB73A28-942F-2E80-313A-16478C105355}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,14 +60,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CheckForEnemy.cs" />
-    <Compile Include="Assets\Scripts\DroneScripts\AttackDroneActions.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\AttackDroneMoveGlow.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\AttackDroneSpawnManager.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\AttackDroneValues.cs" />
-    <Compile Include="Assets\Scripts\DroneScripts\BombDroneActions.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\BombDroneMoveGlow.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\BombDroneSpawnManager.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\BombDroneValues.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\DroneActions.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\DroneShooting.cs" />
+    <Compile Include="Assets\Scripts\DroneScripts\LookAtPlayer.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\MissleSpawnManager.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\MissleValues.cs" />
     <Compile Include="Assets\Scripts\DroneScripts\PoolingManager.cs" />
@@ -85,10 +86,10 @@
     <None Include="Assets\Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/Moo/Documents/Unity Projects/hover-shooter/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/Moo/Documents/Unity Projects/hover-shooter2/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/Moo/Documents/Unity Projects/hover-shooter/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/Moo/Documents/Unity Projects/hover-shooter2/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

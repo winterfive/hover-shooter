@@ -19,4 +19,5 @@ public class BombDroneValues : SetAsSingleton<BombDroneValues> {
     public Color secondGlowColor;
     public int damageValue, pointValue;
     public int proximityToPlayer;
+    public Camera cam;
 }

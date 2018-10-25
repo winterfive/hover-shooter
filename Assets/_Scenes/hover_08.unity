@@ -6790,6 +6790,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23906550051334398, guid: 736fe4f8249ce9545ad8a43854532526,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f183de82313e4e3478de0905741f2d26, type: 2}
     m_RemovedComponents:
     - {fileID: 64708147404153458, guid: 736fe4f8249ce9545ad8a43854532526, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 736fe4f8249ce9545ad8a43854532526, type: 2}
@@ -7572,16 +7577,17 @@ MonoBehaviour:
   yMax: 8
   zMin: -5
   zMax: 20
-  minSpeed: 2
-  maxSpeed: 5
+  minSpeed: 8
+  maxSpeed: 9
   altitudeMin: 2
   altitudeMax: 6
-  timeBetweenSpawns: 8
+  timeBetweenSpawns: 2
   glowSpeed: 0
   secondGlowColor: {r: 0, g: 0, b: 0, a: 0}
   damageValue: 0
   pointValue: 0
-  proximityToPlayer: 3
+  proximityToPlayer: 5
+  cam: {fileID: 1213041253}
 --- !u!114 &1934252590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7617,7 +7623,6 @@ MonoBehaviour:
   secondGlowColor: {r: 0, g: 0, b: 0, a: 0}
   damageValue: 1
   pointValue: 10
-  cam: {fileID: 0}
 --- !u!114 &1934252591
 MonoBehaviour:
   m_ObjectHideFlags: 0

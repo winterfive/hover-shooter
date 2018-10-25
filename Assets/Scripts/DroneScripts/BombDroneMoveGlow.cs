@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class BombDroneMovement : DroneActions
+public class BombDroneMoveGlow : DroneActions
 {
     private Vector3 _camPosition;
     private GameObject _this;
@@ -21,7 +21,7 @@ public class BombDroneMovement : DroneActions
             Debug.Log("Cannot find BombDroneValues script");
         }
 
-        _camPosition = Camera.main.transform.position;
+        _camPosition = _BDVRef.cam.transform.position;
         _this = this.gameObject;
         _agent = _this.GetComponent<NavMeshAgent>();
     }
@@ -46,18 +46,13 @@ public class BombDroneMovement : DroneActions
 
     void Update()
     {
-        // Check if drone is close end point
-        if (Time.frameCount % 30 == 0)
+        if (_this.activeInHierarchy)
         {
-            if(_this.activeInHierarchy)
+            if (_agent.remainingDistance < _BDVRef.proximityToPlayer)
             {
-                if (_agent.remainingDistance < _BDVRef.proximityToPlayer)
-                {
-                    _this.GetComponent<Renderer>().material.color = Color.cyan;
-                    // Blow up
-                    _this.SetActive(false);
-                }
-            }            
+                // Blow up
+                _this.SetActive(false);
+            }
         }
     }
 

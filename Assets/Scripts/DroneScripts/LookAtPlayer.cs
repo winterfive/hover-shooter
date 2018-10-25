@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 
 public class LookAtPlayer : MonoBehaviour {
-
-    public Camera cam;
-
+    
     private Transform _thisTransform;
-
+    private Vector3 cam;
 
     private void Awake()
     {
         _thisTransform = this.gameObject.transform;
+        cam = FindObjectOfType<Camera>().transform.position;
     }
 
     
@@ -24,11 +23,9 @@ public class LookAtPlayer : MonoBehaviour {
     */
     public void LookAt()
     {
-        Vector3 target = cam.transform.position;
-
-        Vector3 newVector = new Vector3(_thisTransform.position.x - target.x,
+        Vector3 newVector = new Vector3(_thisTransform.position.x - cam.x,
                                         0f,
-                                        _thisTransform.position.z - target.z);
+                                        _thisTransform.position.z - cam.z);
 
         _thisTransform.rotation = Quaternion.LookRotation(newVector);
     }
