@@ -15,6 +15,7 @@ public class BombDroneSpawnManager : PoolingManager {
     private List<GameObject> _bombDrones;
     private GameObject _activeBombDrone;
     private DroneActions _droneActions;
+    private WaitForSeconds _waitBetweenSpawns;
 
 
     private void Awake()
@@ -23,6 +24,7 @@ public class BombDroneSpawnManager : PoolingManager {
         _playerManager = PlayerManager.Instance;
         _droneActions = DroneActions.Instance;
         _bombDrones = CreateList(_BDV.prefab, _BDV.poolSize);
+        _waitBetweenSpawns = new WaitForSeconds(_BDV.timeBetweenSpawns);
     }
 
 
@@ -40,7 +42,7 @@ public class BombDroneSpawnManager : PoolingManager {
     {
         while (_playerManager.IsAlive())
         {
-            yield return new WaitForSeconds(_BDV.timeBetweenSpawns);
+            yield return _waitBetweenSpawns;
             _activeBombDrone = GetObjectFromPool(_bombDrones);
 
             if (_activeBombDrone)

@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class AttackDroneActions : DroneActions
+public class AttackDroneMoveGlow : DroneActions
 {
-    private Vector3 _camPosition;
     private GameObject _this;
     private NavMeshAgent _agent;
     private AttackDroneValues _ADVRef;
-    private Transform _turretTransform;
-    private Renderer _glowRenderer;
-    private Color _defaultGlowColor;
     private bool _isShot;
+    private Color _defaultGlowColor;
+    private Renderer _glowRend;
 
     public bool IsShot { get; set; }
 
@@ -27,13 +25,11 @@ public class AttackDroneActions : DroneActions
             Debug.Log("Cannot find AttackDroneValues script");
         }
 
-        _camPosition = Camera.main.transform.position;
         _this = this.gameObject;
         _agent = _this.GetComponent<NavMeshAgent>();
-        _turretTransform = FindChildWithTag("Turret", _this);
-        _glowRenderer = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
-        _defaultGlowColor = _glowRenderer.material.color;
         _isShot = false;
+        _glowRend = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
+        _defaultGlowColor = _glowRend.material.color;
     }
 
 
@@ -42,8 +38,8 @@ public class AttackDroneActions : DroneActions
         if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
         {
             TravelToRandomPoint();
-            _agent.speed = ReturnRandomValue(_ADVRef.minSpeed, _ADVRef.maxSpeed);
-            _agent.baseOffset = ReturnRandomValue(_ADVRef.altitudeMin, _ADVRef.altitudeMax);
+            _agent.speed = Random.Range(_ADVRef.minSpeed, _ADVRef.maxSpeed);
+            _agent.baseOffset = Random.Range(_ADVRef.altitudeMin, _ADVRef.altitudeMax);
         }
         else
         {
@@ -58,15 +54,7 @@ public class AttackDroneActions : DroneActions
     {
         if(!IsShot)
         {
-            LookAt(_camPosition);
-
-            if (_glowRenderer)
-            {
-                LerpColor(_defaultGlowColor,
-                        _ADVRef.secondGlowColor,
-                        _ADVRef.glowSpeed,
-                        _glowRenderer);
-            }
+            LerpColor(_defaultGlowColor, _ADVRef.secondGlowColor, _ADVRef.glowSpeed, _glowRend);
 
             // Check if drone is close to destination
             if (Time.frameCount % 30 == 0)
@@ -77,21 +65,7 @@ public class AttackDroneActions : DroneActions
                 }
             }
         } 
-    }
-
-
-    /*
-    * Changes position and rotation of turret to look at target using only y axis
-    * Vector3 -> void
-    */
-    public void LookAt(Vector3 target)
-    {
-        Vector3 newVector = new Vector3(_turretTransform.position.x - target.x,
-                                        0f,
-                                        _turretTransform.position.z - target.z);
-
-        _turretTransform.rotation = Quaternion.LookRotation(newVector);
-    }
+    }    
 
 
     private void TravelToRandomPoint()

@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class BombDroneActions : DroneActions
+public class BombDroneMoveGlow : DroneActions
 {
     private Vector3 _camPosition;
     private GameObject _this;
     private NavMeshAgent _agent;
     private BombDroneValues _BDVRef;
-    //private Renderer _glowRenderer;
-    //private Color _defaultGlowColor;
 
 
     void Awake()
@@ -23,12 +21,10 @@ public class BombDroneActions : DroneActions
             Debug.Log("Cannot find BombDroneValues script");
         }
 
-        _camPosition = Camera.main.transform.position;
+        _camPosition = _BDVRef.cam.transform.position;
         _this = this.gameObject;
         _agent = _this.GetComponent<NavMeshAgent>();
-        //_glowRenderer = FindChildWithTag("Glow", _this).GetComponent<Renderer>();
-        //_defaultGlowColor = _glowRenderer.material.color;
-    }
+    }  
 
 
     private void OnEnable()
@@ -36,8 +32,8 @@ public class BombDroneActions : DroneActions
         if (_agent.isOnNavMesh && _agent.isActiveAndEnabled)
         {
             GoToPlayer();
-            _agent.speed = ReturnRandomValue(_BDVRef.minSpeed, _BDVRef.maxSpeed);
-            _agent.baseOffset = ReturnRandomValue(_BDVRef.altitudeMin, _BDVRef.altitudeMax);
+            _agent.speed = Random.Range(_BDVRef.minSpeed, _BDVRef.maxSpeed);
+            _agent.baseOffset = Random.Range(_BDVRef.altitudeMin, _BDVRef.altitudeMax);
         }
         else
         {
@@ -48,28 +44,19 @@ public class BombDroneActions : DroneActions
     }
 
 
-    void Update()
+    /*
+     * If bomb drone reaches the player...
+     */
+    void OnTriggerEnter(Collider col)
     {
-        //if (_glowRenderer)
-        //{
-        //    LerpColor(_defaultGlowColor,
-        //          _BDVRef.secondGlowColor,
-        //          _BDVRef.glowSpeed,
-        //          _glowRenderer);
-        //}
-
-        // Check if drone is close end point
-        if (Time.frameCount % 30 == 0)
+        if (col.gameObject.tag == "PlayerTrigger")
         {
-            if(_this.activeInHierarchy)
-            {
-                if (_agent.remainingDistance < _agent.stoppingDistance)
-                {
-                    // Blow up
-                    _this.SetActive(false);
-                }
-            }            
-        }
+            // Bomb drone got within range of player and detonated
+            Debug.Log("Bomb drone reached target");
+            // Call Effects manager for explosion effect normal or agaisnt shield, pass the go
+
+            _this.SetActive(false);
+        }        
     }
 
 

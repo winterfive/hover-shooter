@@ -13,6 +13,7 @@ public class AttackDroneSpawnManager : PoolingManager {
     private List<GameObject> _attackDrones;
     private GameObject _activeAttackDrone;
     private DroneActions _droneActions;
+    private WaitForSeconds _timeBetweenSpawns;
 
 
     private void Awake()
@@ -21,6 +22,7 @@ public class AttackDroneSpawnManager : PoolingManager {
         _playerManager = PlayerManager.Instance;
         _droneActions = DroneActions.Instance;
         _attackDrones = CreateList(_ADV.prefab, _ADV.poolSize);
+        _timeBetweenSpawns = new WaitForSeconds(_ADV.timeBetweenSpawns);
     }
 
 
@@ -50,7 +52,7 @@ public class AttackDroneSpawnManager : PoolingManager {
                 Debug.Log("There aren't any attackDrones available right now.");
             }
 
-            yield return new WaitForSeconds(_ADV.timeBetweenSpawns);
+            yield return _timeBetweenSpawns;
         }
     }
 }
