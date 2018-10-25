@@ -13,6 +13,7 @@ TagManager:
   - Missle
   - Undefined
   - BombDrone
+  - PlayerTrigger
   layers:
   - Default
   - TransparentFX
