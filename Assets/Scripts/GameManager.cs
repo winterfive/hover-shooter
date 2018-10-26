@@ -69,19 +69,19 @@ public class GameManager : SetAsSingleton<GameManager>
         {
             OnShoot();
 
-            if (_checkForEnemy.IsEnemy())
-            {
-                ShootDrone();
-            }
+            //if (_checkForEnemy.IsEnemy())
+            //{
+            //    ShootDrone();
+            //}
         }
     }
 
 
-    private void ShootDrone()
-    {
-        _effectsManager.TerminateEnemy();
-        UpdatePlayerScore();
-    }
+    //private void ShootDrone()
+    //{
+    //    _effectsManager.TerminateEnemy();
+    //    UpdatePlayerScore();
+    //}
     
       
 
