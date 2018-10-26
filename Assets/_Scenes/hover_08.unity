@@ -7627,7 +7627,7 @@ MonoBehaviour:
   yMax: 8
   zMin: -5
   zMax: 20
-  minSpeed: 8
+  minSpeed: 6
   maxSpeed: 9
   altitudeMin: 2
   altitudeMax: 6
@@ -7774,7 +7774,7 @@ MonoBehaviour:
   - {r: 0.8301887, g: 0.105731584, b: 0.7408976, a: 1}
   - {r: 0.63546735, g: 0.1715023, b: 0.7735849, a: 1}
   - {r: 0.3873633, g: 0.20652369, b: 0.4811321, a: 1}
-  waitBetweenColors: 0.5
+  waitBetweenColors: 0.2
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0
