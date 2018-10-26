@@ -14,6 +14,7 @@ public class AttackDroneSpawnManager : PoolingManager {
     private GameObject _activeAttackDrone;
     private DroneActions _droneActions;
     private WaitForSeconds _timeBetweenSpawns;
+    private WaitForSeconds _timeBeforeInitialSpawn;
 
 
     private void Awake()
@@ -23,11 +24,20 @@ public class AttackDroneSpawnManager : PoolingManager {
         _droneActions = DroneActions.Instance;
         _attackDrones = CreateList(_ADV.prefab, _ADV.poolSize);
         _timeBetweenSpawns = new WaitForSeconds(_ADV.timeBetweenSpawns);
+        _timeBeforeInitialSpawn = new WaitForSeconds(_ADV.waitToSpawn);
     }
 
 
     void Start()
     {
+        StartCoroutine(WaitBeforeSpawning());
+    }
+
+
+    private IEnumerator WaitBeforeSpawning()
+    {
+        yield return _timeBeforeInitialSpawn;
+
         StartCoroutine(SpawnAttackDrone());
     }
 
@@ -54,5 +64,5 @@ public class AttackDroneSpawnManager : PoolingManager {
 
             yield return _timeBetweenSpawns;
         }
-    }
+    }    
 }

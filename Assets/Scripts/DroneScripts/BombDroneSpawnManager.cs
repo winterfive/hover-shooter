@@ -16,6 +16,7 @@ public class BombDroneSpawnManager : PoolingManager {
     private GameObject _activeBombDrone;
     private DroneActions _droneActions;
     private WaitForSeconds _waitBetweenSpawns;
+    private WaitForSeconds _waitBeforeInitialSpawn;
 
 
     private void Awake()
@@ -30,6 +31,13 @@ public class BombDroneSpawnManager : PoolingManager {
 
     void Start()
     {
+        StartCoroutine(WaitBeforeInitialSpawn());
+    }
+
+
+    private IEnumerator WaitBeforeInitialSpawn()
+    {
+        yield return _waitBeforeInitialSpawn;
         StartCoroutine(SpawnBombDrone());
     }
 
@@ -57,5 +65,5 @@ public class BombDroneSpawnManager : PoolingManager {
         }        
 
         yield return null;
-    }
+    }    
 }
