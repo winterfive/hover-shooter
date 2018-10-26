@@ -40,7 +40,7 @@ public class MissleActions : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.CompareTag("Player"))
         {
             if (OnPlayerHit != null)
             {
@@ -48,12 +48,17 @@ public class MissleActions : MonoBehaviour
             }
         }
 
-        if (col.gameObject.tag == "Shield")
+        //if (col.gameObject.CompareTag("Shield"))
+        //{
+        //    if (OnShieldHit != null)
+        //    {
+        //        OnShieldHit();
+        //    }
+        //}
+
+        if (col.gameObject.CompareTag("BombDroneTrigger"))
         {
-            if (OnShieldHit != null)
-            {
-                OnShieldHit();
-            }
+            Physics.IgnoreCollision(_missle.GetComponent<Collider>(), col); 
         }
 
         _missle.SetActive(false);
@@ -72,7 +77,6 @@ public class MissleActions : MonoBehaviour
      */
     private void MissleFly()
     {
-        Debug.Log("got to here, missle flying");
         if (Vector3.Distance(_missle.transform.position, _camTransform.position) > 0.5)
         {
             float step = _missleSpeed * Time.deltaTime;
