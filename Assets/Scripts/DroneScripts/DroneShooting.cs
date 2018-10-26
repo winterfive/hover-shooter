@@ -47,7 +47,6 @@ public class DroneShooting : MonoBehaviour {
         {
             if (_hit.transform.tag == "Player" || _hit.transform.tag == "Shield")
             {
-                // Not getting into the statement
                 if (OnMissleFired != null)
                 {
                     OnMissleFired(_thisTransform);
