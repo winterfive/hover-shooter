@@ -34,23 +34,24 @@ public class DroneShooting : MonoBehaviour {
 
     private void Update()
     {
-        ShootMissles();           
+        if (Time.time > _timeOfPreviousShot + _timeBetweenMissles)
+        {
+            ShootMissles();
+        }
     }
     
 
     private void ShootMissles()
     {
-        if (Time.time > _timeOfPreviousShot + _timeBetweenMissles)
+        if (Physics.Raycast(_thisTransform.position, _thisTransform.forward, out _hit, _droneRange))
         {
-            if (Physics.Raycast(_thisTransform.position, _thisTransform.forward, out _hit, _droneRange))
+            if (_hit.transform.tag == "Player" || _hit.transform.tag == "Shield")
             {
-                if (_hit.transform.tag == "Player" || _hit.transform.tag == "Shield")
+                // Not getting into the statement
+                if (OnMissleFired != null)
                 {
-                    if (OnMissleFired != null)
-                    {
-                        OnMissleFired(_thisTransform);
-                        _timeOfPreviousShot = Time.time;
-                    }
+                    OnMissleFired(_thisTransform);
+                    _timeOfPreviousShot = Time.time;
                 }
             }
         }
