@@ -67,11 +67,12 @@ public class MissleActions : MonoBehaviour
 
 
     /*
-     * Checks if missle distance to see if it should continue flying
+     * Checks missle distance to see if it should continue flying
      * void -> void
      */
     private void MissleFly()
     {
+        Debug.Log("got to here, missle flying");
         if (Vector3.Distance(_missle.transform.position, _camTransform.position) > 0.5)
         {
             float step = _missleSpeed * Time.deltaTime;
