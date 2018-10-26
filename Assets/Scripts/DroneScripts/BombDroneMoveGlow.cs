@@ -52,8 +52,7 @@ public class BombDroneMoveGlow : DroneActions
         if (col.gameObject.tag == "PlayerTrigger")
         {
             // Bomb drone got within range of player and detonated
-            Debug.Log("Bomb drone reached target");
-            // Call Effects manager for explosion effect normal or agaisnt shield, pass the go
+            // Call Effects manager for explosion effect normal or against shield, pass the go transform position, rotation
 
             _this.SetActive(false);
         }        
