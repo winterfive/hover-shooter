@@ -49,7 +49,7 @@ public class BombDroneMoveGlow : DroneActions
      */
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "PlayerTrigger")
+        if (col.gameObject.tag == "BombDroneTrigger")
         {
             // Bomb drone got within range of player and detonated
             // Call Effects manager for explosion effect normal or against shield, pass the go transform position, rotation
