@@ -7155,8 +7155,8 @@ GameObject:
   - component: {fileID: 1326366743}
   - component: {fileID: 1326366742}
   m_Layer: 2
-  m_Name: PlayerTrigger
-  m_TagString: PlayerTrigger
+  m_Name: BombDroneTrigger
+  m_TagString: BombDroneTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9516,8 +9516,11 @@ MonoBehaviour:
   - {r: 1, g: 0.1305469, b: 0, a: 1}
   - {r: 0.8301887, g: 0.105731584, b: 0.7408976, a: 1}
   - {r: 0.63546735, g: 0.1715023, b: 0.7735849, a: 1}
-  - {r: 0.3873633, g: 0.20652369, b: 0.4811321, a: 1}
+  - {r: 0.38058975, g: 0.07342471, b: 0.4716981, a: 1}
   waitBetweenColors: 0.2
+  AttackDroneExplosion: {fileID: 19811986, guid: 8647166fb9507c944851b4fbb0a00a3a,
+    type: 2}
+  BombDroneExplosion: {fileID: 0}
 --- !u!1 &1946205525
 GameObject:
   m_ObjectHideFlags: 0
