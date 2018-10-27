@@ -7,6 +7,8 @@ public class EffectsManager : SetAsSingleton<EffectsManager> {
 
     public Color[] destructionColors;
     public float waitBetweenColors;
+    public ParticleSystem AttackDroneExplosion;
+    public ParticleSystem BombDroneExplosion;
 
     private GameObject _shotObject;
     private RaycastManager _raycastManager;
@@ -16,15 +18,18 @@ public class EffectsManager : SetAsSingleton<EffectsManager> {
     void Awake ()
     {
         _raycastManager = RaycastManager.Instance;
-        _poolingManager = PoolingManager.Instance;
 	}
 
 
     public void TerminateEnemy()
     {
         _shotObject = _raycastManager.GetCurrentFoundObject();
-        StopEnemyActions();
-        StartCoroutine(FadeEffect());
+
+        if (_shotObject)
+        {
+            StopEnemyActions(); //TODO
+            StartCoroutine(FadeEffect());
+        }        
     }
 
 
@@ -46,8 +51,6 @@ public class EffectsManager : SetAsSingleton<EffectsManager> {
 
             yield return new WaitForSeconds(waitBetweenColors);
         }
-
-        _poolingManager.ReturnToPool(_shotObject);
     }
 
 
