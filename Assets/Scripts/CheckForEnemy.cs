@@ -27,7 +27,9 @@ public class CheckForEnemy : SetAsSingleton<CheckForEnemy> {
     {
         GameObject currentObject = _raycastManager.GetCurrentFoundObject();
 
-        if (currentObject.tag == "Enemy" || currentObject.tag == "Turret" || currentObject.tag == "Glow")
+        currentObject = currentObject.transform.parent.gameObject;
+
+        if (currentObject.CompareTag("Enemy"))
         {
             _isEnemy = true;
         }
